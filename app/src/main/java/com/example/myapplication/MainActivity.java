@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         };
         timer.schedule(task,DELAY);*/
         readSP = getSharedPreferences("saved_token",MODE_PRIVATE);
-        token = readSP.getString("token","");
+        token = readSP.getString("token","");//test
 
         startActivity(intent1);//test
 

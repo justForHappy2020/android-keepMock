@@ -29,7 +29,7 @@ public class play extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
+        setContentView(R.layout.activity_video_play);
 
         mVideoView = findViewById(R.id.video_view);
         mBufferingTextView = findViewById(R.id.buffering_text_view);

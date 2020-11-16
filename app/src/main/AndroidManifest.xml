@@ -28,9 +28,6 @@
         <activity android:name=".course_main"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
-        <activity android:name=".video_play"
-            android:launchMode="standard"
-            android:screenOrientation="portrait" />
         <activity android:name=".exercise_main"
             android:launchMode="standard"
             android:screenOrientation="portrait" />

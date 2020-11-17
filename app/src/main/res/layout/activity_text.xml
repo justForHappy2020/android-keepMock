@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#FFFFFF"
+android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:fitsSystemWindows="true"><!--状态栏这个没看懂怎么用-->
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/go_back_button"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="fitXY"
+                    android:background="#FFFFFF"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/leftarrow">
+                </ImageButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginBottom="9dp"
+                    android:text="全部课程"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:fontFamily="Arial"
+                    android:layout_gravity="center">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/search_button1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitXY"
+                    android:background="#FFFFFF"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="120dp"
+                    android:src="@drawable/search">
+                </ImageButton>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#ECECEC">
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            android:orientation="vertical" >
+            
+       
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+    
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="185dp"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="vertical">
+    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="部位"
+                        android:textColor="@color/fuxk_base_color_black"
+                        android:textSize="15dp"
+                        android:textStyle="bold">
+    
+                    </TextView>
+    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+    
+                        <Button
+                            android:id="@+id/button1"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:fontFamily="Arial"
+                            android:gravity="center"
+                            android:text="腿部"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/button2"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="腰部"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/button3"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="腹部"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/button4"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="背部"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+                    </LinearLayout>
+    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+    
+                        <Button
+                            android:id="@+id/bt1"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="手臂"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/bt2"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="肩部"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/bt3"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="胸部"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/bt4"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="臀部"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+                    </LinearLayout>
+    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="41dp">
+    
+                        <Button
+                            android:id="@+id/bt5"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="全身"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+                    </LinearLayout>
+    
+    
+                </LinearLayout>
+    
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="vertical">
+    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="难度"
+                        android:textColor="@color/fuxk_base_color_black"
+                        android:textSize="15dp"
+                        android:textStyle="bold">
+    
+                    </TextView>
+    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+    
+                        <Button
+                            android:id="@+id/btdifficult1"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="K1零基础"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/btdifficult2"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="K2初学"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/btdifficult3"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="K3进阶"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/btdifficult4"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="K4强化"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+                    </LinearLayout>
+    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+    
+                        <Button
+                            android:id="@+id/btdifficult5"
+                            android:layout_width="80dp"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_btn_nomal"
+                            android:text="K5挑战"
+                            android:textColor="@color/btn_word_colorblack">
+    
+                        </Button>
+                    </LinearLayout>
+    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+    
+                        <Button
+                            android:id="@+id/reset"
+                            android:layout_width="164dp"
+                            android:layout_height="31dp"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_bbtn_nomal"
+                            android:fontFamily="Arial"
+                            android:text="重置"
+                            android:textColor="@color/btn_boder_colorgreen"
+                            android:textSize="20dp">
+    
+                        </Button>
+    
+                        <Button
+                            android:id="@+id/sure"
+                            android:layout_width="164dp"
+                            android:layout_height="31dp"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@drawable/text_bbtn_nomal"
+                            android:text="确定"
+                            android:textColor="@color/btn_boder_colorgreen"
+                            android:textSize="20dp">
+    
+                        </Button>
+                    </LinearLayout>
+    
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/famous1"
+                    android:layout_width="380dp"
+                    android:layout_height="122dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sports1"
+                    android:scaleType="fitXY"
+                    android:text="@string/sports1_word"
+                    android:textColor="@color/white"
+                    android:textSize="20dp">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/famous2"
+                    android:layout_width="380dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sports1"
+                    android:scaleType="fitXY"
+                    android:text="@string/sports1_word"
+                    android:textSize="20dp"
+                    android:textColor="@color/white">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/famous3"
+                    android:layout_width="380dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sports1"
+                    android:scaleType="fitXY"
+                    android:text="@string/sports1_word"
+                    android:textSize="20dp"
+                    android:textColor="@color/white">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/famous4"
+                    android:layout_width="380dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sports1"
+                    android:scaleType="fitXY"
+                    android:text="@string/sports1_word"
+                    android:textSize="20dp"
+                    android:textColor="@color/white">
+
+                </Button>
+            </LinearLayout>
+            
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

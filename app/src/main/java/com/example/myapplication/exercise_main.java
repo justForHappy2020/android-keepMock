@@ -14,12 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-public class exercise_main extends AppCompatActivity implements View.OnClickListener{
+public class exercise_main extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton ibSearch;
-    private  Button btBodypart[] = new Button[8];
+    private Button btBodypart[] = new Button[8];
     private Button btHotcourse[] = new Button[9];
-
 
 
     private int httpcode;
@@ -32,7 +31,7 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         ibSearch = findViewById(R.id.search);
         btBodypart[0] = findViewById(R.id.bodypart1);
         btBodypart[1] = findViewById(R.id.bodypart2);
@@ -55,9 +54,8 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
 
         ibSearch.setOnClickListener(this);//监听获取验证码按钮
         int i;
-        for(i = 0;i<8;i++) btBodypart[i].setOnClickListener(this);
-        for(i = 0;i<9;i++) btBodypart[i].setOnClickListener(this);
-
+        for (i = 0; i < 8; i++) btBodypart[i].setOnClickListener(this);
+        for (i = 0; i < 9; i++) btBodypart[i].setOnClickListener(this);
 
 
     }

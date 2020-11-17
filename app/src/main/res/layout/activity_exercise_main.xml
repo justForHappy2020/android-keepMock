@@ -52,24 +52,28 @@
                 android:padding="10dp">
 
                 <Button
+                    android:id="@+id/bodypart1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/circle_button2"
                     android:text="腿" />
 
                 <Button
+                    android:id="@+id/bodypart2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/circle_button2"
                     android:text="腿" />
 
                 <Button
+                    android:id="@+id/bodypart3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/circle_button2"
                     android:text="腿" />
 
                 <Button
+                    android:id="@+id/bodypart4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/circle_button2"
@@ -85,28 +89,32 @@
                 android:padding="10dp">
 
                 <Button
+                    android:id="@+id/bodypart5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/circle_button2"
                     android:text="腿" />
 
                 <Button
+                    android:id="@+id/bodypart6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/circle_button2"
                     android:text="腿" />
 
                 <Button
+                    android:id="@+id/bodypart7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/circle_button2"
                     android:text="腿" />
 
                 <Button
+                    android:id="@+id/bodypart8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/circle_button2"
-                    android:text="腿" />
+                    android:text="全部" />
 
             </LinearLayout>
 
@@ -135,7 +143,7 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/hotcourse"
+                            android:id="@+id/hotcourse1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
@@ -144,6 +152,7 @@
                             android:textColor="@color/white" />
 
                         <Button
+                            android:id="@+id/hotcourse2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
@@ -151,6 +160,7 @@
                             android:text="Button Two" />
 
                         <Button
+                            android:id="@+id/hotcourse3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
@@ -158,6 +168,7 @@
                             android:text="Button Three" />
 
                         <Button
+                            android:id="@+id/hotcourse4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
@@ -165,6 +176,7 @@
                             android:text="Button Four" />
 
                         <Button
+                            android:id="@+id/hotcourse5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
@@ -172,6 +184,7 @@
                             android:text="Button Five" />
 
                         <Button
+                            android:id="@+id/hotcourse6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
@@ -179,6 +192,7 @@
                             android:text="Button Six" />
 
                         <Button
+                            android:id="@+id/hotcourse7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
@@ -186,6 +200,7 @@
                             android:text="Button Seven" />
 
                         <Button
+                            android:id="@+id/hotcourse8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
@@ -193,6 +208,7 @@
                             android:text="Button Eight" />
 
                         <Button
+                            android:id="@+id/hotcourse9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"

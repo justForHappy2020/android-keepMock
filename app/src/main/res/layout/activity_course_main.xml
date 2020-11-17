@@ -8,6 +8,7 @@
     >
 
     <ImageButton
+        android:id="@+id/video_play"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:src="@drawable/scenery" />
@@ -132,6 +133,7 @@
 
             <Button
                 style="@style/SmsButton"
+                android:id="@+id/related_course1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
@@ -139,50 +141,43 @@
                 android:text="Button One" />
 
             <Button
+                android:id="@+id/related_course2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:background="@drawable/ocean"
                 android:text="Button Two" />
 
-            <Button android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/related_course3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ocean"
                 android:layout_marginHorizontal="5dp"
                 android:text="Button Three" />
 
             <Button
+                android:id="@+id/related_course4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ocean"
                 android:layout_marginHorizontal="5dp"
                 android:text="Button Four" />
 
-            <Button android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/related_course5"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ocean"
                 android:layout_marginHorizontal="5dp"
                 android:text="Button Five" />
-            <Button android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/related_course6"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ocean"
                 android:layout_marginHorizontal="5dp"
                 android:text="Button Six" />
-            <Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Seven" />
-            <Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Eight" />
-            <Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Nine" />
         </LinearLayout>
     </HorizontalScrollView>
 

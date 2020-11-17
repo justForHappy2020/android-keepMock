@@ -1,20 +1,15 @@
 package com.example.myapplication.utils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class HttpUtils {
 
@@ -43,4 +38,9 @@ public class HttpUtils {
         String responseData = response.body().string();
         return  responseData;
     }
+
+/*    static public String connectHttpGet(String url){
+        String responseData;
+        return  responseData;
+    }*/
 }

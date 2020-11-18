@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class sport_main extends AppCompatActivity {
+public class search_result extends AppCompatActivity {
     private ViewPager vp;
     //声明存储ViewPager下子视图的集合
     ArrayList<View> views = new ArrayList<>();

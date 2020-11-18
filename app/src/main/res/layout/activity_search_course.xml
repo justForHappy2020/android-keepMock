@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".sport_main">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:background="#EFEFEF"
-       android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/search_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:src="@drawable/left_arrow" />
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="50dp"
-          android:orientation="horizontal">
-
-         <LinearLayout
-             android:layout_width="310dp"
-             android:layout_height="45dp"
-             android:orientation="horizontal"
-             android:layout_marginTop="7dp"
-             android:layout_marginLeft="25dp">
+        <LinearLayout
+            android:layout_width="330dp"
+            android:layout_height="38dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#EFEFEF"
+            >
 
             <ImageButton
                 android:id="@+id/searching_button"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:scaleType="fitXY"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/search2">
+                android:background="#EFEFEF"
+                android:scaleType="fitXY"
+                android:src="@drawable/search2">
 
             </ImageButton>
 
             <EditText
                 android:id="@+id/text_inout_search"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="33dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:background="#EFEFEF"
+                android:hint="    搜索课程"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
                 android:textColor="#686868"
@@ -50,37 +52,23 @@
 
             </EditText>
 
-         </LinearLayout>
-
-         <Button
-             android:id="@+id/quit_button"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="取消"
-             android:textColor="#25C689"
-             android:textSize="17dp"
-             android:gravity="center"
-             android:background="#EFEFEF"
-             android:layout_marginRight="14dp"
-             android:layout_marginTop="5dp"
-             android:fontFamily="Arial-regular"
-             style="?android:attr/borderlessButtonStyle">
-
-         </Button>
-      </LinearLayout>
-<com.google.android.material.tabs.TabLayout
-    android:id="@+id/tabLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    app:tabIndicatorColor="@android:color/black"
-    app:tabSelectedTextColor="@android:color/black"
-    app:tabTextColor="@android:color/darker_gray"/>
+            <ImageButton
+                android:id="@+id/search_quit"
+                android:layout_width="31dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/quit"
+                android:background="#EFEFEF"/>
+        </LinearLayout>
 
 
-   <androidx.viewpager.widget.ViewPager
-       android:id="@+id/viewPager"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
-</LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EFEFEF"
+        >
+
+    </LinearLayout>
 </LinearLayout>

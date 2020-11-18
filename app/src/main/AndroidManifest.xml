@@ -34,6 +34,9 @@
         <activity android:name=".exercise_main"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
+        <activity android:name=".search_result"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <!--
                 <activity android:name=".register1"
             android:label="@string/title_activity_register1"

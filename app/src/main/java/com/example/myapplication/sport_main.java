@@ -23,7 +23,7 @@ public class sport_main extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sport_main);
+        setContentView(R.layout.activity_search_course);
         vp = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         initView();//调用初始化视图方法
@@ -34,10 +34,10 @@ public class sport_main extends AppCompatActivity {
 
     //初始化视图的方法（通过布局填充器获取用于滑动的视图并存入对应的的集合）
     private void initView() {
-        View v1 = getLayoutInflater().inflate(R.layout.fragment_sport_all, null);
-        View v2 = getLayoutInflater().inflate(R.layout.fragment_sport_course, null);
-        View v3 = getLayoutInflater().inflate(R.layout.fragment_sport_user, null);
-        View v4 = getLayoutInflater().inflate(R.layout.fragment_sport_daily, null);
+        View v1 = getLayoutInflater().inflate(R.layout.fragment_search_all, null);
+        View v2 = getLayoutInflater().inflate(R.layout.fragment_search_course, null);
+        View v3 = getLayoutInflater().inflate(R.layout.fragment_search_user, null);
+        View v4 = getLayoutInflater().inflate(R.layout.fragment_search_daily, null);
 
         views.add(v1);
         views.add(v2);

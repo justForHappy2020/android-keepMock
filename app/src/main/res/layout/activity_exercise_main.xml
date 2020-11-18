@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:text="运动"
             android:layout_gravity="center"
-
             android:textSize="30dp" />
 
         <ImageButton
@@ -29,6 +28,14 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/accumulate_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已累计运动***分钟"
+        android:background="@drawable/translucent2"
+        android:layout_gravity="center"/>
 
 
     <ScrollView
@@ -214,6 +221,14 @@
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
                             android:text="Button Nine" />
+
+                        <Button
+                            android:id="@+id/hotcourse10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:text="Button ten" />
                     </LinearLayout>
 
                 </HorizontalScrollView>

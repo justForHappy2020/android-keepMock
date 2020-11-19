@@ -16,7 +16,6 @@ public class play extends AppCompatActivity {
 
     private static final String VIDEO_SAMPLE =
             "http://qi7yrfvw3.hn-bkt.clouddn.com/test";
-
     private VideoView mVideoView;
     private TextView mBufferingTextView;
 

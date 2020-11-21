@@ -28,7 +28,6 @@ public class play extends AppCompatActivity {
     private Course course;
     private String VIDEO_URL =
             "http://qi7yrfvw3.hn-bkt.clouddn.com/test";
-
     private VideoView mVideoView;
     private TextView mBufferingTextView;
 

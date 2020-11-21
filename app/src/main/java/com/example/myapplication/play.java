@@ -1,9 +1,12 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.URLUtil;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -12,9 +15,18 @@ import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.entity.Course;
+import com.example.myapplication.utils.HttpUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 public class play extends AppCompatActivity {
 
-    private static final String VIDEO_SAMPLE =
+    private Course course;
+    private String VIDEO_URL =
             "http://qi7yrfvw3.hn-bkt.clouddn.com/test";
 
     private VideoView mVideoView;
@@ -30,6 +42,30 @@ public class play extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
+        String token = null;
+        SharedPreferences readSP = getSharedPreferences("saved_token",MODE_PRIVATE);
+        token = readSP.getString("token","");
+        Intent intentAccept = null;
+        intentAccept = getIntent();
+        VIDEO_URL=intentAccept.getStringExtra("courseUrl");
+        Long courseId = intentAccept.getLongExtra("courseID",0);
+        String url = "http://192.168.16.1:8080/api/course/playTheVideo?token=" + token + "&&courseId=" + courseId.toString().trim();
+        String responseData = null;
+        try {
+            responseData = HttpUtils.connectHttpGet(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonObject1 = null;
+        try {
+            jsonObject1 = new JSONObject(responseData);
+            int httpcode = jsonObject1.getInt("code");
+            if(httpcode == 200){
+                Log.d("test", "successful");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         mVideoView = findViewById(R.id.video_view);
         mBufferingTextView = findViewById(R.id.buffering_text_view);
@@ -93,7 +129,7 @@ public class play extends AppCompatActivity {
         mBufferingTextView.setVisibility(VideoView.VISIBLE);
 
         // Buffer and decode the video sample.
-        Uri videoUri = getMedia(VIDEO_SAMPLE);
+        Uri videoUri = getMedia(VIDEO_URL);
         mVideoView.setVideoURI(videoUri);
 
         // Listener for onPrepared() event (runs after the media is prepared).

@@ -24,13 +24,15 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="燃脂"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="25dp"/>
+                android:text="燃脂"
+                android:textSize="25dp" />
             <TextView
+                android:id="@+id/calorie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="38千卡"/>
@@ -50,6 +52,7 @@
                 android:gravity="center"
                 android:textSize="25dp"/>
             <TextView
+                android:id="@+id/duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="188 分钟"/>
@@ -69,6 +72,7 @@
                 android:gravity="center"
                 android:textSize="25dp"/>
             <TextView
+                android:id="@+id/degree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="K2 初学"/>
@@ -83,7 +87,7 @@
         android:padding="15dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/course_intro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="课程介绍"

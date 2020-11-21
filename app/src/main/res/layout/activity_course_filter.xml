@@ -431,6 +431,77 @@ android:orientation="vertical">
                     android:textColor="@color/white">
 
                 </Button>
+
+                <Button
+                    android:id="@+id/famous5"
+                    android:layout_width="380dp"
+                    android:layout_height="122dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sports1"
+                    android:scaleType="fitXY"
+                    android:text="@string/sports1_word"
+                    android:textColor="@color/white"
+                    android:textSize="20dp">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/famous6"
+                    android:layout_width="380dp"
+                    android:layout_height="122dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sports1"
+                    android:scaleType="fitXY"
+                    android:text="@string/sports1_word"
+                    android:textColor="@color/white"
+                    android:textSize="20dp">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/famous7"
+                    android:layout_width="380dp"
+                    android:layout_height="122dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sports1"
+                    android:scaleType="fitXY"
+                    android:text="@string/sports1_word"
+                    android:textColor="@color/white"
+                    android:textSize="20dp">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/famous8"
+                    android:layout_width="380dp"
+                    android:layout_height="122dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sports1"
+                    android:scaleType="fitXY"
+                    android:text="@string/sports1_word"
+                    android:textColor="@color/white"
+                    android:textSize="20dp">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/famous9"
+                    android:layout_width="380dp"
+                    android:layout_height="122dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sports1"
+                    android:scaleType="fitXY"
+                    android:text="@string/sports1_word"
+                    android:textColor="@color/white"
+                    android:textSize="20dp">
+
+                </Button>
+
             </LinearLayout>
             
         </ScrollView>

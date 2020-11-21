@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="170pt"
+    android:layout_height="wrap_content"
     android:layout_margin="15dp"
     android:background="#FFFFFF"
     android:orientation="vertical">
@@ -10,13 +10,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:orientation="horizontal">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
             android:src="@drawable/sucai"
             app:riv_oval="true" />
 
@@ -35,7 +35,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="15dp"
             android:layout_weight="0.2"
             android:backgroundTint="#FFFFFF"
             android:text="关注" />
@@ -72,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <ImageView

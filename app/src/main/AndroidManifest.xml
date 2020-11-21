@@ -2,18 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapplication">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!--
  这个可写可不写
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
 
     <application
@@ -23,15 +26,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity_ViewPage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-        <activity android:name=".course_main"
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".course_main"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
-        <activity android:name=".exercise_main"
+        <activity
+            android:name=".exercise_main"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
-        <activity android:name=".search_result"
+        <activity
+            android:name=".search_result"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
         <!--

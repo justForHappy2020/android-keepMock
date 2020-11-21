@@ -89,8 +89,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#F6F6F6"
-            tools:listitem="@layout/community_items"/>
+            tools:listitem="@layout/community_items" />
 
     </LinearLayout>
-
 </LinearLayout>

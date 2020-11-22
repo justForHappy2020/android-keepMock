@@ -15,11 +15,13 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+
+/**
 * 类名：MainActivity_ViewPage
 * 功能：主界面Tab容器，用于装载Fragments，非常方便地切换tab
 * 规范：运动、饮食、社区、我界面的类需extends Fragment类，示例如community_main类
-* */
+*/
+
 public class MainActivity_ViewPage extends FragmentActivity implements View.OnClickListener {
     //声明ViewPager
     private ViewPager mViewPager;
@@ -55,6 +57,9 @@ public class MainActivity_ViewPage extends FragmentActivity implements View.OnCl
         //将四个Fragment加入集合中
         //mFragments.add(new exercise_main());
         mFragments.add(new community_main());
+        mFragments.add(new community_main());
+        mFragments.add(new diet_main());
+        mFragments.add(new me_main());
         //mFragments.add(new diet_main());
         //mFragments.add(new me_main());
 
@@ -128,7 +133,7 @@ public class MainActivity_ViewPage extends FragmentActivity implements View.OnCl
         //先将四个ImageButton置为灰色
         resetImgs();
 
-        //根据点击的Tab切换不同的页面及设置对应的ImageButton为绿色
+        //根据点击的Tab切换不同的页面及设置对应的ImageButton为深色
         switch (v.getId()) {
             case R.id.sport_buttton:
                 selectTab(0);
@@ -146,7 +151,7 @@ public class MainActivity_ViewPage extends FragmentActivity implements View.OnCl
     }
 
     private void selectTab(int i) {
-        //根据点击的Tab设置对应的ImageButton为绿色
+        //根据点击的Tab设置对应的ImageButton为深色
         switch (i) {
             case 0:
                 mImgSport.setImageResource(R.drawable.sport_choosen);
@@ -165,7 +170,7 @@ public class MainActivity_ViewPage extends FragmentActivity implements View.OnCl
         mViewPager.setCurrentItem(i);
     }
 
-    //将四个ImageButton设置为灰色
+    //将四个ImageButton设置为浅灰色
     private void resetImgs() {
         mImgSport.setImageResource(R.drawable.sport_unchoosen);
         mImgSocial.setImageResource(R.drawable.social_unchoosen);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,17 +51,20 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
 
     private void initCourse() {
         Intent intentAccept = getIntent();
-        courseClass = (CourseClass) intentAccept.getSerializableExtra("bodyPart");
+        courseClass = (CourseClass) intentAccept.getSerializableExtra("bodypart");
         if (courseClass.getClassValue() == "all") {
-            //选中所有BUTTON
+            //选中所有标签
             //筛选课程
             //展示课程
-        } //else //筛选对应部位的课程，展示课程
+        } else ;//选中对应的标签，筛选对应部位的课程，展示课程
     }
 
     private void initData() {
         //展示标签
-        String url = "http://192.168.16.1:8080/api/course/getFilter";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+        String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getFilter";
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -78,29 +82,42 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
                 for (int i = 0; i < JSONArrayBodyPart.length(); i++) {
                     JSONObject jsonObject3 = JSONArrayBodyPart.getJSONObject(i);
                     //相应的内容
-                    bodyPart.get(i).setCourseClassId(jsonObject3.getLong("courseClassId"));
-                    bodyPart.get(i).setClassName(jsonObject3.getString("className"));
-                    bodyPart.get(i).setClassValue(jsonObject3.getString("classValue"));
+                    CourseClass courseClass = new CourseClass();
+                    courseClass.setCourseClassId(jsonObject3.getLong("courseClassId"));
+                    courseClass.setClassName(jsonObject3.getString("className"));
+                    courseClass.setClassValue(jsonObject3.getString("classValue"));
+                    bodyPart.add(i,courseClass);
                 }
                 for (int i = 0; i < JSONArrayDegree.length(); i++) {
                     JSONObject jsonObject4 = JSONArrayDegree.getJSONObject(i);
-                    degree.get(i).setCourseClassId(jsonObject4.getLong("courseClassId"));
-                    degree.get(i).setClassName(jsonObject4.getString("className"));
-                    degree.get(i).setClassValue(jsonObject4.getString("classValue"));
+                    CourseClass courseClass = new CourseClass();
+                    courseClass.setCourseClassId(jsonObject4.getLong("courseClassId"));
+                    courseClass.setClassName(jsonObject4.getString("className"));
+                    courseClass.setClassValue(jsonObject4.getString("classValue"));
+                    degree.add(i,courseClass);
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < 9; i++) btBodypart[i].setText(bodyPart.get(i).getClassValue());
-        for (int i = 0; i < 5; i++) btDegree[i].setText(degree.get(i).getClassValue());
+        for (int i = 0; i < bodyPart.size(); i++) btBodypart[i].setText(bodyPart.get(i).getClassValue());
+        for (int i = 0; i < degree.size(); i++) btDegree[i].setText(degree.get(i).getClassValue());
+    }
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if(httpcode!=200)Toast.makeText(course_filter.this,"ERROR", Toast.LENGTH_SHORT).show();
     }
 
     private void initView() {
         //ibback.findViewById(R.id.go_back_button);
-        ibSearch.findViewById(R.id.search_button1);
-        btReset.findViewById(R.id.reset);
-        btSure.findViewById(R.id.sure);
+        ibSearch = findViewById(R.id.search_button1);
+        btReset = findViewById(R.id.reset);
+        btSure = findViewById(R.id.sure);
         btBodypart[0] = findViewById(R.id.button1);
         btBodypart[1] = findViewById(R.id.button2);
         btBodypart[2] = findViewById(R.id.button3);
@@ -130,9 +147,9 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
         ibSearch.setOnClickListener(this);
         btReset.setOnClickListener(this);
         btSure.setOnClickListener(this);
-        for (int i = 0; i < 9; i++) btCourse[i].setOnClickListener(this);
-        for (int i = 0; i < 5; i++) btDegree[i].setOnClickListener(this);
-        for (int i = 0; i < 9; i++) btBodypart[i].setOnClickListener(this);
+        for (int i = 0; i < btCourse.length; i++) btCourse[i].setOnClickListener(this);
+        for (int i = 0; i < btDegree.length; i++) btDegree[i].setOnClickListener(this);
+        for (int i = 0; i < btBodypart.length; i++) btBodypart[i].setOnClickListener(this);
     }
 
     @Override
@@ -231,13 +248,16 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
 
 
 /*
+		Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
     Boolean hasNext = false;
     int totalPages = 1;
     Long bodyClassId = Long.valueOf(0);//部位id值
     Long degreeClassId = Long.valueOf(0);//难度id值
     String url;//http请求的url
                 bodyClassId = bodyPart.get(0).getCourseClassId();
-                        url = "http://192.168.16.1:8080/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=&&currentPage=1";
+                        url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=&&currentPage=1";
                         String responseData = null;
                         try {
                         responseData = HttpUtils.connectHttpGet(url);
@@ -270,4 +290,8 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
         }
         } catch (JSONException e) {
         e.printStackTrace();
-        }*/
+        }
+        				        });
+        thread.start();
+    }
+        */

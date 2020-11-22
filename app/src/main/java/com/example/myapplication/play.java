@@ -25,7 +25,7 @@ import java.io.IOException;
 
 public class play extends AppCompatActivity {
 
-    private Course course;
+    private int httpcode;
     private String VIDEO_URL =
             "http://qi7yrfvw3.hn-bkt.clouddn.com/test";
     private VideoView mVideoView;
@@ -41,30 +41,43 @@ public class play extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
-        String token = null;
         SharedPreferences readSP = getSharedPreferences("saved_token",MODE_PRIVATE);
-        token = readSP.getString("token","");
+        final String token = readSP.getString("token","");
         Intent intentAccept = null;
         intentAccept = getIntent();
         VIDEO_URL=intentAccept.getStringExtra("courseUrl");
-        Long courseId = intentAccept.getLongExtra("courseID",0);
-        String url = "http://192.168.16.1:8080/api/course/playTheVideo?token=" + token + "&&courseId=" + courseId.toString().trim();
-        String responseData = null;
-        try {
-            responseData = HttpUtils.connectHttpGet(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JSONObject jsonObject1 = null;
-        try {
-            jsonObject1 = new JSONObject(responseData);
-            int httpcode = jsonObject1.getInt("code");
-            if(httpcode == 200){
-                Log.d("test", "successful");
+        final Long courseId = intentAccept.getLongExtra("courseID",0);
+
+        //记录播放记录http
+/*        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = "http://192.168.16.1:8080/api/course/playTheVideo?token=" + token + "&&courseId=" + courseId.toString().trim();
+                String responseData = null;
+                try {
+                    responseData = HttpUtils.connectHttpGet(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                JSONObject jsonObject1 = null;
+                try {
+                    jsonObject1 = new JSONObject(responseData);
+                    httpcode = jsonObject1.getInt("code");
+                    if (httpcode == 200) {
+                        Log.d("test", "successful");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (JSONException e) {
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        if(httpcode!=200) Toast.makeText(play.this,"ERROR", Toast.LENGTH_SHORT).show();*/
 
         mVideoView = findViewById(R.id.video_view);
         mBufferingTextView = findViewById(R.id.buffering_text_view);

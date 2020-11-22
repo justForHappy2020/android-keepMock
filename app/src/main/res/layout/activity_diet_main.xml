@@ -13,13 +13,12 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="19dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="饮食"
             android:textColor="#353535"
@@ -27,22 +26,22 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/me_main_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:id="@+id/diet_main_follow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:layout_weight="0.02"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/followers" />
 
         <ImageView
-            android:id="@+id/me_main_scan"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:id="@+id/diet_main_search"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
             android:layout_margin="20dp"
-            android:layout_weight="0.02"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/searching_icon" />
 
@@ -61,7 +60,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/diet_tabbar_hot"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -72,7 +71,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/diet_tabbar_followed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"

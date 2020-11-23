@@ -15,34 +15,48 @@
 
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="50dp"
+          android:layout_height="wrap_content"
+          android:background="#FFFFFF"
           android:orientation="horizontal">
 
+         <ImageButton
+             android:id="@+id/search_back"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:layout_marginTop="10dp"
+             android:background="@color/white"
+             android:scaleType="fitCenter"
+             android:src="@drawable/left_arrow" />
+
          <LinearLayout
-             android:layout_width="310dp"
-             android:layout_height="45dp"
-             android:orientation="horizontal"
-             android:layout_marginTop="7dp"
-             android:layout_marginLeft="25dp">
+             android:layout_width="330dp"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:layout_marginTop="10dp"
+             android:layout_marginBottom="10dp"
+             android:background="#EFEFEF"
+             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/searching_result_button"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:scaleType="fitXY"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/search2">
+                android:background="#EFEFEF"
+                android:scaleType="fitXY"
+                android:src="@drawable/search2">
 
             </ImageButton>
 
             <EditText
                 android:id="@+id/text_inout_search"
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_width="250dp"
+                android:layout_height="34dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
                 android:background="#EFEFEF"
+                android:hint="    搜索课程"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
                 android:textColor="#686868"
@@ -50,35 +64,73 @@
 
             </EditText>
 
+            <ImageButton
+                android:id="@+id/result_quit_button"
+                android:layout_width="31dp"
+                android:layout_height="match_parent"
+                android:background="#EFEFEF"
+                android:src="@drawable/quit" />
          </LinearLayout>
 
-         <Button
-             android:id="@+id/result_quit_button"
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="#FFFFFF"
+          android:orientation="horizontal">
+
+         <Space
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="取消"
-             android:textColor="#25C689"
-             android:textSize="17dp"
-             android:gravity="center"
-             android:background="#EFEFEF"
-             android:layout_marginRight="14dp"
-             android:layout_marginTop="5dp"
-             android:fontFamily="Arial-regular"
-             style="?android:attr/borderlessButtonStyle">
+             android:layout_weight="1" />
 
-         </Button>
+         <com.google.android.material.tabs.TabLayout
+             android:id="@+id/tabLayout"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1.8"
+             android:background="@android:color/white"
+             app:tabIndicatorColor="#59535E"
+             app:tabIndicatorFullWidth="false"
+             app:tabSelectedTextColor="@android:color/black"
+             app:tabTextColor="@android:color/darker_gray">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="综合" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="课程" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="动态" />
+         </com.google.android.material.tabs.TabLayout>
+
+         <Space
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1" />
+
       </LinearLayout>
-<com.google.android.material.tabs.TabLayout
-    android:id="@+id/tabLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    app:tabIndicatorColor="@android:color/black"
-    app:tabSelectedTextColor="@android:color/black"
-    app:tabTextColor="@android:color/darker_gray"/>
 
 
-   <androidx.viewpager.widget.ViewPager
+      <androidx.viewpager.widget.ViewPager
        android:id="@+id/viewPager"
        android:layout_width="match_parent"
        android:layout_height="match_parent"/>

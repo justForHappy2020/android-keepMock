@@ -56,7 +56,7 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
 
     //获取热门课程
     private void initHotCourse(){
-        String url = "http://192.168.16.1:8080/api/course/getHotCourse10";
+        String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/course/getHotCourse10";
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -96,7 +96,7 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
 
     //获取部位标签
     private void initBodypart(){
-        String url = "http://192.168.16.1:8080/api/course/getFilter";
+        String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/course/getFilter";
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);

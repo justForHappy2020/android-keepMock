@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="dd_dimen_200px">88.889984dip</dimen>
+
+    <dimen name="login_comfirm_button_margin_top">10.0dip</dimen>
+    <dimen name="login_comfirm_button_text_size">15.0sp</dimen>
+    <dimen name="micro_middle_text_size">13.0sp</dimen>
+    <dimen name="dd_dimen_30px">13.329987dip</dimen>
+    <color name="fuxk_base_color_gray_black">#ff646464</color>
+    <dimen name="dd_dimen_6px">2.669983dip</dimen>
+    <dimen name="dd_dimen_28px">12.439972dip</dimen>
+
+
+</resources>

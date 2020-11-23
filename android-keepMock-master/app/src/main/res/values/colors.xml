@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="white">#ffffffff</color>
+    <color name="gray">#ff808080</color>
+    <color name="fuxk_base_color_black">#ff323232</color>
+    <color name="fuxk_base_color_white">#ffffffff</color>
+    <color name="btn_bg_colorgrey">#F5F5F5</color>
+    <color name="btn_word_colorblack">#615D64</color>
+    <color name="btn_boder_colorgreen">#25C689</color>
+</resources>

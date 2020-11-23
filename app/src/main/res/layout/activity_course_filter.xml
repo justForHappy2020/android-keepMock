@@ -58,12 +58,11 @@ android:orientation="vertical">
                     android:id="@+id/search_button1"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:scaleType="fitXY"
-                    android:background="#FFFFFF"
+                    android:layout_marginLeft="130dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="120dp"
-                    android:src="@drawable/search">
-                </ImageButton>
+                    android:background="#FFFFFF"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/search"></ImageButton>
             </LinearLayout>
 
 
@@ -85,11 +84,13 @@ android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
     
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="185dp"
+                    android:layout_marginLeft="15dp"
                     android:orientation="vertical">
     
                     <TextView
@@ -266,7 +267,7 @@ android:orientation="vertical">
                             android:id="@+id/bt5"
                             android:layout_width="80dp"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="7dp"
                             android:background="@drawable/text_btn_nomal"
@@ -302,7 +303,10 @@ android:orientation="vertical">
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-    
+                        <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                            android:layout_weight="1">
                         <Button
                             android:id="@+id/btdifficult1"
                             android:layout_width="80dp"
@@ -315,7 +319,11 @@ android:orientation="vertical">
                             android:textColor="@color/btn_word_colorblack">
     
                         </Button>
-    
+                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
                         <Button
                             android:id="@+id/btdifficult2"
                             android:layout_width="80dp"
@@ -328,7 +336,11 @@ android:orientation="vertical">
                             android:textColor="@color/btn_word_colorblack">
     
                         </Button>
-    
+                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
                         <Button
                             android:id="@+id/btdifficult3"
                             android:layout_width="80dp"
@@ -341,7 +353,11 @@ android:orientation="vertical">
                             android:textColor="@color/btn_word_colorblack">
     
                         </Button>
-    
+                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
                         <Button
                             android:id="@+id/btdifficult4"
                             android:layout_width="80dp"
@@ -354,6 +370,7 @@ android:orientation="vertical">
                             android:textColor="@color/btn_word_colorblack">
     
                         </Button>
+                        </LinearLayout>
                     </LinearLayout>
     
                     <LinearLayout
@@ -374,7 +391,8 @@ android:orientation="vertical">
     
                         </Button>
                     </LinearLayout>
-    
+
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -411,7 +429,15 @@ android:orientation="vertical">
                     </LinearLayout>
     
                 </LinearLayout>
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#ECECEC"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ECECEC"
+                    android:orientation="vertical">
                 <Button
                     android:id="@+id/famous1"
                     android:layout_width="380dp"
@@ -537,7 +563,7 @@ android:orientation="vertical">
                     android:textSize="20dp">
 
                 </Button>
-
+                </LinearLayout>
             </LinearLayout>
             
         </ScrollView>

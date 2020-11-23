@@ -47,20 +47,6 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
         initView();
         initData();
         initCourse();
-        findViewById(R.id.searching_button).setOnClickListener(new View.OnClickListener() {//点击取消按钮返回到课程主页
-            public void onClick (View v){//点击搜索按钮跳转到搜索界面
-                Intent i = new Intent(course_filter.this , search_course.class);
-                //启动
-                startActivity(i);
-            }
-        });
-        findViewById(R.id.go_back_button).setOnClickListener(new View.OnClickListener() {//点击取消按钮返回到课程主页
-            public void onClick (View v){//点击返回按钮跳转到主界面
-                Intent i = new Intent(course_filter.this , exercise_main.class);
-                //启动
-                startActivity(i);
-            }
-        });
     }
 
     private void initCourse() {

@@ -30,12 +30,6 @@
         android:largeHeap="true"
         android:hardwareAccelerated="false">
 
-        <activity android:name=".search_result"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-        <activity android:name=".MainActivity_ViewPage"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
         <activity android:name=".search"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
@@ -48,6 +42,9 @@
 <!--        <activity android:name=".exercise_main"
             android:launchMode="standard"
             android:screenOrientation="portrait" />-->
+        <activity android:name=".search_result"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity android:name=".search_course"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

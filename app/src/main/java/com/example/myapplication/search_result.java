@@ -23,7 +23,7 @@ public class search_result extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_course_result);
+        setContentView(R.layout.activity_search_course);
         vp = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         initView();//调用初始化视图方法

@@ -49,7 +49,6 @@ public class course_main extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_course_main);
         initView();
         startThread();
-
     }
 
     private void startThread() {

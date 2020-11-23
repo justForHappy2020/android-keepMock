@@ -90,90 +90,110 @@ android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="185dp"
-                    android:layout_marginLeft="15dp"
                     android:orientation="vertical">
     
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="9px"
                         android:layout_marginTop="25dp"
                         android:layout_marginBottom="10dp"
                         android:text="部位"
                         android:textColor="@color/fuxk_base_color_black"
                         android:textSize="15dp"
-                        android:textStyle="bold">
+                        android:textStyle="bold"
+                        android:fontFamily="PingFangSC-bold">
     
                     </TextView>
     
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-    
-                        <Button
-                            android:id="@+id/button1"
-                            android:layout_width="80dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="7dp"
-                            android:background="@drawable/text_btn_nomal"
-                            android:fontFamily="Arial"
-                            android:gravity="center"
-                            android:text="腿部"
-                            android:textColor="@color/btn_word_colorblack">
-    
-                        </Button>
-    
-                        <Button
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                    <Button
+                        android:id="@+id/button1"
+                        android:layout_width="80dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/text_btn_nomal"
+                        android:fontFamily="Arial"
+                        android:gravity="center"
+                        android:text="腿部"
+                        android:textColor="@color/btn_word_colorblack"/>
+                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <Button
                             android:id="@+id/button2"
                             android:layout_width="80dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginRight="15dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="7dp"
                             android:background="@drawable/text_btn_nomal"
                             android:text="腰部"
-                            android:textColor="@color/btn_word_colorblack">
-    
-                        </Button>
-    
-                        <Button
-                            android:id="@+id/button3"
-                            android:layout_width="80dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="7dp"
-                            android:background="@drawable/text_btn_nomal"
-                            android:text="腹部"
-                            android:textColor="@color/btn_word_colorblack">
-    
-                        </Button>
-    
-                        <Button
+                            android:textColor="@color/btn_word_colorblack"/>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <Button
+                                android:id="@+id/button3"
+                                android:layout_width="80dp"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="7dp"
+                                android:background="@drawable/text_btn_nomal"
+                                android:text="腹部"
+                                android:textColor="@color/btn_word_colorblack"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <Button
                             android:id="@+id/button4"
                             android:layout_width="80dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginRight="15dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="7dp"
                             android:background="@drawable/text_btn_nomal"
                             android:text="背部"
-                            android:textColor="@color/btn_word_colorblack">
-    
-                        </Button>
+                            android:textColor="@color/btn_word_colorblack"/>
+
+                        </LinearLayout>
+
                     </LinearLayout>
     
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-    
+                        <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                            android:layout_weight="1">
                         <Button
                             android:id="@+id/bt1"
                             android:layout_width="80dp"
                             android:layout_height="25dp"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="7dp"
                             android:background="@drawable/text_btn_nomal"
@@ -181,12 +201,17 @@ android:orientation="vertical">
                             android:textColor="@color/btn_word_colorblack">
     
                         </Button>
-    
+                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
                         <Button
                             android:id="@+id/bt2"
                             android:layout_width="80dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginRight="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="7dp"
                             android:background="@drawable/text_btn_nomal"
@@ -194,12 +219,17 @@ android:orientation="vertical">
                             android:textColor="@color/btn_word_colorblack">
     
                         </Button>
-    
+                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
                         <Button
                             android:id="@+id/bt3"
                             android:layout_width="80dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginRight="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="7dp"
                             android:background="@drawable/text_btn_nomal"
@@ -207,12 +237,17 @@ android:orientation="vertical">
                             android:textColor="@color/btn_word_colorblack">
     
                         </Button>
-    
+                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
                         <Button
                             android:id="@+id/bt4"
                             android:layout_width="80dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginRight="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="7dp"
                             android:background="@drawable/text_btn_nomal"
@@ -220,6 +255,7 @@ android:orientation="vertical">
                             android:textColor="@color/btn_word_colorblack">
     
                         </Button>
+                        </LinearLayout>
                     </LinearLayout>
     
                     <LinearLayout

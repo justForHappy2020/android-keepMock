@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!--
  这个可写可不写
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -25,47 +26,54 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity_ViewPage">
+        android:theme="@style/AppTheme"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false">
+
+        <activity android:name=".course_filter"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity android:name=".course_main"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
+<!--        <activity android:name=".exercise_main"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />-->
+        <activity android:name=".search_result"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity android:name=".search_course"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+            <activity android:name=".MainActivity_ViewPage">
+                <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            </activity>
+        <activity android:name=".play"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+                <activity android:name=".exercise_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".course_main"
-            android:launchMode="standard"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".exercise_main"
-            android:launchMode="standard"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".search_result"
-            android:launchMode="standard"
-            android:screenOrientation="portrait" />
-        <!--
-                <activity android:name=".register1"
-            android:label="@string/title_activity_register1"
-            android:theme="@style/AppTheme.NoActionBar">
+
+<!--        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        -->
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        </activity>-->
         <activity
             android:name=".register1"
-            android:launchMode="standard"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".register5"
@@ -81,7 +89,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".register2"
-            android:launchMode="standard"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
     </application>
 

@@ -8,22 +8,24 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.entity.MasonryPost;
+import com.example.myapplication.entity.Post;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
 public class MasonryAdapter extends RecyclerView.Adapter<MasonryAdapter.MasonryView>{
-    private List<MasonryPost> posts;
-    View view;
 
-    public MasonryAdapter(List<MasonryPost> list) {
+    private List<Post> posts;
+
+
+    public MasonryAdapter(List<Post> list) {
         posts=list;
     }
 
     @Override
-    public MasonryView onCreateViewHolder(ViewGroup viewGroup, int i) {
-        view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.search_daily_item, viewGroup, false);
+    public MasonryView onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View view;
+        view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.post_item, viewGroup, false);
         return new MasonryView(view);
     }
 

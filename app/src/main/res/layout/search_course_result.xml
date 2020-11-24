@@ -76,6 +76,7 @@
       </LinearLayout>
 
       <LinearLayout
+          android:id="@+id/tab_linearLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="#FFFFFF"
@@ -92,8 +93,10 @@
              android:layout_height="wrap_content"
              android:layout_weight="1.8"
              android:background="@android:color/white"
+             app:tabBackground="@color/transparent"
              app:tabIndicatorColor="#59535E"
              app:tabIndicatorFullWidth="false"
+             app:tabRippleColor="@color/transparent"
              app:tabSelectedTextColor="@android:color/black"
              app:tabTextColor="@android:color/darker_gray">
 
@@ -107,18 +110,21 @@
                 android:id="@+id/tabItem2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
                 android:text="课程" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabItem3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
                 android:text="用户" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabItem4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
                 android:text="动态" />
          </com.google.android.material.tabs.TabLayout>
 

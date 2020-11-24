@@ -10,4 +10,5 @@
     <color name="btn_bg_colorgrey">#F5F5F5</color>
     <color name="btn_word_colorblack">#615D64</color>
     <color name="btn_boder_colorgreen">#25C689</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

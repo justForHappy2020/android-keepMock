@@ -10,14 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.myapplication.entity.MasonryPost;
+import com.example.myapplication.entity.Post;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class fragment_search_daily extends Fragment {
 
-    List<MasonryPost> postList= new ArrayList<>();
+    List<Post> postList= new ArrayList<>();
 
     @Nullable
     @Override
@@ -26,6 +26,7 @@ public class fragment_search_daily extends Fragment {
 
         initData();
         initView(view);
+
         return view;
     }
 
@@ -43,9 +44,9 @@ public class fragment_search_daily extends Fragment {
     }
 
     private void initData(){
-        MasonryPost post1 = new MasonryPost(R.drawable.scenery,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
-        MasonryPost post2 = new MasonryPost(R.drawable.post_img2,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
-        MasonryPost post3 = new MasonryPost(R.drawable.post_img3,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
+        Post post1 = new Post(R.drawable.scenery,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
+        Post post2 = new Post(R.drawable.post_img2,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
+        Post post3 = new Post(R.drawable.post_img3,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
 
         postList.add(post1);
         postList.add(post2);

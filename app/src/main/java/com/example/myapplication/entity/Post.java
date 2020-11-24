@@ -1,6 +1,6 @@
 package com.example.myapplication.entity;
 
-public class MasonryPost {
+public class Post {
     private int post_img;
     private int portrait_img;
     private String title;
@@ -8,7 +8,7 @@ public class MasonryPost {
     private String userName;
     private String notificationNum;
 
-    public MasonryPost(int img, int portrait_img, String title,String textContent,String userName,String notificationNum) {
+    public Post(int img, int portrait_img, String title, String textContent, String userName, String notificationNum) {
         this.post_img = img;
         this.portrait_img = portrait_img;
         this.title = title;

@@ -233,7 +233,7 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
         Intent intent = null;
         switch (view.getId()) {
             case R.id.search:
-                intent = new Intent(this, search_result.class);
+                intent = new Intent(this, search.class);
                 startActivity(intent);
                 break;
                 //筛选课程http、跳转对应的筛选主页

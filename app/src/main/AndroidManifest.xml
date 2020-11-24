@@ -30,6 +30,10 @@
         android:largeHeap="true"
         android:hardwareAccelerated="false">
 
+        <activity android:name=".search"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
         <activity android:name=".course_filter"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

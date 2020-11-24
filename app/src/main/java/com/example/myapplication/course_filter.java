@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -56,7 +57,19 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
             //选中所有标签
             //筛选课程
             //展示课程
-        } else ;//选中对应的标签，筛选对应部位的课程，展示课程
+        }
+        else {
+            int i;
+            for(i = 0 ; i < btBodypart.length ; i++) {
+                if (btBodypart[i].getText().toString() == courseClass.getClassValue()) {
+                    btBodypart[i].performClick();//.setBackgroundColor(Color.parseColor("#615D64"));
+                }
+                break;
+            }
+            for(i = 0 ; i < btDegree.length ; i++){
+                btDegree[i].performClick();//.setBackgroundColor(Color.parseColor("#615D64"));
+            }
+        };//选中对应的部位标签，degree默认全选，筛选对应部位的课程，展示课程
     }
 
     private void initData() {
@@ -160,13 +173,14 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
                 intent = new Intent(this, search_course.class);
                 startActivity(intent);
                 break;
-            case R.id.sure://待做：筛选选中的标签的课程，展示课程
+            case R.id.sure://待做：如果BUTTON选中，传值，筛选选中的标签的课程，展示课程
                 break;
             case R.id.reset://待做：标签全部置灰，取消选中
                 break;
 
             //部位标签
             case R.id.button1:
+                //选中+取消选中
                 break;
             case R.id.button2:
                 break;

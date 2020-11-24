@@ -21,9 +21,7 @@ public class community_main extends Fragment {
         initView(view);
 
 
-        RecyclerView mRecyclerView = view.findViewById(R.id.community_main_recyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+
 
         return view;
     }
@@ -31,10 +29,10 @@ public class community_main extends Fragment {
     private void initView(View view){
         ImageView img1 = view.findViewById(R.id.community_main_follow);
         ImageView img2= view.findViewById(R.id.community_main_search);
+        RecyclerView mRecyclerView = view.findViewById(R.id.community_main_recyclerView);
 
-        img1.setImageResource(R.drawable.followers);
-        img2.setImageResource(R.drawable.searching_icon);
-
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
 }

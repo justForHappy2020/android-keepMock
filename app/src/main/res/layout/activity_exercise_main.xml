@@ -13,10 +13,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="运动"
             android:layout_gravity="center"
-            android:textSize="30dp"
-            android:fontFamily="sans-serif-black" />
+            android:fontFamily="sans-serif-black"
+            android:text="运动"
+            android:textSize="30dp" />
 
         <ImageButton
             android:id="@+id/search"
@@ -47,7 +47,7 @@
         >
 
         <LinearLayout
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -55,88 +55,92 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:gravity="center"
-                android:padding="10dp"
-                android:background="#F4F4FA">
-
-                <Button
-                    android:id="@+id/bodypart1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button2"
-                    android:text="腿"
-                    android:fontFamily="sans-serif-black"/>
-
-                <Button
-                    android:id="@+id/bodypart2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button2"
-                    android:text="腿"
-                    android:fontFamily="sans-serif-black"/>
-
-                <Button
-                    android:id="@+id/bodypart3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button2"
-                    android:text="腿"
-                    android:fontFamily="sans-serif-black"/>
-
-                <Button
-                    android:id="@+id/bodypart4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button2"
-                    android:text="腿"
-                    android:fontFamily="sans-serif-black"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:gravity="center"
-                android:padding="10dp"
+                android:orientation="vertical"
                 android:background="#F4F4FA"
-                >
+                android:gravity="center">
 
-                <Button
-                    android:id="@+id/bodypart5"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button2"
-                    android:text="腿"
-                    android:fontFamily="sans-serif-black"/>
+                    android:background="#F4F4FA"
+                    android:gravity="center"
+                    android:padding="10dp">
 
-                <Button
-                    android:id="@+id/bodypart6"
+                    <Button
+                        android:id="@+id/bodypart1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_button2"
+                        android:fontFamily="sans-serif-black"
+                        android:text="腿" />
+
+                    <Button
+                        android:id="@+id/bodypart2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_button2"
+                        android:fontFamily="sans-serif-black"
+                        android:text="腿" />
+
+                    <Button
+                        android:id="@+id/bodypart3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_button2"
+                        android:fontFamily="sans-serif-black"
+                        android:text="腿" />
+
+                    <Button
+                        android:id="@+id/bodypart4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_button2"
+                        android:fontFamily="sans-serif-black"
+                        android:text="腿" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button2"
-                    android:text="腿"
-                    android:fontFamily="sans-serif-black"/>
+                    android:background="#F4F4FA"
+                    android:gravity="center"
+                    android:padding="10dp">
 
-                <Button
-                    android:id="@+id/bodypart7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button2"
-                    android:text="腿"
-                    android:fontFamily="sans-serif-black"/>
+                    <Button
+                        android:id="@+id/bodypart5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_button2"
+                        android:fontFamily="sans-serif-black"
+                        android:text="腿" />
 
-                <Button
-                    android:id="@+id/bodypart8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button2"
-                    android:text="全部"
-                    android:fontFamily="sans-serif-black"/>
+                    <Button
+                        android:id="@+id/bodypart6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_button2"
+                        android:fontFamily="sans-serif-black"
+                        android:text="腿" />
 
+                    <Button
+                        android:id="@+id/bodypart7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_button2"
+                        android:fontFamily="sans-serif-black"
+                        android:text="腿" />
+
+                    <Button
+                        android:id="@+id/bodypart8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_button2"
+                        android:fontFamily="sans-serif-black"
+                        android:text="全部" />
+
+                </LinearLayout>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

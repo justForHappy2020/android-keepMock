@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -29,7 +30,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class exercise_main extends AppCompatActivity implements View.OnClickListener {
+public class exercise_main extends Activity implements View.OnClickListener {
 
     private ImageButton ibSearch;
     private Button btBodypart[] = new Button[8];

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class course_filter extends AppCompatActivity implements View.OnClickListener {
+public class course_filter extends Activity implements View.OnClickListener {
 
     private ImageButton ibSearch;
     private ImageButton ibback;

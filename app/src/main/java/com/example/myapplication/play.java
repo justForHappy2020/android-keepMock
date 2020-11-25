@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -23,7 +24,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class play extends AppCompatActivity {
+public class play extends Activity {
 
     private Course course;
     private String VIDEO_URL =

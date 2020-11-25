@@ -52,7 +52,7 @@ import okhttp3.Response;
 
 import static com.example.myapplication.utils.ClientUploadUtils.upload;
 
-public class register3 extends AppCompatActivity implements View.OnClickListener {
+public class register3 extends Activity implements View.OnClickListener {
 
     private ImageButton ibUpdatePhoto;
     private TextView tvName;

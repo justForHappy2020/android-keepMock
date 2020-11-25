@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -15,7 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class register4 extends AppCompatActivity implements View.OnClickListener{
+public class register4 extends Activity implements View.OnClickListener{
 
     private ImageButton ibIsFemale;
     private ImageButton ibIsMale;

@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -17,7 +20,9 @@ import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.entity.Post;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class fragment_search_all extends Fragment {
 
@@ -25,6 +30,7 @@ public class fragment_search_all extends Fragment {
 
     private List<Post> datas01= new ArrayList<>();
     private List<MultipleItem> datas02= new ArrayList<>();
+    private List<MultipleItem> datas03= new ArrayList<>();
 
     @Nullable
     @Override
@@ -40,10 +46,21 @@ public class fragment_search_all extends Fragment {
         RecyclerView postRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_all_recyclerView);
 
         //设置recyclerView的样式
-        postRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
+        postRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
 
         //设置adapter
         MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(datas02);
+
+        View view1 = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_course_mini,null);
+
+        RecyclerView courseRecyclerView = (RecyclerView) view1.findViewById(R.id.fragment_course_recyclerView);
+
+        courseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        courseRecyclerView.setAdapter(new MultipleItemQuickAdapter(datas03));
+
+        myAdapter.addHeaderView(view1);//如果无课程则不添加“课程”TextView和加载更多按钮（小于等于三条也不显示）
+
         postRecyclerView.setAdapter(myAdapter);
 
         //设置item之间的间隔
@@ -65,15 +82,15 @@ public class fragment_search_all extends Fragment {
         datas01.add(post2);
         datas01.add(post3);
 
-        datas02.add(new MultipleItem(MultipleItem.TEXTONLY,"课程"));
+        datas03.add(new MultipleItem(MultipleItem.TEXTONLY,"课程"));
 
-        datas02.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
-        datas02.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
-        datas02.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
+        datas03.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
+        datas03.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
+        datas03.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
 
-        datas02.add(new MultipleItem(MultipleItem.BUTTON,"加载更多"));
+        datas03.add(new MultipleItem(MultipleItem.BUTTON,"加载更多"));
 
-        datas02.add(new MultipleItem(MultipleItem.TEXTONLY,"动态"));
+        datas03.add(new MultipleItem(MultipleItem.TEXTONLY,"动态"));
 
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(0)));
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(1)));
@@ -82,20 +99,6 @@ public class fragment_search_all extends Fragment {
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(1)));
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(0)));
 
-/*
-        Post post1 = new Post(R.drawable.scenery,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
-        Post post2 = new Post(R.drawable.post_img2,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","666");
-        Post post3 = new Post(R.drawable.post_img3,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
-
-        postList.add(post1);
-        postList.add(post2);
-        postList.add(post3);
-        postList.add(post1);
-        postList.add(post3);
-        postList.add(post3);
-        postList.add(post2);
-
-        */
 
     }
 }

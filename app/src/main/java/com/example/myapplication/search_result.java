@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 
 import androidx.fragment.app.Fragment;
@@ -24,24 +25,39 @@ public class search_result extends FragmentActivity{
     //装载Fragment的集合
     private List<Fragment> mFragments;
     private String[] titles = {"综合", "课程", "动态", "用户"};
+    private String searchContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.search_course_result);
+        setContentView(R.layout.activity_search_result);
         initViews();//初始化控件
         initEvents();//初始化事件
         initDatas();//初始化数据
     }
 
     private void initDatas() {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("searchContent", searchContent);
+
+        fragment_search_all f1 = new fragment_search_all();
+        fragment_search_course f2 = new fragment_search_course();
+        fragment_search_daily f3 = new fragment_search_daily();
+        fragment_search_daily f4 = new fragment_search_daily();
+
+        f1.setArguments(bundle);
+        f2.setArguments(bundle);
+        f3.setArguments(bundle);
+        f4.setArguments(bundle);
+
         mFragments = new ArrayList<>();
         //将四个Fragment加入集合中
-        mFragments.add(new fragment_search_all());
-        mFragments.add(new fragment_search_course());
-        mFragments.add(new fragment_search_daily());
-        mFragments.add(new fragment_search_daily());
+        mFragments.add(f1);
+        mFragments.add(f2);
+        mFragments.add(f3);
+        mFragments.add(f4);
 
         //初始化适配器
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -61,12 +77,20 @@ public class search_result extends FragmentActivity{
                 return titles[position];
             }
         };
+
         //不要忘记设置ViewPager的适配器
         mViewPager.setAdapter(mAdapter);
 
     }
 
     private void initEvents() {
+
+        findViewById(R.id.search_back).setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v){
+                finish();
+            }
+        });
+
 
     }
 

@@ -17,16 +17,18 @@ public class search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         final TextView tv = findViewById(R.id.searching_history);
         final EditText et = findViewById(R.id.text_inout_search);
+
         findViewById(R.id.searching_button).setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){//点击查找进行课程搜索以及存储搜索记录，目前只能存一个
-                String estr = et.getText().toString().trim();
+                String inputSrt = et.getText().toString().trim();
                 SharedPreferences shp = getSharedPreferences("history", MODE_PRIVATE);
                 SharedPreferences.Editor editor = shp.edit();
-                editor.putString("name",estr);
+                editor.putString("name",inputSrt);
                 editor.commit();
+
                 Intent i = new Intent(search.this , search_result.class);//启动课程结果activity
-                //启动
-                startActivity(i);
+                i.putExtra("searchContent",inputSrt);//传递参数：搜索内容
+                startActivity(i);//启动
             }
         });
 
@@ -42,9 +44,10 @@ public class search extends AppCompatActivity {
         });
         findViewById(R.id.quit_button).setOnClickListener(new View.OnClickListener() {//点击取消按钮返回到课程主页
             public void onClick (View v){
-                Intent i = new Intent(search.this , exercise_main.class);
-                //启动
-                startActivity(i);
+                finish();
+
+                //Intent i = new Intent(search.this , exercise_main.class);
+                //startActivity(i);//启动
             }
         });
     }

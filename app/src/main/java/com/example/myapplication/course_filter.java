@@ -24,7 +24,7 @@ import java.util.List;
 public class course_filter extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton ibSearch;
-    //private ImageButton ibback;
+    private ImageButton ibback;
     private Button btReset;
     private Button btSure;
     private Button btBodypart[] = new Button[9];
@@ -60,7 +60,7 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
 
     private void initData() {
         //展示标签
-        String url = "http://192.168.16.1:8080/api/course/getFilter";
+        String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getFilter";
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -97,10 +97,10 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
     }
 
     private void initView() {
-        //ibback.findViewById(R.id.go_back_button);
-        ibSearch.findViewById(R.id.search_button1);
-        btReset.findViewById(R.id.reset);
-        btSure.findViewById(R.id.sure);
+        ibback = findViewById(R.id.go_back_button);
+        ibSearch = findViewById(R.id.search_button1);
+        btReset = findViewById(R.id.reset);
+        btSure = findViewById(R.id.sure);
         btBodypart[0] = findViewById(R.id.button1);
         btBodypart[1] = findViewById(R.id.button2);
         btBodypart[2] = findViewById(R.id.button3);
@@ -139,9 +139,12 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
-            case R.id.search:
+            case R.id.search_button1:
                 intent = new Intent(this, search_course.class);
                 startActivity(intent);
+                break;
+            case R.id.go_back_button:
+                finish();
                 break;
             case R.id.sure://待做：筛选选中的标签的课程，展示课程
                 break;

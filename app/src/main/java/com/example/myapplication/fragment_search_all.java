@@ -32,13 +32,20 @@ public class fragment_search_all extends Fragment {
     private List<MultipleItem> datas02= new ArrayList<>();
     private List<MultipleItem> datas03= new ArrayList<>();
 
+    String searchContent;//传入用户在搜索界面输入的内容
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_all, container, false);
 
+        Bundle bundle = getArguments();
+        searchContent = bundle.getString("searchContent");
+
         initData();
         initView(view);
+
         return view;
     }
 
@@ -59,7 +66,7 @@ public class fragment_search_all extends Fragment {
 
         courseRecyclerView.setAdapter(new MultipleItemQuickAdapter(datas03));
 
-        myAdapter.addHeaderView(view1);//如果无课程则不添加“课程”TextView和加载更多按钮（小于等于三条也不显示）
+        myAdapter.addHeaderView(view1);//待增添逻辑：如果无课程则不添加“课程”TextView和加载更多按钮（小于等于三条也不显示）
 
         postRecyclerView.setAdapter(myAdapter);
 

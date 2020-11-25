@@ -30,4 +30,5 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.2.1'//圆角图片
     implementation 'com.facebook.fresco:fresco:0.9.0+'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
+    //compile 'com.hyman:flowlayout-lib:1.1.2'
 }

@@ -4,12 +4,14 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.module.LoadMoreModule;
+import com.chad.library.adapter.base.module.UpFetchModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.Course;
 
 import java.util.List;
 
-public class QuickAdapter extends BaseQuickAdapter<Course, BaseViewHolder> {
+public class QuickAdapter extends BaseQuickAdapter<Course, BaseViewHolder> implements UpFetchModule, LoadMoreModule {
 
     public QuickAdapter(@LayoutRes int layoutResId, @Nullable List<Course> data) {
         super(layoutResId, data);

@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
@@ -16,6 +18,11 @@ import java.util.List;
 
 
 public class search_result extends FragmentActivity{
+
+
+    final int SEARCH_ALL = 0;
+    final int SEARCH_COURSE = 1;
+
     //声明ViewPager
     private ViewPager mViewPager;
     //声明TabLayout
@@ -26,12 +33,15 @@ public class search_result extends FragmentActivity{
     private List<Fragment> mFragments;
     private String[] titles = {"综合", "课程", "动态", "用户"};
     private String searchContent;
+    private int from;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_search_result);
+
         initViews();//初始化控件
         initEvents();//初始化事件
         initDatas();//初始化数据
@@ -40,6 +50,7 @@ public class search_result extends FragmentActivity{
     private void initDatas() {
 
         Bundle bundle = new Bundle();
+        from = getIntent().getIntExtra("from",0);
         bundle.putString("searchContent", searchContent);
 
         fragment_search_all f1 = new fragment_search_all();
@@ -78,8 +89,19 @@ public class search_result extends FragmentActivity{
             }
         };
 
+
+
         //不要忘记设置ViewPager的适配器
         mViewPager.setAdapter(mAdapter);
+        switch (from){
+            case 0:
+                break;
+            case 1:
+                mViewPager.setCurrentItem (1);
+                break;
+             default:
+                 break;
+        }
 
     }
 
@@ -90,8 +112,6 @@ public class search_result extends FragmentActivity{
                 finish();
             }
         });
-
-
     }
 
     //初始化控件

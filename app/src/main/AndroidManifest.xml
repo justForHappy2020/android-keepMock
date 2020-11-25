@@ -31,7 +31,13 @@
         <activity
             android:name=".search_course"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".search"
             android:launchMode="singleTop"
@@ -40,12 +46,8 @@
             android:name=".course_filter"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
         <activity
             android:name=".course_main"
             android:launchMode="standard"

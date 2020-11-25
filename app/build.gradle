@@ -29,4 +29,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.makeramen:roundedimageview:2.2.1'//圆角图片
     compile 'com.facebook.fresco:fresco:0.9.0+'
+
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 }

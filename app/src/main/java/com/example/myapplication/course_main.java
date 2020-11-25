@@ -137,7 +137,7 @@ public class course_main extends AppCompatActivity implements View.OnClickListen
             jsonObject1 = new JSONObject(responseData);
             httpcode = jsonObject1.getInt("code");
             if(httpcode == 200){
-                //得到hotCourse的list
+                //得到相关训练的list
                 JSONArray JSONArrayCourse = jsonObject1.getJSONArray("data");
                 for (int i = 0; i < JSONArrayCourse.length(); i++) {
                     JSONObject jsonObject = JSONArrayCourse.getJSONObject(i);

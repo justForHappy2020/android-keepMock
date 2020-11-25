@@ -141,100 +141,101 @@
             </TextView>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/famous_searching1"
-                    android:layout_width="105dp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:background="@drawable/button_radius_white"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="25dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_radius_white"
+                    android:drawableLeft="@drawable/fire"
+                    android:gravity="center"
                     android:text="@string/edittext_tip"
                     android:textColor="#736F75"
-                    android:gravity="center"
-                    android:textSize="15dp"
-                    android:drawableLeft="@drawable/fire"
-                    style="?android:attr/borderlessButtonStyle">
+                    android:textSize="15dp">
 
                 </Button>
 
                 <Button
                     android:id="@+id/famous_searching2"
-                    android:layout_width="105dp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:background="@drawable/button_radius_white"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="25dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_radius_white"
+                    android:drawableLeft="@drawable/fire"
+                    android:gravity="center"
                     android:text="@string/edittext_tip"
                     android:textColor="#736F75"
-                    android:gravity="center"
-                    android:textSize="15dp"
-                    android:drawableLeft="@drawable/fire"
-                    style="?android:attr/borderlessButtonStyle">
+                    android:textSize="15dp">
 
                 </Button>
 
                 <Button
                     android:id="@+id/famous_searching3"
-                    android:layout_width="105dp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:background="@drawable/button_radius_white"
-                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="25dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_radius_white"
+                    android:drawableLeft="@drawable/fire"
+                    android:gravity="center"
                     android:text="@string/edittext_tip"
                     android:textColor="#736F75"
-                    android:gravity="center"
-                    android:textSize="15dp"
-                    android:drawableLeft="@drawable/fire"
-                    style="?android:attr/borderlessButtonStyle">
+                    android:textSize="15dp">
 
                 </Button>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/famous_searching4"
-                    android:layout_width="70dp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:background="@drawable/button_radius_white"
                     android:layout_marginLeft="30dp"
+                    android:background="@drawable/button_radius_white"
                     android:text="瘦腿"
                     android:textColor="#615D64"
-                    android:textSize="16dp"
-                    style="?android:attr/borderlessButtonStyle">
+                    android:textSize="16dp">
 
                 </Button>
+
                 <Button
                     android:id="@+id/famous_searching5"
-                    android:layout_width="70dp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:background="@drawable/button_radius_white"
                     android:layout_marginLeft="20dp"
+                    android:background="@drawable/button_radius_white"
                     android:text="增肌"
                     android:textColor="#615D64"
-                    android:textSize="16dp"
-                    style="?android:attr/borderlessButtonStyle">
+                    android:textSize="16dp">
 
                 </Button>
 
                 <Button
                     android:id="@+id/famous_searching6"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:background="@drawable/button_radius_white"
                     android:layout_marginLeft="20dp"
+                    android:background="@drawable/button_radius_white"
                     android:text="保持健康"
                     android:textColor="#615D64"
-                    android:textSize="16dp"
-                    style="?android:attr/borderlessButtonStyle">
+                    android:textSize="16dp">
 
                 </Button>
 

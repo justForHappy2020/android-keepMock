@@ -147,7 +147,7 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
+            }
         });
         thread.start();
         try {
@@ -177,13 +177,6 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
         JSONObject jsonObject1 = null;
-        try {
-            jsonObject1 = new JSONObject(responseData);
-            httpcode = jsonObject1.getInt("code");
-            if(httpcode == 200)countTime = String.valueOf(jsonObject1.getInt("data"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
         });
         thread.start();
@@ -236,7 +229,7 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
                 intent = new Intent(this, search.class);
                 startActivity(intent);
                 break;
-                //筛选课程http、跳转对应的筛选主页
+            //筛选课程http、跳转对应的筛选主页
             case R.id.bodypart1:
                 intent = new Intent(this, course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(0));
@@ -272,7 +265,7 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
                 intent.putExtra("bodypart" , bodyPart.get(6));
                 startActivity(intent);
                 break;
-                //待做：筛选全部
+            //待做：筛选全部
             case R.id.bodypart8:
                 intent = new Intent(this, course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(7));

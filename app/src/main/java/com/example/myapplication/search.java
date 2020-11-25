@@ -42,12 +42,10 @@ public class search extends AppCompatActivity {
         });
         findViewById(R.id.quit_button).setOnClickListener(new View.OnClickListener() {//点击取消按钮返回到课程主页
             public void onClick (View v){
-                Intent i = new Intent(search.this , exercise_main.class);
-                //启动
-                startActivity(i);
+                finish();
+                //Intent i = new Intent(search.this , exercise_main.class);
+                //startActivity(i);//启动
             }
         });
     }
-
 }
-

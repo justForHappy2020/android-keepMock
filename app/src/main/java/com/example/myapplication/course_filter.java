@@ -246,11 +246,11 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
     }
 
     private void initView() {
-        //ibback.findViewById(R.id.go_back_button);
+        ibback = findViewById(R.id.go_back_button);
         ibSearch = findViewById(R.id.search_button1);
         btReset = findViewById(R.id.reset);
         btSure = findViewById(R.id.sure);
-        ibback = findViewById(R.id.go_back_button);
+
         btBodypart[0] = findViewById(R.id.button1);
         btBodypart[1] = findViewById(R.id.button2);
         btBodypart[2] = findViewById(R.id.button3);
@@ -303,7 +303,7 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.search_button1:
-                intent = new Intent(this, search.class);
+                intent = new Intent(this, search_course.class);
                 startActivity(intent);
                 break;
             case R.id.sure://清空课程列表，如果BUTTON选中，传值，筛选选中的标签的课程，展示课程

@@ -46,7 +46,7 @@ public class MainActivity_ViewPage extends FragmentActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main__view_page);
+        setContentView(R.layout.activity_main_view_page);
         initViews();//初始化控件
         initEvents();//初始化事件
         initDatas();//初始化数据

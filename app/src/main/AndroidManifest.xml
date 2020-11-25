@@ -56,6 +56,7 @@
             android:name=".register1"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".register5"
             android:launchMode="singleTop"

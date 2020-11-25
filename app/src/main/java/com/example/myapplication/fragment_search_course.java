@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,10 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.entity.Course;
-import com.example.myapplication.entity.Post;
+import com.example.myapplication.utils.HttpUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +33,10 @@ public class fragment_search_course extends Fragment {
     RecyclerView recyclerView;
 
     String searchContent;//传入用户在搜索界面输入的内容
+
+    private int httpcode;
+    private Boolean hasNext;
+    private List<Course> courseList = new ArrayList();
 
     @Nullable
     @Override
@@ -52,6 +59,8 @@ public class fragment_search_course extends Fragment {
 
     }
 
+
+
     private void initData(){
 
         /**
@@ -66,11 +75,62 @@ public class fragment_search_course extends Fragment {
             datas.add(course);
         }
 
-        //testData
-        String[] courseNames = {"腹肌撕裂者初级","哑铃手臂塑形","腹肌撕裂者进阶","腹肌撕裂者进阶","腹肌撕裂者进阶"};
-        String[] courseHints = {"“明星也在练的腹肌课！”","“虐腹就是它了”","“虐腹就是它了”","“虐腹就是它了”","“虐腹就是它了”"};
-        String[] courseTexts ={"K1零基础 . 13分钟 . 3002万人已参加","K1零基础 . 13分钟 . 3002万人已参加","K1零基础 . 13分钟 . 3002万人已参加","K1零基础 . 13分钟 . 3002万人已参加","K1零基础 . 13分钟 . 3002万人已参加"};
-        int[] courseImgs = {R.drawable.course_background,R.drawable.course_background,R.drawable.course_background,R.drawable.course_background,R.drawable.course_background};
+    }
 
+    private void getHttpSearch(final String url){
+        final Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int totalPages = 1;
+                String responseData = null;
+                try {
+                    responseData = HttpUtils.connectHttpGet(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                JSONObject jsonObject1 = null;
+                try {
+                    jsonObject1 = new JSONObject(responseData);
+                    httpcode = jsonObject1.getInt("code");
+                    if (httpcode == 200) {
+                        JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
+                        hasNext = jsonObject2.getBoolean("hasNext");
+                        totalPages = jsonObject2.getInt("totalPages");
+                        //得到筛选的课程list
+                        JSONArray JSONArrayCourse = jsonObject2.getJSONArray("courseList");
+                        for (int i = 0; i < JSONArrayCourse.length(); i++) {
+                            JSONObject jsonObject = JSONArrayCourse.getJSONObject(i);
+                            //相应的内容
+                            Course course = new Course();
+                            course.setCourseId(jsonObject.getLong("courseId"));
+                            course.setCourseName(jsonObject.getString("courseName"));
+                            course.setBackgroundUrl(jsonObject.getString("backgroundUrl"));
+                            course.setCourseUrl(jsonObject.getString("courseUrl"));
+                            course.setBodyPart(jsonObject.getString("bodyPart"));
+                            course.setDegree(jsonObject.getString("degree"));
+                            course.setDuration(jsonObject.getString("duration"));
+                            course.setHits(jsonObject.getInt("hits"));
+                            course.setCreateTime(jsonObject.getString("createTime"));
+                            course.setCalorie(jsonObject.getInt("calorie"));
+                            course.setCourseIntro(jsonObject.getString("courseIntro"));
+                            courseList.add(i, course);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (httpcode != 200) {
+            Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+        }
+/*        else for (int i = 0; i <courseList.size(); i++)btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
+                courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程*/
     }
 }

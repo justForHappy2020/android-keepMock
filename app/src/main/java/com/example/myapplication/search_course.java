@@ -89,6 +89,7 @@ public class search_course extends Activity implements View.OnClickListener{
                 break;
             case R.id.search_reset:
                 search_linerlayout.setVisibility(View.VISIBLE);
+                etInput.setText(null);
                 break;
         }
     }

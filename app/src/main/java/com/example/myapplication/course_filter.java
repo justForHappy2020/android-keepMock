@@ -2,11 +2,9 @@ package com.example.myapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.entity.Course;
 import com.example.myapplication.entity.CourseClass;
@@ -29,8 +25,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.myapplication.R.color.btn_boder_colorgreen;
 
 public class course_filter extends AppCompatActivity implements View.OnClickListener {
 
@@ -64,7 +58,7 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
 
 
 
-    public void getHttpFilter(final String url) {
+    private void getHttpFilter(final String url) {
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

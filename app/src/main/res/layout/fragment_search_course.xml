@@ -6,6 +6,12 @@
     android:layout_height="match_parent">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_course_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/course_item"/>
+<!--
     <ListView
         android:id="@+id/fragment_course_listView"
         android:layout_width="match_parent"
@@ -16,5 +22,5 @@
         android:paddingRight="10dp"
         android:scrollbars="none"
         tools:listitem="@layout/course_item" />
-
+-->
 </LinearLayout>

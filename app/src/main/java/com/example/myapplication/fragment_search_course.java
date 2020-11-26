@@ -1,17 +1,22 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.example.myapplication.entity.Course;
 import com.example.myapplication.utils.HttpUtils;
 
@@ -22,66 +27,105 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class fragment_search_course extends Fragment {
 
-    private List<Map<String,Object>> lists;
-    private List<Course> datas;
+    private List<List> dataSet = new  ArrayList<>();
+    private int TOTAL_PAGES = 3;
 
-    ListView listView;
+    QuickAdapter quickAdapter;
     RecyclerView recyclerView;
 
     String searchContent;//传入用户在搜索界面输入的内容
 
     private int httpcode;
+    private String keyWord;//搜索的关键词
     private Boolean hasNext;
+    private int currentPage; //要分页查询的页面
     private List<Course> courseList = new ArrayList();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_course, container, false);
-
-        initData();
+        currentPage = 1;
+        Bundle bundle = getArguments();
+        keyWord = bundle.getString("searchContent");
         initView(view);
-
+        configLoadMoreData();
+        initData();
         return view;
     }
 
-    private void initView(View view){
+    private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_course_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        QuickAdapter quickAdapter = new QuickAdapter(R.layout.course_item,datas);
+        quickAdapter = new QuickAdapter(R.layout.course_item, courseList);
+
+        quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
+            //int mCurrentCunter = 0;
+
+            @Override
+            public void onLoadMore() {
+                if (currentPage >= TOTAL_PAGES) {
+                    quickAdapter.getLoadMoreModule().loadMoreEnd();
+                } else {
+                    new Handler().postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            configLoadMoreData();
+                        }
+                    }, 3000);
+
+                }
+
+            }
+        });
+        //具体课程的监听
+        quickAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {
+                //Log.d("Adapter","Click");
+                Intent intent;
+                intent = new Intent(getActivity(), course_main.class);
+/*                for(int i = 0 ; i < dataSet.size() ; i++){
+                    courseList = dataSet.get(i);
+                    if(courseList.size()<=position)position = position - courseList.size();
+                    else break;
+                }*/
+                intent.putExtra("course", courseList.get(position).getCourseId());
+                startActivity(intent);
+            }
+        });
+
 
         recyclerView.setAdapter(quickAdapter);
 
     }
 
 
+    private void initData() {
 
-    private void initData(){
 
-        /**
-         * TestData
-         */
-        datas = new ArrayList<>();
+          /*TestData*/
+
+
         Course course;
         for (int i = 0; i < 5; i++) {
             course = new Course();
             course.setCourseName("课程名称");
             course.setCourseIntro("课程介绍");
-            datas.add(course);
+            courseList.add(course);
         }
-
+        dataSet.add(courseList);
     }
 
-    private void getHttpSearch(final String url){
+    private void getHttpSearch(final String url) {
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                int totalPages = 1;
                 String responseData = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
@@ -95,7 +139,7 @@ public class fragment_search_course extends Fragment {
                     if (httpcode == 200) {
                         JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
                         hasNext = jsonObject2.getBoolean("hasNext");
-                        totalPages = jsonObject2.getInt("totalPages");
+                        //TOTAL_PAGES = jsonObject2.getInt("totalPages");
                         //得到筛选的课程list
                         JSONArray JSONArrayCourse = jsonObject2.getJSONArray("courseList");
                         for (int i = 0; i < JSONArrayCourse.length(); i++) {
@@ -133,4 +177,15 @@ public class fragment_search_course extends Fragment {
 /*        else for (int i = 0; i <courseList.size(); i++)btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
                 courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程*/
     }
+
+        private void configLoadMoreData() {
+            String url;//http请求的url
+            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/searchCourse?keyword=" + keyWord + "&&currentPage=" + currentPage;
+            getHttpSearch(url);
+            dataSet.add(courseList);
+            quickAdapter.addData(dataSet.get(currentPage-1));
+            currentPage++;
+            quickAdapter.getLoadMoreModule().loadMoreEnd();
+        }
+
 }

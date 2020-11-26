@@ -1,8 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -15,11 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class search_result extends FragmentActivity{
+public class search_result extends FragmentActivity implements View.OnClickListener{
 
 
     final int SEARCH_ALL = 0;
     final int SEARCH_COURSE = 1;
+
+    private ImageButton ibSearch;
+    private ImageButton ibback;
+    private ImageButton btReset;
+    private EditText etInput;
 
     //声明ViewPager
     private ViewPager mViewPager;
@@ -41,14 +49,15 @@ public class search_result extends FragmentActivity{
         setContentView(R.layout.activity_search_result);
 
         initViews();//初始化控件
-        initEvents();//初始化事件
+        //initEvents();//初始化事件
         initDatas();//初始化数据
     }
 
     private void initDatas() {
-
         Bundle bundle = new Bundle();
-        from = getIntent().getIntExtra("from",0);
+        Intent intent = getIntent();
+        from = intent.getIntExtra("from",0);
+        searchContent = intent.getStringExtra("searchContent");
         bundle.putString("searchContent", searchContent);
 
         fragment_search_all f1 = new fragment_search_all();
@@ -93,6 +102,7 @@ public class search_result extends FragmentActivity{
         mViewPager.setAdapter(mAdapter);
         switch (from){
             case 0:
+                mViewPager.setCurrentItem (0);
                 break;
             case 1:
                 mViewPager.setCurrentItem (1);
@@ -114,6 +124,15 @@ public class search_result extends FragmentActivity{
 
     //初始化控件
     private void initViews() {
+        ibback = findViewById(R.id.search_back);
+        ibSearch = findViewById(R.id.searching_result_button);
+        btReset = findViewById(R.id.result_quit_button);
+        etInput = findViewById(R.id.text_inout_search);
+
+        ibback.setOnClickListener(this);
+        ibSearch.setOnClickListener(this);
+        btReset.setOnClickListener(this);
+
         mViewPager = (ViewPager) this.findViewById(R.id.viewPager);
         mTabLayout = (TabLayout) this.findViewById(R.id.tabLayout);
 
@@ -122,4 +141,26 @@ public class search_result extends FragmentActivity{
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
 
+    @Override
+    public void onClick(View view) {
+        Intent intent = null;
+        switch (view.getId()) {
+            case R.id.searching_result_button:
+                intent = new Intent(this, search_result.class);
+                searchContent = etInput.getText().toString().trim();
+                if(from == 0)intent.putExtra("from", SEARCH_ALL);
+                else if(from == 1)intent.putExtra("from", SEARCH_COURSE);
+                //else if(from ==2)
+                intent.putExtra("searchContent",searchContent);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.search_back:
+                finish();
+                break;
+            case R.id.result_quit_button:
+                etInput.setText(null);
+                break;
+        }
+    }
 }

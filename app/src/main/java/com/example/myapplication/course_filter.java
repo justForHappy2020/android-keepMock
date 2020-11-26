@@ -144,7 +144,7 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
             String url;//http请求的url
             totalBodyClassId = getBodyClassId(bodyClassId);//得到身体部位标签的id
             //totalDegreeClassId = getDegreeId(degreeClassId);//得到难度标签的Id
-            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + degreeClassId + "&&currentPage=1";
+            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
             getHttpFilter(url);//筛选课程并展示
         }
     }
@@ -310,7 +310,7 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
                 String url;//http请求的url
                 totalBodyClassId = getBodyClassId(bodyClassId);//得到身体部位标签的id
                 totalDegreeClassId = getDegreeId(degreeClassId);//得到难度标签的Id
-                url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + totalDegreeClassId + "&&currentPage=1";
+                url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + totalDegreeClassId + "&&currentPage=" + currentPage;
                 getHttpFilter(url);//筛选课程并展示
                 break;
             case R.id.reset://标签全部置灰，取消选中

@@ -81,10 +81,9 @@ public class search_course extends Activity implements View.OnClickListener{
                 searchContent = etInput.getText().toString().trim();
                 intent.putExtra("from",SEARCH_COURSE);
                 intent.putExtra("searchContent",searchContent);
-
                 startActivity(intent);
                 break;
-            case R.id.go_back_button:
+            case R.id.search_back:
                 finish();
                 break;
             case R.id.search_reset:

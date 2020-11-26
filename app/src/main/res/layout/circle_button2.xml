@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="62dp" android:layout_width="62dp">
     <item android:bottom="8dp" android:right="8dp" android:top="8dp" android:left="8dp" >
         <selector xmlns:android="http://schemas.android.com/apk/res/android">
             <item android:state_pressed="true">

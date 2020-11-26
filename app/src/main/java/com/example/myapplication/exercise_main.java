@@ -119,35 +119,35 @@ public class exercise_main extends Activity implements View.OnClickListener {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //String url = "http://192.168.16.1:8080/api/course/getFilter";
+        //String url = "http://192.168.16.1:8080/api/course/getFilter";
                 String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getFilter";
                 String responseData = null;
-                try {
-                    responseData = HttpUtils.connectHttpGet(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
+        try {
+            responseData = HttpUtils.connectHttpGet(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonObject1 = null;
+        try {
+            jsonObject1 = new JSONObject(responseData);
+            httpcode = jsonObject1.getInt("code");
+            if(httpcode == 200){
+                JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
+                JSONArray JSONArrayBodyPart = jsonObject2.getJSONArray("bodyPart");
+                JSONArray JSONArrayDegree = jsonObject2.getJSONArray("degree");
+                for (int i = 0; i < JSONArrayBodyPart.length(); i++) {
+                    JSONObject jsonObject3 = JSONArrayBodyPart.getJSONObject(i);
+                    //相应的内容
+                    CourseClass courseClass = new CourseClass();
+                    courseClass.setCourseClassId(jsonObject3.getLong("courseClassId"));
+                    courseClass.setClassName(jsonObject3.getString("className"));
+                    courseClass.setClassValue(jsonObject3.getString("classValue"));
+                    bodyPart.add(i,courseClass);
                 }
-                JSONObject jsonObject1 = null;
-                try {
-                    jsonObject1 = new JSONObject(responseData);
-                    httpcode = jsonObject1.getInt("code");
-                    if(httpcode == 200){
-                        JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
-                        JSONArray JSONArrayBodyPart = jsonObject2.getJSONArray("bodyPart");
-                        JSONArray JSONArrayDegree = jsonObject2.getJSONArray("degree");
-                        for (int i = 0; i < JSONArrayBodyPart.length(); i++) {
-                            JSONObject jsonObject3 = JSONArrayBodyPart.getJSONObject(i);
-                            //相应的内容
-                            CourseClass courseClass = new CourseClass();
-                            courseClass.setCourseClassId(jsonObject3.getLong("courseClassId"));
-                            courseClass.setClassName(jsonObject3.getString("className"));
-                            courseClass.setClassValue(jsonObject3.getString("classValue"));
-                            bodyPart.add(i,courseClass);
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
             }
         });
         thread.start();
@@ -170,22 +170,15 @@ public class exercise_main extends Activity implements View.OnClickListener {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://192.168.16.1:8080/api/course/getCountTime";
-                String responseData = null;
-                try {
-                    responseData = HttpUtils.connectHttpGet(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                JSONObject jsonObject1 = null;
-                try {
-                    jsonObject1 = new JSONObject(responseData);
-                    httpcode = jsonObject1.getInt("code");
-                    if(httpcode == 200)countTime = String.valueOf(jsonObject1.getInt("data"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+        String url = "http://192.168.16.1:8080/api/course/getCountTime";
+        String responseData = null;
+        try {
+            responseData = HttpUtils.connectHttpGet(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonObject1 = null;
+    }
         });
         thread.start();
         try {

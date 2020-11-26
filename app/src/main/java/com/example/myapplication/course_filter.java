@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.example.myapplication.entity.Course;
 import com.example.myapplication.entity.CourseClass;
 import com.example.myapplication.utils.HttpUtils;
@@ -46,6 +49,7 @@ public class course_filter extends Activity implements View.OnClickListener {
     private List<CourseClass> bodyPart = new ArrayList<>();
     private List<CourseClass> degree = new ArrayList<>();
     private List<Course> courseList = new ArrayList();
+    private List<List> courseListSet = new ArrayList<>();
     private CourseClass courseClass;//记录传入的标签
 
     QuickAdapter quickAdapter;
@@ -56,6 +60,7 @@ public class course_filter extends Activity implements View.OnClickListener {
     private Drawable background;
     private Boolean hasNext = false;
     private Long currentPage;
+    private int TOTAL_PAGES = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,13 +72,25 @@ public class course_filter extends Activity implements View.OnClickListener {
         initCourse();
     }
 
+    private void configLoadMoreData() {
+        if(hasNext){
 
+            Long bodyClassId = null;//部位id值
+            Long degreeClassId = null;//难度id值
+            String url;//http请求的url
+            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
+            getHttpFilter(url);//筛选课程并展示
+
+            //quickAdapter.addData(courseListSet.get(currentPage.intValue()));//用不了Long类型数据!!!!!!!!!!这个quickAdapter连数组的下一个元素都检查也没有发生改变！太恐怖了！这句注释掉的不要加上去。。不然重复
+        }
+        quickAdapter.getLoadMoreModule().loadMoreEnd();
+    }
 
     public void getHttpFilter(final String url) {
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                int totalPages = 1;
+
                 String responseData = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
@@ -87,7 +104,7 @@ public class course_filter extends Activity implements View.OnClickListener {
                     if (httpcode == 200) {
                         JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
                         hasNext = jsonObject2.getBoolean("hasNext");
-                        totalPages = jsonObject2.getInt("totalPages");
+                        TOTAL_PAGES = jsonObject2.getInt("totalPages");
                         //得到筛选的课程list
                         JSONArray JSONArrayCourse = jsonObject2.getJSONArray("courseList");
                         for (int i = 0; i < JSONArrayCourse.length(); i++) {
@@ -123,13 +140,14 @@ public class course_filter extends Activity implements View.OnClickListener {
             Toast.makeText(course_filter.this, "ERROR", Toast.LENGTH_SHORT).show();
         }
         else {
-            //quickAdapter.addData(courseList);
-            /*
-            for(int i = 0; i <courseList.size(); i++){
-                btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
-                        courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程
-            }
+
+            courseListSet.add(courseList);
+            Log.d("courseListSet.size: ",Integer.toString(courseListSet.size()));
+
+            /**
+             * quickAdapter会自动检测到courseList的变化并进行更新!!!!!!!
              */
+            //quickAdapter.addData(courseList);
         }
     }
 
@@ -262,14 +280,41 @@ public class course_filter extends Activity implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(course_filter.this));
 
         headerView = LayoutInflater.from(course_filter.this).inflate(R.layout.fragment_course_filter_header,null);
-        quickAdapter = new QuickAdapter(R.layout.course_item, courseList);
+
+        courseListSet.add(courseList);//空值占位
+
+        quickAdapter = new QuickAdapter(R.layout.course_item, courseListSet.get(0));
         quickAdapter.addHeaderView(headerView);
+
+        //RecyclerView中的物体点击事件监听器
         quickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {
                 Intent intent = new Intent(course_filter.this, course_main.class);
                 intent.putExtra("course", courseList.get(0).getCourseId());
                 startActivity(intent);
+            }
+        });
+
+        //RecyclerView的上拉加载监听器
+        quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
+
+            @Override
+            public void onLoadMore() {
+                if(currentPage>=TOTAL_PAGES){
+                    quickAdapter.getLoadMoreModule().loadMoreEnd();
+                }else{
+                    new Handler().postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            currentPage++;
+                            configLoadMoreData();
+                        }
+                    },3000);
+
+                }
+
             }
         });
         recyclerView.setAdapter(quickAdapter);
@@ -295,22 +340,6 @@ public class course_filter extends Activity implements View.OnClickListener {
         btDegree[3] = headerView.findViewById(R.id.btdifficult4);
         btDegree[4] = headerView.findViewById(R.id.btdifficult5);
 
-        /*
-        ibSearch.setOnClickListener(course_filter.this);
-        ibback.setOnClickListener(course_filter.this);
-        btReset.setOnClickListener(course_filter.this);
-        btSure.setOnClickListener(course_filter.this);
-/*
-        for (int i = 0; i < btCourse.length; i++) btCourse[i].setOnClickListener(this);
-        for (int i = 0; i < btDegree.length; i++) {
-            //btDegree[i].setBackgroundColor(Color.parseColor("#F5F5F5"));
-            btDegree[i].setOnClickListener(this);
-        }
-        for (int i = 0; i < btBodypart.length; i++) {
-            //btBodypart[i].setBackgroundColor(Color.parseColor("#F5F5F5"));
-            btBodypart[i].setOnClickListener(this);
-        }
-         */
     }
 
     @SuppressLint("ResourceAsColor")
@@ -329,6 +358,7 @@ public class course_filter extends Activity implements View.OnClickListener {
                 break;
             case R.id.sure://清空课程列表，如果BUTTON选中，传值，筛选选中的标签的课程，展示课程
                 courseList.clear();
+
                 currentPage = Long.valueOf(1);
                 String totalBodyClassId = null;//汇总的部位Id
                 String totalDegreeClassId = null;//汇总的难度id

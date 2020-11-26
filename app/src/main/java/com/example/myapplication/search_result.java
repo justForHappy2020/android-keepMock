@@ -1,8 +1,6 @@
 package com.example.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
@@ -16,9 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class search_result extends FragmentActivity{
-
 
     final int SEARCH_ALL = 0;
     final int SEARCH_COURSE = 1;
@@ -34,7 +30,6 @@ public class search_result extends FragmentActivity{
     private String[] titles = {"综合", "课程", "动态", "用户"};
     private String searchContent;
     private int from;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

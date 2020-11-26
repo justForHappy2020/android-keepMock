@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.myapplication.entity.Course;
 
@@ -28,6 +29,7 @@ public class search_course extends Activity implements View.OnClickListener{
     private EditText etInput;
     private String searchContent;
     LinearLayout search_linerlayout;
+    TextView tv_searchContent;
 
 
     @Override
@@ -44,6 +46,7 @@ public class search_course extends Activity implements View.OnClickListener{
         btReset = findViewById(R.id.search_reset);
         etInput = findViewById(R.id.text_inout_search);
         search_linerlayout = findViewById(R.id.search_linerlayout);
+        tv_searchContent = findViewById(R.id.tv_searchContent);
 
         ibback.setOnClickListener(this);
         ibSearch.setOnClickListener(this);
@@ -58,9 +61,12 @@ public class search_course extends Activity implements View.OnClickListener{
 
             @Override
             public void onTextChanged(CharSequence text, int start, int before, int count) {
-                if(text.toString().trim().isEmpty()){
+                if(!text.toString().trim().isEmpty()){
+                    tv_searchContent.setText(text.toString().trim());
                     search_linerlayout.setVisibility(View.VISIBLE);
+
                 }else{
+                    tv_searchContent.setText("");
                     search_linerlayout.setVisibility(View.GONE);
                 }
             }
@@ -82,11 +88,11 @@ public class search_course extends Activity implements View.OnClickListener{
         Intent intent = null;
         switch (view.getId()) {
             case R.id.searching_button:
+            case R.id.search_linerlayout:
                 intent = new Intent(this, search_result.class);
                 searchContent = etInput.getText().toString().trim();
                 intent.putExtra("from",SEARCH_COURSE);
                 intent.putExtra("searchContent",searchContent);
-
                 startActivity(intent);
                 break;
             case R.id.go_back_button:

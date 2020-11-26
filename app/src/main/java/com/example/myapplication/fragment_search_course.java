@@ -6,12 +6,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.example.myapplication.entity.Course;
 
@@ -46,6 +50,12 @@ public class fragment_search_course extends Fragment {
 
         quickAdapter = new QuickAdapter(R.layout.course_item, data);
 
+        quickAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {
+                Log.d("Adapter","Click"+position);
+            }
+        });
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             int mCurrentCunter = 0;
 

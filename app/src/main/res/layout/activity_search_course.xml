@@ -68,6 +68,7 @@
         android:id="@+id/search_linerlayout"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:clickable="true"
         android:visibility="visible">
 
         <ImageView
@@ -77,7 +78,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            app:srcCompat="@drawable/search2" />
+            android:src="@drawable/search2" />
 
         <TextView
             android:layout_width="wrap_content"

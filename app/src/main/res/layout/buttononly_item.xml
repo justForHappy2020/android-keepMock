@@ -4,12 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <Button
+    <TextView
         android:id="@+id/buttonOnly"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="1"
         android:background="#FFFFFF"
-        android:text="按钮"
+        android:gravity="center"
+        android:text="查看更多"
         android:textColor="#818181"
         android:textSize="16sp" />
+
 </LinearLayout>

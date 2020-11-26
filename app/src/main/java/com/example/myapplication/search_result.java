@@ -1,8 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -19,6 +22,7 @@ public class search_result extends FragmentActivity{
     final int SEARCH_ALL = 0;
     final int SEARCH_COURSE = 1;
 
+    private EditText etInput;
     //声明ViewPager
     private ViewPager mViewPager;
     //声明TabLayout
@@ -26,6 +30,7 @@ public class search_result extends FragmentActivity{
     //适配器
     private FragmentPagerAdapter mAdapter;
     //装载Fragment的集合
+
     private List<Fragment> mFragments;
     private String[] titles = {"综合", "课程", "动态", "用户"};
     private String searchContent;
@@ -113,10 +118,22 @@ public class search_result extends FragmentActivity{
     private void initViews() {
         mViewPager = (ViewPager) this.findViewById(R.id.viewPager);
         mTabLayout = (TabLayout) this.findViewById(R.id.tabLayout);
+        etInput = this.findViewById(R.id.text_input_search);
 
         mViewPager.setOffscreenPageLimit(4);//设置缓存页面上限，默认为3，会出现recyclerview中item重复问题
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+
+        etInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    InputMethodManager manager = ((InputMethodManager)search_result.this.getSystemService(Context.INPUT_METHOD_SERVICE));
+                    if (manager != null)
+                        manager.hideSoftInputFromWindow(view.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        });
     }
 
 }

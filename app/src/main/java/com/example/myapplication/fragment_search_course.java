@@ -78,7 +78,6 @@ public class fragment_search_course extends Fragment {
             }
         });
 
-
         recyclerView.setAdapter(quickAdapter);
 
     }

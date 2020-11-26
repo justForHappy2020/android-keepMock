@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.myapplication.entity.Course;
 import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.entity.Post;
@@ -25,8 +28,6 @@ import java.util.List;
 import java.util.Map;
 
 public class fragment_search_all extends Fragment {
-
-    List<Post> postList = new ArrayList<>();
 
     private List<Post> datas01= new ArrayList<>();
     private List<MultipleItem> datas02= new ArrayList<>();
@@ -50,24 +51,27 @@ public class fragment_search_all extends Fragment {
     }
 
     private void initView(View view){
+        View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_course_mini,null);
+
         RecyclerView postRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_all_recyclerView);
+        RecyclerView courseRecyclerView = (RecyclerView) headerView.findViewById(R.id.fragment_course_recyclerView);
+
+        MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(datas02);
+        MultipleItemQuickAdapter miniCourseAdapter = new MultipleItemQuickAdapter(datas03);
+
+        miniCourseAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> baseQuickAdapter, @NonNull View view, int position) {
+                Toast.makeText(getActivity(),"OnClick Position: " + position,Toast.LENGTH_SHORT).show();
+            }
+        });
+        courseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        courseRecyclerView.setAdapter(miniCourseAdapter);
 
         //设置recyclerView的样式
         postRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-
         //设置adapter
-        MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(datas02);
-
-        View view1 = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_course_mini,null);
-
-        RecyclerView courseRecyclerView = (RecyclerView) view1.findViewById(R.id.fragment_course_recyclerView);
-
-        courseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        courseRecyclerView.setAdapter(new MultipleItemQuickAdapter(datas03));
-
-        myAdapter.addHeaderView(view1);//待增添逻辑：如果无课程则不添加“课程”TextView和加载更多按钮（小于等于三条也不显示）
-
+        myAdapter.addHeaderView(headerView);//待增添逻辑：如果无课程则不添加“课程”TextView和加载更多按钮（小于等于三条也不显示）
         postRecyclerView.setAdapter(myAdapter);
 
         //设置item之间的间隔

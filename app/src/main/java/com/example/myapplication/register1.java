@@ -127,8 +127,6 @@ public class register1 extends AppCompatActivity implements View.OnClickListener
                             String message = jsonObject.getString("message");
                             int code = jsonObject.getInt("code");
                         }*/
-
-
                     } catch (JSONException e){
                         e.printStackTrace();
                     }

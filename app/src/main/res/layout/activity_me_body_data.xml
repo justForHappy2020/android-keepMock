@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#3E3C42"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/setting_goback"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/information_goback"
+            android:background="#3E3C42"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="90dp"
+            android:text="身体数据"
+            android:layout_marginTop="10dp"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp"/>
+        <ImageButton
+            android:id="@+id/btn_bodydata_more"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="90dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/more"
+            android:background="#3E3C42"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F0F0F2"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="0dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0"
+                android:fontFamily="sans-serif-black"
+                android:text="身体数据"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/text_time_record"
+                android:layout_width="220dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:background="#FFFFFF"
+                android:hint="已为你展示最新数据"
+                android:textSize="15dp"
+                android:gravity="center"/>
+            <ImageButton
+                android:id="@+id/btn_bodydata_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bodydata_add"
+                android:layout_marginLeft="40dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="0dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/bodydata"/>
+            <TextView
+                android:id="@+id/textweight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0"
+
+                android:fontFamily="sans-serif-black"
+                android:text="体重"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/text_weight_data"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="150dp"
+                android:background="#FFFFFF"
+                android:hint="3.10M"
+                android:textSize="20dp"
+                android:gravity="center"/>
+            <ImageButton
+                android:id="@+id/btn_weight_more"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/my_course_more"
+                android:layout_marginLeft="20dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/bodydata"/>
+
+            <TextView
+                android:id="@+id/textheight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0"
+                android:fontFamily="sans-serif-black"
+                android:text="身高"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/text_height_data"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="150dp"
+                android:background="#FFFFFF"
+                android:hint="3.10M"
+                android:textSize="20dp"
+                android:gravity="center"/>
+            <ImageButton
+                android:id="@+id/btn_height_more"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/my_course_more"
+                android:layout_marginLeft="20dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/bodydata"/>
+
+            <TextView
+                android:id="@+id/textBMI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0"
+                android:fontFamily="sans-serif-black"
+                android:text="BMI"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/text_BMIo_data"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="150dp"
+                android:background="#FFFFFF"
+                android:hint="3.10M"
+                android:textSize="20dp"
+                android:gravity="center"/>
+            <ImageButton
+                android:id="@+id/btn_BMI_more"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/my_course_more"
+                android:layout_marginLeft="20dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

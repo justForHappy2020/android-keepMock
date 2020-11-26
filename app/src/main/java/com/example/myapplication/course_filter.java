@@ -74,14 +74,17 @@ public class course_filter extends Activity implements View.OnClickListener {
 
     private void configLoadMoreData() {
         if(hasNext){
-
-            Long bodyClassId = null;//部位id值
-            Long degreeClassId = null;//难度id值
-            String url;//http请求的url
+            /**
+             * 加载更多函数，需要完善加载下一页的HTTP请求
+             */
+            Long bodyClassId = null;
+            Long degreeClassId = null;
+            String url;
             url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
             getHttpFilter(url);//筛选课程并展示
 
-            //quickAdapter.addData(courseListSet.get(currentPage.intValue()));//用不了Long类型数据!!!!!!!!!!这个quickAdapter连数组的下一个元素都检查也没有发生改变！太恐怖了！这句注释掉的不要加上去。。不然重复
+            //下面这句注释掉的不要加上去。。不然item显示重复
+            //quickAdapter.addData(courseListSet.get(currentPage.intValue()));//用不了Long类型数据!!!!!!!!!!这个quickAdapter连数组的下一个元素都检查也没有发生改变！太恐怖了！
         }
         quickAdapter.getLoadMoreModule().loadMoreEnd();
     }
@@ -311,7 +314,7 @@ public class course_filter extends Activity implements View.OnClickListener {
                             currentPage++;
                             configLoadMoreData();
                         }
-                    },3000);
+                    },1000);
 
                 }
 

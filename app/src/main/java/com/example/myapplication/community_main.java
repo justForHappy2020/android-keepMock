@@ -20,9 +20,6 @@ public class community_main extends Fragment {
 
         initView(view);
 
-
-
-
         return view;
     }
 

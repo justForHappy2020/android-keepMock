@@ -31,7 +31,7 @@ import java.util.List;
 public class fragment_search_course extends Fragment {
 
     private List<List> dataSet = new  ArrayList<>();
-    private int TOTAL_PAGES = 3;
+    private int TOTAL_PAGES;
 
     QuickAdapter quickAdapter;
     RecyclerView recyclerView;
@@ -52,8 +52,7 @@ public class fragment_search_course extends Fragment {
         Bundle bundle = getArguments();
         keyWord = bundle.getString("searchContent");
         initView(view);
-        configLoadMoreData();
-        initData();
+        //initData();
         return view;
     }
 
@@ -62,13 +61,13 @@ public class fragment_search_course extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         quickAdapter = new QuickAdapter(R.layout.course_item, courseList);
-
+        configLoadMoreData();
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             //int mCurrentCunter = 0;
 
             @Override
             public void onLoadMore() {
-                if (currentPage >= TOTAL_PAGES) {
+                if (currentPage > TOTAL_PAGES) {
                     quickAdapter.getLoadMoreModule().loadMoreEnd();
                 } else {
                     new Handler().postDelayed(new Runnable() {
@@ -139,7 +138,7 @@ public class fragment_search_course extends Fragment {
                     if (httpcode == 200) {
                         JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
                         hasNext = jsonObject2.getBoolean("hasNext");
-                        //TOTAL_PAGES = jsonObject2.getInt("totalPages");
+                        TOTAL_PAGES = jsonObject2.getInt("totalPages");
                         //得到筛选的课程list
                         JSONArray JSONArrayCourse = jsonObject2.getJSONArray("courseList");
                         for (int i = 0; i < JSONArrayCourse.length(); i++) {

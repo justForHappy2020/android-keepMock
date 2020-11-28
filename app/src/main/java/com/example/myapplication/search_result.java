@@ -148,9 +148,9 @@ public class search_result extends FragmentActivity implements View.OnClickListe
             case R.id.searching_result_button:
                 intent = new Intent(this, search_result.class);
                 searchContent = etInput.getText().toString().trim();
-                if(from == 0)intent.putExtra("from", SEARCH_ALL);
-                else if(from == 1)intent.putExtra("from", SEARCH_COURSE);
-                //else if(from ==2)
+                if(mViewPager.getCurrentItem() == 0)intent.putExtra("from", SEARCH_ALL);
+                else if(mViewPager.getCurrentItem() == 1)intent.putExtra("from", SEARCH_COURSE);
+                //else if(mViewPager.getCurrentItem() == 2)
                 intent.putExtra("searchContent",searchContent);
                 startActivity(intent);
                 finish();

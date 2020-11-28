@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -69,7 +70,7 @@ public class search extends Activity implements View.OnClickListener {
                 estr = et.getText().toString().trim();
                 if(!estr.isEmpty()){
                     Intent i = new Intent(search.this , search_result.class);//启动课程结果activity
-                    i.putExtra("search_content",estr);
+                    i.putExtra("searchContent",estr);
                     startActivity(i);
 
                     strSet= new HashSet<String>(strSet);
@@ -80,9 +81,9 @@ public class search extends Activity implements View.OnClickListener {
                     SharedPreferences.Editor editor = shp.edit();
                     editor.putStringSet("search_history_list",strSet);
                     editor.commit();
-
-
-
+                    
+                }else{
+                    Toast.makeText(search.this, "请输入搜索内容", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.clean_history:
@@ -118,7 +119,7 @@ public class search extends Activity implements View.OnClickListener {
                         //获取最近搜索中的点击内容进行传值
                         String str = auto_tv.getText().toString();
                         Intent intent = new Intent(search.this, search_result.class);
-                        intent.putExtra("search_content",str);
+                        intent.putExtra("searchContent",str);
                         startActivity(intent);
                     }
                 });

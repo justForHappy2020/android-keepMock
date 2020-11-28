@@ -18,8 +18,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class course_filter extends Activity implements View.OnClickListener {
+
 
     private ImageButton ibSearch;
     private ImageButton ibback;
@@ -89,7 +92,7 @@ public class course_filter extends Activity implements View.OnClickListener {
         quickAdapter.getLoadMoreModule().loadMoreEnd();
     }
 
-    public void getHttpFilter(final String url) {
+    private void getHttpFilter(final String url) {
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -183,7 +186,7 @@ public class course_filter extends Activity implements View.OnClickListener {
             String url;//http请求的url
             totalBodyClassId = getBodyClassId(bodyClassId);//得到身体部位标签的id
             //totalDegreeClassId = getDegreeId(degreeClassId);//得到难度标签的Id
-            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + degreeClassId + "&&currentPage=1";
+            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
             getHttpFilter(url);//筛选课程并展示
         }
     }
@@ -370,7 +373,7 @@ public class course_filter extends Activity implements View.OnClickListener {
                 String url;//http请求的url
                 totalBodyClassId = getBodyClassId(bodyClassId);//得到身体部位标签的id
                 totalDegreeClassId = getDegreeId(degreeClassId);//得到难度标签的Id
-                url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + totalDegreeClassId + "&&currentPage=1";
+                url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + totalDegreeClassId + "&&currentPage=" + currentPage;
                 getHttpFilter(url);//筛选课程并展示
                 break;
             case R.id.reset://标签全部置灰，取消选中

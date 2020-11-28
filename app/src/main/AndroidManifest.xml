@@ -53,7 +53,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />-->
         <activity android:name=".search_result"
-            android:launchMode="singleTop"
+            android:launchMode="standard"
             android:screenOrientation="portrait" />
       <activity android:name=".MainActivity_ViewPage">
                 <intent-filter>

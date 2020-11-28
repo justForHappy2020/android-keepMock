@@ -10,7 +10,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -94,13 +93,15 @@ public class search_course extends Activity implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.searching_button:
-               search();
+                search();
                 break;
             case R.id.search_back:
                 finish();
                 break;
             case R.id.search_reset:
                 etInput.setText("");
+                search_linerLayout.setVisibility(View.VISIBLE);
+                etInput.setText(null);
                 break;
         }
     }

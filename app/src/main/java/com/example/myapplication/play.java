@@ -7,22 +7,12 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.webkit.URLUtil;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.myapplication.entity.Course;
-import com.example.myapplication.utils.HttpUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 
 public class play extends Activity {
 

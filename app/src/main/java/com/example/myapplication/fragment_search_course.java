@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,7 +47,7 @@ public class fragment_search_course extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_course_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        quickAdapter = new QuickAdapter(R.layout.course_item, data);
+        quickAdapter = new QuickAdapter(R.layout.item_course, data);
 
         quickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

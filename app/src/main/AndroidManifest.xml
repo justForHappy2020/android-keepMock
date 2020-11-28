@@ -58,10 +58,10 @@
       <activity android:name=".MainActivity_ViewPage">
                 <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>-->
+            </activity>
+
         <activity android:name=".play"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">

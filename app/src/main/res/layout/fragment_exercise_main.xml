@@ -72,6 +72,7 @@
                     android:id="@+id/bodypart1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
@@ -80,6 +81,7 @@
                     android:id="@+id/bodypart2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
@@ -88,6 +90,7 @@
                     android:id="@+id/bodypart3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
@@ -96,6 +99,7 @@
                     android:id="@+id/bodypart4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
@@ -113,6 +117,7 @@
                     android:id="@+id/bodypart5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
@@ -121,6 +126,7 @@
                     android:id="@+id/bodypart6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
@@ -129,6 +135,7 @@
                     android:id="@+id/bodypart7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
@@ -137,6 +144,7 @@
                     android:id="@+id/bodypart8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
                     android:text="全部" />

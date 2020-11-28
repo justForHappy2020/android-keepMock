@@ -10,58 +10,44 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:fitsSystemWindows="true"><!--状态栏这个没看懂怎么用-->
+        <ImageButton
+            android:id="@+id/go_back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:background="#FFFFFF"
+            android:onClick="onClick"
+            android:scaleType="fitCenter"
+            android:src="@drawable/leftarrow"></ImageButton>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="9dp"
+            android:layout_weight="1"
+            android:fontFamily="Arial"
+            android:text="全部课程"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/go_back_button"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:background="#FFFFFF"
-                android:scaleType="fitXY"
-                android:src="@drawable/leftarrow"
-                android:onClick="onClick"></ImageButton>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="120dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginBottom="9dp"
-                android:fontFamily="Arial"
-                android:text="全部课程"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"></TextView>
-
-            <ImageButton
-                android:id="@+id/search_button1"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="130dp"
-                android:layout_marginTop="10dp"
-                android:background="#FFFFFF"
-                android:scaleType="fitXY"
-                android:src="@drawable/search"
-                android:onClick="onClick"></ImageButton>
-        </LinearLayout>
-
-
+        <ImageButton
+            android:id="@+id/search_button1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="#FFFFFF"
+            android:onClick="onClick"
+            android:scaleType="fitCenter"
+            android:src="@drawable/search"></ImageButton>
     </LinearLayout>
 
     <LinearLayout
@@ -75,6 +61,6 @@
         android:id="@+id/course_fliter_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/course_item" />
+        tools:listitem="@layout/item_course" />
 
 </LinearLayout>

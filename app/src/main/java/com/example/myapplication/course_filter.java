@@ -286,7 +286,7 @@ public class course_filter extends Activity implements View.OnClickListener {
 
         courseListSet.add(courseList);//空值占位
 
-        quickAdapter = new QuickAdapter(R.layout.course_item, courseListSet.get(0));
+        quickAdapter = new QuickAdapter(R.layout.item_course, courseListSet.get(0));
         quickAdapter.addHeaderView(headerView);
 
         //RecyclerView中的物体点击事件监听器

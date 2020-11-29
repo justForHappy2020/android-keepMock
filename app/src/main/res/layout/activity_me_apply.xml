@@ -10,7 +10,7 @@
 
 
         <ImageButton
-            android:id="@+id/setting_goback"
+            android:id="@+id/apply_goback"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/information_goback"
@@ -63,6 +63,7 @@
 
                     <EditText
                         style="@style/Widget.AppCompat.AutoCompleteTextView"
+                        android:id="@+id/et_realname"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="120dp"
@@ -89,6 +90,7 @@
 
                     <EditText
                         style="@style/Widget.AppCompat.AutoCompleteTextView"
+                        android:id="@+id/et_phone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="120dp"
@@ -115,6 +117,7 @@
 
                     <EditText
                         style="@style/Widget.AppCompat.AutoCompleteTextView"
+                        android:id="@+id/et_licence"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="120dp"
@@ -141,6 +144,7 @@
 
                     <EditText
                         style="@style/Widget.AppCompat.AutoCompleteTextView"
+                        android:id="@+id/et_organization"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="100dp"
@@ -167,6 +171,7 @@
 
                     <EditText
                         style="@style/Widget.AppCompat.AutoCompleteTextView"
+                        android:id="@+id/et_title"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="100dp"
@@ -204,6 +209,7 @@
                     android:gravity="center">
 
                     <EditText
+                        android:id="@+id/et_discribe"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:background="#FFFFFF"
@@ -214,11 +220,9 @@
             </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="50dp"
-            android:background="#FFFFFF"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_gravity="left|center">
+            >
 
             <TextView
                 android:id="@+id/text_material"
@@ -233,7 +237,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:orientation="horizontal">
 
@@ -242,58 +246,110 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical" />
+                        android:layout_height="200dp"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="职业证明材料" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical" >
+
+                            <LinearLayout
+                                android:layout_width="120dp"
+                                android:layout_height="150dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:background="@drawable/border">
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+
+                                    android:src="@drawable/add_material"
+                                    android:background="#FFFFFF"/>
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:textSize="15dp"
+                                android:fontFamily="sans-serif-black"
+                                android:text="职业证明材料"/>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical" >
+
+                            <LinearLayout
+                                android:layout_width="120dp"
+                                android:layout_height="150dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:background="@drawable/border">
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/add_material"
+                                    android:background="#FFFFFF"/>
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:textSize="15dp"
+                                android:fontFamily="sans-serif-black"
+                                android:text="手持身份证人像面"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical" >
+
+                            <LinearLayout
+                                android:layout_width="120dp"
+                                android:layout_height="150dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:background="@drawable/border">
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/add_material"
+                                    android:background="#FFFFFF"/>
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:textSize="15dp"
+                                android:fontFamily="sans-serif-black"
+                                android:text="身份证国徽面"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="职业证明材料"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="职业证明材料"/>
-                </LinearLayout>
             </LinearLayout>
-
-        </LinearLayout>
-
             <Button
-                android:id="@+id/button"
+                android:id="@+id/button_submitapply"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:backgroundTint="#25C689"
@@ -301,6 +357,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

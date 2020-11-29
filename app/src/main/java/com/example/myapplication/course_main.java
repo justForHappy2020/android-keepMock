@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class course_main extends AppCompatActivity implements View.OnClickListener {
+public class course_main extends Activity implements View.OnClickListener {
 
     private ImageButton ibVideoPlay;
     private Button btVideoPlay;
@@ -137,7 +138,7 @@ public class course_main extends AppCompatActivity implements View.OnClickListen
             jsonObject1 = new JSONObject(responseData);
             httpcode = jsonObject1.getInt("code");
             if(httpcode == 200){
-                //得到hotCourse的list
+                //得到相关训练的list
                 JSONArray JSONArrayCourse = jsonObject1.getJSONArray("data");
                 for (int i = 0; i < JSONArrayCourse.length(); i++) {
                     JSONObject jsonObject = JSONArrayCourse.getJSONObject(i);

@@ -12,7 +12,7 @@
 
 
         <ImageButton
-            android:id="@+id/setting_goback"
+            android:id="@+id/personinfor_goback"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/information_goback"
@@ -52,11 +52,12 @@
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="200dp"
+            android:layout_marginLeft="190dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/sucai"
             app:riv_oval="true" />
+
 
 
     </LinearLayout>
@@ -151,7 +152,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
         <Button
             android:id="@+id/btn_save_personal_information"

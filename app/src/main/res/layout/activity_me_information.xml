@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".information">
+    tools:context=".me_information">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
 
 
             <ImageButton
-                android:id="@+id/button2"
+                android:id="@+id/information_goback"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/information_goback"
@@ -56,7 +56,10 @@
             app:tabIndicatorColor="@android:color/black"
             app:tabSelectedTextColor="@android:color/black"
             app:tabTextColor="@android:color/darker_gray"/>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:backgroundTint="#48FFFFFF"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"

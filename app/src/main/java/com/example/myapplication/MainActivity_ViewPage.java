@@ -46,7 +46,7 @@ public class MainActivity_ViewPage extends FragmentActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main__view_page);
+        setContentView(R.layout.activity_main_view_page);
         initViews();//初始化控件
         initEvents();//初始化事件
         initDatas();//初始化数据
@@ -56,7 +56,7 @@ public class MainActivity_ViewPage extends FragmentActivity implements View.OnCl
         mFragments = new ArrayList<>();
         //将四个Fragment加入集合中
         //mFragments.add(new exercise_main());
-        mFragments.add(new community_main());
+        mFragments.add(new exercise_main());
         mFragments.add(new community_main());
         mFragments.add(new diet_main());
         mFragments.add(new me_main());

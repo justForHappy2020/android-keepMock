@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:background="#FFFFFF"
         android:orientation="horizontal">
 
         <ImageButton
@@ -19,11 +26,10 @@
         <LinearLayout
             android:layout_width="330dp"
             android:layout_height="38dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:background="#EFEFEF"
-            >
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/searching_button"
@@ -31,7 +37,7 @@
                 android:layout_height="28dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:background="#EFEFEF"
+                android:background="@color/transparent"
                 android:scaleType="fitXY"
                 android:src="@drawable/search2">
 
@@ -53,22 +59,51 @@
             </EditText>
 
             <ImageButton
-                android:id="@+id/search_quit"
+                android:id="@+id/search_reset"
                 android:layout_width="31dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/quit"
-                android:background="#EFEFEF"/>
+                android:background="@color/transparent"
+                android:src="@drawable/quit" />
         </LinearLayout>
-
 
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/search_linerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#EFEFEF"
-        >
+        android:layout_height="55dp"
+        android:background="#FFFFFF"
+        android:clickable="true"
+        android:onClick="search_linerLayout_onClick"
+        android:visibility="gone">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/search2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:text="点击搜索"
+            android:textColor="#686868"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_searchContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="#000000" />
     </LinearLayout>
+
 </LinearLayout>

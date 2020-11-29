@@ -3,6 +3,7 @@ import com.example.myapplication.utils.HttpUtils;
 import com.example.myapplication.utils.KeyboardUtils;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,7 +36,7 @@ import okhttp3.Response;
 
 import static com.example.myapplication.utils.HttpUtils.connectHttp;
 
-public class register2 extends AppCompatActivity implements View.OnClickListener{
+public class register2 extends Activity implements View.OnClickListener{
 
     private TextView tvGetPhoneNum;
     private EditText etVcode;

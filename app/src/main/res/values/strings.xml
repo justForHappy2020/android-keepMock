@@ -26,7 +26,7 @@
     <string name="run">跑步</string>
     <string name="title_activity_course">course</string>
     <string name="toast_message">najndfj</string>
-    <string name="sports1_word">腹肌撕裂初级 \n K1零基础.13分钟.3002万人参加</string>
+    <string name="sports1_word">暂无课程</string>
     <string name="training_pretime">0.33</string>
     <string name="training_local_percentage">5/16</string>
     <string name="training_overall_percentage">1/12  西西里卷腹</string>
@@ -39,7 +39,9 @@
 
     <string name="action_settings">Settings</string>
     <string name="how_many_lesson">27节课程</string>
-    
 
+    <string name="comment_id">keep_新人助手</string>
+    <string name="comment_content">两只青蛙四条腿..</string>
+    <string name="comment_day">2020/02/29</string>
 
 </resources>

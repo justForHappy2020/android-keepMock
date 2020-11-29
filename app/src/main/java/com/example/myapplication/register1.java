@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -33,7 +35,7 @@ import okhttp3.Response;
 
 import static com.example.myapplication.utils.HttpUtils.connectHttp;
 
-public class register1 extends AppCompatActivity implements View.OnClickListener{
+public class register1 extends Activity implements View.OnClickListener{
 
     private EditText etPhoneNum;
     private Button btAcquireCode;
@@ -127,6 +129,8 @@ public class register1 extends AppCompatActivity implements View.OnClickListener
                             String message = jsonObject.getString("message");
                             int code = jsonObject.getInt("code");
                         }*/
+
+
                     } catch (JSONException e){
                         e.printStackTrace();
                     }

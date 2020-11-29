@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
@@ -130,7 +129,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
         ibback = findViewById(R.id.search_back);
         ibSearch = findViewById(R.id.searching_result_button);
         btReset = findViewById(R.id.result_quit_button);
-        etInput = findViewById(R.id.text_inout_search);
+        etInput = findViewById(R.id.text_input_search);
 
         ibback.setOnClickListener(this);
         ibSearch.setOnClickListener(this);
@@ -138,7 +137,6 @@ public class search_result extends FragmentActivity implements View.OnClickListe
 
         mViewPager = (ViewPager) this.findViewById(R.id.viewPager);
         mTabLayout = (TabLayout) this.findViewById(R.id.tabLayout);
-        etInput = this.findViewById(R.id.text_input_search);
 
         mViewPager.setOffscreenPageLimit(4);//设置缓存页面上限，默认为3，会出现recyclerview中item重复问题
         mTabLayout.setupWithViewPager(mViewPager);

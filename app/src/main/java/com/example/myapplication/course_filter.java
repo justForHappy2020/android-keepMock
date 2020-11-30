@@ -1,19 +1,31 @@
 package com.example.myapplication;
 
+
+import android.app.Activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.example.myapplication.entity.Course;
 import com.example.myapplication.entity.CourseClass;
 import com.example.myapplication.utils.HttpUtils;
@@ -26,7 +38,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class course_filter extends AppCompatActivity implements View.OnClickListener {
+public class course_filter extends Activity implements View.OnClickListener {
+
 
     private ImageButton ibSearch;
     private ImageButton ibback;
@@ -39,12 +52,18 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
     private List<CourseClass> bodyPart = new ArrayList<>();
     private List<CourseClass> degree = new ArrayList<>();
     private List<Course> courseList = new ArrayList();
+    private List<List> courseListSet = new ArrayList<>();
     private CourseClass courseClass;//记录传入的标签
+
+    QuickAdapter quickAdapter;
+    RecyclerView recyclerView;
+    View headerView;
 
     private int httpcode;
     private Drawable background;
     private Boolean hasNext = false;
     private Long currentPage;
+    private int TOTAL_PAGES = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,13 +75,28 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
         initCourse();
     }
 
+    private void configLoadMoreData() {
+        if(hasNext){
+            /**
+             * 加载更多函数，需要完善加载下一页的HTTP请求
+             */
+            Long bodyClassId = null;
+            Long degreeClassId = null;
+            String url;
+            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
+            getHttpFilter(url);//筛选课程并展示
 
+            //下面这句注释掉的不要加上去。。不然item显示重复
+            //quickAdapter.addData(courseListSet.get(currentPage.intValue()));//用不了Long类型数据!!!!!!!!!!这个quickAdapter连数组的下一个元素都检查也没有发生改变！太恐怖了！
+        }
+        quickAdapter.getLoadMoreModule().loadMoreEnd();
+    }
 
     private void getHttpFilter(final String url) {
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                int totalPages = 1;
+
                 String responseData = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
@@ -76,7 +110,7 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
                     if (httpcode == 200) {
                         JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
                         hasNext = jsonObject2.getBoolean("hasNext");
-                        totalPages = jsonObject2.getInt("totalPages");
+                        TOTAL_PAGES = jsonObject2.getInt("totalPages");
                         //得到筛选的课程list
                         JSONArray JSONArrayCourse = jsonObject2.getJSONArray("courseList");
                         for (int i = 0; i < JSONArrayCourse.length(); i++) {
@@ -111,8 +145,16 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
         if (httpcode != 200) {
             Toast.makeText(course_filter.this, "ERROR", Toast.LENGTH_SHORT).show();
         }
-        else for (int i = 0; i <courseList.size(); i++)btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
-                courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程
+        else {
+
+            courseListSet.add(courseList);
+            Log.d("courseListSet.size: ",Integer.toString(courseListSet.size()));
+
+            /**
+             * quickAdapter会自动检测到courseList的变化并进行更新!!!!!!!
+             */
+            //quickAdapter.addData(courseList);
+        }
     }
 
     //初始化标签状态
@@ -240,50 +282,70 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
     }
 
     private void initView() {
-        ibback = findViewById(R.id.go_back_button);
-        ibSearch = findViewById(R.id.search_button1);
-        btReset = findViewById(R.id.reset);
-        btSure = findViewById(R.id.sure);
+        recyclerView = findViewById(R.id.course_fliter_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(course_filter.this));
 
-        btBodypart[0] = findViewById(R.id.button1);
-        btBodypart[1] = findViewById(R.id.button2);
-        btBodypart[2] = findViewById(R.id.button3);
-        btBodypart[3] = findViewById(R.id.button4);
-        btBodypart[4] = findViewById(R.id.bt1);
-        btBodypart[5] = findViewById(R.id.bt2);
-        btBodypart[6] = findViewById(R.id.bt3);
-        btBodypart[7] = findViewById(R.id.bt4);
-        btBodypart[8] = findViewById(R.id.bt5);
+        headerView = LayoutInflater.from(course_filter.this).inflate(R.layout.fragment_course_filter_header,null);
 
-        btDegree[0] = findViewById(R.id.btdifficult1);
-        btDegree[1] = findViewById(R.id.btdifficult2);
-        btDegree[2] = findViewById(R.id.btdifficult3);
-        btDegree[3] = findViewById(R.id.btdifficult4);
-        btDegree[4] = findViewById(R.id.btdifficult5);
+        courseListSet.add(courseList);//空值占位
 
-        btCourse[0] = findViewById(R.id.famous1);
-        btCourse[1] = findViewById(R.id.famous2);
-        btCourse[2] = findViewById(R.id.famous3);
-        btCourse[3] = findViewById(R.id.famous4);
-        btCourse[4] = findViewById(R.id.famous5);
-        btCourse[5] = findViewById(R.id.famous6);
-        btCourse[6] = findViewById(R.id.famous7);
-        btCourse[7] = findViewById(R.id.famous8);
-        btCourse[8] = findViewById(R.id.famous9);
+        quickAdapter = new QuickAdapter(R.layout.item_course, courseListSet.get(0));
+        quickAdapter.addHeaderView(headerView);
 
-        ibSearch.setOnClickListener(this);
-        ibback.setOnClickListener(this);
-        btReset.setOnClickListener(this);
-        btSure.setOnClickListener(this);
-        for (int i = 0; i < btCourse.length; i++) btCourse[i].setOnClickListener(this);
-        for (int i = 0; i < btDegree.length; i++) {
-            //btDegree[i].setBackgroundColor(Color.parseColor("#F5F5F5"));
-            btDegree[i].setOnClickListener(this);
-        }
-        for (int i = 0; i < btBodypart.length; i++) {
-            //btBodypart[i].setBackgroundColor(Color.parseColor("#F5F5F5"));
-            btBodypart[i].setOnClickListener(this);
-        }
+        //RecyclerView中的物体点击事件监听器
+        quickAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {
+                Intent intent = new Intent(course_filter.this, course_main.class);
+                intent.putExtra("course", courseList.get(0).getCourseId());
+                startActivity(intent);
+            }
+        });
+
+        //RecyclerView的上拉加载监听器
+        quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
+
+            @Override
+            public void onLoadMore() {
+                if(currentPage>=TOTAL_PAGES){
+                    quickAdapter.getLoadMoreModule().loadMoreEnd();
+                }else{
+                    new Handler().postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            currentPage++;
+                            configLoadMoreData();
+                        }
+                    },1000);
+
+                }
+
+            }
+        });
+        recyclerView.setAdapter(quickAdapter);
+
+        ibback = headerView.findViewById(R.id.go_back_button);
+        ibSearch = headerView.findViewById(R.id.search_button1);
+        btReset = headerView.findViewById(R.id.reset);
+        btSure = headerView.findViewById(R.id.sure);
+
+        btBodypart[0] = headerView.findViewById(R.id.button1);
+        btBodypart[1] = headerView.findViewById(R.id.button2);
+        btBodypart[2] = headerView.findViewById(R.id.button3);
+        btBodypart[3] = headerView.findViewById(R.id.button4);
+        btBodypart[4] = headerView.findViewById(R.id.bt1);
+        btBodypart[5] = headerView.findViewById(R.id.bt2);
+        btBodypart[6] = headerView.findViewById(R.id.bt3);
+        btBodypart[7] = headerView.findViewById(R.id.bt4);
+        btBodypart[8] = headerView.findViewById(R.id.bt5);
+
+        btDegree[0] = headerView.findViewById(R.id.btdifficult1);
+        btDegree[1] = headerView.findViewById(R.id.btdifficult2);
+        btDegree[2] = headerView.findViewById(R.id.btdifficult3);
+        btDegree[3] = headerView.findViewById(R.id.btdifficult4);
+        btDegree[4] = headerView.findViewById(R.id.btdifficult5);
+
     }
 
     @SuppressLint("ResourceAsColor")
@@ -302,6 +364,7 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.sure://清空课程列表，如果BUTTON选中，传值，筛选选中的标签的课程，展示课程
                 courseList.clear();
+
                 currentPage = Long.valueOf(1);
                 String totalBodyClassId = null;//汇总的部位Id
                 String totalDegreeClassId = null;//汇总的难度id
@@ -404,52 +467,6 @@ public class course_filter extends AppCompatActivity implements View.OnClickList
                 color=colorDrawable.getColor();
                 if(color == -14301559)btDegree[4].setBackgroundColor(Color.parseColor("#F5F5F5"));
                 else if(color == -657931) btDegree[4].setBackgroundColor(Color.parseColor("#25C689"));
-                break;
-
-            case R.id.famous1:
-                intent = new Intent(this, course_main.class);
-                intent.putExtra("course", courseList.get(0).getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.famous2:
-                intent = new Intent(this, course_main.class);
-                intent.putExtra("course", courseList.get(1).getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.famous3:
-                intent = new Intent(this, course_main.class);
-                intent.putExtra("course", courseList.get(2).getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.famous4:
-                intent = new Intent(this, course_main.class);
-                intent.putExtra("course", courseList.get(3).getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.famous5:
-                intent = new Intent(this, course_main.class);
-                intent.putExtra("course", courseList.get(4).getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.famous6:
-                intent = new Intent(this, course_main.class);
-                intent.putExtra("course", courseList.get(5).getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.famous7:
-                intent = new Intent(this, course_main.class);
-                intent.putExtra("course", courseList.get(6).getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.famous8:
-                intent = new Intent(this, course_main.class);
-                intent.putExtra("course", courseList.get(7).getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.famous9:
-                intent = new Intent(this, course_main.class);
-                intent.putExtra("course", courseList.get(8).getCourseId());
-                startActivity(intent);
                 break;
         }
     }

@@ -1,9 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -20,14 +22,14 @@ import java.util.List;
 
 public class search_result extends FragmentActivity implements View.OnClickListener{
 
-
     final int SEARCH_ALL = 0;
     final int SEARCH_COURSE = 1;
 
+
+    private EditText etInput;
     private ImageButton ibSearch;
     private ImageButton ibback;
     private ImageButton btReset;
-    private EditText etInput;
 
     //声明ViewPager
     private ViewPager mViewPager;
@@ -36,11 +38,11 @@ public class search_result extends FragmentActivity implements View.OnClickListe
     //适配器
     private FragmentPagerAdapter mAdapter;
     //装载Fragment的集合
+
     private List<Fragment> mFragments;
     private String[] titles = {"综合", "课程", "动态", "用户"};
     private String searchContent;
     private int from;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +129,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
         ibback = findViewById(R.id.search_back);
         ibSearch = findViewById(R.id.searching_result_button);
         btReset = findViewById(R.id.result_quit_button);
-        etInput = findViewById(R.id.text_inout_search);
+        etInput = findViewById(R.id.text_input_search);
 
         ibback.setOnClickListener(this);
         ibSearch.setOnClickListener(this);
@@ -139,6 +141,17 @@ public class search_result extends FragmentActivity implements View.OnClickListe
         mViewPager.setOffscreenPageLimit(4);//设置缓存页面上限，默认为3，会出现recyclerview中item重复问题
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+
+        etInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    InputMethodManager manager = ((InputMethodManager)search_result.this.getSystemService(Context.INPUT_METHOD_SERVICE));
+                    if (manager != null)
+                        manager.hideSoftInputFromWindow(view.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        });
     }
 
     @Override

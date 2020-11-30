@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -12,9 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-public class play extends AppCompatActivity {
+public class play extends Activity {
 
     private int httpcode;
     private String VIDEO_URL =

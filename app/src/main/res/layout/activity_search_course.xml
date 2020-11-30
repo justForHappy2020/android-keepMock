@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:background="#FFFFFF"
         android:orientation="horizontal">
 
         <ImageButton
@@ -65,10 +70,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/search_linerlayout"
+        android:id="@+id/search_linerLayout"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:visibility="visible">
+        android:background="#FFFFFF"
+        android:clickable="true"
+        android:onClick="search_linerLayout_onClick"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imageView"
@@ -77,7 +85,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            app:srcCompat="@drawable/search2" />
+            android:src="@drawable/search2" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -10,10 +10,10 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
 
     public MultipleItemQuickAdapter(List data) {
         super(data);
-        addItemType(MultipleItem.TEXTONLY, R.layout.textonly_item);
-        addItemType(MultipleItem.BUTTON, R.layout.buttononly_item);
-        addItemType(MultipleItem.MINICOURSE, R.layout.course_item_mini);
-        addItemType(MultipleItem.MASONRYPOST, R.layout.post_item);
+        addItemType(MultipleItem.TEXTONLY, R.layout.item_textonly);
+        addItemType(MultipleItem.BUTTON, R.layout.item_buttononly);
+        addItemType(MultipleItem.MINICOURSE, R.layout.item_course_mini);
+        addItemType(MultipleItem.MASONRYPOST, R.layout.item_post_simplified);
     }
 
     @Override

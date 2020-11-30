@@ -2,14 +2,18 @@ package com.example.myapplication;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class search_course extends Activity implements View.OnClickListener{
 
@@ -22,7 +26,8 @@ public class search_course extends Activity implements View.OnClickListener{
     private ImageButton btReset;
     private EditText etInput;
     private String searchContent;
-    LinearLayout search_linerlayout;
+    LinearLayout search_linerLayout;
+    TextView tv_searchContent;
 
 
     @Override
@@ -38,14 +43,14 @@ public class search_course extends Activity implements View.OnClickListener{
         ibSearch = findViewById(R.id.searching_button);
         btReset = findViewById(R.id.search_reset);
         etInput = findViewById(R.id.text_inout_search);
-        search_linerlayout = findViewById(R.id.search_linerlayout);
+        search_linerLayout = findViewById(R.id.search_linerLayout);
+        tv_searchContent = findViewById(R.id.tv_searchContent);
 
         ibback.setOnClickListener(this);
         ibSearch.setOnClickListener(this);
         btReset.setOnClickListener(this);
 
         etInput.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -53,16 +58,28 @@ public class search_course extends Activity implements View.OnClickListener{
 
             @Override
             public void onTextChanged(CharSequence text, int start, int before, int count) {
-                if(text.toString().trim().isEmpty()){
-                    search_linerlayout.setVisibility(View.VISIBLE);
+                if(!text.toString().trim().isEmpty()){
+                    tv_searchContent.setText(text.toString().trim());
+                    search_linerLayout.setVisibility(View.VISIBLE);
+
                 }else{
-                    search_linerlayout.setVisibility(View.GONE);
+                    tv_searchContent.setText("");
+                    search_linerLayout.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+            }
+        });
+        etInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    InputMethodManager manager = ((InputMethodManager)search_course.this.getSystemService(Context.INPUT_METHOD_SERVICE));
+                    if (manager != null)
+                        manager.hideSoftInputFromWindow(view.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                }
             }
         });
 
@@ -74,22 +91,35 @@ public class search_course extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        Intent intent = null;
         switch (view.getId()) {
             case R.id.searching_button:
-                intent = new Intent(this, search_result.class);
-                searchContent = etInput.getText().toString().trim();
-                intent.putExtra("from",SEARCH_COURSE);
-                intent.putExtra("searchContent",searchContent);
-                startActivity(intent);
+                search();
                 break;
             case R.id.search_back:
                 finish();
                 break;
             case R.id.search_reset:
-                search_linerlayout.setVisibility(View.VISIBLE);
+                etInput.setText("");
+                search_linerLayout.setVisibility(View.VISIBLE);
                 etInput.setText(null);
                 break;
         }
+    }
+
+    public void search_linerLayout_onClick(View view){
+        search();
+    }
+
+    private void search(){
+        Intent intent = new Intent(this, search_result.class);
+        if(etInput.getText().toString().trim().isEmpty()){
+            Toast.makeText(search_course.this,"请输入搜索内容",Toast.LENGTH_SHORT).show();
+        }else{
+            searchContent = etInput.getText().toString().trim();
+            intent.putExtra("from",SEARCH_COURSE);
+            intent.putExtra("searchContent",searchContent);
+            startActivity(intent);
+        }
+
     }
 }

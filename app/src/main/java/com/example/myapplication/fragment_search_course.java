@@ -60,8 +60,10 @@ public class fragment_search_course extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_course_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        quickAdapter = new QuickAdapter(R.layout.course_item, courseList);
+
+        quickAdapter = new QuickAdapter(R.layout.item_course, courseList);
         configLoadMoreData();
+
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             //int mCurrentCunter = 0;
 
@@ -76,7 +78,7 @@ public class fragment_search_course extends Fragment {
                         public void run() {
                             configLoadMoreData();
                         }
-                    }, 3000);
+                    }, 1000);
 
                 }
 
@@ -98,7 +100,6 @@ public class fragment_search_course extends Fragment {
                 startActivity(intent);
             }
         });
-
 
         recyclerView.setAdapter(quickAdapter);
 

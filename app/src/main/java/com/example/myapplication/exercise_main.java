@@ -1,19 +1,16 @@
 package com.example.myapplication;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +26,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class exercise_main extends AppCompatActivity implements View.OnClickListener {
+public class exercise_main extends Fragment{
 
-    private ImageButton ibSearch;
+    private ImageView ivSearch;
     private Button btBodypart[] = new Button[8];
     private Button btHotcourse[] = new Button[10];
     private TextView tvCountTime;
@@ -44,15 +41,19 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
     private int httpcode;
     private String countTime;//累计分钟数
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_main);
+    private View.OnClickListener onClickListener;
 
-        initView();
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_exercise_main, container, false);
+
+
+        initView(view);
         //initCountTime();
         initBodypart();
         initHotCourse();
+        return view;
     }
 
 
@@ -107,7 +108,7 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(httpcode!=200) Toast.makeText(exercise_main.this,"ERROR", Toast.LENGTH_SHORT).show();
+        if(httpcode!=200) Toast.makeText(getActivity(),"ERROR", Toast.LENGTH_SHORT).show();
         else for (int i = 0; i < 10; i++)
             btHotcourse[i].setText(hotCourse.get(i).getCourseName() + "\n" + hotCourse.get(i).getDuration() + "  " + hotCourse.get(i).getDegree());//10个BUTTON中录入热门课程
     }
@@ -155,7 +156,7 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(httpcode!=200) Toast.makeText(exercise_main.this,"ERROR", Toast.LENGTH_SHORT).show();
+        if(httpcode!=200) Toast.makeText(getActivity(),"ERROR", Toast.LENGTH_SHORT).show();
         else {
             for (int i = 0; i < 8; i++) btBodypart[i].setText(bodyPart.get(i).getClassValue());
             bodyPart.get(7).setClassValue("all");
@@ -185,48 +186,54 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(httpcode!=200) Toast.makeText(exercise_main.this,"ERROR", Toast.LENGTH_SHORT).show();
+        if(httpcode!=200) Toast.makeText(getActivity(),"ERROR", Toast.LENGTH_SHORT).show();
         else tvCountTime.setText("已累计运动" + countTime + "分钟");
     }
 
-    private void initView() {
-        tvCountTime = findViewById(R.id.accumulate_time);
-        ibSearch = findViewById(R.id.search);
-        btBodypart[0] = findViewById(R.id.bodypart1);
-        btBodypart[1] = findViewById(R.id.bodypart2);
-        btBodypart[2] = findViewById(R.id.bodypart3);
-        btBodypart[3] = findViewById(R.id.bodypart4);
-        btBodypart[4] = findViewById(R.id.bodypart5);
-        btBodypart[5] = findViewById(R.id.bodypart6);
-        btBodypart[6] = findViewById(R.id.bodypart7);
-        btBodypart[7] = findViewById(R.id.bodypart8);
+    private void initView(View view) {
+        tvCountTime = view.findViewById(R.id.accumulate_time);
+        ivSearch = view.findViewById(R.id.search);
+        btBodypart[0] = view.findViewById(R.id.bodypart1);
+        btBodypart[1] = view.findViewById(R.id.bodypart2);
+        btBodypart[2] = view.findViewById(R.id.bodypart3);
+        btBodypart[3] = view.findViewById(R.id.bodypart4);
+        btBodypart[4] = view.findViewById(R.id.bodypart5);
+        btBodypart[5] = view.findViewById(R.id.bodypart6);
+        btBodypart[6] = view.findViewById(R.id.bodypart7);
+        btBodypart[7] = view.findViewById(R.id.bodypart8);
 
-        btHotcourse[0] = findViewById(R.id.hotcourse1);
-        btHotcourse[1] = findViewById(R.id.hotcourse2);
-        btHotcourse[2] = findViewById(R.id.hotcourse3);
-        btHotcourse[3] = findViewById(R.id.hotcourse4);
-        btHotcourse[4] = findViewById(R.id.hotcourse5);
-        btHotcourse[5] = findViewById(R.id.hotcourse6);
-        btHotcourse[6] = findViewById(R.id.hotcourse7);
-        btHotcourse[7] = findViewById(R.id.hotcourse8);
-        btHotcourse[8] = findViewById(R.id.hotcourse9);
-        btHotcourse[9] = findViewById(R.id.hotcourse10);
+        btHotcourse[0] = view.findViewById(R.id.hotcourse1);
+        btHotcourse[1] = view.findViewById(R.id.hotcourse2);
+        btHotcourse[2] = view.findViewById(R.id.hotcourse3);
+        btHotcourse[3] = view.findViewById(R.id.hotcourse4);
+        btHotcourse[4] = view.findViewById(R.id.hotcourse5);
+        btHotcourse[5] = view.findViewById(R.id.hotcourse6);
+        btHotcourse[6] = view.findViewById(R.id.hotcourse7);
+        btHotcourse[7] = view.findViewById(R.id.hotcourse8);
+        btHotcourse[8] = view.findViewById(R.id.hotcourse9);
+        btHotcourse[9] = view.findViewById(R.id.hotcourse10);
 
 
-        ibSearch.setOnClickListener(this);//监听获取验证码按钮
+        onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onExerciseClick(view);
+            }
+        };
+
+        ivSearch.setOnClickListener(onClickListener);//监听获取验证码按钮
         int i;
-        for (i = 0; i < 8; i++) btBodypart[i].setOnClickListener(this);
-        for (i = 0; i < 10; i++) btHotcourse[i].setOnClickListener(this);
-
+        for (i = 0; i < 8; i++) btBodypart[i].setOnClickListener(onClickListener);
+        for (i = 0; i < 10; i++) btHotcourse[i].setOnClickListener(onClickListener);
 
     }
 
 
-    public void onClick(View view) {
+    public void onExerciseClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.search:
-                intent = new Intent(this, search.class);
+                intent = new Intent(getActivity(), search.class);
                 startActivity(intent);
                 break;
             //筛选课程http、跳转对应的筛选主页
@@ -236,95 +243,95 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
 //                startActivity(intent);
 //                break;
             case R.id.bodypart1:
-                intent = new Intent(this, course_filter.class);
+                intent = new Intent(getActivity(), course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(0));
                 startActivity(intent);
                 break;
                 //text
 
             case R.id.bodypart2:
-                intent = new Intent(this, course_filter.class);
+                intent = new Intent(getActivity(), course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(1));
                 startActivity(intent);
                 break;
             case R.id.bodypart3:
-                intent = new Intent(this, course_filter.class);
+                intent = new Intent(getActivity(), course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(2));
                 startActivity(intent);
                 break;
             case R.id.bodypart4:
-                intent = new Intent(this, course_filter.class);
+                intent = new Intent(getActivity(), course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(3));
                 startActivity(intent);
                 break;
             case R.id.bodypart5:
-                intent = new Intent(this, course_filter.class);
+                intent = new Intent(getActivity(), course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(4));
                 startActivity(intent);
                 break;
             case R.id.bodypart6:
-                intent = new Intent(this, course_filter.class);
+                intent = new Intent(getActivity(), course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(5));
                 startActivity(intent);
                 break;
             case R.id.bodypart7:
-                intent = new Intent(this, course_filter.class);
+                intent = new Intent(getActivity(), course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(6));
                 startActivity(intent);
                 break;
             //待做：筛选全部
             case R.id.bodypart8:
-                intent = new Intent(this, course_filter.class);
+                intent = new Intent(getActivity(), course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(7));
                 startActivity(intent);
                 break;
             case R.id.hotcourse1:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("course",hotCourse.get(0).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse2:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("course",hotCourse.get(1).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse3:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("course",hotCourse.get(2).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse4:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("course",hotCourse.get(3).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse5:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("course",hotCourse.get(4).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse6:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("course",hotCourse.get(5).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse7:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("course",hotCourse.get(6).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse8:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(),course_main.class);
                 intent.putExtra("course",hotCourse.get(7).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse9:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("course",hotCourse.get(8).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse10:
-                intent = new Intent(this, course_main.class);
+                intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("course",hotCourse.get(9).getCourseId());
                 startActivity(intent);
                 break;

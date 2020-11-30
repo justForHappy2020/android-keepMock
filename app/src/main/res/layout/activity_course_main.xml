@@ -30,12 +30,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="燃脂"
-                android:textSize="25dp" />
+                android:textColor="#B3B1B2"
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/calorie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="38千卡"/>
+                android:text="38千卡"
+                android:textColor="#000000"
+                android:textSize="24sp" />
 
         </LinearLayout>
 
@@ -45,17 +49,22 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="时长"
                 android:gravity="center"
-                android:textSize="25dp"/>
+                android:text="时长"
+                android:textColor="#B3B1B2"
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="188 分钟"/>
+                android:text="188 分钟"
+                android:textColor="#000000"
+                android:textSize="24sp" />
 
         </LinearLayout>
 
@@ -65,17 +74,22 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="难度"
                 android:gravity="center"
-                android:textSize="25dp"/>
+                android:text="难度"
+                android:textColor="#B3B1B2"
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/degree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="K2 初学"/>
+                android:text="K2 初学"
+                android:textColor="#000000"
+                android:textSize="24sp" />
 
         </LinearLayout>
     </LinearLayout>

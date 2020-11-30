@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".search_result">
+    tools:context=".search_result"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
 
    <LinearLayout
        android:layout_width="match_parent"
@@ -46,12 +48,12 @@
                 android:layout_marginLeft="10dp"
                 android:background="#EFEFEF"
                 android:scaleType="fitXY"
-                android:src="@drawable/search2">
+                android:src="@drawable/search2"/>
 
-            </ImageButton>
+
 
             <EditText
-                android:id="@+id/text_inout_search"
+                android:id="@+id/text_input_search"
                 android:layout_width="250dp"
                 android:layout_height="34dp"
                 android:layout_marginLeft="10dp"

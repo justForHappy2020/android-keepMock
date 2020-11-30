@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class course_main extends AppCompatActivity implements View.OnClickListener {
+public class course_main extends Activity implements View.OnClickListener {
 
     private ImageButton ibVideoPlay;
     private Button btVideoPlay;

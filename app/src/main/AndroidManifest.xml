@@ -33,14 +33,19 @@
         <activity
             android:name=".search_course"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".search"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity android:name=".course_filter"
+        <activity
+            android:name=".course_filter"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity android:name=".course_main"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
@@ -50,16 +55,26 @@
         <activity android:name=".search_result"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
-<!--            <activity android:name=".MainActivity_ViewPage">
+      <activity android:name=".MainActivity_ViewPage">
                 <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>-->
+            </activity>
+
         <activity android:name=".play"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--
+        <activity android:name=".MainActivity">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
+        -->
 
                 <activity android:name=".exercise_main">
             <intent-filter>

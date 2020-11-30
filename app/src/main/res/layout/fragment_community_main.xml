@@ -32,7 +32,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/followers" />
+            android:src="@drawable/followers" />
 
         <ImageView
             android:id="@+id/community_main_search"
@@ -42,7 +42,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/searching_icon" />
+            android:src="@drawable/search2" />
 
     </LinearLayout>
 
@@ -94,7 +94,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#F6F6F6"
-            tools:listitem="@layout/community_items" />
+            tools:listitem="@layout/item_post_full" />
 
     </LinearLayout>
 </LinearLayout>

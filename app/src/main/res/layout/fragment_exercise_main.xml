@@ -1,72 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:background="#F6F6F6"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:orientation="horizontal">
+        android:layout_height="70dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center_vertical"
             android:text="运动"
-            android:layout_gravity="center"
-            android:textSize="30dp"
-            android:fontFamily="sans-serif-black" />
+            android:textColor="#353535"
+            android:textSize="24sp" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/search"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:layout_marginLeft="280dp"
-            android:paddingLeft="0dp"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/search2" />
 
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/accumulate_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="已累计运动***分钟"
-        android:background="@drawable/translucent2"
-        android:layout_gravity="center"/>
-
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="605dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical"
-        >
+        android:scrollbars="none">
 
         <LinearLayout
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
+
+            <TextView
+                android:id="@+id/accumulate_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/translucent2"
+                android:text="已累计运动***分钟" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:gravity="center"
-                android:padding="10dp"
-                android:background="#F4F4FA">
+                android:padding="10dp">
 
                 <Button
                     android:id="@+id/bodypart1"
                     style="?borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_a"
+=======
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
+>>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
 
@@ -75,30 +88,51 @@
                     android:id="@+id/bodypart2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_b"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
+=======
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿" />
+>>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     style="?borderlessButtonStyle"
                     android:id="@+id/bodypart3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_c"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
+=======
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿" />
+>>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     style="?borderlessButtonStyle"
                     android:id="@+id/bodypart4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_d"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
+=======
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿" />
+>>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
             </LinearLayout>
 
@@ -107,47 +141,71 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:gravity="center"
-                android:padding="10dp"
-                android:background="#F4F4FA"
-                >
+                android:padding="10dp">
 
                 <Button
                     style="?borderlessButtonStyle"
                     android:id="@+id/bodypart5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_e"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
+=======
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿" />
+>>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     style="?borderlessButtonStyle"
                     android:id="@+id/bodypart6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_f"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
+=======
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿" />
+>>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     style="?borderlessButtonStyle"
                     android:id="@+id/bodypart7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_g"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
+=======
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿" />
+>>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     android:id="@+id/bodypart8"
                     style="?borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_h"
+=======
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
+>>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
                     android:fontFamily="sans-serif-black"
                     android:text="全部" />
 
@@ -164,7 +222,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/hot_course"
-                    android:textSize="20dp" />
+                    android:textColor="#535353"
+                    android:textSize="14sp" />
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -184,10 +243,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="腹肌撕裂者 &#10;17分钟 K1"
-                            android:textSize="20dp"
                             android:textColor="@color/white"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
 
                         <Button
                             android:id="@+id/hotcourse2"
@@ -195,9 +254,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="Button Two"
-                            android:textSize="20dp"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
 
                         <Button
                             android:id="@+id/hotcourse3"
@@ -205,9 +264,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="Button Three"
-                            android:textSize="20dp"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
 
                         <Button
                             android:id="@+id/hotcourse4"
@@ -215,9 +274,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="Button Four"
-                            android:textSize="20dp"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
 
                         <Button
                             android:id="@+id/hotcourse5"
@@ -225,9 +284,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="Button Five"
-                            android:textSize="20dp"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
 
                         <Button
                             android:id="@+id/hotcourse6"
@@ -235,9 +294,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="Button Six"
-                            android:textSize="20dp"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
 
                         <Button
                             android:id="@+id/hotcourse7"
@@ -245,9 +304,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="Button Seven"
-                            android:textSize="20dp"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
 
                         <Button
                             android:id="@+id/hotcourse8"
@@ -255,9 +314,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="Button Eight"
-                            android:textSize="20dp"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
 
                         <Button
                             android:id="@+id/hotcourse9"
@@ -265,9 +324,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="Button Nine"
-                            android:textSize="20dp"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
 
                         <Button
                             android:id="@+id/hotcourse10"
@@ -275,9 +334,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
                             android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
                             android:text="Button ten"
-                            android:textSize="20dp"
-                            android:fontFamily="sans-serif-black"/>
+                            android:textSize="20dp" />
                     </LinearLayout>
 
                 </HorizontalScrollView>
@@ -299,7 +358,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/my_course"
-                        android:textSize="20dp" />
+                        android:textColor="#535353"
+                        android:textSize="14sp" />
 
                     <ImageButton
                         android:layout_width="wrap_content"
@@ -322,23 +382,26 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/sucai" />
+
                     <LinearLayout
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:fontFamily="sans-serif-black"
-                        android:textSize="15dp"
-                        android:text="@string/my_learned_course" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:textSize="15dp"
-                            android:text="@string/how_many_lesson" />
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/my_learned_course"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/how_many_lesson"
+                            android:textSize="15dp" />
                     </LinearLayout>
 
                     <ImageView
@@ -365,20 +428,23 @@
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:fontFamily="sans-serif-black"
-                            android:textSize="15dp"
-                            android:text="@string/my_learned_course" />
+                            android:text="@string/my_learned_course"
+                            android:textSize="15dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:textSize="15dp"
-                            android:text="@string/how_many_lesson" />
+                            android:text="@string/how_many_lesson"
+                            android:textSize="15dp" />
                     </LinearLayout>
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -391,10 +457,6 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <include layout="@layout/bottom_navigation" />
-
-
 
 
 </LinearLayout>

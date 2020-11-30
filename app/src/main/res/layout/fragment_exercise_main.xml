@@ -73,13 +73,8 @@
                     style="?borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_a"
-=======
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
->>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
 
@@ -88,51 +83,30 @@
                     android:id="@+id/bodypart2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_b"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
-=======
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
->>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     style="?borderlessButtonStyle"
                     android:id="@+id/bodypart3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_c"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
-=======
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
->>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     style="?borderlessButtonStyle"
                     android:id="@+id/bodypart4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_d"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
-=======
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
->>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
             </LinearLayout>
 
@@ -148,64 +122,38 @@
                     android:id="@+id/bodypart5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_e"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
-=======
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
->>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     style="?borderlessButtonStyle"
                     android:id="@+id/bodypart6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_f"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
-=======
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
->>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     style="?borderlessButtonStyle"
                     android:id="@+id/bodypart7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_g"
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
-=======
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
->>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
 
                 <Button
                     android:id="@+id/bodypart8"
                     style="?borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD:app/src/main/res/layout/activity_exercise_main.xml
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_h"
-=======
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
->>>>>>> 79f69f58a4f730a45ed0430166f397f48bfdf970:app/src/main/res/layout/fragment_exercise_main.xml
                     android:fontFamily="sans-serif-black"
                     android:text="全部" />
 

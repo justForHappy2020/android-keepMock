@@ -37,8 +37,8 @@ public class search_result extends FragmentActivity implements View.OnClickListe
     private TabLayout mTabLayout;
     //适配器
     private FragmentPagerAdapter mAdapter;
-    //装载Fragment的集合
 
+    //装载Fragment的集合
     private List<Fragment> mFragments;
     private String[] titles = {"综合", "课程", "动态", "用户"};
     private String searchContent;
@@ -67,7 +67,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
         fragment_search_daily f3 = new fragment_search_daily();
         fragment_search_daily f4 = new fragment_search_daily();
 
-        f1.setArguments(bundle);
+        f1.setArguments(bundle);//用bundle与活动通信
         f2.setArguments(bundle);
         f3.setArguments(bundle);
         f4.setArguments(bundle);

@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class fragment_search_all extends Fragment {
+public class  fragment_search_all extends Fragment {
 
     List<Post> postList = new ArrayList<>();
 

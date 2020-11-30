@@ -230,11 +230,18 @@ public class exercise_main extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
                 break;
             //筛选课程http、跳转对应的筛选主页
+//            case R.id.bodypart1:
+//                intent = new Intent(this, course_filter.class);
+//                intent.putExtra("bodypart" , bodyPart.get(0));
+//                startActivity(intent);
+//                break;
             case R.id.bodypart1:
                 intent = new Intent(this, course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(0));
                 startActivity(intent);
                 break;
+                //text
+
             case R.id.bodypart2:
                 intent = new Intent(this, course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(1));

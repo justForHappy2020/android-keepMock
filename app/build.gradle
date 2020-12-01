@@ -4,7 +4,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.example.myapplication"
-        minSdkVersion 25
+        minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
     implementation 'com.github.LRH1993:AutoFlowLayout:1.0.5'
     //compile 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'com.google.android.material:material:1.0.0'
 }

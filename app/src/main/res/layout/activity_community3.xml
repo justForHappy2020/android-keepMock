@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!--    1.在java引用 spannablestrintgbuilder方法可以指定 textview 中字符串索引a 到索引 b 配置点击-->
+<!--    2.用relativelayout可以覆盖布局 可以让Button 嵌在Textview上，但是没办法动态调节-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="vertical"
+            android:background="#584F61">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="#584F61"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/community3_LeftArrow_btn"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/leftarrow_white"
+                    style="?borderlessButtonStyle"
+                    android:background="#584F61"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center">
+
+                </ImageButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/community3_repeatnum"
+                    android:textColor="@color/white"
+                    android:textSize="23dp"
+                    android:layout_marginStart="110dp">
+
+                </TextView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="570dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="570dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/community3_HeadProtrait_btn1"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            style="?borderlessButtonStyle"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/headprotrait"
+                            android:background="@color/white"
+                            android:scaleType="fitXY">
+
+                        </ImageButton>
+
+                        <Button
+                            android:id="@+id/community3_Name_btn1"
+                            style="?borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn1"
+                            android:layout_marginTop="10dp"
+                            android:gravity="start"
+                            android:text="@string/community3_visitor"
+                            android:textColor="#676767"
+                            android:textSize="17dp">
+
+                        </Button>
+
+                        <TextView
+                            android:id="@+id/community3_Time_text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/community3_time"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn1"
+                            android:layout_marginTop="37dp"
+                            android:paddingStart="3dp"
+                            android:textColor="#676767"
+                            android:textSize="13dp">
+
+                        </TextView>
+
+                        <ImageButton
+                            android:id="@+id/community3_News_btn1"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@color/white"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn1"
+                            style="?borderlessButtonStyle"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="270dp"
+                            android:src="@drawable/news"
+                            android:layout_marginTop="15dp">
+
+                        </ImageButton>
+
+                        <TextView
+                            android:id="@+id/community3_Repeat_text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/community3_HeadProtrait_btn1"
+                            android:layout_marginStart="90dp"
+                            android:padding="10dp"
+                            android:text="@string/community3_visitor_repeat1"
+                            android:textSize="20dp"
+                            android:background="@color/white"
+                            android:textColor="#383838">
+
+                        </TextView>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:orientation="horizontal"
+                        android:background="#EFEFEF"
+                        android:layout_marginTop="5dp">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/community3_HeadProtrait_btn2"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            style="?borderlessButtonStyle"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/headprotrait"
+                            android:background="@color/white"
+                            android:scaleType="fitXY">
+
+                        </ImageButton>
+
+                        <Button
+                            android:id="@+id/community3_Name_btn2"
+                            style="?borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn2"
+                            android:layout_marginTop="10dp"
+                            android:gravity="start"
+                            android:text="@string/community3_author"
+                            android:textColor="#676767"
+                            android:textSize="17dp">
+
+                        </Button>
+
+                        <TextView
+                            android:id="@+id/community3_Time_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/community3_time"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn2"
+                            android:layout_marginTop="37dp"
+                            android:paddingStart="3dp"
+                            android:textColor="#676767"
+                            android:textSize="13dp">
+
+                        </TextView>
+
+                        <ImageButton
+                            android:id="@+id/community3_News_btn2"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@color/white"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn2"
+                            style="?borderlessButtonStyle"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="270dp"
+                            android:src="@drawable/news"
+                            android:layout_marginTop="15dp">
+
+                        </ImageButton>
+
+                        <TextView
+                            android:id="@+id/community3_Repeat_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/community3_HeadProtrait_btn2"
+                            android:layout_marginStart="90dp"
+                            android:padding="10dp"
+                            android:text="@string/community3_author_repeat1"
+                            android:textSize="20dp"
+                            android:background="@color/white"
+                            android:textColor="#383838">
+
+                        </TextView>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:orientation="horizontal"
+                        android:background="#EFEFEF"
+                        android:layout_marginTop="5dp">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/community3_HeadProtrait_btn3"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            style="?borderlessButtonStyle"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/headprotrait"
+                            android:background="@color/white"
+                            android:scaleType="fitXY">
+
+                        </ImageButton>
+
+                        <Button
+                            android:id="@+id/community3_Name_btn3"
+                            style="?borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn3"
+                            android:layout_marginTop="10dp"
+                            android:gravity="start"
+                            android:text="@string/community3_visitor"
+                            android:textColor="#676767"
+                            android:textSize="17dp">
+
+                        </Button>
+
+                        <TextView
+                            android:id="@+id/community3_Time_text3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/community3_time"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn3"
+                            android:layout_marginTop="37dp"
+                            android:paddingStart="3dp"
+                            android:textColor="#676767"
+                            android:textSize="13dp">
+
+                        </TextView>
+
+                        <ImageButton
+                            android:id="@+id/community3_News_btn3"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@color/white"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn3"
+                            style="?borderlessButtonStyle"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="270dp"
+                            android:src="@drawable/news"
+                            android:layout_marginTop="15dp">
+
+                        </ImageButton>
+
+                        <TextView
+                            android:id="@+id/community3_Repeat_text3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/community3_HeadProtrait_btn3"
+                            android:layout_marginStart="90dp"
+                            android:padding="10dp"
+                            android:text="@string/community3_visitor_repeat2"
+                            android:textSize="20dp"
+                            android:background="@color/white"
+                            android:textColor="#383838">
+
+                        </TextView>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:orientation="horizontal"
+                        android:background="#EFEFEF"
+                        android:layout_marginTop="5dp">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/community3_HeadProtrait_btn4"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            style="?borderlessButtonStyle"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/headprotrait"
+                            android:background="@color/white"
+                            android:scaleType="fitXY">
+
+                        </ImageButton>
+
+                        <Button
+                            android:id="@+id/community3_Name_btn4"
+                            style="?borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn4"
+                            android:layout_marginTop="10dp"
+                            android:gravity="start"
+                            android:text="@string/community3_visitor"
+                            android:textColor="#676767"
+                            android:textSize="17dp">
+
+                        </Button>
+
+                        <TextView
+                            android:id="@+id/community3_Time_text4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/community3_time"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn4"
+                            android:layout_marginTop="37dp"
+                            android:paddingStart="3dp"
+                            android:textColor="#676767"
+                            android:textSize="13dp">
+
+                        </TextView>
+
+                        <ImageButton
+                            android:id="@+id/community3_News_btn4"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@color/white"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn4"
+                            style="?borderlessButtonStyle"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="270dp"
+                            android:src="@drawable/news"
+                            android:layout_marginTop="15dp">
+
+                        </ImageButton>
+
+                        <TextView
+                            android:id="@+id/community3_Repeat_text4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/community3_HeadProtrait_btn4"
+                            android:layout_marginStart="90dp"
+                            android:padding="10dp"
+                            android:text="@string/community3_visitor_repeat3"
+                            android:textSize="20dp"
+                            android:background="@color/white"
+                            android:textColor="#383838">
+
+                        </TextView>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:orientation="horizontal"
+                        android:background="#EFEFEF"
+                        android:layout_marginTop="5dp">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/community3_HeadProtrait_btn5"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            style="?borderlessButtonStyle"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/headprotrait"
+                            android:background="@color/white"
+                            android:scaleType="fitXY">
+
+                        </ImageButton>
+
+                        <Button
+                            android:id="@+id/community3_Name_btn5"
+                            style="?borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn5"
+                            android:layout_marginTop="10dp"
+                            android:gravity="start"
+                            android:text="@string/community3_visitor"
+                            android:textColor="#676767"
+                            android:textSize="17dp">
+
+                        </Button>
+
+                        <TextView
+                            android:id="@+id/community3_Time_text5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/community3_time"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn5"
+                            android:layout_marginTop="37dp"
+                            android:paddingStart="3dp"
+                            android:textColor="#676767"
+                            android:textSize="13dp">
+
+                        </TextView>
+
+                        <ImageButton
+                            android:id="@+id/community3_News_btn5"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@color/white"
+                            android:layout_toEndOf="@id/community3_HeadProtrait_btn5"
+                            style="?borderlessButtonStyle"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="270dp"
+                            android:src="@drawable/news"
+                            android:layout_marginTop="15dp">
+
+                        </ImageButton>
+
+                        <TextView
+                            android:id="@+id/community3_Repeat_text5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/community3_HeadProtrait_btn5"
+                            android:layout_marginStart="90dp"
+                            android:padding="10dp"
+                            android:text="@string/community3_author_repeat2"
+                            android:textSize="20dp"
+                            android:background="@color/white"
+                            android:textColor="#383838">
+
+                        </TextView>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:orientation="horizontal"
+                        android:background="#EFEFEF"
+                        android:layout_marginTop="5dp">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="35dp">
+
+            <LinearLayout
+                android:layout_width="310dp"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/button_radius_gray">
+
+                <EditText
+                    android:layout_width="260dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/button_radius_gray"
+                    android:hint="@string/community3_edithint"
+                    android:textColorHint="#D3D3D3"
+                    android:paddingLeft="15dp"
+                    android:maxLines="1">
+
+                </EditText>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="#EFEFEF"
+                    android:layout_gravity="center"
+                    style="?borderlessButtonStyle"
+                    android:src="@drawable/smile"
+                    android:scaleType="fitXY">
+
+                </ImageButton>
+
+             </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?borderlessButtonStyle"
+                android:background="@color/white"
+                android:text="@string/community4_release"
+                android:textColor="#25C689"
+                android:textSize="22dp"
+                android:gravity="center">
+
+            </Button>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

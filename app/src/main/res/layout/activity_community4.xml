@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EFEFEF"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/community4_Leftarrow_btn"
+                style="?borderlessButtonStyle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:background="#EFEFEF"
+                android:scaleType="fitXY"
+                android:src="@drawable/cancel2">
+
+            </ImageButton>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="114dp"
+                android:text="@string/community4_newdymanic"
+                android:textColor="#393939"
+                android:textSize="23dp">
+
+            </TextView>
+
+            <Button
+                android:id="@+id/community4_Release_btn"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="90dp"
+                android:background="@drawable/button_radius_green"
+                android:text="@string/community4_release"
+                android:textColor="@color/white"
+                android:textSize="20dp">
+
+            </Button>
+
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/community4_Sharetext_edit"
+            android:layout_width="340dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:layout_marginTop="15dp"
+            android:hint="@string/community4_sharehint"
+            android:textColorHint="#DADADA"
+            android:gravity="top"
+            android:textSize="18dp"
+            android:padding="10dp">
+
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="30dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/community4_Image_btn1"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:scaleType="fitXY"
+                android:padding="5dp"
+                android:background="#EFEFEF"
+                android:src="@drawable/sucai">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/community4_Image_btn2"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:scaleType="fitXY"
+                android:padding="5dp"
+                android:background="#EFEFEF"
+                android:src="@drawable/sucai">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/community4_Image_btn3"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:scaleType="fitXY"
+                android:padding="5dp"
+                android:background="#EFEFEF"
+                android:src="@drawable/sucai">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/community4_AddImage_btn4"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:padding="5dp"
+                android:background="#EFEFEF"
+                android:src="@drawable/add">
+
+            </ImageButton>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -96,6 +96,7 @@
             android:name=".register1"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".register5"
             android:launchMode="singleTop"
@@ -112,6 +113,12 @@
             android:name=".register2"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-    </application>
 
+
+
+
+
+
+
+    </application>
 </manifest>

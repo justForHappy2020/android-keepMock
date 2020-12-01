@@ -40,4 +40,54 @@
     <string name="action_settings">Settings</string>
     <string name="how_many_lesson">27节课程</string>
 
+    <!--    community string-->
+    <string name="community1_edit">\t说点什么吧</string>
+    <string name="community1_thumbsnum">331</string>
+    <string name="community1_newsnum">47</string>
+    <string name="community1_playerid">陈陈陈</string>
+    <string name="community1_playerid_repeat">陈陈陈（作者）：</string>
+    <string name="community1_playertext">滴~夜跑可爱卡\n滴~夜跑可爱卡\n滴~夜跑可爱卡\n滴~夜跑可爱卡</string>
+    <string name="community1_visitorsthu">255人点赞</string>
+    <string name="community1_visitors_commentnum">54评论</string>
+    <string name="community1_visitors1_name">kind</string>
+    <string name="community1_visitors_time">3小时前</string>
+    <string name="community1_visitors2_text">小美女你多高</string>
+    <string name="community1_visitors2_repeat1">168</string>
+    <string name="community1_visitors2_repeat2">不能</string>
+    <string name="community1_visitors2_retract">查看全部4 条回复</string>
+    <string name="community1_visitors3_text">喜欢小姐姐的生活态度</string>
+    <string name="community1_visitors_opencomment">展开42条评论</string>
+    <string name="community4_newdymanic">新动态</string>
+    <string name="community4_release">发布</string>
+    <string name="community4_sharehint">分享你的健身经验和心得吧</string>
+    <string name="community3_repeatnum">4条回复</string>
+    <string name="community3_edithint">写下你的第一条评论吧</string>
+    <string name="community3_visitor">最大的油条</string>
+    <string name="community3_author">最香的油条（作者）</string>
+    <string name="community3_visitor_repeat1">996</string>
+    <string name="community3_author_repeat1">666</string>
+    <string name="community3_visitor_repeat2">回复 最香的油条（作者）：能和你互关一下不？</string>
+    <string name="community3_visitor_repeat3">回复 最香的油条（作者）：能和你加个V认识一下不？</string>
+    <string name="community3_author_repeat2">回复 最大的油条：我jio得不行</string>
+    <string name="community3_time">2019/10/10</string>
+    <string name="community2_concern">关注</string>
+    <string name="community2_concern_num">3</string>
+    <string name="community2_fans">粉丝</string>
+    <string name="community2_fans_num">7000</string>
+    <string name="community2_praised">获赞</string>
+    <string name="community2_praised_num">5.2万</string>
+    <string name="community2_Text1">非专业，非专业\n不互关，不互关\n不减肥，不减肥\n不接受任务方面\n任何建议...全部</string>
+    <string name="community6_username1">keep_新人助手</string>
+    <string name="community_hot">热门</string>
+    <string name="community_concern">关注</string>
+    <string name="community_sport">运动</string>
+    <string name="community_community">社区</string>
+    <string name="community_diet">饮食</string>
+    <string name="community_me">我</string>
+    <string name="community_text">运动减肥打卡 慢跑10公里，最近都是...</string>
+    <string name="community_num">815</string>
+
+    
+
+
 </resources>

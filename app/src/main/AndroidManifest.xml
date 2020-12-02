@@ -113,6 +113,10 @@
             android:name=".register2"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity_sharedetail"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
 
 

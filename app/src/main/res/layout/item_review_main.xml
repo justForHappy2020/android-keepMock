@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/headprotrait_visitor1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/headprotrait"
+                android:scaleType="fitCenter"
+                android:src="@drawable/headprotrait"
+                app:riv_oval="true">
+
+            </com.makeramen.roundedimageview.RoundedImageView>
+
+            <TextView
+                android:id="@+id/community1_visitors1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/headprotrait_visitor1"
+                android:layout_alignParentTop="false"
+                android:layout_centerInParent="false"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@id/headprotrait_visitor1"
+                android:text="@string/community1_visitors1_name"
+                android:textColor="#353535"
+                android:textSize="18sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/community1_visitors1"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentBottom="false"
+                android:layout_toEndOf="@id/headprotrait_visitor1"
+                android:text="@string/community1_visitors_time"
+                android:textColor="#AEAEAE"
+                android:textSize="11sp">
+
+            </TextView>
+
+
+        </RelativeLayout>
+
+        <Button
+            style="?borderlessButtonStyle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/horn">
+
+        </Button>
+
+        <Button
+            android:id="@+id/community1_visitors1_news"
+            style="?borderlessButtonStyle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/news">
+
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/community1_visitors1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:maxLines="2"
+            android:text="@string/community1_playertext"
+            android:textColor="#353535"
+            android:textSize="17dp">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="#F0F0F2"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                style="?borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:padding="0dp"
+                android:text="@string/community1_playerid_repeat"
+                android:textColor="#25C689"
+                android:textSize="15dp">
+
+            </Button>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="25dp"
+                android:text="@string/community1_playertext"
+                android:textSize="15dp">
+
+            </TextView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:id="@id/community1_visitors1"
+                    style="?borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="left"
+                    android:padding="0dp"
+                    android:text="@string/community1_visitors1_name"
+                    android:textColor="#25C689"
+                    android:textSize="15dp">
+
+                </Button>
+
+                <TextView
+                    android:id="@id/community1_visitors1_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/community1_visitors1"
+                    android:text="回复"
+                    android:textSize="15dp">
+
+                </TextView>
+
+                <Button
+                    style="?borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_toEndOf="@id/community1_visitors1_text"
+                    android:padding="0dp"
+                    android:text="@string/community1_playerid_repeat"
+                    android:textColor="#25C689"
+                    android:textSize="15dp">
+
+                </Button>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/community1_visitors1"
+                    android:layout_marginStart="25dp"
+                    android:text="嗯嗯！谢谢"
+                    android:textSize="15dp">
+
+                </TextView>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

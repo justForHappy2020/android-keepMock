@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
@@ -38,8 +37,8 @@ public class search_result extends FragmentActivity implements View.OnClickListe
     private TabLayout mTabLayout;
     //适配器
     private FragmentPagerAdapter mAdapter;
-    //装载Fragment的集合
 
+    //装载Fragment的集合
     private List<Fragment> mFragments;
     private String[] titles = {"综合", "课程", "动态", "用户"};
     private String searchContent;
@@ -68,7 +67,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
         fragment_search_daily f3 = new fragment_search_daily();
         fragment_search_daily f4 = new fragment_search_daily();
 
-        f1.setArguments(bundle);
+        f1.setArguments(bundle);//用bundle与活动通信
         f2.setArguments(bundle);
         f3.setArguments(bundle);
         f4.setArguments(bundle);
@@ -130,7 +129,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
         ibback = findViewById(R.id.search_back);
         ibSearch = findViewById(R.id.searching_result_button);
         btReset = findViewById(R.id.result_quit_button);
-        etInput = findViewById(R.id.text_inout_search);
+        etInput = findViewById(R.id.text_input_search);
 
         ibback.setOnClickListener(this);
         ibSearch.setOnClickListener(this);
@@ -138,7 +137,6 @@ public class search_result extends FragmentActivity implements View.OnClickListe
 
         mViewPager = (ViewPager) this.findViewById(R.id.viewPager);
         mTabLayout = (TabLayout) this.findViewById(R.id.tabLayout);
-        etInput = this.findViewById(R.id.text_input_search);
 
         mViewPager.setOffscreenPageLimit(4);//设置缓存页面上限，默认为3，会出现recyclerview中item重复问题
         mTabLayout.setupWithViewPager(mViewPager);

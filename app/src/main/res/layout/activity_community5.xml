@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <ImageButton
+                android:id="@+id/community5_LeftArrow_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                style="?borderlessButtonStyle"
+                android:src="@drawable/arrowleft"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                >
+
+
+            </ImageButton>
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="35dp"
+                android:orientation="horizontal"
+                android:background="@drawable/edit_radius_gray"
+                android:layout_gravity="center"
+                android:layout_marginStart="17dp">
+
+                <ImageButton
+                    android:id="@+id/community5_Search_btn"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/search"
+                    android:scaleType="fitXY"
+                    android:background="#EFEFEF"
+                    style="?borderlessButtonStyle"
+                    android:layout_marginStart="13dp">
+
+                </ImageButton>
+
+                <EditText
+                    android:id="@+id/community5_Search_edit"
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:background="#EFEFEF"
+                    android:layout_marginStart="10dp"
+                    android:hint="搜索好友"
+                    android:maxLines="1">
+
+                </EditText>
+
+                <ImageButton
+                    android:id="@+id/community5_Cancel_btn"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/cancel"
+                    android:scaleType="fitXY"
+                    android:background="#EFEFEF"
+                    style="?borderlessButtonStyle"
+                    android:layout_marginStart="5dp">
+
+                </ImageButton>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#EFEFEF">
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

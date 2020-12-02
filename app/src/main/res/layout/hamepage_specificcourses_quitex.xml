@@ -71,15 +71,12 @@
 
 
                 <ImageButton
-                    android:id="@+id/quit_excerise"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:background="@drawable/rectagle_and_circle"
-                >
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/rectagle_and_circle">
 
             </ImageButton>
                 <ImageButton
-                    android:id="@+id/continue_excerise"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:background="@drawable/triangl_and_circle"

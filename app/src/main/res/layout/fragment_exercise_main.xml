@@ -70,39 +70,43 @@
 
                 <Button
                     android:id="@+id/bodypart1"
+                    style="?borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_a"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
 
                 <Button
+                    style="?borderlessButtonStyle"
                     android:id="@+id/bodypart2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_b"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
 
                 <Button
+                    style="?borderlessButtonStyle"
                     android:id="@+id/bodypart3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_c"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
 
                 <Button
+                    style="?borderlessButtonStyle"
                     android:id="@+id/bodypart4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_d"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
 
             </LinearLayout>
 
@@ -114,38 +118,42 @@
                 android:padding="10dp">
 
                 <Button
+                    style="?borderlessButtonStyle"
                     android:id="@+id/bodypart5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_e"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
 
                 <Button
+                    style="?borderlessButtonStyle"
                     android:id="@+id/bodypart6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_f"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
 
                 <Button
+                    style="?borderlessButtonStyle"
                     android:id="@+id/bodypart7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
-                    android:fontFamily="sans-serif-black"
-                    android:text="腿" />
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_g"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
 
                 <Button
                     android:id="@+id/bodypart8"
+                    style="?borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle_button2"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_h"
                     android:fontFamily="sans-serif-black"
                     android:text="全部" />
 

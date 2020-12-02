@@ -1,11 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +22,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -35,26 +31,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import java.net.URL;
 
 import static com.example.myapplication.utils.ClientUploadUtils.upload;
 
 public class register3 extends Activity implements View.OnClickListener {
 
     private ImageButton ibUpdatePhoto;
+    private TextView tvTextUpdatePhoto;
     private TextView tvName;
     private Button btNameNext;
     private String file_url;
@@ -62,6 +56,7 @@ public class register3 extends Activity implements View.OnClickListener {
     private String filename;
     private SharedPreferences saveSP;
     private int httpCode;
+    private String url;//图片的URL
 
     //调取系统摄像头的请求码
     private static final int MY_ADD_CASE_CALL_PHONE = 6;
@@ -105,6 +100,7 @@ public class register3 extends Activity implements View.OnClickListener {
     private void initView() {
 
         ibUpdatePhoto = findViewById(R.id.update_photo);
+        tvTextUpdatePhoto = findViewById(R.id.text_update_photo);
         tvName = findViewById(R.id.name);
         btNameNext = findViewById(R.id.name_next);
 
@@ -262,7 +258,7 @@ public class register3 extends Activity implements View.OnClickListener {
                                     //相应的内容
                                 httpCode = jsonObject1.getInt("code");
                                 if(httpCode == 200){
-                                    String url = jsonObject1.getString("data");//URL?
+                                    url= jsonObject1.getString("data");//URL?
                                     SharedPreferences.Editor editor = saveSP.edit();
                                     editor.putString("url",url);
                                     if (!editor.commit()) {
@@ -279,14 +275,8 @@ public class register3 extends Activity implements View.OnClickListener {
 
                 });
                         thread.start();
-                        thread.join(10000);
-                /*Tiny.FileCompressOptions options = new Tiny.FileCompressOptions();
-                Tiny.getInstance().source(selectedImage).asFile().withOptions(options).compress(new FileWithBitmapCallback() {
-                    @Override
-                    public void callback(boolean isSuccess, Bitmap bitmap, String outfile, Throwable t) {
-                        saveImageToServer(bitmap, outfile);
-                    }
-                });*/
+                        thread.join(5000);
+                if(url != null)startThread();
             } catch (Exception e) {
                 //"上传失败");
             }
@@ -375,6 +365,48 @@ public class register3 extends Activity implements View.OnClickListener {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
+    private Drawable loadImageFromNetwork(String imageUrl)
+    {
+        Drawable drawable = null;
+        try {
+            // 可以在这里通过文件名来判断，是否本地有此图片
+            drawable = Drawable.createFromStream(
+                    new URL(imageUrl).openStream(), "userIcon.jpg");
+        } catch (IOException e) {
+            Log.d("test", e.getMessage());
+        }
+        if (drawable == null) {
+            Log.d("test", "null drawable");
+        } else {
+            Log.d("test", "not null drawable");
+        }
+
+        return drawable ;
+    }
+
+    //显示头像线程
+    private void startThread() {
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                final Drawable drawable = loadImageFromNetwork(url);
+                // post() 特别关键，就是到UI主线程去更新图片
+                ibUpdatePhoto.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        ibUpdatePhoto.setImageDrawable(drawable) ;
+                    }}) ;
+            }
+
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void onClick(View view) {
         final String nickName = tvName.getText().toString().trim();

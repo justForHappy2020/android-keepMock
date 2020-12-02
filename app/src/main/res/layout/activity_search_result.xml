@@ -48,9 +48,9 @@
                 android:layout_marginLeft="10dp"
                 android:background="#EFEFEF"
                 android:scaleType="fitXY"
-                android:src="@drawable/search2">
+                android:src="@drawable/search2"/>
 
-            </ImageButton>
+
 
             <EditText
                 android:id="@+id/text_input_search"

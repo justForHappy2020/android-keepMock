@@ -3,22 +3,19 @@ package com.example.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.Comment;
-import com.example.myapplication.entity.Course;
 import com.example.myapplication.entity.User;
 
 import java.util.ArrayList;
@@ -52,19 +49,14 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         recyclerView = (RecyclerView) findViewById(R.id.community_reviews_main);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity_sharedetail.this));
 
-
-        quickAdapter =  new BaseQuickAdapter<Comment, BaseViewHolder >(R.layout.item_review_main,mainCommentList){
-
-
+        quickAdapter =  new BaseQuickAdapter<Comment, BaseViewHolder >(R.layout.item_comment_main,mainCommentList){
             @Override
             protected void convert(BaseViewHolder helper, Comment comment) {
-                //可链式调用赋值
                 User user = comment.getUser();
-                helper.setText(R.id.community1_visitors1,comment.getUser().getUserName())
-                        .setText(R.id.community1_visitors1_text, comment.getTextContent())
-                        .setImageResource(R.id.headprotrait_visitor1, comment.getUser().getPortraitImg());//comment.getUser().getPortraitImg()
+                helper.setText(R.id.item_comment_main_username,comment.getUser().getUserName())
+                        .setText(R.id.item_comment_main_text, comment.getTextContent())
+                        .setImageResource(R.id.item_comment_main_username_headprotrait, comment.getUser().getPortraitImg());
             }
-
         };
 
         //new QuickAdapter(R.layout.item_review_main, mainCommentList);
@@ -95,7 +87,6 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
 
          */
 
-        //具体课程的监听
         quickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {
@@ -109,6 +100,42 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
 
             }
         });
+        quickAdapter.addChildClickViewIds(R.id.item_comment_main_like, R.id.item_comment_main_subcomment, R.id.item_comment_main_loadmoresub,R.id.item_comment_main_username,R.id.item_comment_main_username_headprotrait);
+// 设置子控件点击监听
+        quickAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                Intent intent;
+                switch (view.getId()){
+                    case R.id.item_comment_main_like:
+                        Toast.makeText(activity_sharedetail.this, "点赞第"+position+"个回复成功！", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_comment_main_subcomment:
+                        Toast.makeText(activity_sharedetail.this, "回复第"+position+"个回复", Toast.LENGTH_SHORT).show();
+                        /*
+                        intent= new Intent(activity_sharedetail.this,activity_subcomment.class);
+                        intent.putExtra("main_commentId",0123);
+                        startActivity(intent);
+
+                         */
+                        break;
+                    case R.id.item_comment_main_loadmoresub:
+                        Toast.makeText(activity_sharedetail.this, "加载第"+position+"个回复的子回复", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_comment_main_username:
+
+                    case R.id.item_comment_main_username_headprotrait:
+                        Toast.makeText(activity_sharedetail.this, "跳转到第"+position+"个用户的详情页", Toast.LENGTH_SHORT).show();
+                         /*
+                        intent= new Intent(activity_sharedetail.this,activity_userdetail.class);
+                        intent.putExtra("userId",0123);
+                        startActivity(intent);
+
+                         */
+                        break;
+                }
+            }
+        });
 
         recyclerView.setAdapter(quickAdapter);
 
@@ -120,11 +147,11 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         /*TestData*/
 
         Comment comment;
-        User user = new User(0,"TestName",R.drawable.sucai);
+        User user = new User(0,"乔瑟夫·乔斯达",R.drawable.sucai);
         for (int i = 0; i < 5; i++) {
             comment = new Comment();
             comment.setUser(user);
-            comment.setTextContent("测试内容哦");
+            comment.setTextContent("昨天学习了波纹疾走，今天感觉肌肉力量增强了！");
             comment.setLikeNum(233);
             mainCommentList.add(comment);
         }

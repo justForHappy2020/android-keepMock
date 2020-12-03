@@ -10,7 +10,7 @@ public class MultipleItem implements MultiItemEntity {
 
     private int itemType;
     private Course course;
-    private Post post;
+    private Share share;
     private String text;
 
     public MultipleItem(int itemType,String text) {
@@ -18,9 +18,9 @@ public class MultipleItem implements MultiItemEntity {
         this.text = text;
     }
 
-    public MultipleItem(int itemType,Post post) {
+    public MultipleItem(int itemType, Share share) {
         this.itemType = itemType;
-        this.post=post;
+        this.share = share;
     }
 
     public MultipleItem(int itemType,Course course) {
@@ -41,8 +41,8 @@ public class MultipleItem implements MultiItemEntity {
         return course;
     }
 
-    public Post getPost(){
-        return post;
+    public Share getShare(){
+        return share;
     }
 
 }

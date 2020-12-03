@@ -31,12 +31,12 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.tv_content, item.getData().getContent());
                 break;*/
             case MultipleItem.MASONRYPOST:
-                helper.setImageResource(R.id.masonry_item_post_img, item.getPost().getPostImg())
-                        .setImageResource(R.id.masonry_item_portrait_img,item.getPost().getPortraitImg())
-                        .setText(R.id.masonry_item_title, item.getPost().getTitle())
-                        .setText(R.id.masonry_item_textContent, item.getPost().getTextContent())
-                        .setText(R.id.masonry_item_username, item.getPost().getUserName())
-                        .setText(R.id.masonry_item_num, item.getPost().getNotificationNum());
+                helper.setImageResource(R.id.masonry_item_post_img, item.getShare().getPostImg())
+                        .setImageResource(R.id.masonry_item_portrait_img,item.getShare().getPortraitImg())
+                        .setText(R.id.masonry_item_title, item.getShare().getTitle())
+                        .setText(R.id.masonry_item_textContent, item.getShare().getTextContent())
+                        .setText(R.id.masonry_item_username, item.getShare().getUserName())
+                        .setText(R.id.masonry_item_num, item.getShare().getNotificationNum());
                 break;
         }
     }

@@ -69,8 +69,8 @@
 
                         <ImageButton
                             android:id="@+id/headprotrait"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
                             android:layout_margin="15dp"
                             android:background="@drawable/headprotrait"
                             android:scaleType="fitXY"
@@ -88,7 +88,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/community1_playerid"
                             android:textColor="#353535"
-                            android:textSize="20dp"
+                            android:textSize="15sp"
                             android:textStyle="bold">
 
                         </Button>
@@ -103,7 +103,7 @@
                         android:layout_marginRight="30dp"
                         android:text="@string/community1_playertext"
                         android:textColor="#353535"
-                        android:textSize="23dp">
+                        android:textSize="16sp">
 
                     </TextView>
 
@@ -325,7 +325,7 @@
                         android:layout_weight="1"
                         android:isScrollContainer="false"
                         android:visibility="visible"
-                        tools:listitem="@layout/item_review_main" />
+                        tools:listitem="@layout/item_comment_main" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,9 +17,9 @@
             android:layout_weight="1">
 
             <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/headprotrait_visitor1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:id="@+id/item_comment_main_username_headprotrait"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
@@ -32,30 +33,31 @@
             </com.makeramen.roundedimageview.RoundedImageView>
 
             <TextView
-                android:id="@+id/community1_visitors1"
+                android:id="@+id/item_comment_main_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/headprotrait_visitor1"
+                android:layout_alignTop="@id/item_comment_main_username_headprotrait"
                 android:layout_alignParentTop="false"
                 android:layout_centerInParent="false"
                 android:layout_marginBottom="5dp"
-                android:layout_toRightOf="@id/headprotrait_visitor1"
+                android:layout_toRightOf="@id/item_comment_main_username_headprotrait"
                 android:text="@string/community1_visitors1_name"
                 android:textColor="#353535"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold">
 
             </TextView>
 
             <TextView
+                android:id="@+id/item_comment_item_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/community1_visitors1"
+                android:layout_below="@id/item_comment_main_username"
                 android:layout_alignParentStart="false"
                 android:layout_alignParentLeft="false"
                 android:layout_alignParentTop="false"
                 android:layout_alignParentBottom="false"
-                android:layout_toEndOf="@id/headprotrait_visitor1"
+                android:layout_toEndOf="@id/item_comment_main_username_headprotrait"
                 android:text="@string/community1_visitors_time"
                 android:textColor="#AEAEAE"
                 android:textSize="11sp">
@@ -66,21 +68,22 @@
         </RelativeLayout>
 
         <Button
+            android:id="@+id/item_comment_main_like"
             style="?borderlessButtonStyle"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/horn">
 
         </Button>
 
         <Button
-            android:id="@+id/community1_visitors1_news"
+            android:id="@+id/item_comment_main_subcomment"
             style="?borderlessButtonStyle"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/news">
 
@@ -91,12 +94,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/community1_visitors1_text"
+            android:id="@+id/item_comment_main_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
@@ -118,83 +121,27 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <Button
-                style="?borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:padding="0dp"
-                android:text="@string/community1_playerid_repeat"
-                android:textColor="#25C689"
-                android:textSize="15dp">
-
-            </Button>
-
 
             <TextView
+                android:id="@+id/item_comment_main_loadmoresub"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="25dp"
-                android:text="@string/community1_playertext"
-                android:textSize="15dp">
-
-            </TextView>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <Button
-                    android:id="@id/community1_visitors1"
-                    style="?borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:gravity="left"
-                    android:padding="0dp"
-                    android:text="@string/community1_visitors1_name"
-                    android:textColor="#25C689"
-                    android:textSize="15dp">
-
-                </Button>
-
-                <TextView
-                    android:id="@id/community1_visitors1_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/community1_visitors1"
-                    android:text="回复"
-                    android:textSize="15dp">
-
-                </TextView>
-
-                <Button
-                    style="?borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_toEndOf="@id/community1_visitors1_text"
-                    android:padding="0dp"
-                    android:text="@string/community1_playerid_repeat"
-                    android:textColor="#25C689"
-                    android:textSize="15dp">
-
-                </Button>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/community1_visitors1"
-                    android:layout_marginStart="25dp"
-                    android:text="嗯嗯！谢谢"
-                    android:textSize="15dp">
-
-                </TextView>
-
-
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:text="查看全部回复"
+                android:textColor="#25C689"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="#F0F0F2"
+        android:orientation="horizontal">
 
     </LinearLayout>
 

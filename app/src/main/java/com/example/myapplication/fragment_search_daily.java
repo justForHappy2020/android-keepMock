@@ -10,18 +10,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.myapplication.entity.Course;
 import com.example.myapplication.entity.MultipleItem;
-import com.example.myapplication.entity.Post;
+import com.example.myapplication.entity.Share;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class fragment_search_daily extends Fragment {
 
-    List<Post> postList= new ArrayList<>();
+    List<Share> shareList = new ArrayList<>();
 
-    private List<Post> datas01= new ArrayList<>();
+    private List<Share> datas01= new ArrayList<>();
     private List<MultipleItem> datas02= new ArrayList<>();
 
     @Nullable
@@ -51,13 +50,13 @@ public class fragment_search_daily extends Fragment {
 
     private void initData(){
 
-        Post post1 = new Post(R.drawable.scenery,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
-        Post post2 = new Post(R.drawable.post_img2,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","666");
-        Post post3 = new Post(R.drawable.post_img3,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
+        Share share1 = new Share(R.drawable.scenery,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
+        Share share2 = new Share(R.drawable.post_img2,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","666");
+        Share share3 = new Share(R.drawable.post_img3,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
 
-        datas01.add(post1);
-        datas01.add(post2);
-        datas01.add(post3);
+        datas01.add(share1);
+        datas01.add(share2);
+        datas01.add(share3);
 
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(0)));
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(1)));

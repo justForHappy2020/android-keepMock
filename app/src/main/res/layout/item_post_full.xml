@@ -18,6 +18,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
             android:src="@drawable/sucai"
             app:riv_oval="true" />
 
@@ -82,7 +83,7 @@
             android:layout_gravity="left"
             android:layout_marginRight="3dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/like" />
+            android:src="@drawable/like" />
 
         <TextView
             android:id="@+id/praises"
@@ -94,15 +95,14 @@
             android:textSize="10sp" />
 
         <ImageView
-            android:id="@+id/comments"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="3dp"
-            app:srcCompat="@drawable/comment" />
+            android:src="@drawable/comment" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/comments"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"

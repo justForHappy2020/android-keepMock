@@ -51,7 +51,7 @@ public class community_main extends Fragment {
         img2.setOnClickListener(onClickListener);
         RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.community_main_recyclerView);
         //设置recyclerView的样式
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(6,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
         //设置adapter
         MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(datas02);
         recyclerView.setAdapter(myAdapter);
@@ -74,9 +74,9 @@ public class community_main extends Fragment {
         }}
     private void initData(){
 
-        Share share1 = new Share("用户1","测试内容哈哈哈",R.drawable.scenery,R.drawable.sucai,"666","233");
-        Share share2 = new Share("用户2","测试内容哈哈哈",R.drawable.post_img2,R.drawable.sucai,"777","666");
-        Share share3 = new Share("用户3","测试内容哈哈哈",R.drawable.post_img3,R.drawable.sucai,"888","233");
+        Share share1 = new Share("用户1","测试内容哈哈哈",R.drawable.sucai,R.drawable.scenery,"666","233");
+        Share share2 = new Share("用户2","测试内容哈哈哈",R.drawable.sucai,R.drawable.post_img2,"777","666");
+        Share share3 = new Share("用户3","测试内容哈哈哈",R.drawable.sucai,R.drawable.post_img3,"888","233");
 
         datas01.add(share1);
         datas01.add(share2);

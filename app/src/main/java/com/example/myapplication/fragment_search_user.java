@@ -36,9 +36,9 @@ public class fragment_search_user extends Fragment {
     }
 
     private void initView(View view){
-        RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.fragment_daily_recyclerView);
+        RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.fragment_user_recyclerView);
         //设置recyclerView的样式
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //设置adapter
         MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(datas02);

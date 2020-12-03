@@ -37,6 +37,12 @@
 
         </activity>
         <activity
+            android:name=".search_user"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
             android:name=".search"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

@@ -14,6 +14,7 @@
         android:orientation="horizontal">
 
         <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/users_haed"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
@@ -21,7 +22,7 @@
             app:riv_oval="true" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/users_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -42,7 +43,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/contents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -56,7 +57,7 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/content_pics"
         android:layout_width="match_parent"
         android:layout_height="100pt"
         android:layout_marginLeft="15dp"
@@ -84,7 +85,7 @@
             app:srcCompat="@drawable/like" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/praises"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -93,7 +94,7 @@
             android:textSize="10sp" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/comments"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="15dp"

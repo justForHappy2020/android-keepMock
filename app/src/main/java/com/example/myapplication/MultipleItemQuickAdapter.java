@@ -14,6 +14,8 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
         addItemType(MultipleItem.BUTTON, R.layout.item_buttononly);
         addItemType(MultipleItem.MINICOURSE, R.layout.item_course_mini);
         addItemType(MultipleItem.MASONRYPOST, R.layout.item_post_simplified);
+        addItemType(MultipleItem.USER, R.layout.item_user_result);
+        addItemType(MultipleItem.SHARE, R.layout.item_post_full);
     }
 
     @Override
@@ -30,13 +32,25 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.tv_title, item.getData().getTitle())
                         .setText(R.id.tv_content, item.getData().getContent());
                 break;*/
-            case MultipleItem.MASONRYPOST:
+           case MultipleItem.MASONRYPOST:
                 helper.setImageResource(R.id.masonry_item_post_img, item.getPost().getPostImg())
                         .setImageResource(R.id.masonry_item_portrait_img,item.getPost().getPortraitImg())
                         .setText(R.id.masonry_item_title, item.getPost().getTitle())
                         .setText(R.id.masonry_item_textContent, item.getPost().getTextContent())
                         .setText(R.id.masonry_item_username, item.getPost().getUserName())
                         .setText(R.id.masonry_item_num, item.getPost().getNotificationNum());
+                break;
+            case MultipleItem.USER:
+                helper.setText(R.id.user_id, item.getUser().getTitle())
+                    .setImageResource(R.id.user_head, R.mipmap.ic_launcher);
+            break;
+            case MultipleItem.SHARE:
+                helper.setText(R.id.users_id, item.getShare().getUsers_id())
+                        .setText(R.id.contents, item.getShare().getContents())
+                        .setText(R.id.praises, item.getShare().getPraises())
+                        .setText(R.id.comments,item.getShare().getComments())
+                        .setImageResource(R.id.users_haed, item.getShare().getUser_heads())
+                        .setImageResource(R.id.content_pics, item.getShare().getContent_pics());
                 break;
         }
     }

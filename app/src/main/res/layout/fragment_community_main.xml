@@ -5,10 +5,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="#FFFFFF"
         android:orientation="horizontal">
 
@@ -25,25 +24,24 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/community_main_follow"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/followers" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0"
+            android:backgroundTint="#FFFFFF"
+            android:src="@drawable/followers"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/community_main_search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/search2" />
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="#FFFFFF"
+            android:src="@drawable/search1"  />
     </LinearLayout>
 
     <LinearLayout
@@ -91,7 +89,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/community_main_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#F6F6F6"
             tools:listitem="@layout/item_post_full" />

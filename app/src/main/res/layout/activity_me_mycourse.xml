@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#3E3C42"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/course_goback"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/information_goback"
+            android:background="#3E3C42"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:text="我的课程"
+            android:layout_marginTop="10dp"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F0F0F2"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="0dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0"
+                android:fontFamily="sans-serif-black"
+                android:text="我的课程库"
+                android:textSize="15dp" />
+
+            <ImageButton
+                android:id="@+id/btn_bodydata_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/more_black"
+                android:layout_marginLeft="260dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="0dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/bodydata"/>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                android:id="@+id/textweight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0"
+                android:fontFamily="sans-serif-black"
+                android:text="我学过的课程"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/lesson_count1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:background="#FFFFFF"
+                android:hint="27节课程"
+                android:textSize="15dp"
+                android:gravity="center"/>
+            </LinearLayout>
+            <ImageButton
+                android:id="@+id/btn_weight_more"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/my_course_more"
+                android:layout_marginLeft="20dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="0dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/bodydata"/>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="0"
+                    android:fontFamily="sans-serif-black"
+                    android:text="我学过的课程"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/lesson_count2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:background="#FFFFFF"
+                    android:hint="27节课程"
+                    android:textSize="15dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <ImageButton
+                android:id="@+id/btn_lesson_more"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/my_course_more"
+                android:layout_marginLeft="20dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/download_file"
+                android:background="#FFFFFF"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="缓存课程"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif-black"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

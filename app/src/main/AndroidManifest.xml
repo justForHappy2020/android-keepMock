@@ -75,7 +75,6 @@
                     </intent-filter>
                 </activity>
 
-
                 <activity android:name=".exercise_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -113,11 +112,55 @@
             android:name=".register2"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
-
-
-
-
-
+        <activity
+            android:name=".me_fragment_information_comment"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_fragment_information_fans"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_fragment_information_praise"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_information"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_sport_data"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_setting"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_apply"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_download"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_personal_information"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_body_data"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".my_course"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
-</manifest>
+
+
+
+
+
+
+    </manifest>

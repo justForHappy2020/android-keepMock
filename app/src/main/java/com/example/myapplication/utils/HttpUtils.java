@@ -13,6 +13,7 @@ import okhttp3.Response;
 
 public class HttpUtils {
 
+    //POST请求
     static public String connectHttp(String url,JSONObject json) throws Exception {
         //设置JSON数据
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -34,6 +35,8 @@ public class HttpUtils {
         return  responseData;
     }
 
+
+    //GET请求
     static public String connectHttpGet(String url) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(30000, TimeUnit.MILLISECONDS)
                 .readTimeout(30000, TimeUnit.MILLISECONDS)

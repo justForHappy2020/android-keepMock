@@ -76,17 +76,17 @@
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_a"
                     android:fontFamily="sans-serif-black"
-                    android:text="腿" />
+                    android:text="腿"/>
 
                 <Button
-                    style="?borderlessButtonStyle"
                     android:id="@+id/bodypart2"
+                    style="?borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_b"
-                    android:text="腿"
-                    android:fontFamily="sans-serif-black"/>
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿" />
 
                 <Button
                     style="?borderlessButtonStyle"
@@ -154,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_h"
+                    android:layout_weight="1"
                     android:fontFamily="sans-serif-black"
                     android:text="全部" />
 

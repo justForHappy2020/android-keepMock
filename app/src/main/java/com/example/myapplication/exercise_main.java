@@ -237,11 +237,6 @@ public class exercise_main extends Fragment{
                 startActivity(intent);
                 break;
             //筛选课程http、跳转对应的筛选主页
-//            case R.id.bodypart1:
-//                intent = new Intent(this, course_filter.class);
-//                intent.putExtra("bodypart" , bodyPart.get(0));
-//                startActivity(intent);
-//                break;
             case R.id.bodypart1:
                 intent = new Intent(getActivity(), course_filter.class);
                 intent.putExtra("bodypart" , bodyPart.get(0));

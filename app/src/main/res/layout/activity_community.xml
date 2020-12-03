@@ -231,55 +231,56 @@
 
                         <ImageButton
                             android:id="@+id/community_Headprotrait_btn2"
+                            style="?borderlessButtonStyle"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            style="?borderlessButtonStyle"
-                            android:src="@drawable/headprotrait"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
                             android:background="@color/white"
                             android:scaleType="fitXY"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="20dp">
+                            android:src="@drawable/headprotrait">
 
                         </ImageButton>
 
                         <Button
+                            style="?borderlessButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="25dp"
-                            android:background="@color/white"
-                            android:layout_toEndOf="@id/community_Headprotrait_btn2"
-                            android:layout_marginTop="23dp"
-                            android:textColor="#353535"
-                            android:textSize="16sp"
                             android:layout_marginStart="7dp"
+                            android:layout_marginTop="23dp"
+                            android:layout_toEndOf="@id/community_Headprotrait_btn2"
+                            android:background="@color/white"
                             android:gravity="start"
-                            style="?borderlessButtonStyle"
-                            android:text="@string/community1_playerid">
+                            android:text="@string/community1_playerid"
+                            android:textColor="#353535"
+                            android:textSize="16sp">
 
                         </Button>
 
                         <Button
                             android:layout_width="100dp"
                             android:layout_height="30dp"
-                            android:background="@drawable/button_radius_white_stroke"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="35dp"
                             android:layout_marginTop="20dp"
+                            android:layout_marginEnd="35dp"
+                            android:background="@drawable/button_radius_white_stroke"
                             android:text="@string/community_concern"
                             android:textSize="18dp">
 
                         </Button>
+
                         <TextView
                             android:id="@+id/community_text2"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/community_Headprotrait_btn2"
-                            android:layout_marginTop="10dp"
                             android:layout_marginStart="25dp"
+                            android:layout_marginTop="10dp"
+                            android:minLines="2"
                             android:text="@string/community_text"
-                            android:textSize="16dp"
                             android:textColor="#383837"
-                            android:textStyle="bold"
-                            android:minLines="2">
+                            android:textSize="16dp"
+                            android:textStyle="bold">
 
                         </TextView>
 
@@ -288,24 +289,24 @@
                             android:layout_width="350dp"
                             android:layout_height="160dp"
                             android:layout_below="@id/community_text2"
-                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="1dp"
                             android:background="@color/white"
-                            android:src="@drawable/sisi"
-                            android:scaleType="fitXY">
+                            android:scaleType="fitXY"
+                            android:src="@drawable/sisi">
 
                         </ImageButton>
 
                         <Button
                             android:id="@+id/community_thumbs_btn2"
+                            style="?borderlessButtonStyle"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
                             android:layout_below="@id/community_Image_btn2"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="10dp"
                             android:background="@color/white"
-                            style="?borderlessButtonStyle"
                             android:drawableStart="@drawable/thumbs2"
                             android:scaleType="fitXY"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginStart="18dp"
                             android:text="@string/community_num"
                             android:textColor="#999999"
                             android:textSize="15sp">
@@ -313,16 +314,16 @@
                         </Button>
 
                         <Button
+                            style="?borderlessButtonStyle"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:layout_toEndOf="@id/community_thumbs_btn2"
                             android:layout_below="@id/community_Image_btn2"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_toEndOf="@id/community_thumbs_btn2"
                             android:background="@color/white"
-                            style="?borderlessButtonStyle"
                             android:drawableStart="@drawable/message"
                             android:scaleType="fitXY"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginStart="18dp"
                             android:text="@string/community_num"
                             android:textColor="#999999"
                             android:textSize="15sp">

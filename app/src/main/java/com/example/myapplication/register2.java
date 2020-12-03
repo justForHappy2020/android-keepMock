@@ -1,16 +1,11 @@
 package com.example.myapplication;
-import com.example.myapplication.utils.HttpUtils;
-import com.example.myapplication.utils.KeyboardUtils;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -18,21 +13,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import com.example.myapplication.utils.KeyboardUtils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.xml.transform.sax.TemplatesHandler;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 import static com.example.myapplication.utils.HttpUtils.connectHttp;
 
@@ -85,7 +73,7 @@ public class register2 extends Activity implements View.OnClickListener{
         intentAccept = getIntent();
         String phoneNum = intentAccept.getStringExtra("mobile");
 
-        if(phoneNum.equals("")) Toast.makeText(this,"没有手机号数据",Toast.LENGTH_SHORT).show();
+        if(phoneNum == null) Toast.makeText(this,"没有手机号数据",Toast.LENGTH_SHORT).show();
         else tvGetPhoneNum.setText("+86-"+phoneNum);
     }
 
@@ -104,7 +92,6 @@ public class register2 extends Activity implements View.OnClickListener{
 
         btNameNext.setOnClickListener(this);
         tvRequireAgain.setOnClickListener(this);
-
       /*  etVcode.setOnFocusChangeListener(new android.view.View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -171,9 +158,26 @@ public class register2 extends Activity implements View.OnClickListener{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(httpcode==200)Toast.makeText(this,"验证码已重新发送",Toast.LENGTH_SHORT).show();
-                if(httpcode!=200)Toast.makeText(register2.this,"手机号有误",Toast.LENGTH_SHORT).show();
-                tvRequireAgain.setEnabled(Boolean.TRUE);
+                if(httpcode==200){
+                    Toast.makeText(this,"验证码已重新发送",Toast.LENGTH_SHORT).show();
+                    new CountDownTimer(10000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            tvRequireAgain.setEnabled(false);
+                            tvRequireAgain.setText(String.format("重新获取(%ds)",millisUntilFinished/1000));
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            tvRequireAgain.setEnabled(Boolean.TRUE);
+                            tvRequireAgain.setText("重新获取");
+                        }
+                    }.start();
+                }
+                if(httpcode!=200){
+                    Toast.makeText(register2.this,"手机号有误",Toast.LENGTH_SHORT).show();
+                    tvRequireAgain.setEnabled(Boolean.TRUE);
+                }
                 break;
             case R.id.name_next:
                 final String code = etVcode.getText().toString().trim();

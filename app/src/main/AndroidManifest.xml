@@ -64,16 +64,16 @@
 
         <activity android:name=".play"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:configChanges="keyboardHidden|orientation|screenSize">
 
         </activity>
 
-<!--        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity">
                     <intent-filter>
                         <action android:name="android.intent.action.MAIN" />
                         <category android:name="android.intent.category.LAUNCHER" />
                     </intent-filter>
-                </activity>-->
+                </activity>
 
 
                 <activity android:name=".exercise_main">
@@ -113,7 +113,6 @@
             android:name=".register2"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
 
 
 

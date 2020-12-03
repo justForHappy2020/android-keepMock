@@ -17,6 +17,13 @@ android {
         }
     }
 }
+android.applicationVariants.all {
+    variant ->
+        variant.outputs.all {
+            // 此处指定生成的apk文件名
+            outputFileName = "KeepTest.apk"
+        }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

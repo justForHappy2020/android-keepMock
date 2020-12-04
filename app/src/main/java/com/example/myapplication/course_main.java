@@ -1,6 +1,10 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +17,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.myapplication.entity.Course;
+import com.example.myapplication.entity.Movement;
+import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.utils.HttpUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -40,6 +48,8 @@ public class course_main extends Activity implements View.OnClickListener {
     private Course course = new Course();
     private Long courseID;
 
+    private RecyclerView recyclerView;
+
     private int httpcode;
     //private Drawable drawable;
 
@@ -47,9 +57,9 @@ public class course_main extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fresco.initialize(this);
-        setContentView(R.layout.activity_course_main);
+        setContentView(R.layout.activity_course_detail);
         initView();
-        startThread();
+        //startThread();
     }
 
     private void startThread() {
@@ -194,6 +204,7 @@ public class course_main extends Activity implements View.OnClickListener {
 
 
     private void initView(){
+        /*
         ibVideoPlay = findViewById(R.id.video_play);
         btVideoPlay = findViewById(R.id.play_video);
         btRelatedCourse[0] = findViewById(R.id.related_course1);
@@ -207,10 +218,41 @@ public class course_main extends Activity implements View.OnClickListener {
         tvDegree = findViewById(R.id.degree);
         tvIntro = findViewById(R.id.course_intro);
 
+         */
+
+        recyclerView = findViewById(R.id.course_detail_content_recyclerView);
+
+        /**
+         * TestData
+         */
+        List<MultipleItem> data= new ArrayList<>();
+
+        for(int j=0;j<10;j++){
+            Movement m = new Movement("TEST_ID","动作"+j,"01:00","URL");
+            data.add(new MultipleItem(MultipleItem.MOVEMENT,m));
+        }
+
+        MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(data);
+
+        LinearLayoutManager layoutM = new LinearLayoutManager(this);
+        layoutM.setOrientation(LinearLayoutManager.HORIZONTAL);//设置为横向排列
+
+        recyclerView.setLayoutManager(layoutM);
+        myAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> baseQuickAdapter, @NonNull View view, int i) {
+                Intent intent = new Intent(course_main.this,activity_movement_detail.class);
+                intent.putExtra("courseMovementId","ID"+i);
+                startActivity(intent);
+            }
+        });
+        recyclerView.setAdapter(myAdapter);
+
+
         Intent intentAccept = null;
         intentAccept = getIntent();
         courseID=intentAccept.getLongExtra("course",0);
-
+/*
         if(courseId2Course(courseID) == true) {//根据ID获取课程类./courseId2course
             tvCalorie.setText(course.getCalorie() + "千卡");
             tvDuration.setText(course.getDuration());
@@ -223,6 +265,8 @@ public class course_main extends Activity implements View.OnClickListener {
         ibVideoPlay.setOnClickListener(this);//监听获取验证码按钮
         btVideoPlay.setOnClickListener(this);//监听获取验证码按钮
         for(int i = 0;i<btRelatedCourse.length;i++) btRelatedCourse[i].setOnClickListener(this);
+
+ */
     }
 
     public void onClick(View view) {

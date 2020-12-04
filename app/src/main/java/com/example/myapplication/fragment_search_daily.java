@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.entity.Share;
+import com.example.myapplication.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +50,11 @@ public class fragment_search_daily extends Fragment {
     }
 
     private void initData(){
+        User user = new User(6666,"迪奥·布兰度",R.drawable.sucai);
 
-        Share share1 = new Share(R.drawable.scenery,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名",233);
-        Share share2 = new Share(R.drawable.post_img2,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名",233);
-        Share share3 = new Share(R.drawable.post_img3,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名",233);
+        Share share1 = new Share(user.getUserName(),"波纹呼吸法",R.drawable.sucai,R.drawable.scenery,"233","666",user);
+        Share share2 = new Share(user.getUserName(),"波纹呼吸法",R.drawable.sucai,R.drawable.post_img2,"777","235",user);
+        Share share3= new Share(user.getUserName(),"波纹呼吸法",R.drawable.sucai,R.drawable.post_img3,"666","857",user);
 
         datas01.add(share1);
         datas01.add(share2);

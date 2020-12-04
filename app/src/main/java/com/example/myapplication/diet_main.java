@@ -23,8 +23,5 @@ public class diet_main extends Fragment {
         ImageView img1 = view.findViewById(R.id.diet_main_follow);
         ImageView img2= view.findViewById(R.id.diet_main_search);
 
-        img1.setImageResource(R.drawable.followers);
-        img2.setImageResource(R.drawable.searching_icon);
-
     }
 }

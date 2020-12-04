@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
 import com.example.myapplication.entity.MultipleItem;
-import com.example.myapplication.entity.Post;
 import com.example.myapplication.entity.User;
 
 import java.util.ArrayList;
@@ -50,9 +49,9 @@ public class fragment_search_user extends Fragment {
     }
 
     private void initData(){
-        User user1 = new User("用户1",R.drawable.sucai);
-        User user2 = new User("用户2",R.drawable.sucai);
-        User user3 = new User("用户3",R.drawable.sucai);
+        User user1 = new User(666,"用户1",R.drawable.sucai);
+        User user2 = new User(233,"用户2",R.drawable.sucai);
+        User user3 = new User(555,"用户3",R.drawable.sucai);
 
         datas01.add(user1);
         datas01.add(user2);

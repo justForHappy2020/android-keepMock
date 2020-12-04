@@ -34,7 +34,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/followers" />
+            android:src="@drawable/followers" />
 
         <ImageView
             android:id="@+id/diet_main_search"
@@ -43,7 +43,7 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="20dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/search2" />
+            android:src="@drawable/search1" />
 
     </LinearLayout>
 

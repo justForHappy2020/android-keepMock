@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.myapplication.entity.Course;
 import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.entity.Share;
+import com.example.myapplication.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,10 +80,11 @@ public class fragment_search_all extends Fragment {
         Course course1 = new Course();
         course1.setCourseName("腹肌");
         course1.setCourseIntro("K1零基础  . 3002.5万人参加");
+        User user = new User(6666,"迪奥·布兰度",R.drawable.sucai);
 
-        Share share1 = new Share(R.drawable.scenery,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名",233);
-        Share share2 = new Share(R.drawable.post_img2,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名",233);
-        Share share3 = new Share(R.drawable.post_img3,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名",233);
+        Share share1 = new Share("USER_ID_TEST","波纹呼吸法",R.drawable.sucai,R.drawable.sports1,"666","235",user);
+        Share share2 = new Share("USER_ID_TEST","波纹呼吸法",R.drawable.sucai,R.drawable.scenery,"223","56",user);
+        Share share3= new Share("USER_ID_TEST","波纹呼吸法",R.drawable.sucai,R.drawable.post_img2,"3k","2k",user);
 
         datas01.add(share1);
         datas01.add(share2);
@@ -101,9 +103,9 @@ public class fragment_search_all extends Fragment {
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(0)));
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(1)));
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(2)));
+        datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(0)));
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(2)));
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(1)));
-        datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(0)));
 
 
     }

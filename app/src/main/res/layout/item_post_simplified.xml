@@ -15,18 +15,6 @@
         app:srcCompat="@drawable/scenery" />
 
     <TextView
-        android:id="@+id/masonry_item_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="9dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginRight="9dp"
-        android:text="运动减肥打卡"
-        android:textColor="#383837"
-        android:textSize="14sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/masonry_item_textContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

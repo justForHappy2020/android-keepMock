@@ -36,7 +36,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.masonry_item_title, item.getShare().getTitle())
                         .setText(R.id.masonry_item_textContent, item.getShare().getTextContent())
                         .setText(R.id.masonry_item_username, item.getShare().getUserName())
-                        .setText(R.id.masonry_item_num, item.getShare().getNotificationNum());
+                        .setText(R.id.masonry_item_num,String.valueOf(item.getShare().getLikeNumbers()));
                 break;
         }
     }

@@ -333,11 +333,11 @@
                         android:orientation="horizontal">
 
                         <Button
+                            android:id="@+id/sharedetail_loadmore_comments"
                             style="?borderlessButtonStyle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginStart="160dp"
                             android:background="@color/white"
                             android:text="@string/community1_visitors_opencomment"
                             android:textColor="#353535"

@@ -80,9 +80,9 @@ public class  fragment_search_all extends Fragment {
         course1.setCourseName("腹肌");
         course1.setCourseIntro("K1零基础  . 3002.5万人参加");
 
-        Share share1 = new Share(R.drawable.scenery,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
-        Share share2 = new Share(R.drawable.post_img2,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","666");
-        Share share3 = new Share(R.drawable.post_img3,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名","233");
+        Share share1 = new Share(R.drawable.scenery,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名",233);
+        Share share2 = new Share(R.drawable.post_img2,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名",233);
+        Share share3 = new Share(R.drawable.post_img3,R.drawable.sucai,"测试标题","测试内容哈哈哈","测试用户名",233);
 
         datas01.add(share1);
         datas01.add(share2);

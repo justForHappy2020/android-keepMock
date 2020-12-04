@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,9 +27,13 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
 
     private List<List> dataSet = new ArrayList<>();
     private int TOTAL_PAGES;
+    private RecyclerView recyclerView;
+
+    private Button loadMoreComments;
+    private ImageView back;
 
     BaseQuickAdapter<Comment, BaseViewHolder> quickAdapter;
-    RecyclerView recyclerView;
+
 
     private String commentId;//传入帖子ID
 
@@ -41,15 +47,23 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_sharedetail);
 
-        initView();
         initData();
+        initView();
+
     }
 
     private void initView() {
+        loadMoreComments = findViewById(R.id.sharedetail_loadmore_comments);
+        back = findViewById(R.id.community1_leftarrow);
         recyclerView = (RecyclerView) findViewById(R.id.community_reviews_main);
+
+        loadMoreComments.setOnClickListener(this);
+        back.setOnClickListener(this);
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(activity_sharedetail.this));
 
-        quickAdapter =  new BaseQuickAdapter<Comment, BaseViewHolder >(R.layout.item_comment_main,mainCommentList){
+        quickAdapter =  new BaseQuickAdapter<Comment, BaseViewHolder >(R.layout.item_comment_main,dataSet.get(0)){
             @Override
             protected void convert(BaseViewHolder helper, Comment comment) {
                 User user = comment.getUser();
@@ -58,34 +72,6 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
                         .setImageResource(R.id.item_comment_main_username_headprotrait, comment.getUser().getPortraitImg());
             }
         };
-
-        //new QuickAdapter(R.layout.item_review_main, mainCommentList);
-
-        /*
-        configLoadMoreData();
-
-        quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
-            //int mCurrentCunter = 0;
-
-            @Override
-            public void onLoadMore() {
-                if (currentPage > TOTAL_PAGES) {
-                    quickAdapter.getLoadMoreModule().loadMoreEnd();
-                } else {
-                    new Handler().postDelayed(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            configLoadMoreData();
-                        }
-                    }, 1000);
-
-                }
-
-            }
-        });
-
-         */
 
         quickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -173,6 +159,39 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.community1_leftarrow:
+                finish();
+                break;
+            case R.id.community1_news:
+                Toast.makeText(activity_sharedetail.this, "回复", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.community1_thumbs:
+                Toast.makeText(activity_sharedetail.this, "点赞成功", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.sharedetail_loadmore_comments:
+                Toast.makeText(activity_sharedetail.this, "读取中···", Toast.LENGTH_SHORT).show();
 
+                /*TestData*/
+
+                List<Comment> testList = new ArrayList();
+                Comment comment;
+                User user = new User(0,"乔瑟夫·乔斯达",R.drawable.sucai);
+                for (int i = 0; i < 5; i++) {
+                    comment = new Comment();
+                    comment.setUser(user);
+                    comment.setTextContent("今天获得了替身，照相机粉碎者！");
+                    comment.setLikeNum(666);
+                    testList.add(comment);
+                }
+                dataSet.add(testList);
+
+                quickAdapter.addData(testList);//放入新评论
+                break;
+            case R.id.headprotrait:
+            case R.id.community1_playername_btn:
+                Toast.makeText(activity_sharedetail.this, "进入个人主页", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }

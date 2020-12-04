@@ -1,5 +1,7 @@
 package com.example.myapplication.entity;
 
+import android.widget.ImageView;
+
 public class User {
     private int userId;
     private String userName;

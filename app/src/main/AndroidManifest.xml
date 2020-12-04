@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
     package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!--
  这个可写可不写
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -21,7 +20,6 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
-
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
@@ -30,12 +28,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity_movement_detail"></activity>
         <activity
             android:name=".search_course"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".search"
             android:launchMode="singleTop"
@@ -43,60 +40,58 @@
         <activity
             android:name=".course_filter"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".course_main"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".course_main"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
-<!--        <activity android:name=".exercise_main"
+        <!--
+        <activity android:name=".exercise_main"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />-->
-        <activity android:name=".search_result"
+            android:screenOrientation="portrait" />
+        -->
+        <activity
+            android:name=".search_result"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
-      <activity android:name=".MainActivity_ViewPage">
-                <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            </activity>
-
-        <activity android:name=".play"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-<!--        <activity android:name=".MainActivity">
-                    <intent-filter>
-                        <action android:name="android.intent.action.MAIN" />
-                        <category android:name="android.intent.category.LAUNCHER" />
-                    </intent-filter>
-                </activity>-->
-
-
-                <activity android:name=".exercise_main">
+        <activity android:name=".MainActivity_ViewPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!--        <activity android:name=".MainActivity">
+        <activity
+            android:name=".play"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+        </activity>
+        <activity android:name=".exercise_main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        -->
         <activity
             android:name=".register1"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".register5"
             android:launchMode="singleTop"
@@ -117,12 +112,50 @@
             android:name=".activity_sharedetail"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
-
-
-
-
-
-
+        <activity
+            android:name=".me_fragment_information_comment"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_fragment_information_fans"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_fragment_information_praise"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_information"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_sport_data"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_setting"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_apply"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_download"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_personal_information"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me_body_data"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".my_course"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
+
 </manifest>

@@ -14,6 +14,9 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
         addItemType(MultipleItem.BUTTON, R.layout.item_buttononly);
         addItemType(MultipleItem.MINICOURSE, R.layout.item_course_mini);
         addItemType(MultipleItem.MASONRYPOST, R.layout.item_post_simplified);
+        addItemType(MultipleItem.USER, R.layout.item_user_result);
+        addItemType(MultipleItem.SHARE, R.layout.item_post_full);
+        addItemType(MultipleItem.MOVEMENT, R.layout.item_course_movement);
     }
 
     @Override
@@ -31,12 +34,29 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.tv_content, item.getData().getContent());
                 break;*/
             case MultipleItem.MASONRYPOST:
-                helper.setImageResource(R.id.masonry_item_post_img, item.getShare().getPostImg())
-                        .setImageResource(R.id.masonry_item_portrait_img,item.getShare().getPortraitImg())
-                        .setText(R.id.masonry_item_title, item.getShare().getTitle())
-                        .setText(R.id.masonry_item_textContent, item.getShare().getTextContent())
-                        .setText(R.id.masonry_item_username, item.getShare().getUserName())
-                        .setText(R.id.masonry_item_num,String.valueOf(item.getShare().getLikeNumbers()));
+                helper.setImageResource(R.id.masonry_item_post_img, item.getShare().getContent_pics())
+                        .setImageResource(R.id.masonry_item_portrait_img,item.getShare().getUser_heads())
+                        .setText(R.id.masonry_item_textContent, item.getShare().getContents())
+                        .setText(R.id.masonry_item_username, item.getShare().getUsers_id())
+                        .setText(R.id.masonry_item_num,String.valueOf(item.getShare().getPraises()));
+
+                break;
+            case MultipleItem.USER:
+                helper.setText(R.id.user_id, item.getUser().getUserName())
+                    .setImageResource(R.id.user_head, R.mipmap.ic_launcher);
+            break;
+            case MultipleItem.SHARE:
+                helper.setText(R.id.users_id, item.getShare().getUser().getUserName())
+                        .setText(R.id.contents, item.getShare().getContents())
+                        .setText(R.id.praises, item.getShare().getPraises())
+                        .setText(R.id.comments,item.getShare().getComments())
+                        .setImageResource(R.id.users_haed, item.getShare().getUser_heads())
+                        .setImageResource(R.id.content_pics, item.getShare().getContent_pics());
+                break;
+            case MultipleItem.MOVEMENT:
+                helper.setText(R.id.item_movement_name, item.getMovement().getMovementName())
+                        .setText(R.id.item_movement_duration, item.getMovement().getDuration())
+                        .setImageResource(R.id.item_movement_img,R.drawable.course_movement);//item.getMovement().getBackgroundUrl()
                 break;
         }
     }

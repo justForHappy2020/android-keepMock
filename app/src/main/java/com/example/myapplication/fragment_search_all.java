@@ -22,7 +22,7 @@ import com.example.myapplication.entity.Share;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  fragment_search_all extends Fragment {
+public class fragment_search_all extends Fragment {
 
     private List<Share> datas01= new ArrayList<>();
     private List<MultipleItem> datas02= new ArrayList<>();

@@ -22,7 +22,6 @@ public class QuickAdapter extends BaseQuickAdapter<Course, BaseViewHolder> imple
         //可链式调用赋值
         String item_text = item.getDegree() + " . " + item.getDuration() + " . " +item.getHits() + "万人已参加";
         helper.setText(R.id.course_item_name, item.getCourseName())
-
                 .setText(R.id.course_item_tag, item.getCourseIntro())
                 .setText(R.id.course_item_text, item_text)//后期需要修改为正确的形式
                 .setImageResource(R.id.course_item_bgImg, R.drawable.course_background);//item.getBackgroundUrl();

@@ -24,7 +24,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
 
     final int SEARCH_ALL = 0;
     final int SEARCH_COURSE = 1;
-
+    final int SEARCH_USER = 3;
 
     private EditText etInput;
     private ImageButton ibSearch;
@@ -37,8 +37,8 @@ public class search_result extends FragmentActivity implements View.OnClickListe
     private TabLayout mTabLayout;
     //适配器
     private FragmentPagerAdapter mAdapter;
-
     //装载Fragment的集合
+
     private List<Fragment> mFragments;
     private String[] titles = {"综合", "课程", "动态", "用户"};
     private String searchContent;
@@ -65,9 +65,9 @@ public class search_result extends FragmentActivity implements View.OnClickListe
         fragment_search_all f1 = new fragment_search_all();
         fragment_search_course f2 = new fragment_search_course();
         fragment_search_daily f3 = new fragment_search_daily();
-        fragment_search_daily f4 = new fragment_search_daily();
+        fragment_search_user f4 = new fragment_search_user();
 
-        f1.setArguments(bundle);//用bundle与活动通信
+        f1.setArguments(bundle);
         f2.setArguments(bundle);
         f3.setArguments(bundle);
         f4.setArguments(bundle);
@@ -108,6 +108,9 @@ public class search_result extends FragmentActivity implements View.OnClickListe
                 break;
             case 1:
                 mViewPager.setCurrentItem (1);
+                break;
+            case 3:
+                mViewPager.setCurrentItem (3);
                 break;
              default:
                  break;
@@ -164,6 +167,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
                 if(mViewPager.getCurrentItem() == 0)intent.putExtra("from", SEARCH_ALL);
                 else if(mViewPager.getCurrentItem() == 1)intent.putExtra("from", SEARCH_COURSE);
                 //else if(mViewPager.getCurrentItem() == 2)
+                else if(mViewPager.getCurrentItem() == 3)intent.putExtra("from", SEARCH_USER);
                 intent.putExtra("searchContent",searchContent);
                 startActivity(intent);
                 finish();

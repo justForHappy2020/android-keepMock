@@ -9,7 +9,6 @@
     <string name="height">身高</string>
     <string name="hint_height">你的身高</string>
 
-
     <string name="bottom_train">运动</string>
     <string name="hot_course">热门课程</string>
     <string name="my_course">我的课程库</string>
@@ -87,7 +86,9 @@
     <string name="community_text">运动减肥打卡 慢跑10公里，最近都是...</string>
     <string name="community_num">815</string>
 
-    
 
+    <string name="comment_id">keep_新人助手1</string>
+    <string name="comment_content">两只青蛙四条腿..</string>
+    <string name="comment_day">2020/02/29</string>
 
 </resources>

@@ -1,84 +1,70 @@
 package com.example.myapplication.entity;
 
-import java.util.Date;
-
 public class Share {
-    private int shareType;//[动态类型][dailyShare1]
-    private Long shareId;
-    private Long userId;
-    private String headPortraitUrl;
-    private String nickname;
-    private int relations;//[陌生人0/关注1/粉丝2/互相关注3]
-    private String imgUrls;
-    private String content;//[部分内容？]
-    private int likeNumbers;
-    private int commentNumbers;
-    private Date createTime;
+    private String users_id;
+    private String contents;
+    private int user_heads;
+    private int content_pics;
+    private String praises;
+    private String comments;
+    private User user;
 
-
-    private int post_img;
-    private int portrait_img;
-    private String title;
-    private String textContent;
-    private String userName;
-
-
-    public Share(int img, int portrait_img, String title, String textContent, String userName, int likeNumbers) {
-        this.post_img = img;
-        this.portrait_img = portrait_img;
-        this.title = title;
-        this.textContent = textContent;
-        this.userName = userName;
-        this.likeNumbers = likeNumbers;
+    public Share(String user_id, String content, int user_head, int content_pic, String praise, String comment,User user){
+        this.users_id = user_id;
+        this.contents = content;
+        this.user_heads = user_head;
+        this.content_pics = content_pic;
+        this.praises = praise;
+        this.comments = comment;
+        this.user=user;
     }
 
-    public int getPostImg() {
-        return post_img;
+    public int getContent_pics() {return content_pics; }
+
+    public int getUser_heads() { return user_heads; }
+
+    public String getComments() {return comments; }
+
+    public String getPraises() { return praises; }
+
+    public String getContents() {
+        return contents;
     }
 
-    public int getPortraitImg(){
-        return  portrait_img;
+    public String getUsers_id() {
+        return users_id;
     }
 
-    public void setPostImg(int post_img) {
-        this.post_img = post_img;
+    public User getUser() {
+        return user;
     }
 
-    public void setPortraitImg(int portrait_img){
-        this.portrait_img = portrait_img;
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
-    public String getTitle() {
-        return title;
+    public void setContent_pics(int content_pics) {
+        this.content_pics = content_pics;
     }
 
-    public String getTextContent(){
-        return textContent;
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 
-    public  String getUserName(){
-        return userName;
+    public void setPraises(String praises) {
+        this.praises = praises;
     }
 
-    public int getLikeNumbers(){
-        return likeNumbers;
+    public void setUser_heads(int user_heads) {
+        this.user_heads = user_heads;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setUsers_id(String users_id) {
+        this.users_id = users_id;
     }
 
-    public void setTextContent(String textContent){
-        this.textContent=textContent;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-    public void setUserName(String userName){
-        this.userName = userName;
-    }
-
-    public void setLikeNumbers(int num){
-        this.likeNumbers = num;
-    }
-
-
 }
+

@@ -139,7 +139,8 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp">
         <LinearLayout
-            android:orientation="horizontal" android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp">
 

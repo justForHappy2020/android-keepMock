@@ -4,6 +4,8 @@
 
     package="com.example.myapplication">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <!--
@@ -41,6 +43,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".search_user"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".course_filter"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
@@ -74,14 +80,6 @@
                         <category android:name="android.intent.category.LAUNCHER" />
                     </intent-filter>
                 </activity>
-
-                <activity android:name=".exercise_main">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <!--        <activity android:name=".MainActivity">
             <intent-filter>
@@ -156,6 +154,16 @@
             android:name=".my_course"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+<!--        <activity
+            android:name=".community4"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />-->
+        <activity android:name=".community4">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 

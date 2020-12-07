@@ -434,7 +434,7 @@ public class community4 extends Activity implements View.OnClickListener {
             case R.id.community4_Release_btn:
                 et_str = et.getText().toString().trim();
                 imgUrlList = "";
-                for (int i = 0; i <urlList.size(); i++)imgUrlList = imgUrlList + urlList.get(i) + " ";
+                if(urlList.size() > 0) for (int i = 0; i <urlList.size(); i++)imgUrlList = imgUrlList + urlList.get(i) + " ";
                 imgUrlList = imgUrlList.substring(0,imgUrlList.length()-1);
                 if(et_str.isEmpty()){
                     Toast.makeText(getApplicationContext(),"输入为空",Toast.LENGTH_SHORT).show();

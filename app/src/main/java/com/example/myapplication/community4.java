@@ -29,8 +29,10 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.example.myapplication.utils.HttpUtils;
 
@@ -44,6 +46,7 @@ import java.util.List;
 
 public class community4 extends Activity implements View.OnClickListener {
 
+
     private ImageButton btn_cancel;
     private Button btn_release;
     private EditText et;
@@ -53,6 +56,7 @@ public class community4 extends Activity implements View.OnClickListener {
     private RecyclerView recyclerView;
     private MultipleItemQuickAdapter multipleItemQuickAdapter;
 
+
     private SharedPreferences saveSP;
     private int httpCode;
     private String url;//一张图片的URL
@@ -60,17 +64,26 @@ public class community4 extends Activity implements View.OnClickListener {
     private String imgUrlList;//http请求的参数，一组图片url，用空格分隔
     private String token;//相当于用户的唯一ID
 
+
 //    private String locationStr = "";//定位的经纬度
 //    private String message = "";
 //
 //    private static final int REQUEST_CODE = 10;//定位的请求码
+
+
+    private String locationStr = "";//定位的经纬度
+    private String message = "";
+
+    private static final int REQUEST_CODE = 10;//定位的请求码
+
     private static final int MY_ADD_CASE_CALL_PHONE2 = 7; //打开相册的请求码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community4);
-        initView();
+   //     initView();
+
         //getLocation();
     }
 
@@ -192,17 +205,144 @@ public class community4 extends Activity implements View.OnClickListener {
  */
 
 
+//      getLocation();
+
+
+    private void getLocation() {
+        if (Build.VERSION.SDK_INT >= 23) {// android6 执行运行时权限
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    Activity#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for Activity#requestPermissions for more details.
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE);
+            }
+        }
+
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);//低精度，如果设置为高精度，依然获取不了location。
+        criteria.setAltitudeRequired(false);//不要求海拔
+        criteria.setBearingRequired(false);//不要求方位
+        criteria.setCostAllowed(true);//允许有花费
+        criteria.setPowerRequirement(Criteria.POWER_LOW);//低功耗
+        //获取LocationManager
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        // 获取最好的定位方式
+        String provider = locationManager.getBestProvider(criteria, true); // true 代表从打开的设备中查找
+
+        // 获取所有可用的位置提供器
+        List<String> providerList = locationManager.getProviders(true);
+        // 测试一般都在室内，这里颠倒了书上的判断顺序
+        if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
+            provider = LocationManager.NETWORK_PROVIDER;
+        } else if (providerList.contains(LocationManager.GPS_PROVIDER)) {
+            provider = LocationManager.GPS_PROVIDER;
+        } else {
+            // 当没有可用的位置提供器时，弹出Toast提示用户
+            Toast.makeText(this, "Please Open Your GPS or Location Service", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        LocationListener locationListener = new LocationListener() {
+            //当位置改变的时候调用
+            @Override
+            public void onLocationChanged(Location location) {
+                //经度
+                double longitude = location.getLongitude();
+                //纬度
+                double latitude = location.getLatitude();
+
+                //海拔
+                double altitude = location.getAltitude();
+
+                locationStr = longitude + "_" + latitude;
+                //launcher.callExternalInterface("getLocationSuccess", locationStr);
+            }
+
+            //当GPS状态发生改变的时候调用
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                switch (status) {
+
+                    case LocationProvider.AVAILABLE:
+                        message = "当前GPS为可用状态!";
+                        break;
+
+                    case LocationProvider.OUT_OF_SERVICE:
+                        message = "当前GPS不在服务内!";
+                        break;
+
+                    case LocationProvider.TEMPORARILY_UNAVAILABLE:
+                        message = "当前GPS为暂停服务状态!";
+                        break;
+
+                }
+                //launcher.callExternalInterface("GPSStatusChanged", message);
+
+            }
+
+            //GPS开启的时候调用
+            @Override
+            public void onProviderEnabled(String provider) {
+                message = "GPS开启了!";
+                //launcher.callExternalInterface("GPSOpenSuccess", message);
+
+            }
+
+            //GPS关闭的时候调用
+            @Override
+            public void onProviderDisabled(String provider) {
+                message = "GPS关闭了!";
+                //launcher.callExternalInterface("GPSClosed", message);
+
+            }
+        };
+
+        //获取上次的location
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        /**
+         * 参1:选择定位的方式
+         * 参2:定位的间隔时间
+         * 参3:当位置改变多少时进行重新定位
+         * 参4:位置的回调监听
+         */
+        locationManager.requestLocationUpdates(provider, 10000, 0, locationListener);
+        while(location == null){ location = locationManager.getLastKnownLocation(provider); } //移除更新监听
+        locationManager.removeUpdates(locationListener);
+        if (location != null) { //不为空,显示地理位置经纬度
+            double longitude = location.getLongitude();// 经度
+            double latitude = location.getLatitude();// 纬度
+            locationStr = longitude+ ","+latitude;
+        }
+    }
+    /**
+     * 获取权限结果
+
+
     private void initView(){
         btn_cancel = findViewById(R.id.community4_Leftarrow_btn);
         btn_release = findViewById(R.id.community4_Release_btn);
         et = findViewById(R.id.community4_Sharetext_edit);
         ibUpdatePhoto = findViewById(R.id.community4_AddImage_btn4);
+        ibPhoto = findViewById(R.id.community4_Image_btn1);
 
 
         btn_cancel.setOnClickListener(this);
         btn_release.setOnClickListener(this);
         ibUpdatePhoto.setOnClickListener(this);
         ibPhoto.setOnClickListener(this);
+
+
+        token = getSharedPreferences("saved_token",MODE_PRIVATE).getString("token", "");//从本地获取用户的token
+
+    }
+
 
         recyclerView = (RecyclerView) recyclerView.findViewById(R.id.community4_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//ing
@@ -219,6 +359,14 @@ public class community4 extends Activity implements View.OnClickListener {
     //json封装comntent和url图片
 
     //点击 + 后跳转到添加图片的layout
+
+
+
+    //json封装comntent和url图片
+
+    //点击 + 后跳转到添加图片的layout
+
+>>>>>>> 1636f6138ea1825a335c6041a6fd8cbf4468b2ca
 
     //打开相册
     private void choosePhoto() {
@@ -238,6 +386,7 @@ public class community4 extends Activity implements View.OnClickListener {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
+
 //        if (requestCode == REQUEST_CODE) {
 //            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 //                // Permission Granted准许
@@ -246,9 +395,19 @@ public class community4 extends Activity implements View.OnClickListener {
 //                // Permission Denied拒绝
 //            }
 //        }
+
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted准许
+                getLocation();
+            } else {
+                // Permission Denied拒绝
+            }
+        }
+
         if (requestCode == MY_ADD_CASE_CALL_PHONE2) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                choosePhoto();
+             //   choosePhoto();
             } else {
                 //"权限拒绝");
                 // TODO: 2018/12/4 这里可以给用户一个提示,请求权限被拒绝了
@@ -405,6 +564,8 @@ public class community4 extends Activity implements View.OnClickListener {
                                 //相应的内容
                                 httpCode = jsonObject1.getInt("code");
                                 if(httpCode == 200){
+
+
                                     url= jsonObject1.getString("data");//云上的图片URL
                                     urlList.add(url);
 *//*                                    SharedPreferences.Editor editor = saveSP.edit();
@@ -441,7 +602,11 @@ public class community4 extends Activity implements View.OnClickListener {
             case R.id.community4_Release_btn:
                 et_str = et.getText().toString().trim();
                 imgUrlList = "";
+
                 for (int i = 0; i <urlList.size(); i++)imgUrlList = imgUrlList + urlList.get(i) + " ";
+
+                if(urlList.size() > 0) for (int i = 0; i <urlList.size(); i++)imgUrlList = imgUrlList + urlList.get(i) + " ";
+
                 imgUrlList = imgUrlList.substring(0,imgUrlList.length()-1);
                 if(et_str.isEmpty()){
                     Toast.makeText(getApplicationContext(),"输入为空",Toast.LENGTH_SHORT).show();
@@ -496,11 +661,15 @@ public class community4 extends Activity implements View.OnClickListener {
 
                 } else {
                     //打开相册
-                    choosePhoto();
+                 //   choosePhoto();
                 }
                 break;
+
                 //点击删除图片
             case R.id.community4_item_cancel:
+            //点击删除图片
+            case R.id.community4_item_image:
+
                 ibPhoto.setImageResource(R.drawable.sucai);//测试。实际需做：删除此图片item
                 urlList.remove(0);//从urlList中删除对应的图片url ，括号内为要删除的第几张图片（从0开始算）
         }

@@ -7,8 +7,18 @@
     android:id="@+id/constraintLayout"
     tools:context=".MainActivity">
 
+    <VideoView
+        android:id="@+id/video_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="240dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="4:3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ProgressBar
-        android:id="@+id/progressBar_videoplay"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -35,7 +45,7 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/showTime"
             android:layout_width="135dp"
             android:layout_height="59dp"
 
@@ -47,7 +57,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/actionName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="540dp"
@@ -64,7 +74,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton1"
+                android:id="@+id/last"
                 style="?borderlessButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -74,6 +84,7 @@
                 app:srcCompat="@drawable/leftstart" />
 
             <ImageButton
+                android:id="@+id/stop"
                 style="?borderlessButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -86,7 +97,7 @@
             </ImageButton>
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/next"
                 style="?borderlessButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -98,18 +109,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-
-    <VideoView
-        android:id="@+id/video_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="240dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="4:3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
     <TextView
@@ -128,7 +127,7 @@
 
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/detail"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginStart="320dp"

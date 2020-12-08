@@ -181,7 +181,7 @@ public class community4 extends Activity implements View.OnClickListener {
          if (location != null) { //不为空,显示地理位置经纬度
          double longitude = location.getLongitude();// 经度
          double latitude = location.getLatitude();// 纬度
-         locationStr = longitude+ ","+latitude;
+         locationStr = latitude+ ","+longitude;
          }
     }
 /**
@@ -397,7 +397,6 @@ public class community4 extends Activity implements View.OnClickListener {
                                 //相应的内容
                                 httpCode = jsonObject1.getInt("code");
                                 if(httpCode == 200){
-<<<<<<< HEAD
                                     url= jsonObject1.getString("data");//云上的图片URL
                                     urlList.add(url);
 *//*                                    SharedPreferences.Editor editor = saveSP.edit();
@@ -499,7 +498,5 @@ public class community4 extends Activity implements View.OnClickListener {
         }
 
     }
-
-
 
 }

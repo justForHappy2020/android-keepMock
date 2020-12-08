@@ -155,9 +155,20 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".community4"
+            android:name=".pvideo_pause"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+<!--        <activity
+            android:name=".community4"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />-->
+                <activity android:name=".community4">
+           <intent-filter>
+               <action android:name="android.intent.action.MAIN" />
+
+               <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>
+       </activity>
     </application>
 
 

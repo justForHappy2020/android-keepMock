@@ -57,7 +57,7 @@ public class course_main extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fresco.initialize(this);
-        setContentView(R.layout.activity_course_detail);
+        setContentView(R.layout.activity_course_main);
         initView();
         //startThread();
     }

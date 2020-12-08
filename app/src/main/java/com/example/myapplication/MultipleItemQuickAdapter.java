@@ -7,6 +7,10 @@ import com.example.myapplication.entity.MultipleItem;
 import java.util.List;
 
 public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> {
+    /**
+     * 类名：MultipleItemQuickAdapter
+     * 功能：由多Item布局适配器改造成的RecyclerView万能适配器
+     */
 
     public MultipleItemQuickAdapter(List data) {
         super(data);

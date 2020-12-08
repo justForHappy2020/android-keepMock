@@ -3,6 +3,10 @@ package com.example.myapplication.entity;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 public class MultipleItem implements MultiItemEntity {
+    /**
+     * 类名：MultipleItem
+     * 功能：在构造时根据Share、User、Course、Comment或Movement等实体类生成，相当于一个规范的外包装，利于装入RecyclerView，实现多Item布局、多功能适配器等等
+     */
     public static final int TEXTONLY = 1;
     public static final int BUTTON = 2;
     public static final int MINICOURSE = 3;

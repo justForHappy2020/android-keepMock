@@ -41,4 +41,5 @@ dependencies {
     implementation 'com.github.LRH1993:AutoFlowLayout:1.0.5'
     //compile 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.github.sendtion:XRichText:1.9.4'//富文本编辑器
 }

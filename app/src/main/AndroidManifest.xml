@@ -156,6 +156,10 @@
             android:name=".my_course"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".community4"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
 
 

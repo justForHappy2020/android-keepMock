@@ -149,7 +149,7 @@ public class fragment_search_course extends Fragment {
                             course.setCourseId(jsonObject.getLong("courseId"));
                             course.setCourseName(jsonObject.getString("courseName"));
                             course.setBackgroundUrl(jsonObject.getString("backgroundUrl"));
-                            course.setCourseUrl(jsonObject.getString("courseUrl"));
+                            //course.setCourseUrl(jsonObject.getString("courseUrl"));
                             course.setBodyPart(jsonObject.getString("bodyPart"));
                             course.setDegree(jsonObject.getString("degree"));
                             course.setDuration(jsonObject.getString("duration"));

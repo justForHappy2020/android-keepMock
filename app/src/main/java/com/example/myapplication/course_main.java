@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -13,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.entity.Action;
 import com.example.myapplication.entity.Course;
 import com.example.myapplication.utils.HttpUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -71,7 +70,7 @@ public class course_main extends Activity implements View.OnClickListener {
     }
 
     //通过课程ID获得课程类
-    private Boolean courseId2Course(Long courseId){
+    private void courseId2Course(Long courseId){
         final Long courseID = courseId;
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -93,7 +92,7 @@ public class course_main extends Activity implements View.OnClickListener {
                 course.setCourseId(jsonObject2.getLong("courseId"));
                 course.setCourseName(jsonObject2.getString("courseName"));
                 course.setBackgroundUrl(jsonObject2.getString("backgroundUrl"));
-                course.setCourseUrl(jsonObject2.getString("courseUrl"));
+                //course.setCourseUrl(jsonObject2.getString("courseUrl"));
                 course.setBodyPart(jsonObject2.getString("bodyPart"));
                 course.setDegree(jsonObject2.getString("degree"));
                 course.setDuration(jsonObject2.getString("duration"));
@@ -101,6 +100,19 @@ public class course_main extends Activity implements View.OnClickListener {
                 course.setCreateTime(jsonObject2.getString("createTime"));
                 course.setCalorie(jsonObject2.getInt("calorie"));
                 course.setCourseIntro(jsonObject2.getString("courseIntro"));
+                JSONArray JSONArrayAction = jsonObject2.getJSONArray("actionList");
+                for (int i = 0; i < JSONArrayAction.length(); i++) {
+                    JSONObject jsonObject = JSONArrayAction.getJSONObject(i);
+                    //相应的内容
+                    Action action = new Action();
+                    action.setActionId(jsonObject.getLong("actionId"));
+                    action.setActionName(jsonObject.getString("actionName"));
+                    action.setActionImgs(jsonObject.getString("actionImgs"));
+                    action.setActionUrl(jsonObject.getString("actionUrl"));
+                    action.setDuration(jsonObject.getString("duration"));
+                    action.setIntroId(jsonObject.getLong("introId"));
+                    course.getActionList().add(action);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -109,15 +121,20 @@ public class course_main extends Activity implements View.OnClickListener {
         });
         thread.start();
         try {
-            thread.join(10000);
+            thread.join(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         if(httpcode!=200) {
             Toast.makeText(course_main.this,"ERROR", Toast.LENGTH_SHORT).show();
-            return false;
         }
-        return true;
+        else             {
+            tvCalorie.setText(course.getCalorie() + "千卡");
+            tvDuration.setText(course.getDuration());
+            tvDegree.setText(course.getDegree());
+            tvIntro.setText(course.getCourseIntro());
+        }
+        httpcode = 0;
     }
 
     //初始化相关课程
@@ -147,7 +164,7 @@ public class course_main extends Activity implements View.OnClickListener {
                     course.setCourseId(jsonObject.getLong("courseId"));
                     course.setCourseName(jsonObject.getString("courseName"));
                     course.setBackgroundUrl(jsonObject.getString("backgroundUrl"));
-                    course.setCourseUrl(jsonObject.getString("courseUrl"));
+                    //course.setCourseUrl(jsonObject.getString("courseUrl"));
                     course.setBodyPart(jsonObject.getString("bodyPart"));
                     course.setDegree(jsonObject.getString("degree"));
                     course.setDuration(jsonObject.getString("duration"));
@@ -171,6 +188,7 @@ public class course_main extends Activity implements View.OnClickListener {
         }
         if(httpcode!=200) Toast.makeText(course_main.this,"ERROR", Toast.LENGTH_SHORT).show();
         else for (int i = 0; i <relatedCourse.size(); i++)btRelatedCourse[i].setText(relatedCourse.get(i).getCourseName() + "\n" + relatedCourse.get(i).getDuration() + "  " + relatedCourse.get(i).getDegree() );//录入相关课程
+        httpcode = 0;
     }
 
     private Drawable loadImageFromNetwork(String imageUrl)
@@ -211,12 +229,7 @@ public class course_main extends Activity implements View.OnClickListener {
         intentAccept = getIntent();
         courseID=intentAccept.getLongExtra("course",0);
 
-        if(courseId2Course(courseID) == true) {//根据ID获取课程类./courseId2course
-            tvCalorie.setText(course.getCalorie() + "千卡");
-            tvDuration.setText(course.getDuration());
-            tvDegree.setText(course.getDegree());
-            tvIntro.setText(course.getCourseIntro());
-        }
+        courseId2Course(courseID);//根据ID获取课程类./courseId2course
 
         initRelativeCourse(courseID);//获取相关课程./getRelativeCourse
 
@@ -230,13 +243,13 @@ public class course_main extends Activity implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.video_play:
                 intent = new Intent(this, play.class);
-                intent.putExtra("courseUrl",course.getCourseUrl());
+                intent.putExtra("courseUrl",course.getActionList().get(0).getActionUrl());
                 intent.putExtra("courseID",course.getCourseId());
                 startActivity(intent);
                 break;
             case R.id.play_video:
                 intent = new Intent(this, play.class);
-                intent.putExtra("courseUrl",course.getCourseUrl());
+                intent.putExtra("courseUrl",course.getActionList().get(0).getActionUrl());
                 intent.putExtra("courseID",course.getCourseId());
                 startActivity(intent);
                 break;

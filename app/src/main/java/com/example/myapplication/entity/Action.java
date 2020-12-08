@@ -8,7 +8,7 @@ public class Action {
     private String duration;
     private Long introId;
 
-    public Action(Long actionId, String actionName, String actionImgs, String actionUrl, String duration, Long introId) {
+    public Action() {
         this.actionId = actionId;
         this.actionName = actionName;
         this.actionImgs = actionImgs;

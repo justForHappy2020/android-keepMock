@@ -1,14 +1,15 @@
 package com.example.myapplication.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Course implements Serializable {
     private Long courseId;
 
     private String courseName;
 
-    private String courseUrl;
+    //private String courseUrl;
 
     private String bodyPart;
 
@@ -25,6 +26,9 @@ public class Course implements Serializable {
     private int calorie;
 
     private String courseIntro;
+
+    private List<Action> actionList = new ArrayList();
+
 
     public String getCourseIntro() {
         return courseIntro;
@@ -58,10 +62,6 @@ public class Course implements Serializable {
         return courseName;
     }
 
-    public String getCourseUrl() {
-        return courseUrl;
-    }
-
     public String getBodyPart() {
         return bodyPart;
     }
@@ -90,10 +90,6 @@ public class Course implements Serializable {
         this.courseName = courseName;
     }
 
-    public void setCourseUrl(String courseUrl) {
-        this.courseUrl = courseUrl;
-    }
-
     public void setBodyPart(String bodyPart) {
         this.bodyPart = bodyPart;
     }
@@ -112,5 +108,13 @@ public class Course implements Serializable {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public List<Action> getActionList() {
+        return actionList;
+    }
+
+    public void setActionList(List<Action> actionList) {
+        this.actionList = actionList;
     }
 }

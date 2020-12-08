@@ -1,22 +1,21 @@
 package com.example.myapplication;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.myapplication.entity.Course;
 import com.example.myapplication.entity.CourseClass;
 import com.example.myapplication.utils.HttpUtils;
-import com.example.myapplication.entity.Course;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,7 +84,7 @@ public class exercise_main extends Fragment{
                             course.setCourseId(jsonObject.getLong("courseId"));
                             course.setCourseName(jsonObject.getString("courseName"));
                             course.setBackgroundUrl(jsonObject.getString("backgroundUrl"));
-                            course.setCourseUrl(jsonObject.getString("courseUrl"));
+                            //course.setCourseUrl(jsonObject.getString("courseUrl"));
                             course.setBodyPart(jsonObject.getString("bodyPart"));
                             course.setDegree(jsonObject.getString("degree"));
                             course.setDuration(jsonObject.getString("duration"));

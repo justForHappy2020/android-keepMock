@@ -20,7 +20,8 @@ import androidx.constraintlayout.widget.ConstraintSet;
 public class play extends Activity {
 
     private int httpcode;
-    private String VIDEO_URL ="http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
+    private String VIDEO_URL ="http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
+            //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
     private VideoView mVideoView;
     private TextView mBufferingTextView;
@@ -85,10 +86,10 @@ public class play extends Activity {
 
         mVideoView = findViewById(R.id.video_view);
         mBufferingTextView = findViewById(R.id.buffering_text_view);
-        clRootContainer = findViewById(R.id.constraintLayout);
-        mPortraitPosition = findViewById(R.id.main_portrait_position);
-        mPortraitContent = findViewById(R.id.main_portrait_content);
 
+        clRootContainer = findViewById(R.id.constraintLayout);
+        //mPortraitPosition = findViewById(R.id.main_portrait_position);
+        //mPortraitContent = findViewById(R.id.main_portrait_content);
         if (savedInstanceState != null) {
             mCurrentPosition = savedInstanceState.getInt(PLAYBACK_TIME);
         }

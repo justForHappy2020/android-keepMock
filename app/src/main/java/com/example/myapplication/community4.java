@@ -188,8 +188,7 @@ public class community4 extends Activity implements View.OnClickListener {
  * 获取权限结果
  */
 
-
-    private void initView(){
+ private void initView(){
         btn_cancel = findViewById(R.id.community4_Leftarrow_btn);
         btn_release = findViewById(R.id.community4_Release_btn);
         et = findViewById(R.id.community4_Sharetext_edit);
@@ -213,6 +212,7 @@ public class community4 extends Activity implements View.OnClickListener {
 
     //点击 + 后跳转到添加图片的layout
 
+
     //打开相册
     private void choosePhoto() {
         //这是打开系统默认的相册(就是你系统怎么分类,就怎么显示,首先展示分类列表)
@@ -230,7 +230,6 @@ public class community4 extends Activity implements View.OnClickListener {
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-
         if (requestCode == REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission Granted准许
@@ -342,11 +341,11 @@ public class community4 extends Activity implements View.OnClickListener {
             public void run() {
                 final Drawable drawable = loadImageFromNetwork(url);
                 // post() 特别关键，就是到UI主线程去更新图片
-                ibPhoto.post(new Runnable(){
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        ibPhoto.setImageDrawable(drawable) ;
+                        ibPhoto.post(new Runnable(){
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+                                ibPhoto.setImageDrawable(drawable) ;
                     }}) ;
             }
 
@@ -398,6 +397,7 @@ public class community4 extends Activity implements View.OnClickListener {
                                 //相应的内容
                                 httpCode = jsonObject1.getInt("code");
                                 if(httpCode == 200){
+<<<<<<< HEAD
                                     url= jsonObject1.getString("data");//云上的图片URL
                                     urlList.add(url);
 *//*                                    SharedPreferences.Editor editor = saveSP.edit();

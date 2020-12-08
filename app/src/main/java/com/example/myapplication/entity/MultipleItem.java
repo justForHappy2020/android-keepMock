@@ -9,6 +9,7 @@ public class MultipleItem implements MultiItemEntity {
     public static final int MASONRYPOST = 4;
     public static final int USER = 5;
     public static final int SHARE = 6;
+    public static final int ADDIMAGE = 7;
 
     private int itemType;
     private Course course;
@@ -16,6 +17,7 @@ public class MultipleItem implements MultiItemEntity {
     private User user;
     private String text;
     private Share share;
+    private AddImage addimage;
 
     public MultipleItem(int itemType,String text) {
         this.itemType = itemType;
@@ -40,6 +42,11 @@ public class MultipleItem implements MultiItemEntity {
         this.share = share;
     }
 
+    public MultipleItem(int itemType,AddImage addimage) {
+        this.itemType = itemType;
+        this.addimage = addimage;
+    }
+
     @Override
     public int getItemType() {
         return itemType;
@@ -62,4 +69,6 @@ public class MultipleItem implements MultiItemEntity {
     }
 
     public Share getShare() { return share; }
+
+    public AddImage getAddimage() { return addimage;}
 }

@@ -86,8 +86,8 @@ public class play extends Activity {
         mVideoView = findViewById(R.id.video_view);
         mBufferingTextView = findViewById(R.id.buffering_text_view);
         clRootContainer = findViewById(R.id.constraintLayout);
-        mPortraitPosition = findViewById(R.id.main_portrait_position);
-        mPortraitContent = findViewById(R.id.main_portrait_content);
+        //mPortraitPosition = findViewById(R.id.main_portrait_position);
+        //mPortraitContent = findViewById(R.id.main_portrait_content);
 
         if (savedInstanceState != null) {
             mCurrentPosition = savedInstanceState.getInt(PLAYBACK_TIME);

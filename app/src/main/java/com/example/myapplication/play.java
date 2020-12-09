@@ -17,9 +17,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.URLUtil;
+import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -42,7 +45,7 @@ import java.util.TimerTask;
 public class play extends Activity implements View.OnClickListener{
 
     private int httpcode;
-    private String VIDEO_URL = "http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
+    private String VIDEO_URL = "http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
@@ -50,10 +53,12 @@ public class play extends Activity implements View.OnClickListener{
     private VideoView mVideoView;
     private TextView mBufferingTextView;
     private ProgressBar progressBar;
+    private ProgressBar progressBar_cir;
     private TextView tvShowTime;
     private TextView tvActionName;
     private ImageButton last;
     private ImageButton stop;
+    private ImageButton stop_cir;
     private ImageButton next;
     private ImageButton ibQuit;
     private ImageButton ibKeepTrain;
@@ -61,6 +66,9 @@ public class play extends Activity implements View.OnClickListener{
     //private View mPortraitPosition;
     //private View mPortraitContent;
     private ConstraintLayout clRootContainer;
+    private FrameLayout bottom_framelayout;
+    private FrameLayout framelayout_cir;
+    private LinearLayout bottom_linerlayout;
 
     private int width;// 屏幕宽度（像素）
     private int height;// 屏幕高度（像素）
@@ -91,6 +99,9 @@ public class play extends Activity implements View.OnClickListener{
         if (savedInstanceState != null) {
             mCurrentPosition = savedInstanceState.getInt(PLAYBACK_TIME);
         }
+
+        //WebView webView = (WebView) findViewById(R.id.webView);
+        //webView.loadUrl("http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4");
         initView();
 
     }
@@ -113,13 +124,19 @@ public class play extends Activity implements View.OnClickListener{
         mVideoView = findViewById(R.id.video_view);
         mBufferingTextView = findViewById(R.id.buffering_text_view);
         progressBar = findViewById(R.id.progressBar);
+        //progressBar_cir=findViewById(R.id.progressBar_cir);
         tvShowTime = findViewById(R.id.showTime);
         tvActionName = findViewById(R.id.actionName);
         last = findViewById(R.id.last);
         stop = findViewById(R.id.stop);
+        //stop_cir=findViewById(R.id.stop_cir);
         next = findViewById(R.id.next);
         detail = findViewById(R.id.detail);
         clRootContainer = findViewById(R.id.constraintLayout);
+        bottom_framelayout=findViewById(R.id.bottom_framelayout);
+        //framelayout_cir=findViewById(R.id.framelayout_cir);
+        bottom_linerlayout=findViewById(R.id.bottom_linerlayout);
+
         //mPortraitPosition = findViewById(R.id.main_portrait_position);
         //mPortraitContent = findViewById(R.id.main_portrait_content);
 
@@ -128,7 +145,7 @@ public class play extends Activity implements View.OnClickListener{
         next.setOnClickListener(this);
         detail.setOnClickListener(this);
 
-        VIDEO_URL = actionCom.getActionUrl();
+        //VIDEO_URL = actionCom.getActionUrl();
         //进度条
         tvShowTime.setText(actionCom.getDuration());
         tvActionName.setText(actionCom.getActionName());//还要显示第几个动作，一共几个动作
@@ -281,6 +298,9 @@ public class play extends Activity implements View.OnClickListener{
         Uri videoUri = getMedia(VIDEO_URL);
         mVideoView.setVideoURI(videoUri);
 
+        //mVideoView.setAutofillId();
+        //mVideoView.setClipToOutline(true);
+
         // Listener for onPrepared() event (runs after the media is prepared).
         mVideoView.setOnPreparedListener(
                 new MediaPlayer.OnPreparedListener() {
@@ -385,6 +405,18 @@ public class play extends Activity implements View.OnClickListener{
 
     //横屏
     private void changeToLandscapeLayout() {
+        /*
+        framelayout_cir.setVisibility(View.VISIBLE);
+        progressBar_cir.setVisibility(View.VISIBLE);
+        stop_cir.setVisibility(View.VISIBLE);
+
+        bottom_framelayout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+        bottom_linerlayout.setVisibility(View.GONE);
+
+         */
+
+
         ConstraintSet cs = new ConstraintSet();
         //获取当前目标控件的约束集合
         cs.clone(this, R.layout.activity_video_play);
@@ -411,12 +443,24 @@ public class play extends Activity implements View.OnClickListener{
 
     //竖屏
     private void changeToPortraitLayout() {
+        /*
+        framelayout_cir.setVisibility(View.INVISIBLE);
+        progressBar_cir.setVisibility(View.INVISIBLE);
+        stop_cir.setVisibility(View.INVISIBLE);
+
+        bottom_framelayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        bottom_linerlayout.setVisibility(View.VISIBLE);
+
+         */
+
         ConstraintSet cs = new ConstraintSet();
         //获取当前目标控件的约束集合
         cs.clone(this, R.layout.activity_video_play);
 
         //修改mVideoView约束
         //清除约束
+
         cs.clear(mVideoView.getId());
         cs.clear(mBufferingTextView.getId());
         cs.connect(mVideoView.getId(), ConstraintSet.LEFT, clRootContainer.getId(), ConstraintSet.LEFT);
@@ -442,6 +486,7 @@ public class play extends Activity implements View.OnClickListener{
     private Uri getMedia(String mediaName) {
         if (URLUtil.isValidUrl(mediaName)) {
             // Media name is an external URL.
+            Log.d("Video!!!!!!!","Valid");
             return Uri.parse(mediaName);
         } else {
 
@@ -468,7 +513,7 @@ public class play extends Activity implements View.OnClickListener{
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(lp);
+       window.setAttributes(lp);
         dialog.show();//显示对话框
 
         ibQuit = layout.findViewById(R.id.quit);

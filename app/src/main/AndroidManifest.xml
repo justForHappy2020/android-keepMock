@@ -29,7 +29,8 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"><!--允许明文传输，否则无法直接获取获取资源-->
         <activity android:name=".activity_movement_detail"></activity>
         <activity
             android:name=".search_course"

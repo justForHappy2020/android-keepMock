@@ -171,6 +171,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/course_detail_actionNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="14 个动作" />

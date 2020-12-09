@@ -20,7 +20,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
         addItemType(MultipleItem.MASONRYPOST, R.layout.item_post_simplified);
         addItemType(MultipleItem.USER, R.layout.item_user_result);
         addItemType(MultipleItem.SHARE, R.layout.item_post_full);
-        addItemType(MultipleItem.MOVEMENT, R.layout.item_course_movement);
+        addItemType(MultipleItem.ACTION, R.layout.item_course_movement);
     }
 
     @Override
@@ -57,10 +57,10 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setImageResource(R.id.users_haed, item.getShare().getUser_heads())
                         .setImageResource(R.id.content_pics, item.getShare().getContent_pics());
                 break;
-            case MultipleItem.MOVEMENT:
-                helper.setText(R.id.item_movement_name, item.getMovement().getMovementName())
-                        .setText(R.id.item_movement_duration, item.getMovement().getDuration())
-                        .setImageResource(R.id.item_movement_img,R.drawable.course_movement);//item.getMovement().getBackgroundUrl()
+            case MultipleItem.ACTION:
+                helper.setText(R.id.item_movement_name, item.getAction().getActionName())
+                        .setText(R.id.item_movement_duration, item.getAction().getDuration())
+                        .setImageResource(R.id.item_movement_img,R.drawable.course_movement);//item.getAction().getBackgroundUrl()
                 break;
         }
     }

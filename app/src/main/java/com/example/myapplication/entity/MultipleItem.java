@@ -13,14 +13,14 @@ public class MultipleItem implements MultiItemEntity {
     public static final int MASONRYPOST = 4;
     public static final int USER = 5;
     public static final int SHARE = 6;
-    public static final int MOVEMENT = 7;
+    public static final int ACTION = 7;
 
     private int itemType;
     private Course course;
     private Share share;
     private User user;
     private String text;
-    private Movement movement;
+    private Action action;
 
     public MultipleItem(int itemType,String text) {
         this.itemType = itemType;
@@ -41,9 +41,9 @@ public class MultipleItem implements MultiItemEntity {
         this.user = user;
     }
 
-    public MultipleItem(int itemType, Movement movement){
+    public MultipleItem(int itemType, Action action){
         this.itemType = itemType;
-        this.movement = movement;
+        this.action = action;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class MultipleItem implements MultiItemEntity {
         return user;
     }
 
-    public Movement getMovement(){
-        return movement;
+    public Action getAction(){
+        return action;
     }
 }

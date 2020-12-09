@@ -52,7 +52,11 @@ public class course_main extends Activity implements View.OnClickListener {
     private Course course = new Course();
     private Long courseID;
 
+
     private RecyclerView recyclerView;
+
+    private List<Long> actionIdList = new ArrayList();//动作ID的LIST
+    private int IdLocation;//第几个动作，从0开始算
 
     private int httpcode;
     //private Drawable drawable;

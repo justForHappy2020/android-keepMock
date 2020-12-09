@@ -21,6 +21,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
         addItemType(MultipleItem.USER, R.layout.item_user_result);
         addItemType(MultipleItem.SHARE, R.layout.item_post_full);
         addItemType(MultipleItem.ACTION, R.layout.item_course_movement);
+        addItemType(MultipleItem.ADDIMAGE,R.layout.item_photo);
     }
 
     @Override
@@ -57,11 +58,16 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setImageResource(R.id.users_haed, item.getShare().getUser_heads())
                         .setImageResource(R.id.content_pics, item.getShare().getContent_pics());
                 break;
+
             case MultipleItem.ACTION:
                 helper.setText(R.id.item_movement_name, item.getAction().getActionName())
                         .setText(R.id.item_movement_duration, item.getAction().getDuration())
                         .setImageResource(R.id.item_movement_img,R.drawable.course_movement);//item.getAction().getBackgroundUrl()
                 break;
+
+            case MultipleItem.ADDIMAGE:
+                helper.setImageResource(R.id.community4_item_image, item.getAddimage().getImgUrl());
+
         }
     }
 

@@ -14,6 +14,7 @@ public class MultipleItem implements MultiItemEntity {
     public static final int USER = 5;
     public static final int SHARE = 6;
     public static final int ACTION = 7;
+    public static final int ADDIMAGE = 8;
 
     private int itemType;
     private Course course;
@@ -21,6 +22,7 @@ public class MultipleItem implements MultiItemEntity {
     private User user;
     private String text;
     private Action action;
+    private AddImage addimage;
 
     public MultipleItem(int itemType,String text) {
         this.itemType = itemType;
@@ -46,6 +48,11 @@ public class MultipleItem implements MultiItemEntity {
         this.action = action;
     }
 
+    public MultipleItem(int itemType,AddImage addimage) {
+        this.itemType = itemType;
+        this.addimage = addimage;
+    }
+
     @Override
     public int getItemType() {
         return itemType;
@@ -67,7 +74,10 @@ public class MultipleItem implements MultiItemEntity {
         return user;
     }
 
+
     public Action getAction(){
         return action;
     }
+
+    public AddImage getAddimage() { return addimage;}
 }

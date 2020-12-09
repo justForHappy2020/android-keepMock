@@ -14,7 +14,7 @@ public class ActionCom {
     private String fellImg;
     private String mistake;
 
-    public ActionCom(Long actionId, String actionName, String actionImgs, String actionUrl, String duration, Long introId, String actionGif, String keyPoint, String breath, String feel, String fellImg, String mistake, String detail, String detailImg) {
+    public ActionCom() {
         this.actionId = actionId;
         this.actionName = actionName;
         this.actionImgs = actionImgs;

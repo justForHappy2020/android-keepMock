@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -9,26 +10,63 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.URLUtil;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
-public class play extends Activity {
+
+import com.example.myapplication.entity.ActionCom;
+import com.example.myapplication.utils.HttpUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class play extends Activity implements View.OnClickListener{
 
     private int httpcode;
-    private String VIDEO_URL ="http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
+    private String VIDEO_URL = "http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
+            //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
+            //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
+
     private VideoView mVideoView;
     private TextView mBufferingTextView;
-    private View mPortraitPosition;
-    private View mPortraitContent;
+    private ProgressBar progressBar;
+    private TextView tvShowTime;
+    private TextView tvActionName;
+    private ImageButton last;
+    private ImageButton stop;
+    private ImageButton next;
+    private ImageButton ibQuit;
+    private ImageButton ibKeepTrain;
+    private Button detail;
+    //private View mPortraitPosition;
+    //private View mPortraitContent;
     private ConstraintLayout clRootContainer;
+
     private int width;// 屏幕宽度（像素）
     private int height;// 屏幕高度（像素）
+    private String token;
+    private long actionID;
+    private ActionCom actionCom;
 
     // Current playback position (in milliseconds).
     private int mCurrentPosition = 0;
@@ -36,27 +74,135 @@ public class play extends Activity {
     // Tag for the instance state bundle.
     private static final String PLAYBACK_TIME = "play_time";
 
+    //暂停对话框
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
+    private LayoutInflater inflater;
+    private ImageView imageView;
+    private View layout;
+
+    private Timer timer;
+    private TimerTask timerTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_video_play);
+        if (savedInstanceState != null) {
+            mCurrentPosition = savedInstanceState.getInt(PLAYBACK_TIME);
+        }
+        initView();
+
+    }
+
+    private void initView(){
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         width = metric.widthPixels;     // 屏幕宽度（像素）
         height = metric.heightPixels;   // 屏幕高度（像素）
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_play);
         SharedPreferences readSP = getSharedPreferences("saved_token",MODE_PRIVATE);
-        final String token = readSP.getString("token","");
+        token = readSP.getString("token","");
+
         Intent intentAccept = null;
         intentAccept = getIntent();
+        actionID = intentAccept.getLongExtra("actionID",0);
+        getActionCom();//http获取动作类
         //VIDEO_URL=intentAccept.getStringExtra("courseUrl");
-        final Long courseId = intentAccept.getLongExtra("courseID",0);
 
-        //记录播放记录http
-/*        Thread thread = new Thread(new Runnable() {
+        mVideoView = findViewById(R.id.video_view);
+        mBufferingTextView = findViewById(R.id.buffering_text_view);
+        progressBar = findViewById(R.id.progressBar);
+        tvShowTime = findViewById(R.id.showTime);
+        tvActionName = findViewById(R.id.actionName);
+        last = findViewById(R.id.last);
+        stop = findViewById(R.id.stop);
+        next = findViewById(R.id.next);
+        detail = findViewById(R.id.detail);
+        clRootContainer = findViewById(R.id.constraintLayout);
+        //mPortraitPosition = findViewById(R.id.main_portrait_position);
+        //mPortraitContent = findViewById(R.id.main_portrait_content);
+
+        last.setOnClickListener(this);
+        stop.setOnClickListener(this);
+        next.setOnClickListener(this);
+        detail.setOnClickListener(this);
+
+        VIDEO_URL = actionCom.getActionUrl();
+        //进度条
+        tvShowTime.setText(actionCom.getDuration());
+        tvActionName.setText(actionCom.getActionName());//还要显示第几个动作，一共几个动作
+
+        // Set up the media controller widget and attach it to the video view.
+        MediaController controller = new MediaController(this);
+        controller.setMediaPlayer(mVideoView);
+        controller.setVisibility(View.GONE);
+        mVideoView.setMediaController(controller);
+        //使用post是由于会使用mPortraitPosition的宽高信息
+        mVideoView.post(new Runnable() {
             @Override
             public void run() {
-                String url = "http://192.168.16.1:8080/api/course/playTheVideo?token=" + token + "&&courseId=" + courseId.toString().trim();
+                onStart();
+            }
+        });
+    }
+
+    private void getActionCom() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/actionId2Action?actionId=" + actionID;
+                String responseData = null;
+                try {
+                    responseData = HttpUtils.connectHttpGet(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                JSONObject jsonObject1 = null;
+                try {
+                    jsonObject1 = new JSONObject(responseData);
+                    httpcode = jsonObject1.getInt("code");
+                    if(httpcode == 200){
+                        //得到相应的内容
+                        JSONObject jsonObject = jsonObject1.getJSONObject("data");
+                            //ActionCom相应的内容
+                            actionCom = new ActionCom();
+                        actionCom.setActionId(jsonObject.getLong("actionId"));
+                        actionCom.setActionName(jsonObject.getString("actionName"));
+                        actionCom.setActionImgs(jsonObject.getString("actionImgs"));
+                        actionCom.setActionUrl(jsonObject.getString("actionUrl"));
+                        actionCom.setDuration(jsonObject.getString("duration"));
+                        actionCom.setIntroId(jsonObject.getLong("introId"));
+                        actionCom.setActionGif(jsonObject.getString("actionGif"));
+                        actionCom.setKeyPoint(jsonObject.getString("keyPoint"));
+                        actionCom.setBreath(jsonObject.getString("breath"));
+                        actionCom.setFeel(jsonObject.getString("feel"));
+                        actionCom.setFellImg(jsonObject.getString("fellImg"));
+                        actionCom.setMistake(jsonObject.getString("mistake"));
+                        actionCom.setDetail(jsonObject.getString("detail"));
+                        actionCom.setDetailImg(jsonObject.getString("detailImg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if(httpcode!=200) Toast.makeText(play.this,"ERROR", Toast.LENGTH_SHORT).show();
+        httpcode = 0;
+    }
+
+    //记录播放记录http
+    private void savedPlayRecord(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = "http://192.168.16.1:8080/api/course/playTheVideo?token=" + token + "&&courseId=" + actionID;
                 String responseData = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
@@ -81,31 +227,8 @@ public class play extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(httpcode!=200) Toast.makeText(play.this,"ERROR", Toast.LENGTH_SHORT).show();*/
-
-        mVideoView = findViewById(R.id.video_view);
-        mBufferingTextView = findViewById(R.id.buffering_text_view);
-        clRootContainer = findViewById(R.id.constraintLayout);
-        mPortraitPosition = findViewById(R.id.main_portrait_position);
-        mPortraitContent = findViewById(R.id.main_portrait_content);
-
-        if (savedInstanceState != null) {
-            mCurrentPosition = savedInstanceState.getInt(PLAYBACK_TIME);
-        }
-
-        // Set up the media controller widget and attach it to the video view.
-        MediaController controller = new MediaController(this);
-        controller.setMediaPlayer(mVideoView);
-        mVideoView.setMediaController(controller);
-        //使用post是由于会使用mPortraitPosition的宽高信息
-        mVideoView.post(new Runnable() {
-            @Override
-            public void run() {
-                onStart();
-            }
-        });
+        if(httpcode!=200) Toast.makeText(play.this,"ERROR", Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     protected void onStart() {
@@ -163,7 +286,28 @@ public class play extends Activity {
                 new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mediaPlayer) {
-
+                        progressBar.setMax(mVideoView.getDuration());
+                        if (timer != null) {
+                            timer = null;
+                            timerTask = null;
+                        }
+                        timer = new Timer();
+                        timerTask = new TimerTask() {
+                            @Override
+                            public void run() {
+                                if (mVideoView != null) {
+                                    if (mVideoView.isPlaying()) {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                progressBar.setProgress(mVideoView.getCurrentPosition());
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        };
+                        timer.schedule(timerTask, 0, 1000);
                         // Hide buffering message.
                         mBufferingTextView.setVisibility(VideoView.INVISIBLE);
 
@@ -310,4 +454,52 @@ public class play extends Activity {
         }
     }
 
+    public void viewInit() {
+
+        builder = new AlertDialog.Builder(this);//创建对话框
+        inflater = getLayoutInflater();
+        layout = inflater.inflate(R.layout.hamepage_specificcourses_quitex, null);//获取自定义布局
+        builder.setView(layout);//设置对话框的布局
+        dialog = builder.create();//生成最终的对话框
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        //window.setWindowAnimations(R.style.dialog_animation);
+        window.getDecorView().setPadding(0, 0, 0, 0);
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+        dialog.show();//显示对话框
+
+        ibQuit = layout.findViewById(R.id.quit);
+        ibKeepTrain = layout.findViewById(R.id.keepTrain);
+
+        ibQuit.setOnClickListener(this);
+        ibKeepTrain.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = null;
+        switch (view.getId()){
+            case R.id.last:
+                break;
+            case R.id.stop:
+                mVideoView.pause();
+                viewInit();
+                break;
+            case R.id.next:
+                break;
+            case R.id.detail:
+                break;
+            case R.id.quit:
+                dialog.dismiss();
+                finish();
+                break;
+            case R.id.keepTrain:
+                dialog.dismiss();//关闭对话框
+                mVideoView.start();
+                break;
+        }
+    }
 }

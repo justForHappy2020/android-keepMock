@@ -63,6 +63,8 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity_sharedetail.this));
 
+        recyclerView.setNestedScrollingEnabled(false);//禁止嵌套滚动，使得recyclerview可以平滑滚动
+
         quickAdapter =  new BaseQuickAdapter<Comment, BaseViewHolder >(R.layout.item_comment_main,dataSet.get(0)){
             @Override
             protected void convert(BaseViewHolder helper, Comment comment) {

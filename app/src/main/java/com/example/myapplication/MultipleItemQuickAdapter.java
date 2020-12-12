@@ -55,7 +55,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.contents, item.getShare().getContents())
                         .setText(R.id.praises, item.getShare().getPraises())
                         .setText(R.id.comments,item.getShare().getComments())
-                        .setImageResource(R.id.users_haed, item.getShare().getUser_heads())
+                        .setImageResource(R.id.users_head, item.getShare().getUser_heads())
                         .setImageResource(R.id.content_pics, item.getShare().getContent_pics());
                 break;
 

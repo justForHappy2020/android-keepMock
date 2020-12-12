@@ -73,21 +73,8 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
             }
         };
 
-        quickAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {
-                Toast.makeText(activity_sharedetail.this, "Click:"+String.valueOf(position), Toast.LENGTH_SHORT).show();
-                /*
-                Intent intent;
-                intent = new Intent(activity_sharedetail.this, course_main.class);
-                intent.putExtra("review", mainCommentList.get(position).getCourseId());
-                startActivity(intent);
-                 */
-
-            }
-        });
         quickAdapter.addChildClickViewIds(R.id.item_comment_main_like, R.id.item_comment_main_subcomment, R.id.item_comment_main_loadmoresub,R.id.item_comment_main_username,R.id.item_comment_main_username_headprotrait);
-// 设置子控件点击监听
+        // 设置子控件点击监听
         quickAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {

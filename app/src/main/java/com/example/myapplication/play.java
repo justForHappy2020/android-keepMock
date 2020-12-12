@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.URLUtil;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -45,7 +44,8 @@ import java.util.TimerTask;
 public class play extends Activity implements View.OnClickListener{
 
     private int httpcode;
-    private String VIDEO_URL = "http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
+    private String movementVideoLocPath;
+    //private String VIDEO_URL = "http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
@@ -96,12 +96,15 @@ public class play extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
+
+        Intent intent = getIntent();
+        movementVideoLocPath = intent.getStringExtra("movementVideoLocPath");
+
         if (savedInstanceState != null) {
             mCurrentPosition = savedInstanceState.getInt(PLAYBACK_TIME);
         }
 
-        //WebView webView = (WebView) findViewById(R.id.webView);
-        //webView.loadUrl("http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4");
+
         initView();
 
     }
@@ -295,7 +298,7 @@ public class play extends Activity implements View.OnClickListener{
         mBufferingTextView.setVisibility(VideoView.VISIBLE);
 
         // Buffer and decode the video sample.
-        Uri videoUri = getMedia(VIDEO_URL);
+        Uri videoUri = Uri.parse(movementVideoLocPath);//getMedia(movementVideoLocPath);
         mVideoView.setVideoURI(videoUri);
 
         //mVideoView.setAutofillId();
@@ -321,6 +324,7 @@ public class play extends Activity implements View.OnClickListener{
                                             @Override
                                             public void run() {
                                                 progressBar.setProgress(mVideoView.getCurrentPosition());
+                                                //tvShowTime.setText();
                                             }
                                         });
                                     }
@@ -486,15 +490,11 @@ public class play extends Activity implements View.OnClickListener{
     private Uri getMedia(String mediaName) {
         if (URLUtil.isValidUrl(mediaName)) {
             // Media name is an external URL.
-            Log.d("Video!!!!!!!","Valid");
             return Uri.parse(mediaName);
         } else {
-
             // you can also put a video file in raw package and get file from there as shown below
-
             return Uri.parse("android.resource://" + getPackageName() +
                     "/raw/" + mediaName);
-
 
         }
     }
@@ -547,4 +547,5 @@ public class play extends Activity implements View.OnClickListener{
                 break;
         }
     }
+
 }

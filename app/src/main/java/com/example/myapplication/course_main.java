@@ -33,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -271,9 +272,10 @@ public class course_main extends Activity implements View.OnClickListener {
         recyclerView.setLayoutManager(layoutM);
         myAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> baseQuickAdapter, @NonNull View view, int i) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> baseQuickAdapter, @NonNull View view, int position) {
                 Intent intent = new Intent(course_main.this,activity_movement_detail.class);
-                intent.putExtra("courseMovementId","ID"+i);
+                intent.putExtra("courseActionPosition",position);
+                intent.putExtra("course",(Serializable) course);
                 startActivity(intent);
             }
         });
@@ -304,12 +306,6 @@ public class course_main extends Activity implements View.OnClickListener {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.video_play:
-                intent = new Intent(this, play.class);
-                intent.putExtra("courseUrl",course.getActionList().get(0).getActionUrl());
-                intent.putExtra("courseID",course.getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.play_video:
                 intent = new Intent(this, play.class);
                 intent.putExtra("courseUrl",course.getActionList().get(0).getActionUrl());
                 intent.putExtra("courseID",course.getCourseId());

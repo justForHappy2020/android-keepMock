@@ -30,12 +30,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"><!--允许明文传输，否则无法直接获取获取资源-->
-        <activity android:name=".activity_movement_detail"></activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity_download"></activity>
+        <!-- 允许明文传输，否则无法直接获取获取资源 -->
+        <activity android:name=".activity_movement_detail" />
         <activity
             android:name=".search_course"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".search"
             android:launchMode="singleTop"
@@ -47,7 +49,7 @@
         <activity
             android:name=".course_filter"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".course_main"
             android:launchMode="standard"
@@ -64,20 +66,18 @@
         <activity android:name=".MainActivity_ViewPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".play"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTop">
-        </activity>
+            android:launchMode="singleTop"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".exercise_main"></activity>
+        <!--
         <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".exercise_main">
-                </activity>
-
-        <!--        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -165,12 +165,13 @@
             android:name=".pvideo_pause"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-<!--        <activity
+        <!--
+        <activity
             android:name=".community4"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />-->
-                <activity android:name=".community4">
-       </activity>
+            android:screenOrientation="portrait" />
+        -->
+        <activity android:name=".community4"></activity>
     </application>
 
 </manifest>

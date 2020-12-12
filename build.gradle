@@ -2,7 +2,6 @@
 
 buildscript {
     repositories {
-
         google()
         jcenter()
         
@@ -17,13 +16,12 @@ buildscript {
 
 allprojects {
     repositories {
-
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}//阿里云的仓库，便于下载依赖包
+        //maven { url "https://mirrors.huaweicloud.com/repository/maven/" }
         maven { url "https://jitpack.io" }
+
         google()
         jcenter()
-        maven {
-            url "https://jitpack.io"
-        }
     }
 }
 

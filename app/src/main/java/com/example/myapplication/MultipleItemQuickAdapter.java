@@ -9,7 +9,7 @@ import com.example.myapplication.entity.MultipleItem;
 import java.util.List;
 import java.util.List;
 
-public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> {
+public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> implements LoadMoreModule{
 
     public MultipleItemQuickAdapter(List data) {
         super(data);

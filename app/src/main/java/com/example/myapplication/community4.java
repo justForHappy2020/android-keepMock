@@ -22,55 +22,141 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.myapplication.entity.AddImage;
 import com.example.myapplication.utils.HttpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.myapplication.utils.ClientUploadUtils.upload;
+
 public class community4 extends Activity implements View.OnClickListener {
 
-    private ImageButton btn_cancel;
-    private Button btn_release;
-    private EditText et;
-    private ImageButton ibUpdatePhoto;
-    private ImageButton ibPhoto;//显示的照片item
 
-    private String et_str;
+    private ImageButton btn_cancel;//取消按钮
+    private Button btn_release;//发布按钮
+    private EditText et;//输入框
+    private ImageButton ibUpdatePhoto;//url下载下来的图片
+    private ImageButton ibPhoto;//显示的照片item
+    private String et_str;//输入的内容
+//    private RecyclerView recyclerView;
+//    private MultipleItemQuickAdapter multipleItemQuickAdapter;
+//    private RecyclerView.LayoutManager mLayoutmanager;
+    private GridView gridView;
+    private BaseAdapter madapt;
+    private Context mcontext;
+
+    private TextView locate;
+    private String URL_LOCATION;
 
     private SharedPreferences saveSP;
     private int httpCode;
     private String url;//一张图片的URL
     private List<String> urlList = new ArrayList();//动态图片URL数组
+    private ArrayList<AddImage> mData = new ArrayList();//用来展示图片
+
     private String imgUrlList;//http请求的参数，一组图片url，用空格分隔
     private String token;//相当于用户的唯一ID
 
+
     private String locationStr = "";//定位的经纬度
+    private String address;
     private String message = "";
 
+
     private static final int REQUEST_CODE = 10;//定位的请求码
+
     private static final int MY_ADD_CASE_CALL_PHONE2 = 7; //打开相册的请求码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community4);
-        initView();
+        mcontext = community4.this;
         getLocation();
+        getaddress();
+
+        initView();
+//        initData();
+    }
+//通过经纬度获取地址
+    private void getaddress(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL_LOCATION = "http://api.map.baidu.com/geocoder?output=json&location="+locationStr+"&ak=esNPFDwwsXWtsQfw4NMNmur1";
+//                    URL url = new URL("http://api.map.baidu.com/geocoder?output=json&location=23.213542,116.41&ak=esNPFDwwsXWtsQfw4NMNmur1");
+                    URL url = new URL(URL_LOCATION);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setConnectTimeout(5000);
+                    httpURLConnection.setReadTimeout(8000);
+                    httpURLConnection.setRequestMethod("GET");
+
+                    int responseCode = httpURLConnection.getResponseCode();
+                    if (responseCode == 200){
+                        InputStream inputStream = httpURLConnection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
+                        String str = null;
+                        StringBuffer buffer = new StringBuffer();
+
+                        while((str = reader.readLine()) != null){
+                            buffer.append(str);
+                        }
+                        String result = buffer.toString();
+
+                        JSONObject result_json = new JSONObject(result);
+                        JSONObject re = result_json.getJSONObject("result");//经纬度
+                        address = re.getString("formatted_address");//地址
+//                        JSONArray location = result_json.getJSONArray("location");//经纬度
+//                        address[0] = result_json.getString("formatted_address");//地址
+
+//                        JSONObject object1 = location.getJSONObject(0);
+//                        Double longitude = object1.getDouble("lng");//经度
+//                        Double latitude = object1.getDouble("lat");//纬度
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
+//获取经纬度
     private void getLocation() {
         if (Build.VERSION.SDK_INT >= 23) {// android6 执行运行时权限
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -116,6 +202,8 @@ public class community4 extends Activity implements View.OnClickListener {
             public void onLocationChanged(Location location) {
                 //经度
                 double longitude = location.getLongitude();
+
+
                 //纬度
                 double latitude = location.getLatitude();
 
@@ -178,39 +266,60 @@ public class community4 extends Activity implements View.OnClickListener {
         locationManager.requestLocationUpdates(provider, 10000, 0, locationListener);
         while(location == null){ location = locationManager.getLastKnownLocation(provider); } //移除更新监听
         locationManager.removeUpdates(locationListener);
-         if (location != null) { //不为空,显示地理位置经纬度
-         double longitude = location.getLongitude();// 经度
-         double latitude = location.getLatitude();// 纬度
-         locationStr = latitude+ ","+longitude;
-         }
-    }
-/**
- * 获取权限结果
- */
+        if (location != null) { //不为空,显示地理位置经纬度
+            double longitude = location.getLongitude();// 经度
+            double latitude = location.getLatitude();// 纬度
+            locationStr = latitude+ ","+longitude;
+        }
 
- private void initView(){
+    }
+
+//     * 获取权限结果
+
+    //输入的测试图片
+//    private void initData(){
+//        multipleItemQuickAdapter = new MultipleItemQuickAdapter(getData());
+//    }
+//
+//    private ArrayList<AddImage> getData(){
+//        ArrayList<AddImage> data = new ArrayList<>();
+//        AddImage addImage1 = new AddImage(R.drawable.sisi);
+//        AddImage addImage2 = new AddImage(R.drawable.sisi);
+//
+//        data.add(addImage1);
+//        data.add((addImage2));
+//        return data;
+//    }
+
+    private void initView(){
         btn_cancel = findViewById(R.id.community4_Leftarrow_btn);
         btn_release = findViewById(R.id.community4_Release_btn);
         et = findViewById(R.id.community4_Sharetext_edit);
         ibUpdatePhoto = findViewById(R.id.community4_AddImage_btn4);
-        ibPhoto = findViewById(R.id.community4_Image_btn1);
+        //ibPhoto = findViewById(R.id.community4_item_image);
+        locate = findViewById(R.id.Locate);
+        saveSP = getSharedPreferences("url",MODE_PRIVATE);
+
+        locate.setText(address);
 
         btn_cancel.setOnClickListener(this);
         btn_release.setOnClickListener(this);
         ibUpdatePhoto.setOnClickListener(this);
-        ibPhoto.setOnClickListener(this);
+        //ibPhoto.setOnClickListener(this);
 
+        gridView = findViewById(R.id.community4_gridview);
+
+//        recyclerView = (RecyclerView) recyclerView.findViewById(R.id.community4_recyclerView);
+//        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));//ing
+//        recyclerView.setAdapter(multipleItemQuickAdapter);
         token = getSharedPreferences("saved_token",MODE_PRIVATE).getString("token", "");//从本地获取用户的token
 
     }
 
-
-
-
-
     //json封装comntent和url图片
 
     //点击 + 后跳转到添加图片的layout
+
 
 
     //打开相册
@@ -230,6 +339,17 @@ public class community4 extends Activity implements View.OnClickListener {
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+
+//        if (requestCode == REQUEST_CODE) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                // Permission Granted准许
+//                getLocation();
+//            } else {
+//                // Permission Denied拒绝
+//            }
+//        }
+
         if (requestCode == REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission Granted准许
@@ -238,6 +358,7 @@ public class community4 extends Activity implements View.OnClickListener {
                 // Permission Denied拒绝
             }
         }
+
         if (requestCode == MY_ADD_CASE_CALL_PHONE2) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 choosePhoto();
@@ -314,7 +435,7 @@ public class community4 extends Activity implements View.OnClickListener {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
-    //通过图片url获取drawable
+ //   通过图片url获取drawable
     private Drawable loadImageFromNetwork(String imageUrl)
     {
         Drawable drawable = null;
@@ -334,7 +455,7 @@ public class community4 extends Activity implements View.OnClickListener {
         return drawable ;
     }
 
-    //显示头像线程
+    //显示图片线程
     private void startThread() {
         Thread thread = new Thread(new Runnable(){
             @Override
@@ -375,16 +496,14 @@ public class community4 extends Activity implements View.OnClickListener {
             // 把原图显示到界面上
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK
                 && null != data) {
-            //测试数据，后期去掉，然后用下面注释的代码
-            url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606458247444&di=16bd6df8ac282275048bb95bfaef3cda&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20190522%2Fe63c244cf52b4675b36f773a70ac0582.jpeg";
-            urlList.add(url);
-            startThread();
-            /*            try {
+            //url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606458247444&di=16bd6df8ac282275048bb95bfaef3cda&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20190522%2Fe63c244cf52b4675b36f773a70ac0582.jpeg";
+            //urlList.add(url);
+                        try {
                 Uri photoUri = data.getData();//获取路径
                 //final String filename = photoUri.getPath();
                 final String filepath = getRealPathFromUriAboveApi19(this,photoUri);//获取绝对路径
-                final String httpurl = "http://192.168.16.1:8080/api/user/uploadImageAndroid";
-
+                //final String httpurl = "http://192.168.16.1:8080/api/user/uploadImageAndroid";
+                final String httpurl = "http://159.75.2.94:8080/api/user/uploadImageAndroid";
 
                 //http请求获取上传到云后的图片URL
                 Thread thread = new Thread(new Runnable() {
@@ -397,13 +516,15 @@ public class community4 extends Activity implements View.OnClickListener {
                                 //相应的内容
                                 httpCode = jsonObject1.getInt("code");
                                 if(httpCode == 200){
+
+
                                     url= jsonObject1.getString("data");//云上的图片URL
                                     urlList.add(url);
-*//*                                    SharedPreferences.Editor editor = saveSP.edit();
+                                    SharedPreferences.Editor editor = saveSP.edit();
                                     editor.putString("url",url);
                                     if (!editor.commit()) {
                                         System.out.println("ERROR commit");
-                                    }*//*
+                                    }
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -416,11 +537,30 @@ public class community4 extends Activity implements View.OnClickListener {
                 });
                 thread.start();
                 thread.join(5000);
-                if(url != null)startThread();//显示图片线程
+                if(url != null){
+                    for (int i = 0; i <urlList.size(); i++) {
+                        mData.add(new AddImage(i, urlList.get(i)));
+                        urlList.clear();
+                    }
+                    madapt = new MyAdapter<AddImage>(mData, R.layout.item_photo){//Arraylist转换list
+                        @Override
+                        public void bindView(ViewHolder holder, AddImage obj) {
+                            holder.setImageResource(R.id.community4_item_image,R.drawable.sucai);
+                            //holder.getItemView().setBackground();
+                        }
+                    };
+                    gridView.setAdapter(madapt);
+                    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Toast.makeText(mcontext, "你点击了~" + position + "~项", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             } catch (Exception e) {
                 //"上传失败");
             }
-            if(httpCode!=200)Toast.makeText(community4.this,"上传图片失败",Toast.LENGTH_SHORT).show();*/
+            if(httpCode!=200)Toast.makeText(community4.this,"上传图片失败",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -433,7 +573,11 @@ public class community4 extends Activity implements View.OnClickListener {
             case R.id.community4_Release_btn:
                 et_str = et.getText().toString().trim();
                 imgUrlList = "";
+
+                for (int i = 0; i <urlList.size(); i++)imgUrlList = imgUrlList + urlList.get(i) + " ";
+
                 if(urlList.size() > 0) for (int i = 0; i <urlList.size(); i++)imgUrlList = imgUrlList + urlList.get(i) + " ";
+
                 imgUrlList = imgUrlList.substring(0,imgUrlList.length()-1);
                 if(et_str.isEmpty()){
                     Toast.makeText(getApplicationContext(),"输入为空",Toast.LENGTH_SHORT).show();
@@ -491,12 +635,59 @@ public class community4 extends Activity implements View.OnClickListener {
                     choosePhoto();
                 }
                 break;
+
                 //点击删除图片
-            case R.id.community4_Image_btn1:
+            case R.id.community4_item_cancel:
+            //点击删除图片
+            case R.id.community4_item_image:
+
                 ibPhoto.setImageResource(R.drawable.sucai);//测试。实际需做：删除此图片item
                 urlList.remove(0);//从urlList中删除对应的图片url ，括号内为要删除的第几张图片（从0开始算）
         }
 
     }
 
+
 }
+
+
+
+//class MyAdapt extends  RecyclerView.Adapter{
+//
+//    private List<AddImage> addImages;
+//
+//    public MyAdapt(List<AddImage> addImages){
+//        this.addImages = addImages;
+//    }
+//    @Override
+//    public int getItemCount() {
+//        return addImages.size();
+//    }
+//
+//
+//    @Override
+//    public MyHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+//        return MyHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_photo, viewGroup, false));
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+//
+//    }
+//
+//
+//}
+//
+//class MyHolder extends RecyclerView.ViewHolder{
+//
+//    private ImageButton photo;
+//    private ImageButton cancel;
+//
+//    public MyHolder(@NonNull View itemView) {
+//        super(itemView);
+//
+//        photo = itemView.findViewById(R.id.community4_item_image);
+//        cancel = itemView.findViewById(R.id.community4_item_cancel);
+//
+//    }
+//}

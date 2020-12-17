@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,7 +30,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class register5 extends AppCompatActivity implements View.OnClickListener{
+public class register5 extends Activity implements View.OnClickListener{
     private Intent intentAccept;
     private String file_url;
     private String nickName;
@@ -37,6 +39,7 @@ public class register5 extends AppCompatActivity implements View.OnClickListener
     private Double weight;
     private Double height;
     private String token;
+    private int httpCode;
 
     private EditText etRegWeight;
     private EditText etRegHeight;
@@ -62,7 +65,7 @@ public class register5 extends AppCompatActivity implements View.OnClickListener
 
         btRegNext.setOnClickListener(this);
 
-        saveSP = getSharedPreferences("saved_token",MODE_PRIVATE);
+        saveSP = getSharedPreferences("saved_token",Context.MODE_PRIVATE);
 
     }
 
@@ -70,8 +73,8 @@ public class register5 extends AppCompatActivity implements View.OnClickListener
         intentAccept = getIntent();
         nickName = intentAccept.getStringExtra("nickName");
         gender = intentAccept.getStringExtra("gender");
-        readSP = getSharedPreferences("saved_mobile",MODE_PRIVATE);
-        readSP2 = getSharedPreferences("saved_photo",MODE_PRIVATE);
+        readSP = getSharedPreferences("saved_token", Context.MODE_PRIVATE);
+        readSP2 = getSharedPreferences("saved_photo",Context.MODE_PRIVATE);
         userId = readSP.getLong("userId",0);
         file_url = readSP2.getString("url","");
     }
@@ -82,7 +85,7 @@ public class register5 extends AppCompatActivity implements View.OnClickListener
         if(etRegHeight.getText().toString().trim()!=null)height = Double.parseDouble(etRegHeight.getText().toString().trim());
         if(weight*10%1 == 0&&height*10%1 == 0) {
             //http请求
-            new Thread(new Runnable() {
+            Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -103,12 +106,17 @@ public class register5 extends AppCompatActivity implements View.OnClickListener
                         try {
                             JSONObject jsonObject1 = new JSONObject(responseData);
                                 //相应的内容
-                                token = jsonObject1.getString("token");
+                                httpCode = jsonObject1.getInt("code");
+                                if(httpCode==200)
+                                {
+                                    JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
+                                    token = jsonObject2.getString("token");
+                                }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         SharedPreferences.Editor editor = saveSP.edit();
-                        editor.putString("token",token);
+                        editor.putString("token",token).commit();
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (Exception e) {
@@ -116,7 +124,15 @@ public class register5 extends AppCompatActivity implements View.OnClickListener
                     }
                 }
 
-            }).start();
+            });
+            thread.start();
+            try {
+                thread.join(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(httpCode!=200)Toast.makeText(this,  "保存信息失败", Toast.LENGTH_SHORT).show();
+            if(httpCode==200)Toast.makeText(this,  "保存信息成功", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         else Toast.makeText(this,  "最多一位小数，请重新输入", Toast.LENGTH_SHORT).show();

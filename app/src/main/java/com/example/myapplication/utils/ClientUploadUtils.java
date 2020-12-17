@@ -14,12 +14,15 @@ import okhttp3.ResponseBody;
 
 public class ClientUploadUtils {
 
-    static public ResponseBody upload(String url, String filePath, String fileName) throws Exception {
+    static public ResponseBody upload(String url, String filePath) throws Exception {
         OkHttpClient client = new OkHttpClient();
+        File file = new File(filePath);
+        String fileName = file.getName();
+
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("file", fileName,
-                        RequestBody.create(MediaType.parse("multipart/form-data"), new File(filePath)))
+                        RequestBody.create(MediaType.parse("multipart/form-data"), file))
                 .build();
 
         Request request = new Request.Builder()

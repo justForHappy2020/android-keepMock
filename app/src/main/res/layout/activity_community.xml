@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#EFEFEF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="社区"
+                android:textColor="#696969"
+                android:textSize="25dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/community_Search_btn"
+                style="?borderlessButtonStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/white"
+                android:scaleType="fitXY"
+                android:src="@drawable/search2">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/community_AddFriend_btn"
+                style="?borderlessButtonStyle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@id/community_Search_btn"
+                android:background="@color/white"
+                android:scaleType="fitXY"
+                android:src="@drawable/addfriend">
+
+            </ImageButton>
+
+        </RelativeLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TableRow>
+                <Button
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    style="?borderlessButtonStyle"
+                    android:text="@string/community_hot"
+                    android:textColor="#383837"
+                    android:textStyle="bold"
+                    android:textSize="20sp">
+
+                </Button>
+
+                <Button
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    style="?borderlessButtonStyle"
+                    android:text="@string/community_concern"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#383837">
+
+                </Button>
+
+            </TableRow>
+
+
+        </TableLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="530dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="520dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="380dp"
+                        android:layout_height="310dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/white">
+
+                        <ImageButton
+                            android:id="@+id/community_Headprotrait_btn1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            style="?borderlessButtonStyle"
+                            android:src="@drawable/headprotrait"
+                            android:background="@color/white"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp">
+
+                        </ImageButton>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:background="@color/white"
+                            android:layout_toEndOf="@id/community_Headprotrait_btn1"
+                            android:layout_marginTop="23dp"
+                            android:textColor="#353535"
+                            android:textSize="16sp"
+                            android:layout_marginStart="7dp"
+                            android:gravity="start"
+                            style="?borderlessButtonStyle"
+                            android:text="@string/community1_playerid">
+
+                        </Button>
+
+                        <Button
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/button_radius_white_stroke"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="35dp"
+                            android:layout_marginTop="20dp"
+                            android:text="@string/community_concern"
+                            android:textSize="18dp">
+
+                        </Button>
+                        <TextView
+                            android:id="@+id/community_text1"
+                            android:layout_width="290dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/community_Headprotrait_btn1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="25dp"
+                            android:text="@string/community_text"
+                            android:textSize="16dp"
+                            android:textColor="#383837"
+                            android:textStyle="bold"
+                            android:minLines="2">
+
+                        </TextView>
+
+                        <ImageButton
+                            android:id="@+id/community_Image_btn1"
+                            android:layout_width="350dp"
+                            android:layout_height="160dp"
+                            android:layout_below="@id/community_text1"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/white"
+                            android:src="@drawable/sisi"
+                            android:scaleType="fitXY">
+
+                        </ImageButton>
+
+                        <Button
+                            android:id="@+id/community_thumbs_btn1"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
+                            android:layout_below="@id/community_Image_btn1"
+                            android:background="@color/white"
+                            style="?borderlessButtonStyle"
+                            android:drawableStart="@drawable/thumbs2"
+                            android:scaleType="fitXY"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="18dp"
+                            android:text="@string/community_num"
+                            android:textColor="#999999"
+                            android:textSize="15sp">
+
+                        </Button>
+
+                        <Button
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
+                            android:layout_toEndOf="@id/community_thumbs_btn1"
+                            android:layout_below="@id/community_Image_btn1"
+                            android:background="@color/white"
+                            style="?borderlessButtonStyle"
+                            android:drawableStart="@drawable/message"
+                            android:scaleType="fitXY"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="18dp"
+                            android:text="@string/community_num"
+                            android:textColor="#999999"
+                            android:textSize="15sp">
+
+                        </Button>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="380dp"
+                        android:layout_height="310dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/white">
+
+                        <ImageButton
+                            android:id="@+id/community_Headprotrait_btn2"
+                            style="?borderlessButtonStyle"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/white"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/headprotrait">
+
+                        </ImageButton>
+
+                        <Button
+                            style="?borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="7dp"
+                            android:layout_marginTop="23dp"
+                            android:layout_toEndOf="@id/community_Headprotrait_btn2"
+                            android:background="@color/white"
+                            android:gravity="start"
+                            android:text="@string/community1_playerid"
+                            android:textColor="#353535"
+                            android:textSize="16sp">
+
+                        </Button>
+
+                        <Button
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="35dp"
+                            android:background="@drawable/button_radius_white_stroke"
+                            android:text="@string/community_concern"
+                            android:textSize="18dp">
+
+                        </Button>
+
+                        <TextView
+                            android:id="@+id/community_text2"
+                            android:layout_width="290dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/community_Headprotrait_btn2"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="10dp"
+                            android:minLines="2"
+                            android:text="@string/community_text"
+                            android:textColor="#383837"
+                            android:textSize="16dp"
+                            android:textStyle="bold">
+
+                        </TextView>
+
+                        <ImageButton
+                            android:id="@+id/community_Image_btn2"
+                            android:layout_width="350dp"
+                            android:layout_height="160dp"
+                            android:layout_below="@id/community_text2"
+                            android:layout_marginTop="1dp"
+                            android:background="@color/white"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/sisi">
+
+                        </ImageButton>
+
+                        <Button
+                            android:id="@+id/community_thumbs_btn2"
+                            style="?borderlessButtonStyle"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
+                            android:layout_below="@id/community_Image_btn2"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/white"
+                            android:drawableStart="@drawable/thumbs2"
+                            android:scaleType="fitXY"
+                            android:text="@string/community_num"
+                            android:textColor="#999999"
+                            android:textSize="15sp">
+
+                        </Button>
+
+                        <Button
+                            style="?borderlessButtonStyle"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
+                            android:layout_below="@id/community_Image_btn2"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_toEndOf="@id/community_thumbs_btn2"
+                            android:background="@color/white"
+                            android:drawableStart="@drawable/message"
+                            android:scaleType="fitXY"
+                            android:text="@string/community_num"
+                            android:textColor="#999999"
+                            android:textSize="15sp">
+
+                        </Button>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="350dp"
+                android:backgroundTint="#72C6AC"
+                android:src="@drawable/camera_white"
+                app:borderWidth="0dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true">
+
+            </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white">
+
+            <Button
+                android:id="@+id/community_sport_btn"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="?borderlessButtonStyle"
+                android:background="@color/white"
+                android:drawableTop="@drawable/community_sport_unchosen"
+                android:scaleType="centerInside"
+                android:text="@string/community_sport"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#BBBBBB">
+
+            </Button>
+
+            <Button
+                android:id="@+id/community_community_btn"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="?borderlessButtonStyle"
+                android:background="@color/white"
+                android:drawableTop="@drawable/community_community_unchosen"
+                android:scaleType="centerInside"
+                android:text="@string/community_community"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#BBBBBB">
+
+            </Button>
+
+            <Button
+                android:id="@+id/community_diet_btn"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="?borderlessButtonStyle"
+                android:background="@color/white"
+                android:drawableTop="@drawable/community_diet_unchosen"
+                android:scaleType="centerInside"
+                android:text="@string/community_diet"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#BBBBBB">
+
+            </Button>
+
+            <Button
+                android:id="@+id/community_me_btn"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="?borderlessButtonStyle"
+                android:background="@color/white"
+                android:drawableTop="@drawable/community_me_unchosen"
+                android:scaleType="centerInside"
+                android:text="@string/community_me"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#BBBBBB">
+
+            </Button>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

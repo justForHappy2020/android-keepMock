@@ -1,12 +1,12 @@
 package com.example.myapplication;
-import com.example.myapplication.utils.HttpUtils;
-import com.example.myapplication.utils.KeyboardUtils;
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -14,7 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import com.example.myapplication.utils.KeyboardUtils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,15 +23,9 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
 import static com.example.myapplication.utils.HttpUtils.connectHttp;
 
-public class register2 extends AppCompatActivity implements View.OnClickListener{
+public class register2 extends Activity implements View.OnClickListener{
 
     private TextView tvGetPhoneNum;
     private EditText etVcode;
@@ -42,6 +37,8 @@ public class register2 extends AppCompatActivity implements View.OnClickListener
     private Long userId;
     private String token;
     private Boolean isNewUser;
+    private String message;
+    private int httpcode;
 /*    private SharedPreferences readSP;*/
 
 
@@ -77,7 +74,7 @@ public class register2 extends AppCompatActivity implements View.OnClickListener
         intentAccept = getIntent();
         String phoneNum = intentAccept.getStringExtra("mobile");
 
-        if(phoneNum.equals("")) Toast.makeText(this,"没有手机号数据",Toast.LENGTH_SHORT).show();
+        if(phoneNum == null) Toast.makeText(this,"没有手机号数据",Toast.LENGTH_SHORT).show();
         else tvGetPhoneNum.setText("+86-"+phoneNum);
     }
 
@@ -87,7 +84,7 @@ public class register2 extends AppCompatActivity implements View.OnClickListener
         btNameNext = findViewById(R.id.name_next);
         tvRequireAgain = findViewById(R.id.require_again);
 
-        saveSP = getSharedPreferences("saved_token",MODE_PRIVATE);
+        saveSP = getSharedPreferences("saved_token",Context.MODE_PRIVATE);
 
 /*        //弹出小键盘
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -96,7 +93,6 @@ public class register2 extends AppCompatActivity implements View.OnClickListener
 
         btNameNext.setOnClickListener(this);
         tvRequireAgain.setOnClickListener(this);
-
       /*  etVcode.setOnFocusChangeListener(new android.view.View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -112,13 +108,14 @@ public class register2 extends AppCompatActivity implements View.OnClickListener
 
     }
     public void onClick(View view){
-        Intent intent = new Intent(this, register3.class);
-        Intent intent2 = new Intent(this, course_main.class);
+        final Intent intent = new Intent(this, register3.class);
+        final Intent intent2 = new Intent(this, exercise_main.class);
         final String mobile = intentAccept.getStringExtra("mobile");
         switch (view.getId()){
             case R.id.require_again:
+                tvRequireAgain.setEnabled(Boolean.FALSE);
                 intentAccept = getIntent();
-                new Thread(new Runnable() {
+                Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
@@ -142,30 +139,50 @@ public class register2 extends AppCompatActivity implements View.OnClickListener
                         try {
                             //解析JSON数据
                             JSONObject jsonObject1 = new JSONObject(responseData);
-                            String message = jsonObject1.getString("message");
-                            Object data = jsonObject1.getJSONObject("data");
-                            int code = jsonObject1.getInt("code");
+                            httpcode = jsonObject1.getInt("code");
 /*                        JSONArray jsonArray = jsonObject1.getJSONArray("codes");
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             //相应的内容
                             String message = jsonObject.getString("message");
-                            Object data = jsonObject.getJSONObject("data");
                             int code = jsonObject.getInt("code");
                         }*/
-
-
                         } catch (JSONException e){
+                            Toast.makeText(register2.this,"ERROR",Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
-                }).start();
-                Toast.makeText(this,"验证码已重新发送",Toast.LENGTH_SHORT).show();
+                });
+                thread.start();
+                try {
+                    thread.join(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(httpcode==200){
+                    Toast.makeText(this,"验证码已重新发送",Toast.LENGTH_SHORT).show();
+                    new CountDownTimer(10000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            tvRequireAgain.setEnabled(false);
+                            tvRequireAgain.setText(String.format("重新获取(%ds)",millisUntilFinished/1000));
+                        }
 
+                        @Override
+                        public void onFinish() {
+                            tvRequireAgain.setEnabled(Boolean.TRUE);
+                            tvRequireAgain.setText("重新获取");
+                        }
+                    }.start();
+                }
+                if(httpcode!=200){
+                    Toast.makeText(register2.this,"手机号有误",Toast.LENGTH_SHORT).show();
+                    tvRequireAgain.setEnabled(Boolean.TRUE);
+                }
                 break;
             case R.id.name_next:
                 final String code = etVcode.getText().toString().trim();
-                new Thread(new Runnable() {
+                Thread thread2 = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
@@ -177,24 +194,31 @@ public class register2 extends AppCompatActivity implements View.OnClickListener
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String responseData = HttpUtils.connectHttp("http://192.168.16.1:8080/api/user/login",json);//okhttp
+                            String responseData = connectHttp("http://192.168.16.1:8080/api/user/login",json);//okhttp
                             //getfeedback(responseData);
                             try {
-                                JSONObject jsonObject1 = new JSONObject(responseData);
-                                    //相应的内容
-                                    isNewUser = jsonObject1.getBoolean("isNewUser");
+                                JSONObject jsonObject = new JSONObject(responseData);
+                                message = jsonObject.getString("message");
+                                httpcode = jsonObject.getInt("code");
+                                    JSONObject jsonObject1 = jsonObject.getJSONObject("data");
+                                    isNewUser = jsonObject1.getBoolean("newUser");
                                     userId = jsonObject1.getLong("userId");
                                     token = jsonObject1.getString("token");
                             } catch (JSONException e){
                                 e.printStackTrace();
                             }
                             SharedPreferences.Editor editor = saveSP.edit();
-                            editor.putLong("userId",userId);
-                            editor.putString("token",token);
+                            editor.putLong("userId",userId).commit();
+                            editor.putString("token",token).commit();
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (Exception e) {
                             e.printStackTrace();
+                        }
+                        if(httpcode==200){
+                            //判定是否新用户，新用户跳转注册页面，旧用户跳转主页
+                            if(isNewUser) startActivity(intent);
+                            else startActivity(intent2);
                         }
                     }
 
@@ -214,12 +238,15 @@ public class register2 extends AppCompatActivity implements View.OnClickListener
                         }
                     }*/
 
-                }).start();
-/*                //判定是否新用户，新用户跳转注册页面，旧用户跳转主页
-                if(isNewUser) startActivity(intent);
-                else startActivity(intent2);*/
-                startActivity(intent);
-                break;
-        }
+                });
+                thread2.start();
+                try {
+                    thread2.join(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(httpcode!=200)Toast.makeText(register2.this,"验证码有误，请重新输入",Toast.LENGTH_SHORT).show();
+                }
     }
+
 }

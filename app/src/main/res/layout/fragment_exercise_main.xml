@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F6F6"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center_vertical"
+            android:text="运动"
+            android:textColor="#353535"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/search2" />
+
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+
+            <TextView
+                android:id="@+id/accumulate_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/translucent2"
+                android:text="已累计运动***分钟" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/bodypart1"
+                    style="?borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_a"
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿"/>
+
+                <Button
+                    android:id="@+id/bodypart2"
+                    style="?borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_b"
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿" />
+
+                <Button
+                    style="?borderlessButtonStyle"
+                    android:id="@+id/bodypart3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_c"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
+
+                <Button
+                    style="?borderlessButtonStyle"
+                    android:id="@+id/bodypart4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_d"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <Button
+                    style="?borderlessButtonStyle"
+                    android:id="@+id/bodypart5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_e"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
+
+                <Button
+                    style="?borderlessButtonStyle"
+                    android:id="@+id/bodypart6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_f"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
+
+                <Button
+                    style="?borderlessButtonStyle"
+                    android:id="@+id/bodypart7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_g"
+                    android:text="腿"
+                    android:fontFamily="sans-serif-black"/>
+
+                <Button
+                    android:id="@+id/bodypart8"
+                    style="?borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F4F4FA"
+                    android:drawableTop="@drawable/bodypart_h"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:text="全部" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/hot_course"
+                    android:textColor="#535353"
+                    android:textSize="14sp" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/hotcourse1"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="腹肌撕裂者 &#10;17分钟 K1"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/hotcourse2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Button Two"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/hotcourse3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Button Three"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/hotcourse4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Button Four"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/hotcourse5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Button Five"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/hotcourse6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Button Six"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/hotcourse7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Button Seven"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/hotcourse8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Button Eight"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/hotcourse9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Button Nine"
+                            android:textSize="20dp" />
+
+                        <Button
+                            android:id="@+id/hotcourse10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/fitness"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Button ten"
+                            android:textSize="20dp" />
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_course"
+                        android:textColor="#535353"
+                        android:textSize="14sp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="250dp"
+                        android:background="@color/white"
+                        android:src="@drawable/points" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/my_learned_course"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/sucai" />
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/my_learned_course"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/how_many_lesson"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="140dp"
+                        android:src="@drawable/next" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="83dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/sucai" />
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/my_learned_course"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/how_many_lesson"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="140dp"
+                        android:src="@drawable/next" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

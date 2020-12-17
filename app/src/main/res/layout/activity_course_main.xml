@@ -8,8 +8,10 @@
     >
 
     <ImageButton
+        android:id="@+id/video_play"
         android:layout_width="match_parent"
         android:layout_height="220dp"
+        android:scaleType="fitXY"
         android:src="@drawable/scenery" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,16 +25,22 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="燃脂"
-                android:gravity="center"
-                android:textSize="25dp"/>
+                android:textColor="#B3B1B2"
+                android:textSize="12sp" />
+
             <TextView
+                android:id="@+id/calorie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="38千卡"/>
+                android:text="38千卡"
+                android:textColor="#000000"
+                android:textSize="24sp" />
 
         </LinearLayout>
 
@@ -42,16 +50,22 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:text="时长"
-                android:gravity="center"
-                android:textSize="25dp"/>
+                android:textColor="#B3B1B2"
+                android:textSize="12sp" />
+
             <TextView
+                android:id="@+id/duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="188 分钟"/>
+                android:text="188 分钟"
+                android:textColor="#000000"
+                android:textSize="24sp" />
 
         </LinearLayout>
 
@@ -61,16 +75,22 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="难度"
                 android:gravity="center"
-                android:textSize="25dp"/>
+                android:text="难度"
+                android:textColor="#B3B1B2"
+                android:textSize="12sp" />
+
             <TextView
+                android:id="@+id/degree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="K2 初学"/>
+                android:text="K2 初学"
+                android:textColor="#000000"
+                android:textSize="24sp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -82,7 +102,7 @@
         android:padding="15dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/course_intro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="课程介绍"
@@ -130,56 +150,53 @@
                 />
 
 
-
-            <Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button One"
-                android:layout_marginHorizontal="5dp"
+            <Button
                 style="@style/SmsButton"
-                android:background="@drawable/ocean"/>
-            <Button android:layout_width="wrap_content"
+                android:id="@+id/related_course1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
                 android:layout_marginHorizontal="5dp"
+                android:background="@drawable/ocean"
+                android:text="Button One" />
+
+            <Button
+                android:id="@+id/related_course2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/ocean"
                 android:text="Button Two" />
-            <Button android:layout_width="wrap_content"
+
+            <Button
+                android:id="@+id/related_course3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ocean"
                 android:layout_marginHorizontal="5dp"
                 android:text="Button Three" />
 
             <Button
+                android:id="@+id/related_course4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ocean"
                 android:layout_marginHorizontal="5dp"
                 android:text="Button Four" />
 
-            <Button android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/related_course5"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ocean"
                 android:layout_marginHorizontal="5dp"
                 android:text="Button Five" />
-            <Button android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/related_course6"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ocean"
                 android:layout_marginHorizontal="5dp"
                 android:text="Button Six" />
-            <Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Seven" />
-            <Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Eight" />
-            <Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Nine" />
         </LinearLayout>
     </HorizontalScrollView>
 

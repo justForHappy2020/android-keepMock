@@ -12,8 +12,9 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="465dp"
-            android:layout_height="694dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             android:src="@drawable/start4"
             tools:layout_editor_absoluteX="-27dp"
             tools:layout_editor_absoluteY="-9dp" />
@@ -21,9 +22,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Keep Plus"
-            android:textSize="40dp"
-            android:gravity="center"/>
+            android:textSize="40dp" />
 
 
 

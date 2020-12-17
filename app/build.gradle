@@ -4,7 +4,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.example.myapplication"
-        minSdkVersion 25
+        minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -17,6 +17,13 @@ android {
         }
     }
 }
+android.applicationVariants.all {
+    variant ->
+        variant.outputs.all {
+            // 此处指定生成的apk文件名
+            outputFileName = "KeepTest.apk"
+        }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -27,6 +34,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.makeramen:roundedimageview:2.2.1'//圆角图片
 
-    compile 'com.facebook.fresco:fresco:0.9.0+'
+    implementation 'com.facebook.fresco:fresco:0.9.0+'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
+    implementation 'com.github.LRH1993:AutoFlowLayout:1.0.5'
+    //compile 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'com.google.android.material:material:1.0.0'
 }

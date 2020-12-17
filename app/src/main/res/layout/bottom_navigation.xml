@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    >
+    android:orientation="horizontal"
+    android:padding="5dp">
 
     <LinearLayout
         android:id="@+id/sport_buttton"
@@ -13,15 +13,18 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
+
         <ImageView
+            android:id="@+id/sport_img"
             android:layout_width="25dip"
             android:layout_height="25dip"
-            android:src="@drawable/sport_choosen"/>
+            android:src="@drawable/sport_choosen" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="运动"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -31,15 +34,18 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
+
         <ImageView
+            android:id="@+id/social_img"
             android:layout_width="25dip"
             android:layout_height="25dip"
-            android:src="@drawable/social_unchoosen"/>
+            android:src="@drawable/social_unchoosen" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="社区"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,15 +55,18 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
+
         <ImageView
+            android:id="@+id/eating_img"
             android:layout_width="25dip"
             android:layout_height="25dip"
-            android:src="@drawable/eating_unchoosen"/>
+            android:src="@drawable/eating_unchoosen" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="饮食"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -67,15 +76,18 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
+
         <ImageView
+            android:id="@+id/me_img"
             android:layout_width="25dip"
             android:layout_height="25dip"
-            android:src="@drawable/me_unchoosen"/>
+            android:src="@drawable/me_unchoosen" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
 </LinearLayout>

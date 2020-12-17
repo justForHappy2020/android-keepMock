@@ -13,7 +13,6 @@
                 android:layout_height="wrap_content"
                 android:background="#D3D4DA">
 
-
                 <ProgressBar
                     android:id="@+id/progressBar5"
                     style="?android:attr/progressBarStyleHorizontal"
@@ -70,7 +69,6 @@
             </TextView>
 
             <Button
-                android:id="@+id/zawaludo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/dblrectagle_and_circle"

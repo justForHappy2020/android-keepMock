@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9px"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="PingFangSC-bold"
+            android:text="部位"
+            android:textColor="@color/fuxk_base_color_black"
+            android:textSize="15dp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:fontFamily="Arial"
+                    android:gravity="center"
+                    android:radius="70dp"
+                    android:text="腿部"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="腰部"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="腹部"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="背部"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/bt1"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="手臂"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick">
+
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/bt2"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="肩部"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick">
+
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/bt3"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="胸部"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick">
+
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/bt4"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="臀部"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick">
+
+                </Button>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="41dp">
+
+            <Button
+                android:id="@+id/bt5"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="7dp"
+                android:background="@color/btn_bg_colorgrey"
+                android:radius="70dp"
+                android:text="全身"
+                android:textColor="@color/btn_word_colorblack"
+                android:onClick="onClick">
+
+            </Button>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:text="难度"
+            android:textColor="@color/fuxk_base_color_black"
+            android:textSize="15dp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btdifficult1"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="K1零基础"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick">
+
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btdifficult2"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="K2初学"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick">
+
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btdifficult3"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="K3进阶"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick">
+
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btdifficult4"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/btn_bg_colorgrey"
+                    android:radius="70dp"
+                    android:text="K4强化"
+                    android:textColor="@color/btn_word_colorblack"
+                    android:onClick="onClick">
+
+                </Button>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btdifficult5"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="7dp"
+                android:background="@color/btn_bg_colorgrey"
+                android:radius="70dp"
+                android:text="K5挑战"
+                android:textColor="@color/btn_word_colorblack"
+                android:onClick="onClick">
+
+            </Button>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/reset"
+                android:layout_width="164dp"
+                android:layout_height="31dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/text_bbtn_nomal"
+                android:fontFamily="Arial"
+                android:text="重置"
+                android:textColor="@color/btn_boder_colorgreen"
+                android:textSize="20dp"
+                android:onClick="onClick">
+
+            </Button>
+
+            <Button
+                android:id="@+id/sure"
+                android:layout_width="164dp"
+                android:layout_height="31dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/text_bbtn_nomal"
+                android:text="确定"
+                android:textColor="@color/btn_boder_colorgreen"
+                android:textSize="20dp"
+                android:onClick="onClick">
+
+            </Button>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#ECECEC" />
+
+</LinearLayout>

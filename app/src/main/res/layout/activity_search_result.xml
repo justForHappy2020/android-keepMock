@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".search_result"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="#EFEFEF"
+       android:orientation="vertical">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="#FFFFFF"
+          android:orientation="horizontal">
+
+         <ImageButton
+             android:id="@+id/search_back"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:layout_marginTop="10dp"
+             android:background="@color/white"
+             android:scaleType="fitCenter"
+             android:src="@drawable/left_arrow" />
+
+         <LinearLayout
+             android:layout_width="330dp"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:layout_marginTop="10dp"
+             android:layout_marginBottom="10dp"
+             android:background="#EFEFEF"
+             android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/searching_result_button"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="#EFEFEF"
+                android:scaleType="fitXY"
+                android:src="@drawable/search2"/>
+
+
+
+            <EditText
+                android:id="@+id/text_input_search"
+                android:layout_width="250dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="10dp"
+                android:background="#EFEFEF"
+                android:hint="    搜索课程"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="#686868"
+                android:textSize="17dp">
+
+            </EditText>
+
+            <ImageButton
+                android:id="@+id/result_quit_button"
+                android:layout_width="31dp"
+                android:layout_height="match_parent"
+                android:background="#EFEFEF"
+                android:src="@drawable/quit" />
+         </LinearLayout>
+
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/tab_linearLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="#FFFFFF"
+          android:orientation="horizontal">
+
+         <Space
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1" />
+
+         <com.google.android.material.tabs.TabLayout
+             android:id="@+id/tabLayout"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1.8"
+             android:background="@android:color/white"
+             app:tabBackground="@color/transparent"
+             app:tabIndicatorColor="#59535E"
+             app:tabIndicatorFullWidth="false"
+             app:tabRippleColor="@color/transparent"
+             app:tabSelectedTextColor="@android:color/black"
+             app:tabTextColor="@android:color/darker_gray">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="综合" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:text="课程" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:text="用户" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:text="动态" />
+         </com.google.android.material.tabs.TabLayout>
+
+         <Space
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1" />
+
+      </LinearLayout>
+
+
+      <androidx.viewpager.widget.ViewPager
+       android:id="@+id/viewPager"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
+</LinearLayout>
+</LinearLayout>

@@ -1,11 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +22,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -35,31 +31,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import java.net.URL;
 
 import static com.example.myapplication.utils.ClientUploadUtils.upload;
 
-public class register3 extends AppCompatActivity implements View.OnClickListener {
+public class register3 extends Activity implements View.OnClickListener {
 
     private ImageButton ibUpdatePhoto;
+    private TextView tvTextUpdatePhoto;
     private TextView tvName;
     private Button btNameNext;
     private String file_url;
     private File headPortrait;
     private String filename;
     private SharedPreferences saveSP;
+    private int httpCode;
+    private String url;//图片的URL
 
     //调取系统摄像头的请求码
     private static final int MY_ADD_CASE_CALL_PHONE = 6;
@@ -103,6 +100,7 @@ public class register3 extends AppCompatActivity implements View.OnClickListener
     private void initView() {
 
         ibUpdatePhoto = findViewById(R.id.update_photo);
+        tvTextUpdatePhoto = findViewById(R.id.text_update_photo);
         tvName = findViewById(R.id.name);
         btNameNext = findViewById(R.id.name_next);
 
@@ -112,7 +110,7 @@ public class register3 extends AppCompatActivity implements View.OnClickListener
         btNameNext.setOnClickListener(this);
         ibUpdatePhoto.setOnClickListener(this);
 
-        saveSP = getSharedPreferences("saved_photo",MODE_PRIVATE);
+        saveSP = getSharedPreferences("saved_photo",Context.MODE_PRIVATE);
 
         //昵称框有输入才可以点下一步
         tvName.addTextChangedListener(new TextWatcher() {
@@ -244,23 +242,29 @@ public class register3 extends AppCompatActivity implements View.OnClickListener
                 && null != data) {
             try {
                 Uri photoUri = data.getData();//获取路径
-                final String filename = photoUri.getPath();
+                //final String filename = photoUri.getPath();
                 final String filepath = getRealPathFromUriAboveApi19(this,photoUri);//获取绝对路径
-                final String httpurl = "http://192.168.16.1:8080/api/user/uploadImage";
+                final String httpurl = "http://192.168.16.1:8080/api/user/uploadImageAndroid";
 
 
                 //http请求
-                new Thread(new Runnable() {
+                Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            String responseData = upload(httpurl,filepath,filename).string();//http请求
+                            String responseData = upload(httpurl,filepath).string();//http请求
                             try {
                                 JSONObject jsonObject1 = new JSONObject(responseData);
                                     //相应的内容
-                                    String url = jsonObject1.getString("data");//URL?
+                                httpCode = jsonObject1.getInt("code");
+                                if(httpCode == 200){
+                                    url= jsonObject1.getString("data");//URL?
                                     SharedPreferences.Editor editor = saveSP.edit();
                                     editor.putString("url",url);
+                                    if (!editor.commit()) {
+                                        System.out.println("ERROR commit");
+                                    }
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -269,17 +273,15 @@ public class register3 extends AppCompatActivity implements View.OnClickListener
                         }
                     }
 
-                }).start();
-                /*Tiny.FileCompressOptions options = new Tiny.FileCompressOptions();
-                Tiny.getInstance().source(selectedImage).asFile().withOptions(options).compress(new FileWithBitmapCallback() {
-                    @Override
-                    public void callback(boolean isSuccess, Bitmap bitmap, String outfile, Throwable t) {
-                        saveImageToServer(bitmap, outfile);
-                    }
-                });*/
+                });
+                        thread.start();
+                        thread.join(5000);
+                if(url != null)startThread();
             } catch (Exception e) {
                 //"上传失败");
             }
+            if(httpCode==200)Toast.makeText(register3.this,"头像上传成功",Toast.LENGTH_SHORT).show();
+            if(httpCode!=200)Toast.makeText(register3.this,"上传头像失败",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -363,6 +365,48 @@ public class register3 extends AppCompatActivity implements View.OnClickListener
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
+    private Drawable loadImageFromNetwork(String imageUrl)
+    {
+        Drawable drawable = null;
+        try {
+            // 可以在这里通过文件名来判断，是否本地有此图片
+            drawable = Drawable.createFromStream(
+                    new URL(imageUrl).openStream(), "userIcon.jpg");
+        } catch (IOException e) {
+            Log.d("test", e.getMessage());
+        }
+        if (drawable == null) {
+            Log.d("test", "null drawable");
+        } else {
+            Log.d("test", "not null drawable");
+        }
+
+        return drawable ;
+    }
+
+    //显示头像线程
+    private void startThread() {
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                final Drawable drawable = loadImageFromNetwork(url);
+                // post() 特别关键，就是到UI主线程去更新图片
+                ibUpdatePhoto.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        ibUpdatePhoto.setImageDrawable(drawable) ;
+                    }}) ;
+            }
+
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void onClick(View view) {
         final String nickName = tvName.getText().toString().trim();

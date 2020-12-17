@@ -13,6 +13,21 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -75,13 +90,14 @@ public class search_user extends AppCompatActivity implements View.OnClickListen
                     i.putExtra("from",SEARCH_USER);
                     i.putExtra("search_content",estr);
                     startActivity(i);
+
                     strSet= new HashSet<String>(strSet);
                     strSet.add(estr);
                     strList.add(estr);
                     addData(strList);
 
                     SharedPreferences.Editor editor = shp.edit();
-                    editor.putStringSet("search_user_history_list",strSet);
+                    editor.putStringSet("search_share_history_list",strSet);
                     editor.commit();
 
 
@@ -135,4 +151,29 @@ public class search_user extends AppCompatActivity implements View.OnClickListen
         list.clear();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

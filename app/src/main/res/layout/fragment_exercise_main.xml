@@ -61,6 +61,8 @@
                 android:background="@drawable/translucent2"
                 android:text="已累计运动***分钟" />
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,13 +80,14 @@
                     android:fontFamily="sans-serif-black"
                     android:text="腿"/>
 
+
+
                 <Button
                     android:id="@+id/bodypart2"
-                    style="?borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#F4F4FA"
-                    android:drawableTop="@drawable/bodypart_b"
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
 
@@ -98,15 +101,16 @@
                     android:text="腿"
                     android:fontFamily="sans-serif-black"/>
 
+
                 <Button
-                    style="?borderlessButtonStyle"
                     android:id="@+id/bodypart4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#F4F4FA"
-                    android:drawableTop="@drawable/bodypart_d"
-                    android:text="腿"
-                    android:fontFamily="sans-serif-black"/>
+                    android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
+                    android:fontFamily="sans-serif-black"
+                    android:text="腿" />
+
 
             </LinearLayout>
 
@@ -154,9 +158,16 @@
                     android:layout_height="wrap_content"
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_h"
+                    android:layout_weight="1"/>
+=======
+                    android:id="@+id/bodypart5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/circle_button2"
                     android:fontFamily="sans-serif-black"
-                    android:text="全部" />
+                    android:text="腿" />
+
 
             </LinearLayout>
 

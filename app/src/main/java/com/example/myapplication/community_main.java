@@ -39,10 +39,30 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+//=======
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.example.myapplication.entity.MultipleItem;
+import com.example.myapplication.entity.Post;
+import com.example.myapplication.entity.Share;
+
+//>>>>>>> 44ba78d6b9ceb9b5fbc3c1d650faa08fca6c4424
 import java.util.ArrayList;
 import java.util.List;
 
 
+//<<<<<<< HEAD
 public class community_main extends Fragment implements LoadMoreModule {
     private View.OnClickListener onClickListener;
     private List<List> dataSet = new  ArrayList<>();
@@ -56,6 +76,9 @@ public class community_main extends Fragment implements LoadMoreModule {
     private int from;
     private TabLayout mTabLayout;
     private String[] titles = {"热门","关注"};
+    List<Share> postList= new ArrayList<>();
+    private List<Share> datas01= new ArrayList<>();
+    private List<MultipleItem> datas02= new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,6 +86,7 @@ public class community_main extends Fragment implements LoadMoreModule {
         viewpager = view.findViewById(R.id.community_main_viewPager);
         currentPage = 1;
         //Bundle bundle = getArguments();
+
         initData();
         initView(view);
         return view;
@@ -117,6 +141,8 @@ public class community_main extends Fragment implements LoadMoreModule {
         img1.setOnClickListener(onClickListener);
         img2.setOnClickListener(onClickListener);
         float_btn.setOnClickListener(onClickListener);
+
+
     }
     public void onCommunityClick(View view){
         Intent intent = null;
@@ -131,6 +157,7 @@ public class community_main extends Fragment implements LoadMoreModule {
                 break;
             case R.id.float_button:
                 intent = new Intent(getActivity(),community4.class);//点击浮动按钮跳转到发表动态界面
+                intent = new Intent(getActivity(),search_user.class);//点击搜索按钮跳转到搜索结果
                 startActivity(intent);
                 break;
         }}
@@ -193,3 +220,5 @@ public class community_main extends Fragment implements LoadMoreModule {
             }
         });
     }}
+
+//>>>>>>> 44ba78d6b9ceb9b5fbc3c1d650faa08fca6c4424

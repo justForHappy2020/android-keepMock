@@ -13,15 +13,16 @@
                 android:layout_height="wrap_content"
                 android:background="#D3D4DA">
 
-                <ProgressBar
-                    android:id="@+id/progressBar5"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:max="100"
-                    android:progress="20"
-                    android:progressDrawable="@drawable/progressbar"
-                    android:secondaryProgress="70" />
+            <ProgressBar
+                android:id="@+id/progressBar5"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:max="100"
+                android:progress="20"
+                android:progressDrawable="@drawable/progressbar"
+                android:secondaryProgress="70" />
+
 
         </LinearLayout>
 

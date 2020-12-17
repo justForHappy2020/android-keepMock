@@ -188,6 +188,7 @@ public class course_main extends Activity implements View.OnClickListener {
         }
         if(httpcode!=200) Toast.makeText(course_main.this,"ERROR", Toast.LENGTH_SHORT).show();
         else for (int i = 0; i <relatedCourse.size(); i++)btRelatedCourse[i].setText(relatedCourse.get(i).getCourseName() + "\n" + relatedCourse.get(i).getDuration() + "  " + relatedCourse.get(i).getDegree() );//录入相关课程
+
         httpcode = 0;
     }
 

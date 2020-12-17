@@ -39,6 +39,7 @@
     <string name="action_settings">Settings</string>
     <string name="how_many_lesson">27节课程</string>
 
+
     <!--    community string-->
     <string name="community1_edit">\t说点什么吧</string>
     <string name="community1_thumbsnum">331</string>
@@ -88,6 +89,7 @@
 
 
     <string name="comment_id">keep_新人助手1</string>
+
     <string name="comment_content">两只青蛙四条腿..</string>
     <string name="comment_day">2020/02/29</string>
 

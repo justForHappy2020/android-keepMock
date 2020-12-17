@@ -86,6 +86,7 @@
         <activity android:name=".search_result"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
+
       <activity android:name=".MainActivity_ViewPage">
                 <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -95,9 +96,24 @@
 
         <activity android:name=".play"
             android:launchMode="singleTop"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:screenOrientation="portrait">
 
         </activity>
+        <!--
+        <activity android:name=".MainActivity">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
+        -->
+       <!--  <activity android:name=".exercise_main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            </activity>-->
+
 
         <activity android:name=".MainActivity">
                     <intent-filter>
@@ -106,20 +122,25 @@
                     </intent-filter>
                 </activity>
 
-                <activity android:name=".exercise_main">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <!--        <activity android:name=".MainActivity">
+>>>>>>> 44ba78d6b9ceb9b5fbc3c1d650faa08fca6c4424
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+<<<<<<< HEAD
+        </activity>
+
+              <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+=======
+>>>>>>> 44ba78d6b9ceb9b5fbc3c1d650faa08fca6c4424
         </activity>-->
 
         <activity

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,10 +36,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
+import com.example.myapplication.entity.Course;
+import com.example.myapplication.entity.MultipleItem;
+import com.example.myapplication.entity.Post;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class fragment_search_daily extends Fragment {
+
 
     //List<Post> postList1= new ArrayList<>();
     private List<List> dataSet = new  ArrayList<>();
@@ -48,20 +62,24 @@ public class fragment_search_daily extends Fragment {
 
     MultipleItemQuickAdapter quickAdapter;
     RecyclerView recyclerView;
+
+    private List<MultipleItem> datas02= new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_daily, container, false);
+
         currentPage = 1;
         Bundle bundle = getArguments();
         keyWord = bundle.getString("searchContent");
-        initData();
         initView(view);
 
         return view;
     }
 
     private void initView(View view){
+
         recyclerView= (RecyclerView) view.findViewById(R.id.fragment_daily_recyclerView);
         //设置recyclerView的样式
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
@@ -88,8 +106,6 @@ public class fragment_search_daily extends Fragment {
 
             }
         });
-        SpacesItemDecoration decoration=new SpacesItemDecoration(16);
-        recyclerView.addItemDecoration(decoration);
         //具体课程的监听
         quickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -113,6 +129,17 @@ public class fragment_search_daily extends Fragment {
 
             }
         });
+        recyclerView= (RecyclerView) view.findViewById(R.id.fragment_daily_recyclerView);
+        //设置recyclerView的样式
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+
+        //设置adapter
+        MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(datas02);
+        recyclerView.setAdapter(myAdapter);
+
+        //设置item之间的间隔
+        SpacesItemDecoration decoration=new SpacesItemDecoration(16);
+        recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(quickAdapter);
     }
     public void clickHead(int position){
@@ -120,9 +147,7 @@ public class fragment_search_daily extends Fragment {
         intent = new Intent(getActivity(), community2.class);
         startActivity(intent);
     }
-    private void initData(){
 
-    }
     private void getHttpSearch(final String url) {
         final Thread thread = new Thread(new Runnable() {
             @Override
@@ -182,5 +207,6 @@ public class fragment_search_daily extends Fragment {
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreEnd();*/
     }
+
 
 }

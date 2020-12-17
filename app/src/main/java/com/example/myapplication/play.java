@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -19,9 +20,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 public class play extends Activity {
 
+
     private int httpcode;
     private String VIDEO_URL ="http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
+            //"http://qi7yrfvw3.hn-bkt.clouddn.com/test";
+
     private VideoView mVideoView;
     private TextView mBufferingTextView;
     private View mPortraitPosition;
@@ -45,12 +49,16 @@ public class play extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
-        SharedPreferences readSP = getSharedPreferences("saved_token",MODE_PRIVATE);
-        final String token = readSP.getString("token","");
+        SharedPreferences readSP = getSharedPreferences("saved_token", MODE_PRIVATE);
+        final String token = readSP.getString("token", "");
         Intent intentAccept = null;
         intentAccept = getIntent();
+
         //VIDEO_URL=intentAccept.getStringExtra("courseUrl");
-        final Long courseId = intentAccept.getLongExtra("courseID",0);
+
+        VIDEO_URL = intentAccept.getStringExtra("courseUrl");
+
+        final Long courseId = intentAccept.getLongExtra("courseID", 0);
 
         //记录播放记录http
 /*        Thread thread = new Thread(new Runnable() {
@@ -206,7 +214,7 @@ public class play extends Activity {
                 changeToLandscapeLayout();
                 break;
             }
-            case Configuration.ORIENTATION_PORTRAIT:{
+            case Configuration.ORIENTATION_PORTRAIT: {
                 changeToPortraitLayout();
                 break;
             }
@@ -255,7 +263,7 @@ public class play extends Activity {
         cs.connect(mVideoView.getId(), ConstraintSet.BOTTOM, clRootContainer.getId(), ConstraintSet.BOTTOM);
         //cs.constrainHeight(mVideoView.getId(), mPortraitPosition.getHeight());
         cs.constrainWidth(mVideoView.getId(), height);
-        cs.setDimensionRatio(mVideoView.getId(),"1");
+        cs.setDimensionRatio(mVideoView.getId(), "1");
 
         //将修改过的约束重新应用到ConstrainLayout
         cs.applyTo(clRootContainer);
@@ -280,7 +288,7 @@ public class play extends Activity {
         cs.connect(mVideoView.getId(), ConstraintSet.RIGHT, clRootContainer.getId(), ConstraintSet.RIGHT);
         cs.connect(mVideoView.getId(), ConstraintSet.BOTTOM, clRootContainer.getId(), ConstraintSet.BOTTOM);
         cs.constrainHeight(mVideoView.getId(), height);
-        cs.setDimensionRatio(mVideoView.getId(),"1");
+        cs.setDimensionRatio(mVideoView.getId(), "1");
 
         //将修改过的约束重新应用到ConstrainLayout
         cs.applyTo(clRootContainer);
@@ -309,5 +317,4 @@ public class play extends Activity {
 
         }
     }
-
 }

@@ -41,7 +41,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+
 import java.net.URL;
+
 
 import static com.example.myapplication.utils.ClientUploadUtils.upload;
 
@@ -56,7 +58,9 @@ public class register3 extends Activity implements View.OnClickListener {
     private String filename;
     private SharedPreferences saveSP;
     private int httpCode;
+
     private String url;//图片的URL
+
 
     //调取系统摄像头的请求码
     private static final int MY_ADD_CASE_CALL_PHONE = 6;
@@ -259,6 +263,8 @@ public class register3 extends Activity implements View.OnClickListener {
                                 httpCode = jsonObject1.getInt("code");
                                 if(httpCode == 200){
                                     url= jsonObject1.getString("data");//URL?
+
+
                                     SharedPreferences.Editor editor = saveSP.edit();
                                     editor.putString("url",url);
                                     if (!editor.commit()) {
@@ -277,6 +283,14 @@ public class register3 extends Activity implements View.OnClickListener {
                         thread.start();
                         thread.join(5000);
                 if(url != null)startThread();
+                        thread.join(10000);
+                /*Tiny.FileCompressOptions options = new Tiny.FileCompressOptions();
+                Tiny.getInstance().source(selectedImage).asFile().withOptions(options).compress(new FileWithBitmapCallback() {
+                    @Override
+                    public void callback(boolean isSuccess, Bitmap bitmap, String outfile, Throwable t) {
+                        saveImageToServer(bitmap, outfile);
+                    }
+                });*/
             } catch (Exception e) {
                 //"上传失败");
             }

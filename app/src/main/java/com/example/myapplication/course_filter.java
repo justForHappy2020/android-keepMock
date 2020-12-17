@@ -1,8 +1,13 @@
 package com.example.myapplication;
 
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+
+import android.app.Activity;
+import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,6 +25,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -119,6 +128,7 @@ public class course_filter extends Activity implements View.OnClickListener {
                             course.setCourseName(jsonObject.getString("courseName"));
                             course.setBackgroundUrl(jsonObject.getString("backgroundUrl"));
                             //course.setCourseUrl(jsonObject.getString("courseUrl"));
+                            course.setCourseUrl(jsonObject.getString("courseUrl"));
                             course.setBodyPart(jsonObject.getString("bodyPart"));
                             course.setDegree(jsonObject.getString("degree"));
                             course.setDuration(jsonObject.getString("duration"));

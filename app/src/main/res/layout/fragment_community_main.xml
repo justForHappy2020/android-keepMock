@@ -33,10 +33,18 @@
             android:layout_weight="0"
             android:backgroundTint="#FFFFFF"
             android:src="@drawable/followers" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0"
+            android:backgroundTint="#FFFFFF"
+            android:src="@drawable/followers"/>
 
         <ImageButton
             android:id="@+id/community_main_search"
             android:layout_width="wrap_content"
+
             android:layout_height="46dp"
             android:layout_marginTop="9dp"
             android:layout_weight="0"
@@ -117,5 +125,13 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"/>
         </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/community_main_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#F6F6F6"
+            tools:listitem="@layout/item_post_full" />
     </LinearLayout>
 </LinearLayout>

@@ -3,10 +3,13 @@ package com.example.myapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import android.os.CountDownTimer;
+
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -22,6 +25,16 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+
+
+import javax.xml.transform.sax.TemplatesHandler;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 
 import static com.example.myapplication.utils.HttpUtils.connectHttp;
 
@@ -159,6 +172,7 @@ public class register2 extends Activity implements View.OnClickListener{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 if(httpcode==200){
                     Toast.makeText(this,"验证码已重新发送",Toast.LENGTH_SHORT).show();
                     new CountDownTimer(10000, 1000) {
@@ -179,6 +193,11 @@ public class register2 extends Activity implements View.OnClickListener{
                     Toast.makeText(register2.this,"手机号有误",Toast.LENGTH_SHORT).show();
                     tvRequireAgain.setEnabled(Boolean.TRUE);
                 }
+
+                if(httpcode==200)Toast.makeText(this,"验证码已重新发送",Toast.LENGTH_SHORT).show();
+                if(httpcode!=200)Toast.makeText(register2.this,"手机号有误",Toast.LENGTH_SHORT).show();
+                tvRequireAgain.setEnabled(Boolean.TRUE);
+
                 break;
             case R.id.name_next:
                 final String code = etVcode.getText().toString().trim();

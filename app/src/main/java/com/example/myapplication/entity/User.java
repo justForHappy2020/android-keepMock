@@ -15,7 +15,8 @@ public class User {
     private String password;
     private String token;
     private int user_head;
-    ;
+      private String title;
+    private String imgUrl;
 
     public User(){
     }
@@ -117,5 +118,28 @@ public class User {
 
     public int getUser_head() {
         return user_head;
+    }
+
+
+    //生成set、get方法
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+
+
+
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

@@ -4,11 +4,12 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.MultipleItem;
-import com.example.myapplication.entity.Share;
+
 
 import java.util.List;
+import java.util.List;
 
-public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> implements LoadMoreModule {
+public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> {
 
     public MultipleItemQuickAdapter(List data) {
         super(data);
@@ -35,7 +36,8 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.tv_title, item.getData().getTitle())
                         .setText(R.id.tv_content, item.getData().getContent());
                 break;*/
-            case MultipleItem.MASONRYPOST:
+
+           case MultipleItem.MASONRYPOST:
                 helper.setImageResource(R.id.masonry_item_post_img, item.getPost().getPostImg())
                         .setImageResource(R.id.masonry_item_portrait_img,item.getPost().getPortraitImg())
                         .setText(R.id.masonry_item_title, item.getPost().getTitle())
@@ -64,7 +66,8 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.masonry_item_username, item.getPost().getUserName())
                         .setText(R.id.masonry_item_num, item.getPost().getNotificationNum())
                         .setImageResource(R.id.masonry_item_post_img,R.drawable.scenery);
-                break;
+                        //.setImageResource(R.id.user_head, R.mipmap.ic_launcher);
+            break;
         }
     }
 

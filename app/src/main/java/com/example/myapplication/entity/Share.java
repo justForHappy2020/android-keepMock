@@ -45,6 +45,16 @@ public class Share {
     public String getCreateTime() {
         return createTime;
     }
+    private String users_id;
+    private String praises;
+    private String comments;
+
+
+
+    public String getComments() {return comments; }
+
+    public String getPraises() { return praises; }
+
 
     public String getContents() {
         return contents;
@@ -109,10 +119,18 @@ public class Share {
     public void setContents(String contents) {
         this.contents = contents;
     }
+    public String getUsers_id() {
+        return users_id;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
 
     public void setContent_pics(int content_pics) {
         this.content_pics = content_pics;
     }
+
 
     public void setCommentsNumbers(String commentsNumbers) {
         this.commentsNumbers = commentsNumbers;
@@ -136,6 +154,16 @@ public class Share {
 
     public void setShareType(int shareType) {
         this.shareType = shareType;
+    }
+
+    public void setPraises(String praises) {
+        this.praises = praises;
+    }
+
+
+    public void setUsers_id(String users_id) {
+        this.users_id = users_id;
+
     }
 }
 

@@ -55,7 +55,6 @@ public class MainActivity_ViewPage extends FragmentActivity implements View.OnCl
     private void initDatas() {
         mFragments = new ArrayList<>();
         //将四个Fragment加入集合中
-
         mFragments.add(new exercise_main());
         mFragments.add(new community_main());
         mFragments.add(new diet_main());

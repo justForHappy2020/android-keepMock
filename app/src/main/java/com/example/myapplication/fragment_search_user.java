@@ -7,11 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 
 
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
@@ -98,6 +104,21 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
 
     private void initData(){
        /* User user1 = new User("用户1",R.drawable.sucai);
+=======
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        //设置adapter
+        MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(datas02);
+        recyclerView.setAdapter(myAdapter);
+
+        //设置item之间的间隔
+        SpacesItemDecoration decoration = new SpacesItemDecoration(16);
+        recyclerView.addItemDecoration(decoration);
+    }
+
+    private void initData(){
+        User user1 = new User("用户1",R.drawable.sucai);
+>>>>>>> 44ba78d6b9ceb9b5fbc3c1d650faa08fca6c4424
         User user2 = new User("用户2",R.drawable.sucai);
         User user3 = new User("用户3",R.drawable.sucai);
 
@@ -111,6 +132,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
         datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(2)));
         datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(1)));
         datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(0)));
+<<<<<<< HEAD
         datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(1)));*/
 
      /*   User user;
@@ -183,4 +205,5 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
         quickAdapter.getLoadMoreModule().loadMoreEnd();
     }
 }
+
 

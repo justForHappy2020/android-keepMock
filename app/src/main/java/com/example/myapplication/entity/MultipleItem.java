@@ -11,6 +11,7 @@ public class MultipleItem implements MultiItemEntity {
     public static final int SHARE = 6;
     public static final int POST = 7;
 
+
     private int itemType;
     private Course course;
     private Post post;

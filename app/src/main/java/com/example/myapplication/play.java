@@ -42,11 +42,10 @@ import java.util.TimerTask;
 public class play extends Activity implements View.OnClickListener{
 
     private int httpcode;
-    private String VIDEO_URL = "http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
-    //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
-    //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
-    //"http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
-
+    private String VIDEO_URL = "http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
+            //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
+            //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
+            //"http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
     private VideoView mVideoView;
     private TextView mBufferingTextView;
     private ProgressBar progressBar;
@@ -128,7 +127,7 @@ public class play extends Activity implements View.OnClickListener{
         next.setOnClickListener(this);
         detail.setOnClickListener(this);
 
-        VIDEO_URL = actionCom.getActionUrl();
+        //VIDEO_URL = actionCom.getActionUrl();
         //进度条
         tvShowTime.setText(actionCom.getDuration());
         tvActionName.setText(actionCom.getActionName());//还要显示第几个动作，一共几个动作
@@ -278,7 +277,8 @@ public class play extends Activity implements View.OnClickListener{
         mBufferingTextView.setVisibility(VideoView.VISIBLE);
 
         // Buffer and decode the video sample.
-        Uri videoUri = getMedia(VIDEO_URL);
+        //Uri videoUri = getMedia(VIDEO_URL);
+        Uri videoUri = Uri.parse(VIDEO_URL);
         mVideoView.setVideoURI(videoUri);
 
         // Listener for onPrepared() event (runs after the media is prepared).

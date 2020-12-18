@@ -1,17 +1,26 @@
 package com.example.myapplication.entity;
 
 public class AddImage {
-    private  int imgUrl;
+    private  String imgUrl;
+    private int iId;
 
-    public AddImage(int imgUrl){
+    public AddImage(int iID, String imgUrl){
+        this.iId = iId;
         this.imgUrl = imgUrl;
     }
 
-    public int getImgUrl() {
+    public int getiId() {
+        return iId;
+    }
+
+    public void setiId(int iId) {
+        this.iId = iId;
+    }
+    public String getImgUrl() {
         return imgUrl;
     }
 
-    public void setImgUrl(int imgUrl) {
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 }

@@ -60,7 +60,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setImageResource(R.id.content_pics,R.drawable.post_img2);// item.getShare().getImgUrls()
                 break;
             case MultipleItem.ADDIMAGE:
-                helper.setImageResource(R.id.community4_item_image, item.getAddimage().getImgUrl());
+                //helper.setImageResource(R.id.community4_item_image, item.getAddimage().getImgUrl());
 
             case MultipleItem.POST:
                 helper.setImageResource(R.id.masonry_item_post_img, item.getPost().getPostImg())

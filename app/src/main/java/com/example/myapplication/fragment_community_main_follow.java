@@ -63,7 +63,7 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
     }
 
     private void initView(View view) {
-        final ImageButton float_btn = view.findViewById(R.id.float_button);
+        ImageButton float_btn = view.findViewById(R.id.float_button);
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,7 +124,10 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                         clickLike(view,position,count_like);
                         break;
                     case R.id.postcomment:
-                        clickComment(position);
+                      //  clickComment(position);
+                        Intent intent;
+                        intent = new Intent(getActivity(), community1.class);
+                        startActivity(intent);
                         break;
                 }
 

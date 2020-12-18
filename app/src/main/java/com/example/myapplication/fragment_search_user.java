@@ -1,10 +1,13 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
-
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.example.myapplication.entity.Course;
@@ -53,7 +59,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
     private List<MultipleItem> userList = new ArrayList();
     private int currentPage; //要分页查询的页面
     private String keyWord;//搜索的关键词
-
+    RecyclerView recyclerView;
 
     @Nullable
     @Override
@@ -68,7 +74,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
     }
 
     private void initView(View view){
-        RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.fragment_user_recyclerView);
+        recyclerView= (RecyclerView) view.findViewById(R.id.fragment_user_recyclerView);
         //设置recyclerView的样式
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         quickAdapter = new MultipleItemQuickAdapter(userList);
@@ -99,7 +105,53 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
 
             }
         });
+        quickAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                Intent intent;
+                intent = new Intent(getActivity(), community2.class);
+                startActivity(intent);
+            }
+        });
+        quickAdapter.addChildClickViewIds(R.id.user_follow,R.id.user_head);
+        quickAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {
+                int count_like = 0;
+                int count_follow = 0;
+                switch (view.getId()){
+                    case R.id.user_follow:
+                        //position.like.click;
+                        count_follow = count_follow + 1;
+                        clickFollow(position,count_follow);
+                        break;
+                    case R.id.user_head:
+                        Intent intent;
+                        intent = new Intent(getActivity(), community2.class);
+                        startActivity(intent);
+                        break;
+                }
+
+            }
+        });
         recyclerView.setAdapter(quickAdapter);
+    }
+    public void clickFollow(int position,int i){
+        Boolean isClicked;
+        if (i%2 == 1) isClicked = true;
+        else isClicked = false;
+        if(isClicked == false){
+            isClicked=true;
+            Button item_follow=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.user_follow);
+            item_follow.setText("关注");
+            item_follow.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }
+        else {
+            isClicked=false;
+            Button item_follow=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.user_follow);
+            item_follow.setText("已关注");
+            item_follow.setBackgroundColor(Color.parseColor("#25C689"));
+        }
     }
 
     private void initData(){

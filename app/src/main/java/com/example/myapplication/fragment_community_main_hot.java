@@ -162,7 +162,10 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                         clickLike(view,position,count_like);
                         break;
                     case R.id.postcomment:
-                        clickComment(position);
+                        //  clickComment(position);
+                        Intent intent;
+                        intent = new Intent(getActivity(), community1.class);
+                        startActivity(intent);
                         break;
                 }
 

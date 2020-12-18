@@ -8,6 +8,13 @@ public class Post {
     private String userName;
     private String notificationNum;
 
+    private String headPortraitUrl;
+    private String imgUrls;
+
+    public Post(){
+
+    }
+
     public Post(int img, int portrait_img, String title, String textContent, String userName, String notificationNum) {
         this.post_img = img;
         this.portrait_img = portrait_img;
@@ -16,6 +23,16 @@ public class Post {
         this.userName = userName;
         this.notificationNum = notificationNum;
     }
+
+
+    public String getHeadPortraitUrl() {
+        return headPortraitUrl;
+    }
+
+    public int getPortrait_img() {
+        return portrait_img;
+    }
+
 
     public int getPostImg() {
         return post_img;
@@ -59,6 +76,19 @@ public class Post {
 
     public void setUserName(String userName){
         this.userName = userName;
+    }
+
+
+    public void setNotificationNum(String num){
+        this.notificationNum = String.valueOf(num);
+    }
+
+    public void setHeadPortraitUrl(String headPortraitUrl) {
+        this.headPortraitUrl = headPortraitUrl;
+    }
+
+    public void setImgUrls(String imgUrls) {
+        this.imgUrls = imgUrls;
     }
 
     public void setNotificationNum(int num){

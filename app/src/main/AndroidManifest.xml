@@ -39,11 +39,35 @@
 
         </activity>
         <activity
-            android:name=".search"
+            android:name=".community1"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".community2"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".community3"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".search_user"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".search_user"
+            android:name=".search_share"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".search"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -61,6 +85,7 @@
         <activity android:name=".search_result"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
+
       <activity android:name=".MainActivity_ViewPage">
                 <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -81,13 +106,12 @@
                     </intent-filter>
                 </activity>
 
-        <!--        <activity android:name=".MainActivity">
+       <!--  <activity android:name=".exercise_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+            </activity>-->
 
         <activity
             android:name=".register1"

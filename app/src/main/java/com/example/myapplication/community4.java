@@ -178,17 +178,17 @@ public class community4 extends Activity implements View.OnClickListener {
         locationManager.requestLocationUpdates(provider, 10000, 0, locationListener);
         while(location == null){ location = locationManager.getLastKnownLocation(provider); } //移除更新监听
         locationManager.removeUpdates(locationListener);
-         if (location != null) { //不为空,显示地理位置经纬度
-         double longitude = location.getLongitude();// 经度
-         double latitude = location.getLatitude();// 纬度
-         locationStr = latitude+ ","+longitude;
-         }
+        if (location != null) { //不为空,显示地理位置经纬度
+            double longitude = location.getLongitude();// 经度
+            double latitude = location.getLatitude();// 纬度
+            locationStr = latitude+ ","+longitude;
+        }
     }
-/**
- * 获取权限结果
- */
+    /**
+     * 获取权限结果
+     */
 
- private void initView(){
+    private void initView(){
         btn_cancel = findViewById(R.id.community4_Leftarrow_btn);
         btn_release = findViewById(R.id.community4_Release_btn);
         et = findViewById(R.id.community4_Sharetext_edit);
@@ -341,11 +341,11 @@ public class community4 extends Activity implements View.OnClickListener {
             public void run() {
                 final Drawable drawable = loadImageFromNetwork(url);
                 // post() 特别关键，就是到UI主线程去更新图片
-                        ibPhoto.post(new Runnable(){
-                            @Override
-                            public void run() {
-                                // TODO Auto-generated method stub
-                                ibPhoto.setImageDrawable(drawable) ;
+                ibPhoto.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        ibPhoto.setImageDrawable(drawable) ;
                     }}) ;
             }
 
@@ -384,8 +384,6 @@ public class community4 extends Activity implements View.OnClickListener {
                 //final String filename = photoUri.getPath();
                 final String filepath = getRealPathFromUriAboveApi19(this,photoUri);//获取绝对路径
                 final String httpurl = "http://192.168.16.1:8080/api/user/uploadImageAndroid";
-
-
                 //http请求获取上传到云后的图片URL
                 Thread thread = new Thread(new Runnable() {
                     @Override
@@ -412,7 +410,6 @@ public class community4 extends Activity implements View.OnClickListener {
                             e.printStackTrace();
                         }
                     }
-
                 });
                 thread.start();
                 thread.join(5000);
@@ -491,7 +488,7 @@ public class community4 extends Activity implements View.OnClickListener {
                     choosePhoto();
                 }
                 break;
-                //点击删除图片
+            //点击删除图片
             case R.id.community4_Image_btn1:
                 ibPhoto.setImageResource(R.drawable.sucai);//测试。实际需做：删除此图片item
                 urlList.remove(0);//从urlList中删除对应的图片url ，括号内为要删除的第几张图片（从0开始算）

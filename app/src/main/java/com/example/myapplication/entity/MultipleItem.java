@@ -9,7 +9,8 @@ public class MultipleItem implements MultiItemEntity {
     public static final int MASONRYPOST = 4;
     public static final int USER = 5;
     public static final int SHARE = 6;
-    public static final int ADDIMAGE = 7;
+    public static final int ADDIMAGE = 8;
+    public static final int POST = 7;
 
     private int itemType;
     private Course course;

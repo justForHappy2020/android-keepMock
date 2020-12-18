@@ -59,8 +59,6 @@ public class fragment_search_course extends Fragment {
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_course_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
         quickAdapter = new QuickAdapter(R.layout.item_course, courseList);
         configLoadMoreData();
 

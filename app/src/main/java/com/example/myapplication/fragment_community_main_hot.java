@@ -173,7 +173,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
     public void clickHead(int position){
         Intent intent;
         intent = new Intent(getActivity(), community2.class);
-        intent.putExtra("ShareId",shareList.get(position).getShare().getShareId())
+        intent.putExtra("ShareId",shareList.get(position).getShare().getShareId());
         startActivity(intent);
     }
     public void clickFollow(int position,int i){

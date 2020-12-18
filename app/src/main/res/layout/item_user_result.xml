@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/user_id"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/community6_username1"
             android:layout_gravity="center"
@@ -40,7 +40,7 @@
             android:layout_height="30dp"
             android:background="@drawable/button_radius_green"
             android:layout_gravity="center"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="80dp"
             android:text="关注"
             android:textColor="@color/white"
             android:textStyle="bold"

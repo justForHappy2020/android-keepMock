@@ -24,6 +24,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
 
     final int SEARCH_ALL = 0;
     final int SEARCH_COURSE = 1;
+    final int SEARCH_SHARE = 2;
     final int SEARCH_USER = 3;
 
     private EditText etInput;
@@ -109,11 +110,14 @@ public class search_result extends FragmentActivity implements View.OnClickListe
             case 1:
                 mViewPager.setCurrentItem (1);
                 break;
+            case 2 :
+                mViewPager.setCurrentItem (2);
+                break;
             case 3:
                 mViewPager.setCurrentItem (3);
                 break;
-             default:
-                 break;
+            default:
+                break;
         }
 
     }
@@ -166,7 +170,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
                 searchContent = etInput.getText().toString().trim();
                 if(mViewPager.getCurrentItem() == 0)intent.putExtra("from", SEARCH_ALL);
                 else if(mViewPager.getCurrentItem() == 1)intent.putExtra("from", SEARCH_COURSE);
-                //else if(mViewPager.getCurrentItem() == 2)
+                else if(mViewPager.getCurrentItem() == 2)intent.putExtra("from", SEARCH_SHARE);
                 else if(mViewPager.getCurrentItem() == 3)intent.putExtra("from", SEARCH_USER);
                 intent.putExtra("searchContent",searchContent);
                 startActivity(intent);

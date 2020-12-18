@@ -271,7 +271,6 @@ public class community4 extends Activity implements View.OnClickListener {
             double latitude = location.getLatitude();// 纬度
             locationStr = latitude+ ","+longitude;
         }
-
     }
 
 //     * 获取权限结果
@@ -462,11 +461,11 @@ public class community4 extends Activity implements View.OnClickListener {
             public void run() {
                 final Drawable drawable = loadImageFromNetwork(url);
                 // post() 特别关键，就是到UI主线程去更新图片
-                        ibPhoto.post(new Runnable(){
-                            @Override
-                            public void run() {
-                                // TODO Auto-generated method stub
-                                ibPhoto.setImageDrawable(drawable) ;
+                ibPhoto.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        ibPhoto.setImageDrawable(drawable) ;
                     }}) ;
             }
 
@@ -504,7 +503,6 @@ public class community4 extends Activity implements View.OnClickListener {
                 final String filepath = getRealPathFromUriAboveApi19(this,photoUri);//获取绝对路径
                 //final String httpurl = "http://192.168.16.1:8080/api/user/uploadImageAndroid";
                 final String httpurl = "http://159.75.2.94:8080/api/user/uploadImageAndroid";
-
                 //http请求获取上传到云后的图片URL
                 Thread thread = new Thread(new Runnable() {
                     @Override
@@ -533,7 +531,6 @@ public class community4 extends Activity implements View.OnClickListener {
                             e.printStackTrace();
                         }
                     }
-
                 });
                 thread.start();
                 thread.join(5000);
@@ -635,7 +632,6 @@ public class community4 extends Activity implements View.OnClickListener {
                     choosePhoto();
                 }
                 break;
-
                 //点击删除图片
             case R.id.community4_item_cancel:
             //点击删除图片

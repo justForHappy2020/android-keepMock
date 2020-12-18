@@ -1,12 +1,15 @@
 package com.example.myapplication;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
+import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.MultipleItem;
 
+
+import java.util.List;
 import java.util.List;
 
-public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> {
+public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> implements LoadMoreModule{
 
     public MultipleItemQuickAdapter(List data) {
         super(data);
@@ -17,6 +20,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
         addItemType(MultipleItem.USER, R.layout.item_user_result);
         addItemType(MultipleItem.SHARE, R.layout.item_post_full);
         addItemType(MultipleItem.ADDIMAGE,R.layout.item_photo);
+        addItemType(MultipleItem.POST,R.layout.item_post_simplified);
     }
 
     @Override
@@ -33,6 +37,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.tv_title, item.getData().getTitle())
                         .setText(R.id.tv_content, item.getData().getContent());
                 break;*/
+
            case MultipleItem.MASONRYPOST:
                 helper.setImageResource(R.id.masonry_item_post_img, item.getPost().getPostImg())
                         .setImageResource(R.id.masonry_item_portrait_img,item.getPost().getPortraitImg())
@@ -42,20 +47,31 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.masonry_item_num, item.getPost().getNotificationNum());
                 break;
             case MultipleItem.USER:
-                helper.setText(R.id.user_id, item.getUser().getTitle())
-                    .setImageResource(R.id.user_head, R.mipmap.ic_launcher);
-            break;
+                helper.setText(R.id.user_id, item.getUser().getNickname())
+                        .setImageResource(R.id.user_head,R.drawable.sucai );//item.getUser().getHeadPortraitUrl()
+                break;
             case MultipleItem.SHARE:
-                helper.setText(R.id.users_id, item.getShare().getUsers_id())
+                helper.setText(R.id.users_id, item.getShare().getNickname())
                         .setText(R.id.contents, item.getShare().getContents())
-                        .setText(R.id.praises, item.getShare().getPraises())
-                        .setText(R.id.comments,item.getShare().getComments())
-                        .setImageResource(R.id.users_haed, item.getShare().getUser_heads())
-                        .setImageResource(R.id.content_pics, item.getShare().getContent_pics());
+                        .setText(R.id.praises, item.getShare().getLikeNumbers())
+                        .setText(R.id.comments,item.getShare().getCommentsNumbers())
+                        .setImageResource(R.id.postlike,R.drawable.like_unclick)
+                        .setImageResource(R.id.share_users_head, R.drawable.sucai)//item.getShare().getHeadPortraitUrl()
+                        .setImageResource(R.id.content_pics,R.drawable.post_img2);// item.getShare().getImgUrls()
                 break;
             case MultipleItem.ADDIMAGE:
                 //helper.setImageResource(R.id.community4_item_image, item.getAddimage().getImgUrl());
 
+            case MultipleItem.POST:
+                helper.setImageResource(R.id.masonry_item_post_img, item.getPost().getPostImg())
+                        .setImageResource(R.id.masonry_item_portrait_img,item.getPost().getPortraitImg())
+                        .setText(R.id.masonry_item_title, item.getPost().getTitle())
+                        .setText(R.id.masonry_item_textContent, item.getPost().getTextContent())
+                        .setText(R.id.masonry_item_username, item.getPost().getUserName())
+                        .setText(R.id.masonry_item_num, item.getPost().getNotificationNum())
+                        .setImageResource(R.id.masonry_item_post_img,R.drawable.scenery);
+                        //.setImageResource(R.id.user_head, R.mipmap.ic_launcher);
+            break;
         }
     }
 

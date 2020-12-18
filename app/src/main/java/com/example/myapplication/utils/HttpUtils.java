@@ -35,7 +35,6 @@ public class HttpUtils {
         return  responseData;
     }
 
-
     //GET请求
     static public String connectHttpGet(String url) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(30000, TimeUnit.MILLISECONDS)

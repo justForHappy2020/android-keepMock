@@ -13,6 +13,7 @@
         android:orientation="horizontal">
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
@@ -25,7 +26,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/me_main_setting"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -33,19 +34,19 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:scaleType="fitCenter"
+            android:background="#FFFFFF"
             app:srcCompat="@drawable/setting" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/me_main_scan"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_margin="20dp"
-            android:scaleType="fitCenter"
+            android:background="#FFFFFF"
             app:srcCompat="@drawable/scan" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/me_main_message"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -53,8 +54,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:scaleType="fitCenter"
+            android:background="#FFFFFF"
             app:srcCompat="@drawable/envelope" />
+
 
     </LinearLayout>
 
@@ -188,12 +190,13 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/img_sport_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
+                        android:background="#FFFFFF"
                         android:scaleType="fitEnd"
                         app:srcCompat="@drawable/next" />
                 </LinearLayout>
@@ -276,13 +279,14 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/img_height_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:scaleType="fitEnd"
+                        android:background="#FFFFFF"
                         app:srcCompat="@drawable/next" />
                 </LinearLayout>
 
@@ -370,7 +374,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/me_main_mycourse_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -378,9 +382,13 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:scaleType="fitEnd"
+                android:background="#FFFFFF"
                 app:srcCompat="@drawable/next" />
         </LinearLayout>
 
     </LinearLayout>
+
+
+
 
 </LinearLayout>

@@ -74,6 +74,9 @@ public class fragment_search_daily extends Fragment {
 
         //设置adapter
         quickAdapter = new MultipleItemQuickAdapter(shareList);
+
+        configLoadMoreData();
+
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             //int mCurrentCunter = 0;
 
@@ -123,7 +126,7 @@ public class fragment_search_daily extends Fragment {
         SpacesItemDecoration decoration=new SpacesItemDecoration(16);
         recyclerView.addItemDecoration(decoration);
 
-        configLoadMoreData();
+
     }
 
     public void clickHead(int position){
@@ -190,10 +193,13 @@ public class fragment_search_daily extends Fragment {
         String url;//http请求的url
         url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/getHotShare";
         getHttpSearch(url);
-        /*dataSet.add(shareList);
-        quickAdapter.addData(dataSet.get(currentPage-1));
+
+        //sharePages.add(shareList);
+
+        //dataSet.add(shareList);
+        //quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
-        quickAdapter.getLoadMoreModule().loadMoreEnd();*/
+        quickAdapter.getLoadMoreModule().loadMoreEnd();
     }
 
 

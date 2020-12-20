@@ -51,6 +51,7 @@ public class fragment_search_course extends Fragment {
         currentPage = 1;
         Bundle bundle = getArguments();
         keyWord = bundle.getString("searchContent");
+
         initView(view);
         //initData();
         return view;
@@ -59,7 +60,9 @@ public class fragment_search_course extends Fragment {
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_course_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         quickAdapter = new QuickAdapter(R.layout.item_course, courseList);
+
         configLoadMoreData();
 
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -76,7 +79,7 @@ public class fragment_search_course extends Fragment {
                         public void run() {
                             configLoadMoreData();
                         }
-                    }, 1000);
+                    }, 2000);
 
                 }
 
@@ -101,23 +104,6 @@ public class fragment_search_course extends Fragment {
 
         recyclerView.setAdapter(quickAdapter);
 
-    }
-
-
-    private void initData() {
-
-
-          /*TestData*/
-
-
-        Course course;
-        for (int i = 0; i < 5; i++) {
-            course = new Course();
-            course.setCourseName("课程名称");
-            course.setCourseIntro("课程介绍");
-            courseList.add(course);
-        }
-        dataSet.add(courseList);
     }
 
     private void getHttpSearch(final String url) {
@@ -172,16 +158,15 @@ public class fragment_search_course extends Fragment {
         if (httpcode != 200) {
             Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
         }
-/*        else for (int i = 0; i <courseList.size(); i++)btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
-                courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程*/
+
     }
 
         private void configLoadMoreData() {
             String url;//http请求的url
             url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/searchCourse?keyword=" + keyWord + "&&currentPage=" + currentPage;
             getHttpSearch(url);
-            dataSet.add(courseList);
-            quickAdapter.addData(dataSet.get(currentPage-1));
+            //dataSet.add(courseList);
+            //quickAdapter.addData(dataSet.get(currentPage-1));
             currentPage++;
             quickAdapter.getLoadMoreModule().loadMoreEnd();
         }

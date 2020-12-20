@@ -9,9 +9,9 @@
     <ImageView
         android:id="@+id/course_item_bgImg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:src="@drawable/course_background" />
 
     <LinearLayout

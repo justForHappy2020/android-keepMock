@@ -32,12 +32,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.example.myapplication.entity.ActionCom;
+import com.example.myapplication.entity.Course;
 import com.example.myapplication.utils.HttpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -72,9 +74,12 @@ public class play extends Activity implements View.OnClickListener{
 
     private int width;// 屏幕宽度（像素）
     private int height;// 屏幕高度（像素）
+    private int courseActionPosition;
     private String token;
     private long actionID;
     private ActionCom actionCom;
+    private Course course;
+
 
     // Current playback position (in milliseconds).
     private int mCurrentPosition = 0;
@@ -99,6 +104,8 @@ public class play extends Activity implements View.OnClickListener{
 
         Intent intent = getIntent();
         movementVideoLocPath = intent.getStringExtra("movementVideoLocPath");
+        course = (Course)intent.getSerializableExtra("course");
+        courseActionPosition = intent.getIntExtra("currentOne",0);
 
         if (savedInstanceState != null) {
             mCurrentPosition = savedInstanceState.getInt(PLAYBACK_TIME);
@@ -536,6 +543,10 @@ public class play extends Activity implements View.OnClickListener{
             case R.id.next:
                 break;
             case R.id.detail:
+                intent = new Intent(this,activity_movement_detail.class);
+                intent.putExtra("currentOne",courseActionPosition);
+                intent.putExtra("course",(Serializable) course);
+                startActivity(intent);
                 break;
             case R.id.quit:
                 dialog.dismiss();

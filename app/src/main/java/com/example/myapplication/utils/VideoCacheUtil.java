@@ -29,7 +29,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class VideoCacheUtil {
     final int DOWNLOAD_FAINED = -1;
 
-
     private List<TaskInfo> infoList;
     private HashMap<String,String> urlMap = new HashMap<String,String>();
     private String cacheRootDir;

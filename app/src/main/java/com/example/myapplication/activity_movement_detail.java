@@ -16,6 +16,7 @@ import com.example.myapplication.entity.Course;
 import com.example.myapplication.utils.VideoCacheUtil;
 import com.sendtion.xrichtext.RichTextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class activity_movement_detail extends Activity implements View.OnClickLi
     private TextView movementNameTextView;
     private TextView contentTextView;
     private RichTextView richContentTextView;//富文本TextView，暂未能使用
+
     private Course course;
     private List<String> introList;
 
@@ -44,6 +46,7 @@ public class activity_movement_detail extends Activity implements View.OnClickLi
 
         Intent intent = getIntent();
         course=(Course)intent.getSerializableExtra("course");
+        currentOne=intent.getIntExtra("courseActionPosition",0);
 
         initData();
         initView();
@@ -126,6 +129,7 @@ public class activity_movement_detail extends Activity implements View.OnClickLi
                     intent.putExtra("cacheRootDir",rootDir);
                 }
                 intent.putExtra("currentOne",currentOne);
+                intent.putExtra("course",(Serializable) course);
                 startActivity(intent);
                 break;
         }

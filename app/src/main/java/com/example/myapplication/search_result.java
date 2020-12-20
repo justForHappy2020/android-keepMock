@@ -24,7 +24,9 @@ public class search_result extends FragmentActivity implements View.OnClickListe
 
     final int SEARCH_ALL = 0;
     final int SEARCH_COURSE = 1;
+    final int SEARCH_SHARE = 2;
     final int SEARCH_USER = 3;
+
 
     private EditText etInput;
     private ImageButton ibSearch;
@@ -102,15 +104,19 @@ public class search_result extends FragmentActivity implements View.OnClickListe
 
         //不要忘记设置ViewPager的适配器
         mViewPager.setAdapter(mAdapter);
+
         switch (from){
-            case 0:
-                mViewPager.setCurrentItem (0);
+            case SEARCH_ALL:
+                mViewPager.setCurrentItem (SEARCH_ALL);
                 break;
-            case 1:
-                mViewPager.setCurrentItem (1);
+            case SEARCH_COURSE:
+                mViewPager.setCurrentItem (SEARCH_COURSE);
                 break;
-            case 3:
-                mViewPager.setCurrentItem (3);
+            case SEARCH_SHARE:
+                mViewPager.setCurrentItem (SEARCH_SHARE);
+                break;
+            case SEARCH_USER:
+                mViewPager.setCurrentItem (SEARCH_USER);
                 break;
              default:
                  break;

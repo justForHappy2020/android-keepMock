@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:background="#00FFFFFF"
             android:max="100"
-            android:progress="20"
+            android:progress="0"
             android:progressDrawable="@drawable/progressbar"
             android:visibility="visible" />
 

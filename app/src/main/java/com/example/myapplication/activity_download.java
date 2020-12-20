@@ -15,8 +15,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.myapplication.Runnable.DownloadRunnable;
 import com.example.myapplication.Beans.TaskInfo;
+import com.example.myapplication.entity.Course;
 import com.example.myapplication.utils.VideoCacheUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class activity_download extends Activity implements View.OnClickListener 
     private List<TaskInfo> taskList;
     private DownloadRunnable dlRunnable;//下载任务
     private VideoCacheUtil vcu;
+    private Course course;
 
     private String movementVideoUrl;
     private String cacheRootDir;
@@ -79,6 +82,8 @@ public class activity_download extends Activity implements View.OnClickListener 
 
                      Intent intent = new Intent(getApplicationContext(),play.class);
                      intent.putExtra("movementVideoLocPath",taskList.get(msg.what).getPath()+taskList.get(msg.what).getName());//vcu.getVideoLocPath(movementVideoUrl)
+                     intent.putExtra("currentOne",currentOne);
+                     intent.putExtra("course",(Serializable) course);
                      startActivity(intent);
                      finish();
                      break;
@@ -107,8 +112,7 @@ public class activity_download extends Activity implements View.OnClickListener 
         movementVideoUrl=intent.getStringExtra("movementVideoUrl");
         cacheRootDir=intent.getStringExtra("cacheRootDir");
         currentOne=intent.getIntExtra("currentOne",0);
-
-
+        course=(Course)intent.getSerializableExtra("course");
 
         initView();
         initData();

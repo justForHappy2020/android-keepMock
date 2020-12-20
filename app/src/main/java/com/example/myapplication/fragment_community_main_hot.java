@@ -2,14 +2,17 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +64,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
         return view;
     }
 
-    private void initView(View view) {
+    private void initView(final View view) {
        // ImageButton img1 = view.findViewById(R.id.fragment_community_main_follow);
        // ImageButton img2 = view.findViewById(R.id.community_main_search);
        // ImageButton float_btn = view.findViewById(R.id.float_button);
@@ -143,6 +147,42 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                 startActivity(intent);
             }
         });
+
+        //获取item imageview并展示图片
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                for(int i = 1 ;i <= recyclerView.getChildCount(); i++){
+                    final View child = recyclerView.getChildAt(i);
+                    LinearLayout layout = (LinearLayout)child;
+                    final ImageView imageView1 = layout.findViewById(R.id.share_users_head);
+                    final ImageView imageView2 = layout.findViewById(R.id.content_pics);
+                    final Drawable drawable1 = loadImageFromNetwork(shareList.get(i).getShare().getHeadPortraitUrl());
+                    final Drawable drawable2 = loadImageFromNetwork(shareList.get(i).getShare().getContent_pics());
+                    // post() 到UI主线程去更新图片
+                    imageView1.post(new Runnable(){
+                        @Override
+                        public void run() {
+                            // TODO Auto-generated method stub
+                            imageView1.setBackground(drawable1);
+                        }}) ;
+                    imageView2.post(new Runnable(){
+                        @Override
+                        public void run() {
+                            // TODO Auto-generated method stub
+                            imageView2.setBackground(drawable2);
+                        }}) ;
+                }
+            }
+
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         quickAdapter.addChildClickViewIds(R.id.share_follow,R.id.share_users_head,R.id.users_id,R.id.postlike,R.id.praises,R.id.postcomment,R.id.comments);
         //具体课程的监听
         quickAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
@@ -322,5 +362,25 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
         quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreEnd();
+    }
+
+    //   通过图片url获取drawable
+    private Drawable loadImageFromNetwork(String imageUrl)
+    {
+        Drawable drawable = null;
+        try {
+            // 可以在这里通过文件名来判断，是否本地有此图片
+            drawable = Drawable.createFromStream(
+                    new URL(imageUrl).openStream(), imageUrl + ".jpg");
+        } catch (IOException e) {
+            Log.d("test", e.getMessage());
+        }
+        if (drawable == null) {
+            Log.d("test", "null drawable");
+        } else {
+            Log.d("test", "not null drawable");
+        }
+
+        return drawable ;
     }
 }

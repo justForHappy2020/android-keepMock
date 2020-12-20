@@ -3,7 +3,7 @@ package com.example.myapplication.entity;
 public class Share {
 
     private int user_heads;
-    private int content_pics;
+    private String content_pics;
     private int shareType;
     private int shareId;
     private int userId;
@@ -18,7 +18,7 @@ public class Share {
     public Share(){
 
     }
-    public Share(String user_id, String content, int user_head, int content_pic, String praise, String comment){
+    public Share(String user_id, String content, int user_head, String content_pic, String praise, String comment){
         this.nickname = user_id;
         this.contents = content;
         this.user_heads = user_head;
@@ -26,7 +26,7 @@ public class Share {
         this.likeNumbers = praise;
         this.commentsNumbers = comment;
     }
-    public Share(String user_id, String content, int user_head, int content_pic, String comment){
+    public Share(String user_id, String content, int user_head, String content_pic, String comment){
         this.nickname = user_id;
         this.contents = content;
         this.user_heads = user_head;
@@ -64,7 +64,7 @@ public class Share {
         return user_heads;
     }
 
-    public int getContent_pics() {
+    public String getContent_pics() {
         return content_pics;
     }
 
@@ -127,7 +127,7 @@ public class Share {
         this.comments = comments;
     }
 
-    public void setContent_pics(int content_pics) {
+    public void setContent_pics(String content_pics) {
         this.content_pics = content_pics;
     }
 

@@ -118,8 +118,8 @@ public class search_result extends FragmentActivity implements View.OnClickListe
             case SEARCH_USER:
                 mViewPager.setCurrentItem (SEARCH_USER);
                 break;
-             default:
-                 break;
+            default:
+                break;
         }
 
     }
@@ -172,7 +172,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
                 searchContent = etInput.getText().toString().trim();
                 if(mViewPager.getCurrentItem() == 0)intent.putExtra("from", SEARCH_ALL);
                 else if(mViewPager.getCurrentItem() == 1)intent.putExtra("from", SEARCH_COURSE);
-                //else if(mViewPager.getCurrentItem() == 2)
+                else if(mViewPager.getCurrentItem() == 2)intent.putExtra("from", SEARCH_SHARE);
                 else if(mViewPager.getCurrentItem() == 3)intent.putExtra("from", SEARCH_USER);
                 intent.putExtra("searchContent",searchContent);
                 startActivity(intent);

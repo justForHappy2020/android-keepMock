@@ -14,6 +14,7 @@ public class ActionCom {
     private String fellImg;
     private String mistake;
 
+
     public ActionCom() {
         this.actionId = actionId;
         this.actionName = actionName;

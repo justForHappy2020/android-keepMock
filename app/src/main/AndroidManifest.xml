@@ -33,17 +33,43 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".activity_download"></activity>
         <!-- 允许明文传输，否则无法直接获取获取资源 -->
-        <activity android:name=".activity_movement_detail" />
+        <activity android:name=".activity_movement_detail"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme"/>
         <activity
             android:name=".search_course"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".search"
+            android:name=".community1"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".community2"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".community3"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".search_user"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".search_user"
+            android:name=".search_share"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".search"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -63,8 +89,10 @@
             android:name=".search_result"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
-        <activity android:name=".MainActivity_ViewPage">
-            <intent-filter>
+
+
+      <activity android:name=".MainActivity_ViewPage">
+                <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -78,9 +106,16 @@
         <activity android:name=".exercise_main"></activity>
         <!--
         <activity android:name=".MainActivity">
+
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
+
+       <!-  <activity android:name=".exercise_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -88,6 +123,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+            </activity>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

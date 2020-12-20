@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/community4_item_image"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:scaleType="fitXY"
+        android:background="#EFEFEF"
+        android:src="@drawable/sucai" />
 
-        <ImageButton
-            android:id="@+id/community4_item_image"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:scaleType="fitXY"
-            android:background="#EFEFEF"
-            android:src="@drawable/sucai"
-            style="?borderlessButtonStyle">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
 
-        </ImageButton>
-
-        <ImageButton
+        <ImageView
             android:id="@+id/community4_item_cancel"
             android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_toRightOf="@id/community4_item_image"
+            android:layout_height="wrap_content"
             android:layout_marginStart="-15dp"
             android:background="@drawable/button_leftradius_white"
-            android:src="@drawable/cancel2"
-            android:scaleType="fitCenter">
+            android:scaleType="fitCenter"
+            android:src="@drawable/cancel2"/>
 
-        </ImageButton>
-    </RelativeLayout>
+    </LinearLayout>
 
-
-
-</LinearLayout>
+</FrameLayout>

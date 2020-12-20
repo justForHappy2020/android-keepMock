@@ -24,6 +24,10 @@ android.applicationVariants.all {
             outputFileName = "KeepTest.apk"
         }
 }
+configurations {
+    cleanedAnnotations
+    compile.exclude group: 'org.jetbrains' , module:'annotations'
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -35,11 +39,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.makeramen:roundedimageview:2.2.1'//圆角图片
-
     implementation 'com.facebook.fresco:fresco:0.9.0+'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
     implementation 'com.github.LRH1993:AutoFlowLayout:1.0.5'
     //compile 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.sendtion:XRichText:1.9.4'//富文本编辑器
+    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }

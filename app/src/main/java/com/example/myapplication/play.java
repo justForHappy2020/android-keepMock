@@ -46,12 +46,13 @@ import java.util.TimerTask;
 public class play extends Activity implements View.OnClickListener{
 
     private int httpcode;
+
     private String movementVideoLocPath;
     //private String VIDEO_URL = "http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
+
             //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7%C2%B6%C3%BE.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/%C2%B6%C2%AF%C3%97%C3%B7O%CC%80%C2%BB.mp4";
             //"http://qkds47aiq.hn-bkt.clouddn.com/2333.mp4";
-
     private VideoView mVideoView;
     private TextView mBufferingTextView;
     private ProgressBar progressBar;
@@ -192,8 +193,8 @@ public class play extends Activity implements View.OnClickListener{
                     if(httpcode == 200){
                         //得到相应的内容
                         JSONObject jsonObject = jsonObject1.getJSONObject("data");
-                            //ActionCom相应的内容
-                            actionCom = new ActionCom();
+                        //ActionCom相应的内容
+                        actionCom = new ActionCom();
                         actionCom.setActionId(jsonObject.getLong("actionId"));
                         actionCom.setActionName(jsonObject.getString("actionName"));
                         actionCom.setActionImgs(jsonObject.getString("actionImgs"));
@@ -305,7 +306,10 @@ public class play extends Activity implements View.OnClickListener{
         mBufferingTextView.setVisibility(VideoView.VISIBLE);
 
         // Buffer and decode the video sample.
+
         Uri videoUri = Uri.parse(movementVideoLocPath);//getMedia(movementVideoLocPath);
+
+        //Uri videoUri = getMedia(VIDEO_URL);
         mVideoView.setVideoURI(videoUri);
 
         //mVideoView.setAutofillId();

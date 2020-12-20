@@ -61,6 +61,8 @@
                 android:background="@drawable/translucent2"
                 android:text="已累计运动***分钟" />
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,6 +111,7 @@
                     android:drawableTop="@drawable/bodypart_d"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
+
 
             </LinearLayout>
 
@@ -160,7 +163,8 @@
                     android:background="#F4F4FA"
                     android:drawableTop="@drawable/bodypart_h"
                     android:fontFamily="sans-serif-black"
-                    android:text="全部" />
+                    android:text="腿" />
+
 
             </LinearLayout>
 

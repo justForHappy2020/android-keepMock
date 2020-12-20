@@ -1,16 +1,15 @@
 package com.example.myapplication;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
+import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.MultipleItem;
 
+
 import java.util.List;
 
-public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> {
-    /**
-     * 类名：MultipleItemQuickAdapter
-     * 功能：由多Item布局适配器改造成的RecyclerView万能适配器
-     */
+
+public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> implements LoadMoreModule{
 
     public MultipleItemQuickAdapter(List data) {
         super(data);
@@ -38,25 +37,26 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.tv_title, item.getData().getTitle())
                         .setText(R.id.tv_content, item.getData().getContent());
                 break;*/
+
             case MultipleItem.MASONRYPOST:
-                helper.setImageResource(R.id.masonry_item_post_img, item.getShare().getContent_pics())
-                        .setImageResource(R.id.masonry_item_portrait_img,item.getShare().getUser_heads())
+                helper.setImageResource(R.id.masonry_item_post_img,R.drawable.post_img2)//item.getShare().getImgUrls()
+                        .setImageResource(R.id.masonry_item_portrait_img,R.drawable.sucai)//item.getShare().getUser().getHeadPortraitUrl()
                         .setText(R.id.masonry_item_textContent, item.getShare().getContents())
-                        .setText(R.id.masonry_item_username, item.getShare().getUsers_id())
-                        .setText(R.id.masonry_item_num,String.valueOf(item.getShare().getPraises()));
+                        .setText(R.id.masonry_item_username, item.getShare().getUser().getNickname())
+                        .setText(R.id.masonry_item_num,String.valueOf(item.getShare().getLikeNumbers()));
 
                 break;
             case MultipleItem.USER:
-                helper.setText(R.id.user_id, item.getUser().getUserName())
-                    .setImageResource(R.id.user_head, R.mipmap.ic_launcher);
+                helper.setText(R.id.user_id, item.getUser().getNickname())
+                    .setImageResource(R.id.user_head, R.mipmap.ic_launcher);// item.getUser().getHeadPortraitUrl()
             break;
             case MultipleItem.SHARE:
-                helper.setText(R.id.users_id, item.getShare().getUser().getUserName())
+                helper.setText(R.id.users_id, item.getShare().getUser().getNickname())
                         .setText(R.id.contents, item.getShare().getContents())
-                        .setText(R.id.praises, item.getShare().getPraises())
-                        .setText(R.id.comments,item.getShare().getComments())
-                        .setImageResource(R.id.users_head, item.getShare().getUser_heads())
-                        .setImageResource(R.id.content_pics, item.getShare().getContent_pics());
+                        .setText(R.id.praises, item.getShare().getLikeNumbers())
+                        .setText(R.id.comments,item.getShare().getCommentsNumbers())
+                        .setImageResource(R.id.share_users_head, R.drawable.sucai)// item.getShare().getUser().getHeadPortraitUrl()
+                        .setImageResource(R.id.content_pics, R.drawable.post_img2);//item.getShare().getImgUrls()
                 break;
 
             case MultipleItem.ACTION:
@@ -66,7 +66,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                 break;
 
             case MultipleItem.ADDIMAGE:
-                helper.setImageResource(R.id.community4_item_image, item.getAddimage().getImgUrl());
+                //helper.setImageResource(R.id.community4_item_image, item.getAddimage().getImgUrl());
 
         }
     }

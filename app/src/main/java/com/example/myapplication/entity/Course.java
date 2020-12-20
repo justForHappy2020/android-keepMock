@@ -1,6 +1,7 @@
 package com.example.myapplication.entity;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,9 @@ public class Course implements Serializable {
     private String courseName;
 
     //private String courseUrl;
+
+    private String courseUrl;
+
 
     private String bodyPart;
 
@@ -62,6 +66,10 @@ public class Course implements Serializable {
         return courseName;
     }
 
+    public String getCourseUrl() {
+        return courseUrl;
+    }
+
     public String getBodyPart() {
         return bodyPart;
     }
@@ -88,6 +96,11 @@ public class Course implements Serializable {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+
+    public void setCourseUrl(String courseUrl) {
+        this.courseUrl = courseUrl;
     }
 
     public void setBodyPart(String bodyPart) {

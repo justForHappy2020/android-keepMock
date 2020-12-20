@@ -24,8 +24,10 @@
         android:layout_margin="15dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/video_view"
-        app:layout_constraintTop_toTopOf="parent">
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateIds">
 
         <TextView
             android:id="@+id/showTime"

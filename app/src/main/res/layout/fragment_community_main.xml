@@ -10,14 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="#FFFFFF"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="19dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="社区"
@@ -29,21 +28,14 @@
             android:id="@+id/community_main_follow"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:scaleType="fitCenter"
             android:src="@drawable/followers" />
 
         <ImageView
             android:id="@+id/community_main_search"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
             android:layout_margin="20dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/search1" />
+            android:src="@drawable/search2" />
 
     </LinearLayout>
 
@@ -72,11 +64,13 @@
                 app:tabIndicatorFullWidth="false">
 
                 <com.google.android.material.tabs.TabItem
+                    android:id="@+id/community_main_hot_tab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="热门" />
 
                 <com.google.android.material.tabs.TabItem
+                    android:id="@+id/community_main_follow_tab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="关注" />
@@ -90,10 +84,36 @@
 
         </LinearLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/community_main_viewPager"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <!--<androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/community_main_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F6F6F6"
+                tools:listitem="@layout/item_post_full" />-->
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/community_main_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F6F6F6"
+                tools:listitem="@layout/item_post_full" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/float_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_margin="25dp"
+                android:backgroundTint="#72C6AC"
+                android:src="@drawable/camera_white"
+                app:borderWidth="0dp" />
+        </RelativeLayout>
 
     </LinearLayout>
 </LinearLayout>

@@ -1,70 +1,94 @@
 package com.example.myapplication.entity;
 
 public class Share {
-    private String users_id;
-    private String contents;
-    private int user_heads;
-    private int content_pics;
-    private String praises;
-    private String comments;
+
     private User user;
+    private int shareType;
+    private int shareId;
+    private String imgUrls;
+    private String contents;
+    private String likeNumbers;
+    private String commentsNumbers;
+    private String createTime;
 
-    public Share(String user_id, String content, int user_head, int content_pic, String praise, String comment,User user){
-        this.users_id = user_id;
-        this.contents = content;
-        this.user_heads = user_head;
-        this.content_pics = content_pic;
-        this.praises = praise;
-        this.comments = comment;
-        this.user=user;
+    public Share(){
+
     }
 
-    public int getContent_pics() {return content_pics; }
 
-    public int getUser_heads() { return user_heads; }
-
-    public String getComments() {return comments; }
-
-    public String getPraises() { return praises; }
-
-    public String getContents() {
-        return contents;
-    }
-
-    public String getUsers_id() {
-        return users_id;
+    public Share(User user, int shareType, int shareId, String imgUrls, String contents, String likeNumbers, String commentsNumbers, String createTime) {
+        this.user = user;
+        this.shareType = shareType;
+        this.shareId = shareId;
+        this.imgUrls = imgUrls;
+        this.contents = contents;
+        this.likeNumbers = likeNumbers;
+        this.commentsNumbers = commentsNumbers;
+        this.createTime = createTime;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setContent_pics(int content_pics) {
-        this.content_pics = content_pics;
+    public int getShareType() {
+        return shareType;
+    }
+
+    public void setShareType(int shareType) {
+        this.shareType = shareType;
+    }
+
+    public int getShareId() {
+        return shareId;
+    }
+
+    public void setShareId(int shareId) {
+        this.shareId = shareId;
+    }
+
+    public String getImgUrls() {
+        return imgUrls;
+    }
+
+    public void setImgUrls(String imgUrls) {
+        this.imgUrls = imgUrls;
+    }
+
+    public String getContents() {
+        return contents;
     }
 
     public void setContents(String contents) {
         this.contents = contents;
     }
 
-    public void setPraises(String praises) {
-        this.praises = praises;
+    public String getLikeNumbers() {
+        return likeNumbers;
     }
 
-    public void setUser_heads(int user_heads) {
-        this.user_heads = user_heads;
+    public void setLikeNumbers(String likeNumbers) {
+        this.likeNumbers = likeNumbers;
     }
 
-    public void setUsers_id(String users_id) {
-        this.users_id = users_id;
+    public String getCommentsNumbers() {
+        return commentsNumbers;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCommentsNumbers(String commentsNumbers) {
+        this.commentsNumbers = commentsNumbers;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }
 

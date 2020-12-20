@@ -100,6 +100,8 @@ public class MainActivity_ViewPage extends FragmentActivity implements View.OnCl
 
             }
         });
+        //预加载fragment个数，防止切换页面卡顿
+        mViewPager.setOffscreenPageLimit(4);
     }
 
     private void initEvents() {

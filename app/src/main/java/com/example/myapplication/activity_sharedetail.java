@@ -69,9 +69,9 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
             @Override
             protected void convert(BaseViewHolder helper, Comment comment) {
                 User user = comment.getUser();
-                helper.setText(R.id.item_comment_main_username,comment.getUser().getUserName())
+                helper.setText(R.id.item_comment_main_username,comment.getUser().getNickname())
                         .setText(R.id.item_comment_main_text, comment.getTextContent())
-                        .setImageResource(R.id.item_comment_main_username_headprotrait, comment.getUser().getPortraitImg());
+                        .setImageResource(R.id.item_comment_main_username_headprotrait, R.drawable.sucai);//comment.getUser().getHeadPortraitUrl()
             }
         };
 
@@ -122,7 +122,7 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         /*TestData*/
 
         Comment comment;
-        User user = new User(0,"乔瑟夫·乔斯达",R.drawable.sucai);
+        User user = new User("乔瑟夫·乔斯达","URL");
         for (int i = 0; i < 5; i++) {
             comment = new Comment();
             comment.setUser(user);
@@ -165,7 +165,7 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
 
                 List<Comment> testList = new ArrayList();
                 Comment comment;
-                User user = new User(0,"乔瑟夫·乔斯达",R.drawable.sucai);
+                User user = new User("乔瑟夫·乔斯达","URL");
                 for (int i = 0; i < 5; i++) {
                     comment = new Comment();
                     comment.setUser(user);

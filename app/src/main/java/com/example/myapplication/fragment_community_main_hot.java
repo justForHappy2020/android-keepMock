@@ -26,6 +26,7 @@ import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.entity.Share;
+import com.example.myapplication.entity.User;
 import com.example.myapplication.utils.HttpUtils;
 
 import org.json.JSONArray;
@@ -52,7 +53,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_community_main_hot, container, false);
+        View view = inflater.inflate(R.layout.fragment_community_main_content, container, false);
         currentPage = 1;
         Bundle bundle = getArguments();
         initData();
@@ -64,18 +65,11 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
        // ImageButton img1 = view.findViewById(R.id.fragment_community_main_follow);
        // ImageButton img2 = view.findViewById(R.id.community_main_search);
        // ImageButton float_btn = view.findViewById(R.id.float_button);
-        final ImageButton float_btn = view.findViewById(R.id.float_button);
-        onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onCommunityClick(view);
-            }
-        };
-        float_btn.setOnClickListener(onClickListener);
+
        // img1.setOnClickListener(onClickListener);
        // img2.setOnClickListener(onClickListener);
        // float_btn.setOnClickListener(onClickListener);
-        recyclerView = (RecyclerView) view.findViewById(R.id.community_main_hot_recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.community_main_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         quickAdapter = new MultipleItemQuickAdapter(shareList);
         configLoadMoreData();
@@ -138,7 +132,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent;
-                intent = new Intent(getActivity(), community1.class);
+                intent = new Intent(getActivity(), activity_sharedetail.class);
                 intent.putExtra("ShareId",shareList.get(position).getShare().getShareId());
                 startActivity(intent);
             }
@@ -159,6 +153,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                         count_follow = count_follow + 1;
                         clickFollow(position,count_follow);
                         break;
+                    case R.id.praises:
                     case R.id.postlike:
                         count_like = count_like + 1;
                         clickLike(view,position,count_like);
@@ -166,7 +161,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                     case R.id.postcomment:
                         //  clickComment(position);
                         Intent intent;
-                        intent = new Intent(getActivity(), community1.class);
+                        intent = new Intent(getActivity(), activity_sharedetail.class);
                         startActivity(intent);
                         break;
                 }
@@ -179,7 +174,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
         Intent intent;
         intent = new Intent(getActivity(), community2.class);
         intent.putExtra("token",token);  //后期通过Sp获取
-        intent.putExtra("userId",shareList.get(position).getShare().getUserId());
+        intent.putExtra("userId",shareList.get(position).getShare().getUser().getUserId());
         startActivity(intent);
     }
     public void clickFollow(int position,int i){
@@ -199,7 +194,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
             item_follow.setBackgroundColor(Color.parseColor("#25C689"));
         }
     }
-    public void clickLike(View view,int position,int i){
+    public void clickLike(View view,int position,int i){//这里逻辑比较混乱
         Boolean isClicked;
         if (i%2 == 1) isClicked = true;
         else isClicked = false;//从接口获取，List.get(i).getLiked();
@@ -292,14 +287,19 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                             JSONObject jsonObject = JSONArrayShare.getJSONObject(i);
                             //相应的内容
                             Share share = new Share();
-                            share.setNickname(jsonObject.getString("nickname"));
+                            User user = new User();
+
+                            user.setNickname(jsonObject.getString("nickname"));
+                            user.setHeadPortraitUrl(jsonObject.getString("headPortraitUrl"));
+
                             share.setContents(jsonObject.getString("content"));
-                            share.setHeadPortraitUrl(jsonObject.getString("headPortraitUrl"));
                             share.setImgUrls(jsonObject.getString("imgUrls"));
                             share.setLikeNumbers(jsonObject.getString("likeNumbers"));
                             share.setCommentsNumbers(jsonObject.getString("commentNumbers"));
                             share.setCreateTime(jsonObject.getString("createTime"));
-                            shareList.add(new MultipleItem(6,share));
+
+                            share.setUser(user);
+                            shareList.add(new MultipleItem(MultipleItem.SHARE,share));
                         }
                     }
                 } catch (JSONException e) {

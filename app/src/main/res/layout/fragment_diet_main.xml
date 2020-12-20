@@ -43,7 +43,7 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="20dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/search1" />
+            android:src="@drawable/search2" />
 
     </LinearLayout>
 

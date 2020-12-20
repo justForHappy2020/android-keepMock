@@ -26,8 +26,8 @@ import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.entity.Share;
+import com.example.myapplication.entity.User;
 import com.example.myapplication.utils.HttpUtils;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +54,7 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_community_main_follow, container, false);
+        View view = inflater.inflate(R.layout.fragment_community_main_content, container, false);
         currentPage = 1;
         Bundle bundle = getArguments();
         initData();
@@ -63,18 +63,14 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
     }
 
     private void initView(View view) {
-        ImageButton float_btn = view.findViewById(R.id.float_button);
-        onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onCommunityClick(view);
-            }
-        };
-        float_btn.setOnClickListener(onClickListener);
-        recyclerView = (RecyclerView) view.findViewById(R.id.community_main_follow_recyclerView);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.community_main_recyclerView);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         quickAdapter = new MultipleItemQuickAdapter(shareList);
+
         configLoadMoreData();
+
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             //int mCurrentCunter = 0;
 
@@ -99,7 +95,7 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent;
-                intent = new Intent(getActivity(), community1.class);
+                intent = new Intent(getActivity(), activity_sharedetail.class);
                 startActivity(intent);
             }
         });
@@ -126,7 +122,7 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                     case R.id.postcomment:
                       //  clickComment(position);
                         Intent intent;
-                        intent = new Intent(getActivity(), community1.class);
+                        intent = new Intent(getActivity(), activity_sharedetail.class);
                         startActivity(intent);
                         break;
                 }
@@ -225,14 +221,19 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                             JSONObject jsonObject = JSONArrayShare.getJSONObject(i);
                             //相应的内容
                             Share share = new Share();
-                            share.setNickname(jsonObject.getString("nickname"));
+                            User user = new User();
+
+                            user.setNickname(jsonObject.getString("nickname"));
+                            user.setHeadPortraitUrl(jsonObject.getString("headPortraitUrl"));
+
                             share.setContents(jsonObject.getString("content"));
-                            share.setHeadPortraitUrl(jsonObject.getString("headPortraitUrl"));
                             share.setImgUrls(jsonObject.getString("imgUrls"));
                             share.setLikeNumbers(jsonObject.getString("likeNumbers"));
                             share.setCommentsNumbers(jsonObject.getString("commentNumbers"));
                             share.setCreateTime(jsonObject.getString("createTime"));
-                            shareList.add(new MultipleItem(6,share));
+
+                            share.setUser(user);
+                            shareList.add(new MultipleItem(MultipleItem.SHARE,share));
                         }
                     }
                 } catch (JSONException e) {

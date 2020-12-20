@@ -80,11 +80,11 @@ public class fragment_search_all extends Fragment {
         Course course1 = new Course();
         course1.setCourseName("腹肌");
         course1.setCourseIntro("K1零基础  . 3002.5万人参加");
-        User user = new User(6666,"迪奥·布兰度",R.drawable.sucai);
+        User user = new User("迪奥·布兰度","URL");
 
-        Share share1 = new Share("USER_ID_TEST","波纹呼吸法",R.drawable.sucai,R.drawable.sports1,"666","235",user);
-        Share share2 = new Share("USER_ID_TEST","波纹呼吸法",R.drawable.sucai,R.drawable.scenery,"223","56",user);
-        Share share3= new Share("USER_ID_TEST","波纹呼吸法",R.drawable.sucai,R.drawable.post_img2,"3k","2k",user);
+        Share share1 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27");
+        Share share2 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27");
+        Share share3= new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27");
 
         datas01.add(share1);
         datas01.add(share2);
@@ -106,7 +106,6 @@ public class fragment_search_all extends Fragment {
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(0)));
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(2)));
         datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(1)));
-
 
     }
 }

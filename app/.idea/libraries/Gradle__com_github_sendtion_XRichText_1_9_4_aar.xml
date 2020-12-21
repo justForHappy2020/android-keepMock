@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.sendtion:XRichText:1.9.4@aar">
+    <CLASSES>
+      <root url="jar://D:/gradle-5.4.1/respositry/caches/transforms-2/files-2.1/d76400e01305878acc4611a32293f5d1/jetified-XRichText-1.9.4/jars/classes.jar!/" />
+      <root url="file://D:/gradle-5.4.1/respositry/caches/transforms-2/files-2.1/d76400e01305878acc4611a32293f5d1/jetified-XRichText-1.9.4/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://D:/gradle-5.4.1/respositry/caches/modules-2/files-2.1/com.github.sendtion/XRichText/1.9.4/b0118f3ca1bbed13881a8280e400e83fe28228c6/XRichText-1.9.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

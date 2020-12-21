@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,200 +8,306 @@
     android:background="@color/white"
     >
 
-    <ImageButton
-        android:id="@+id/video_play"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/scenery" />
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_weight="1">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:background="#FAFAFA"
             android:orientation="vertical">
 
-            <TextView
+            <ImageButton
+                android:id="@+id/video_play"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/scenery" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="燃脂"
-                android:textColor="#B3B1B2"
-                android:textSize="12sp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/calorie"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="燃脂"
+                        android:textColor="#B3B1B2"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/calorie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="38千卡"
+                        android:textColor="#000000"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="时长"
+                        android:textColor="#B3B1B2"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="188 分钟"
+                        android:textColor="#000000"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="难度"
+                        android:textColor="#B3B1B2"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/degree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="K2 初学"
+                        android:textColor="#000000"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sucai"
+                        app:riv_oval="true" />
+
+                    <TextView
+                        android:id="@+id/course_detail_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:text="官方号"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/course_detail_follow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/button_radius_green"
+                        android:text="关注"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="#F0F0F2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="课程内容"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/course_detail_actionNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="14 个动作" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/course_detail_content_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_course_movement" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="38千卡"
-                android:textColor="#000000"
-                android:textSize="24sp" />
+                android:layout_marginTop="15dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="15dp">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/course_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="课程介绍"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxEms="2"
+                    android:text="全球流行的瘦腿动作"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxEms="2"
+                    android:text="建议每周4到5次"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxEms="2"
+                    android:text="加油，你是最棒的"
+                    android:textSize="13sp" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="时长"
-                android:textColor="#B3B1B2"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/duration"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="188 分钟"
+                android:layout_marginTop="15dp"
+                android:background="#FFFFFF"
+                android:padding="15dp"
+                android:text="相关训练"
                 android:textColor="#000000"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="难度"
-                android:textColor="#B3B1B2"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/degree"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="K2 初学"
-                android:textColor="#000000"
-                android:textSize="24sp" />
+                android:background="#FFFFFF"
+                android:fillViewport="true"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        />
+
+
+                    <Button
+                        android:id="@+id/related_course1"
+                        style="@style/SmsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/ocean"
+                        android:text="Button One" />
+
+                    <Button
+                        android:id="@+id/related_course2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/ocean"
+                        android:text="Button Two" />
+
+                    <Button
+                        android:id="@+id/related_course3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/ocean"
+                        android:text="Button Three" />
+
+                    <Button
+                        android:id="@+id/related_course4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/ocean"
+                        android:text="Button Four" />
+
+                    <Button
+                        android:id="@+id/related_course5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/ocean"
+                        android:text="Button Five" />
+
+                    <Button
+                        android:id="@+id/related_course6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/ocean"
+                        android:text="Button Six" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:padding="15dp">
-
-        <TextView
-            android:id="@+id/course_intro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="课程介绍"
-            android:textSize="20dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="全球流行的瘦腿动作"
-            android:maxEms="2"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="建议每周4到5次"
-            android:maxEms="2"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="加油，你是最棒的"
-            android:maxEms="2"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="相关训练"
-        android:textSize="20dp"
-        android:paddingLeft="10dp"/>
-
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                />
-
-
-            <Button
-                style="@style/SmsButton"
-                android:id="@+id/related_course1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:background="@drawable/ocean"
-                android:text="Button One" />
-
-            <Button
-                android:id="@+id/related_course2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:background="@drawable/ocean"
-                android:text="Button Two" />
-
-            <Button
-                android:id="@+id/related_course3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Three" />
-
-            <Button
-                android:id="@+id/related_course4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Four" />
-
-            <Button
-                android:id="@+id/related_course5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Five" />
-            <Button
-                android:id="@+id/related_course6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ocean"
-                android:layout_marginHorizontal="5dp"
-                android:text="Button Six" />
-        </LinearLayout>
-    </HorizontalScrollView>
-
+    </ScrollView>
 
 
     <Button
@@ -208,9 +315,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="10dp"
-        android:background="#4CAF50"
-        android:layout_marginTop="10dp"
+        android:layout_marginVertical="10dp"
 
+        android:background="#4CAF50"
         android:gravity="center"
         android:text="参加课程"
         android:textColor="@color/white"

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
     package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!--
  这个可写可不写
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -23,7 +22,6 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
-
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
@@ -31,14 +29,17 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity_download"></activity>
+        <!-- 允许明文传输，否则无法直接获取获取资源 -->
+        <activity android:name=".activity_movement_detail"
         android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"/>
         <activity
             android:name=".search_course"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".community1"
             android:launchMode="singleTop"
@@ -74,51 +75,64 @@
         <activity
             android:name=".course_filter"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".course_main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".course_main"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
-<!--        <activity android:name=".exercise_main"
+        <!--
+        <activity android:name=".exercise_main"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />-->
-        <activity android:name=".search_result"
+            android:screenOrientation="portrait" />
+        -->
+        <activity
+            android:name=".search_result"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
+
 
       <activity android:name=".MainActivity_ViewPage">
                 <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>
-
-        <activity android:name=".play"
-            android:launchMode="singleTop"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-
         </activity>
-
+        <activity
+            android:name=".play"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".exercise_main"></activity>
+        <!--
         <activity android:name=".MainActivity">
+
                     <intent-filter>
                         <action android:name="android.intent.action.MAIN" />
                         <category android:name="android.intent.category.LAUNCHER" />
                     </intent-filter>
                 </activity>
 
-       <!--  <activity android:name=".exercise_main">
+       <!-  <activity android:name=".exercise_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>-->
+        </activity>
+        <!
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </activity>
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        -->
         <activity
             android:name=".register1"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".register5"
             android:launchMode="singleTop"
@@ -133,6 +147,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".register2"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity_sharedetail"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -183,22 +201,13 @@
             android:name=".pvideo_pause"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-<!--        <activity
+        <!--
+        <activity
             android:name=".community4"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />-->
-                <activity android:name=".community4">
-           <intent-filter>
-               <action android:name="android.intent.action.MAIN" />
-
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
+            android:screenOrientation="portrait" />
+        -->
+        <activity android:name=".community4"></activity>
     </application>
 
-
-
-
-
-
-    </manifest>
+</manifest>

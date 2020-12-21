@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +14,11 @@ public class community1 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_community1);
+        setContentView(R.layout.activity_community);
         initView();
     }
     public void initView(){
-        ImageButton c1_goback = findViewById(R.id.community1_leftarrow);
+        ImageView c1_goback = findViewById(R.id.community1_leftarrow);
         c1_goback.setOnClickListener(onClickListener);
         onClickListener = new View.OnClickListener() {
             @Override

@@ -106,7 +106,7 @@ public class search_user extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.clean_history:
                 flowLayout.removeAllViews();
-                et.getText().clear();
+                if(et.getText()!=null)et.getText().clear();
                 strList.clear();
                 strSet.clear();
 

@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -44,7 +46,7 @@ public class search extends Activity implements View.OnClickListener {
 
     private void initView(){
         flowLayout = findViewById(R.id.flowLayout);
-        et = findViewById(R.id.text_inout_search);
+        et = findViewById(R.id.text_input_search);
         search = findViewById(R.id.searching_button);
         clear_history = findViewById(R.id.clean_history);
         quit = findViewById(R.id.quit_button);
@@ -69,20 +71,22 @@ public class search extends Activity implements View.OnClickListener {
                 estr = et.getText().toString().trim();
                 if(!estr.isEmpty()){
                     Intent i = new Intent(search.this , search_result.class);//启动课程结果activity
-                    i.putExtra("search_content",estr);
+                    i.putExtra("searchContent",estr);
                     startActivity(i);
 
                     strSet= new HashSet<String>(strSet);
                     strSet.add(estr);
+
                     strList.add(estr);
+
                     addData(strList);
 
                     SharedPreferences.Editor editor = shp.edit();
                     editor.putStringSet("search_history_list",strSet);
                     editor.commit();
-
-
-
+                    
+                }else{
+                    Toast.makeText(search.this, "请输入搜索内容", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.clean_history:
@@ -103,6 +107,7 @@ public class search extends Activity implements View.OnClickListener {
 
     private void addData(final ArrayList list) {
         //流式布局适配器
+
         flowLayout.setAdapter(new FlowAdapter(list) {
             @Override
             public View getView(int i) {
@@ -118,7 +123,7 @@ public class search extends Activity implements View.OnClickListener {
                         //获取最近搜索中的点击内容进行传值
                         String str = auto_tv.getText().toString();
                         Intent intent = new Intent(search.this, search_result.class);
-                        intent.putExtra("search_content",str);
+                        intent.putExtra("searchContent",str);
                         startActivity(intent);
                     }
                 });
@@ -129,5 +134,14 @@ public class search extends Activity implements View.OnClickListener {
         });
         //清空当前集合
         list.clear();
+    }
+
+    public static ArrayList removeDuplicate(ArrayList list){
+        ArrayList tempList = new ArrayList(list.size());
+        for(int i=0;i<list.size();i++){
+            if(!tempList.contains(list.get(i)))
+                tempList.add(list.get(i));
+        }
+        return tempList;
     }
 }

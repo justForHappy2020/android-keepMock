@@ -301,52 +301,52 @@ public class exercise_main extends Fragment{
                 break;
             case R.id.hotcourse1:
                 intent = new Intent(getActivity(), course_main.class);
-                intent.putExtra("course",hotCourse.get(0).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(0).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse2:
                 intent = new Intent(getActivity(), course_main.class);
-                intent.putExtra("course",hotCourse.get(1).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(1).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse3:
                 intent = new Intent(getActivity(), course_main.class);
-                intent.putExtra("course",hotCourse.get(2).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(2).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse4:
                 intent = new Intent(getActivity(), course_main.class);
-                intent.putExtra("course",hotCourse.get(3).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(3).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse5:
                 intent = new Intent(getActivity(), course_main.class);
-                intent.putExtra("course",hotCourse.get(4).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(4).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse6:
                 intent = new Intent(getActivity(), course_main.class);
-                intent.putExtra("course",hotCourse.get(5).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(5).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse7:
                 intent = new Intent(getActivity(), course_main.class);
-                intent.putExtra("course",hotCourse.get(6).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(6).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse8:
                 intent = new Intent(getActivity(),course_main.class);
-                intent.putExtra("course",hotCourse.get(7).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(7).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse9:
                 intent = new Intent(getActivity(), course_main.class);
-                intent.putExtra("course",hotCourse.get(8).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(8).getCourseId());
                 startActivity(intent);
                 break;
             case R.id.hotcourse10:
                 intent = new Intent(getActivity(), course_main.class);
-                intent.putExtra("course",hotCourse.get(9).getCourseId());
+                intent.putExtra("courseID",hotCourse.get(9).getCourseId());
                 startActivity(intent);
                 break;
         }

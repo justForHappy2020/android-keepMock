@@ -1,132 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#665D6E"
+    android:orientation="vertical">
 
+
+    <ProgressBar
+        android:id="@+id/progressBar5"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:max="100"
+        android:progress="20"
+        android:progressDrawable="@drawable/progressbar"
+        android:secondaryProgress="70" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/saying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:fontFamily="PingFangSC-regular"
+            android:gravity="center"
+            android:text="习惯就是人生的最大知道。"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/saying"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/saying"
+            android:fontFamily="PingFangSC-regular"
+            android:text="-休谟"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold">
+
+        </TextView>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#665D6E">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <ProgressBar
-                    android:id="@+id/progressBar5"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:max="100"
-                    android:progress="20"
-                    android:progressDrawable="@drawable/progressbar"
-                    android:secondaryProgress="70" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="99dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:fontFamily="PingFangSC-regular"
-                android:text="习惯就是人生的最大知道。">
-
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="280dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:fontFamily="PingFangSC-regular"
-                android:text="-休谟">
-
-            </TextView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="84dp"
-                android:layout_marginRight="84dp"
-                android:layout_marginTop="140dp">
-
-
-                <ImageButton
+            <ImageButton
                 android:id="@+id/quit"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
+                android:layout_marginBottom="15dp"
+                android:adjustViewBounds="true"
                 android:background="@drawable/rectagle_and_circle">
 
             </ImageButton>
 
-                <ImageButton
-                    android:id="@+id/keepTrain"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:background="@drawable/triangl_and_circle"
-                    android:layout_marginLeft="60dp"
-                    >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="PingFangSC-regular"
+                android:text="退出训练"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold">
 
-                </ImageButton>
+            </TextView>
+        </LinearLayout>
 
-
-            </LinearLayout>
-            <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="94dp"
-            android:layout_marginRight="94dp"
-            android:layout_marginTop="20dp">
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:fontFamily="PingFangSC-regular"
-                    android:text="退出训练">
+            <ImageButton
+                android:id="@+id/keepTrain"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginBottom="15dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/triangl_and_circle">
 
-                </TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="74dp"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:fontFamily="PingFangSC-regular"
-                    android:text="继续训练">
+            </ImageButton>
 
-                </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="PingFangSC-regular"
+                android:text="继续训练"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold">
 
-             </LinearLayout>
-
-
-
+            </TextView>
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

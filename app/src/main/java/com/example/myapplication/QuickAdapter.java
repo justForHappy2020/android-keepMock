@@ -1,8 +1,11 @@
 package com.example.myapplication;
 
+import android.widget.ImageView;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.module.UpFetchModule;
@@ -17,14 +20,17 @@ public class QuickAdapter extends BaseQuickAdapter<Course, BaseViewHolder> imple
         super(layoutResId, data);
     }
 
+
+
     @Override
     protected void convert(BaseViewHolder helper, Course item) {
         //可链式调用赋值
         String item_text = item.getDegree() + " . " + item.getDuration() + " . " +item.getHits() + "万人已参加";
         helper.setText(R.id.course_item_name, item.getCourseName())
                 .setText(R.id.course_item_tag, item.getCourseIntro())
-                .setText(R.id.course_item_text, item_text)
-                .setImageResource(R.id.course_item_bgImg, R.drawable.course_background);//item.getBackgroundUrl();
+                .setText(R.id.course_item_text, item_text);
+        Glide.with(getContext()).load(item.getBackgroundUrl()).into((ImageView) helper.getView(R.id.course_item_bgImg));
+                //.setImageResource(R.id.course_item_bgImg, R.drawable.course_background);//item.getBackgroundUrl();
 
         //获取当前条目position
         //int position = helper.getLayoutPosition();

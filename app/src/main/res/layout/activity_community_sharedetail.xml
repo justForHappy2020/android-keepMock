@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/community1_leftarrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/leftarrow">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="120dp"
+            android:text="动态详情"
+            android:textColor="#3D4428"
+            android:textSize="23dp">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/community1_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="575dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        android:visibility="visible">
+        <!--          ov  575-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <!--                player页面-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/headprotrait"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/headprotrait"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/headprotrait">
+
+                    </ImageButton>
+
+                    <Button
+                        android:id="@+id/community1_playername_btn"
+                        style="?borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="@string/community1_playerid"
+                        android:textColor="#353535"
+                        android:textSize="15sp"
+                        android:textStyle="bold">
+
+                    </Button>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/community1_playersay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:text="@string/community1_playertext"
+                    android:textColor="#353535"
+                    android:textSize="16sp">
+
+                </TextView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <ImageButton
+                        android:id="@+id/community1_playerimage5"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_centerInParent="true"
+                        android:background="@color/white"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sucai">
+
+                    </ImageButton>
+
+                    <ImageButton
+                        android:id="@+id/community1_playerimage1"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_above="@id/community1_playerimage5"
+                        android:layout_toLeftOf="@id/community1_playerimage5"
+                        android:background="@color/white"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sucai">
+
+                    </ImageButton>
+
+                    <ImageButton
+                        android:id="@+id/community1_playerimage2"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_above="@id/community1_playerimage5"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/white"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sucai">
+
+                    </ImageButton>
+
+                    <ImageButton
+                        android:id="@+id/community1_playerimage3"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_above="@id/community1_playerimage5"
+                        android:layout_toRightOf="@id/community1_playerimage5"
+                        android:background="@color/white"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sucai">
+
+                    </ImageButton>
+
+
+                    <ImageButton
+                        android:id="@+id/community1_playerimage4"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@id/community1_playerimage5"
+                        android:background="@color/white"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sucai">
+
+                    </ImageButton>
+
+                    <ImageButton
+                        android:id="@+id/community1_playerimage6"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/community1_playerimage5"
+                        android:background="@color/white"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sucai">
+
+                    </ImageButton>
+
+                    <ImageButton
+                        android:id="@+id/community1_playerimage7"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_below="@id/community1_playerimage5"
+                        android:layout_toStartOf="@id/community1_playerimage5"
+                        android:background="@color/white"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sucai">
+
+                    </ImageButton>
+
+                    <ImageButton
+                        android:id="@+id/community1_playerimage8"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_below="@id/community1_playerimage5"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/white"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sucai">
+
+                    </ImageButton>
+
+                    <ImageButton
+                        android:id="@+id/community1_playerimage9"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_below="@id/community1_playerimage5"
+                        android:layout_toEndOf="@id/community1_playerimage5"
+                        android:background="@color/white"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sucai">
+
+                    </ImageButton>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="#F0F0F2"
+                android:orientation="vertical">
+                <!--                间隔player和visitor页面-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <!--                visitor页面-->
+
+                <TextView
+                    android:id="@+id/community1_visitors_commentnum"
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/community1_visitors_commentnum"
+                    android:textSize="15dp">
+
+                </TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#F0F0F2"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/community1_visitorthu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/community1_visitorsthu"
+                        android:textColor="#AFAFAF"
+                        android:textSize="17dp">
+
+                    </TextView>
+
+                    <Button
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/white"
+                        android:gravity="right"
+                        android:text="按热度"
+                        android:textColor="#AFAFAF"
+                        android:textSize="18dp">
+
+                    </Button>
+
+                    <Button
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/white"
+                        android:gravity="left"
+                        android:text="| 按时间"
+                        android:textColor="#AFAFAF"
+                        android:textSize="18dp">
+
+                    </Button>
+
+
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/community_reviews_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:isScrollContainer="false"
+                    android:visibility="visible"
+                    tools:listitem="@layout/item_comment_main" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/sharedetail_loadmore_comments"
+                        style="?borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:text="@string/community1_visitors_opencomment"
+                        android:textColor="#353535"
+                        android:textSize="15dp">
+
+                    </Button>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/community1_saysomething"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <EditText
+            android:id="@+id/community1_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/button_radius_gray"
+            android:drawableLeft="@drawable/pen"
+            android:hint="@string/community1_edit"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textColor="#D3D3D3"
+            android:textSize="22dp">
+
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/community1_thumbs"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/thumbs">
+
+        </ImageButton>
+
+        <TextView
+            android:id="@+id/community1_thumbsnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="4dp"
+            android:gravity="center"
+            android:text="@string/community1_thumbsnum"
+            android:textColor="#999999"
+            android:textSize="20dp">
+
+        </TextView>
+
+        <ImageButton
+            android:id="@+id/community1_news"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/news">
+
+        </ImageButton>
+
+        <TextView
+            android:id="@+id/community1_newsnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="4dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:text="@string/community1_newsnum"
+            android:textColor="#999999"
+            android:textSize="20dp">
+
+        </TextView>
+
+
+    </LinearLayout>
+
+</LinearLayout>

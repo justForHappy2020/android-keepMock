@@ -1,6 +1,5 @@
 package com.example.myapplication.entity;
 
-
 import android.widget.ImageView;
 
 public class User {
@@ -14,24 +13,19 @@ public class User {
     private String intro;
     private String password;
     private String token;
-    private int user_head;
-      private String title;
+    private String title;
     private String imgUrl;
 
     public User(){
-    }
-    public User(String title, String user_head){
-        this.nickname = title;
-        this.headPortraitUrl = user_head;
+
     }
 
-    public User(String title,int user_haed){
-        this.nickname = title;
-        this.user_head = user_haed;
+    public User(String nickname,String headPortraitUrl){
+        this.nickname = nickname;
+        this.headPortraitUrl = headPortraitUrl;
     }
+
     //生成set、get方法
-
-
     public int getType() {
         return type;
     }
@@ -40,106 +34,83 @@ public class User {
         return userId;
     }
 
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getHeadPortraitUrl() {
-        return headPortraitUrl;
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public String getPassword() {
-        return password;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public String getToken() {
-        return token;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setHeadPortraitUrl(String headPortraitUrl) {
-        this.headPortraitUrl = headPortraitUrl;
-    }
-
-    public void setIntro(String intro) {
-        this.intro = intro;
+    public String getNickname() {
+        return nickname;
     }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getGender() {
+        return gender;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public String getHeadPortraitUrl() {
+        return headPortraitUrl;
+    }
+
+    public void setHeadPortraitUrl(String headPortraitUrl) {
+        this.headPortraitUrl = headPortraitUrl;
     }
 
     public void setType(int type) {
         this.type = type;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setUser_head(int user_head) {
-        this.user_head = user_head;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
-    public int getUser_head() {
-        return user_head;
+    public String getIntro() {
+        return intro;
     }
 
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
 
-    //生成set、get方法
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getImgUrl() {
         return imgUrl;
     }
 
-
-
-
-
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

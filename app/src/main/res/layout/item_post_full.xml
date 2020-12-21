@@ -14,6 +14,7 @@
         android:orientation="horizontal">
 
         <com.makeramen.roundedimageview.RoundedImageView
+
             android:id="@+id/share_users_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -79,7 +80,6 @@
 
         <ImageView
             android:id="@+id/postlike"
-            android:orientation="horizontal"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="left"
@@ -96,9 +96,7 @@
             android:textColor="#999999"
             android:textSize="10sp" />
 
-
-
-        <ImageButton
+        <ImageView
             android:id="@+id/postcomment"
             android:layout_width="20dp"
             android:layout_height="20dp"

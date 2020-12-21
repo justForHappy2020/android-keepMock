@@ -1,5 +1,13 @@
 package com.example.myapplication;
 
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -11,8 +19,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.myapplication.entity.Action;
 import com.example.myapplication.entity.Course;
+import com.example.myapplication.entity.Movement;
+import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.utils.HttpUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -21,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +49,12 @@ public class course_main extends Activity implements View.OnClickListener {
     private TextView tvDuration;
     private TextView tvDegree;
     private TextView tvIntro;
+    private TextView tvActionNum;
     private Course course = new Course();
     private Long courseID;
+
+
+    private RecyclerView recyclerView;
 
     private List<Long> actionIdList = new ArrayList();//动作ID的LIST
     private int IdLocation;//第几个动作，从0开始算
@@ -50,8 +67,14 @@ public class course_main extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         Fresco.initialize(this);
         setContentView(R.layout.activity_course_main);
+
+        Intent intent = getIntent();
+        courseID = intent.getLongExtra("courseID",0);
+
+        courseId2Course(courseID);
+
         initView();
-        startThread();
+        //startThread();
     }
 
     private void startThread() {
@@ -132,10 +155,10 @@ public class course_main extends Activity implements View.OnClickListener {
             Toast.makeText(course_main.this,"ERROR", Toast.LENGTH_SHORT).show();
         }
         else             {
-            tvCalorie.setText(course.getCalorie() + "千卡");
-            tvDuration.setText(course.getDuration());
-            tvDegree.setText(course.getDegree());
-            tvIntro.setText(course.getCourseIntro());
+            //tvCalorie.setText(course.getCalorie() + "千卡");
+            //tvDuration.setText(course.getDuration());
+            //tvDegree.setText(course.getDegree());
+            //tvIntro.setText(course.getCourseIntro());
         }
         httpcode = 0;
     }
@@ -215,6 +238,7 @@ public class course_main extends Activity implements View.OnClickListener {
 
 
     private void initView(){
+        /*
         ibVideoPlay = findViewById(R.id.video_play);
         btVideoPlay = findViewById(R.id.play_video);
         btRelatedCourse[0] = findViewById(R.id.related_course1);
@@ -228,9 +252,44 @@ public class course_main extends Activity implements View.OnClickListener {
         tvDegree = findViewById(R.id.degree);
         tvIntro = findViewById(R.id.course_intro);
 
-        Intent intentAccept = null;
-        intentAccept = getIntent();
-        courseID=intentAccept.getLongExtra("course",0);
+         */
+        tvActionNum=findViewById(R.id.course_detail_actionNum);
+
+        tvActionNum.setText(course.getActionList().size()+" 个动作");
+
+        recyclerView = findViewById(R.id.course_detail_content_recyclerView);
+
+        List<MultipleItem> data= new ArrayList<>();
+        for(int j=0;j<course.getActionList().size();j++){
+           data.add(new MultipleItem(MultipleItem.ACTION,course.getActionList().get(j)));
+        }
+
+        MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(data);
+
+        LinearLayoutManager layoutM = new LinearLayoutManager(this);
+        layoutM.setOrientation(LinearLayoutManager.HORIZONTAL);//设置为横向排列
+
+        recyclerView.setLayoutManager(layoutM);
+        myAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> baseQuickAdapter, @NonNull View view, int position) {
+                Intent intent = new Intent(course_main.this,activity_movement_detail.class);
+                intent.putExtra("courseActionPosition",position);
+                intent.putExtra("course",(Serializable) course);
+                startActivity(intent);
+            }
+        });
+        recyclerView.setAdapter(myAdapter);
+
+
+/*
+        if(courseId2Course(courseID) == true) {//根据ID获取课程类./courseId2course
+            tvCalorie.setText(course.getCalorie() + "千卡");
+            tvDuration.setText(course.getDuration());
+            tvDegree.setText(course.getDegree());
+            tvIntro.setText(course.getCourseIntro());
+        }
+
 
         courseId2Course(courseID);//根据ID获取课程类./courseId2course
 
@@ -239,18 +298,14 @@ public class course_main extends Activity implements View.OnClickListener {
         ibVideoPlay.setOnClickListener(this);//监听获取验证码按钮
         btVideoPlay.setOnClickListener(this);//监听获取验证码按钮
         for(int i = 0;i<btRelatedCourse.length;i++) btRelatedCourse[i].setOnClickListener(this);
+
+ */
     }
 
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.video_play:
-                intent = new Intent(this, play.class);
-                intent.putExtra("courseUrl",course.getActionList().get(0).getActionUrl());
-                intent.putExtra("courseID",course.getCourseId());
-                startActivity(intent);
-                break;
-            case R.id.play_video:
                 intent = new Intent(this, play.class);
                 intent.putExtra("courseUrl",course.getActionList().get(0).getActionUrl());
                 intent.putExtra("courseID",course.getCourseId());

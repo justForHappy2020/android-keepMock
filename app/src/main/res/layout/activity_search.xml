@@ -38,7 +38,7 @@
                     </ImageButton>
 
                     <EditText
-                        android:id="@+id/text_inout_search"
+                        android:id="@+id/text_input_search"
                         android:layout_width="274dp"
                         android:layout_height="33dp"
                         android:layout_marginLeft="10dp"

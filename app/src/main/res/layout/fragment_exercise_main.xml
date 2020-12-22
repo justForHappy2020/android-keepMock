@@ -40,7 +40,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical"
         android:scrollbars="none">
 
@@ -188,17 +187,16 @@
                     android:fillViewport="true">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/hotcourse1"
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="腹肌撕裂者 &#10;17分钟 K1"
@@ -208,8 +206,8 @@
                         <Button
                             android:id="@+id/hotcourse2"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="Button Two"
@@ -218,8 +216,8 @@
                         <Button
                             android:id="@+id/hotcourse3"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="Button Three"
@@ -229,7 +227,7 @@
                             android:id="@+id/hotcourse4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="Button Four"
@@ -239,7 +237,7 @@
                             android:id="@+id/hotcourse5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="Button Five"
@@ -249,7 +247,7 @@
                             android:id="@+id/hotcourse6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="Button Six"
@@ -259,7 +257,7 @@
                             android:id="@+id/hotcourse7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="Button Seven"
@@ -269,7 +267,7 @@
                             android:id="@+id/hotcourse8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="Button Eight"
@@ -279,7 +277,7 @@
                             android:id="@+id/hotcourse9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="Button Nine"
@@ -289,7 +287,7 @@
                             android:id="@+id/hotcourse10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/fitness"
                             android:fontFamily="sans-serif-black"
                             android:text="Button ten"

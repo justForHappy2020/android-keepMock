@@ -131,7 +131,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
 
             }
         });
-        //具体课程的监听
+
         quickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
@@ -143,7 +143,6 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
         });
 
         quickAdapter.addChildClickViewIds(R.id.share_follow,R.id.share_users_head,R.id.users_id,R.id.postlike,R.id.praises,R.id.postcomment,R.id.comments);
-        //具体课程的监听
         quickAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {

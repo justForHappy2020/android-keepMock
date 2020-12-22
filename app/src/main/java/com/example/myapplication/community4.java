@@ -1,13 +1,18 @@
 package com.example.myapplication;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -18,22 +23,29 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
+import com.example.myapplication.Beans.DownImageTask;
 import com.example.myapplication.entity.AddImage;
 import com.example.myapplication.utils.HttpUtils;
 
@@ -58,15 +70,16 @@ public class community4 extends Activity implements View.OnClickListener {
     private ImageButton btn_cancel;//取消按钮
     private Button btn_release;//发布按钮
     private EditText et;//输入框
-    private ImageButton ibUpdatePhoto;//url下载下来的图片
+    private ImageView ibUpdatePhoto;//url下载下来的图片
     private ImageButton ibPhoto;//显示的照片item
     private String et_str;//输入的内容
 //    private RecyclerView recyclerView;
 //    private MultipleItemQuickAdapter multipleItemQuickAdapter;
 //    private RecyclerView.LayoutManager mLayoutmanager;
     private GridView gridView;
-    private BaseAdapter madapt;
+    private MyAdapter madapt;
     private Context mcontext;
+    private int Position;
 
     private TextView locate;
     private String URL_LOCATION;
@@ -76,6 +89,8 @@ public class community4 extends Activity implements View.OnClickListener {
     private String url;//一张图片的URL
     private List<String> urlList = new ArrayList();//动态图片URL数组
     private ArrayList<AddImage> mData = new ArrayList();//用来展示图片
+    private Dialog dialog;//放大图片
+    private ImageView image;
 
     private String imgUrlList;//http请求的参数，一组图片url，用空格分隔
     private String token;//相当于用户的唯一ID
@@ -99,7 +114,6 @@ public class community4 extends Activity implements View.OnClickListener {
         getaddress();
 
         initView();
-//        initData();
     }
 //通过经纬度获取地址
     private void getaddress(){
@@ -271,24 +285,9 @@ public class community4 extends Activity implements View.OnClickListener {
             double latitude = location.getLatitude();// 纬度
             locationStr = latitude+ ","+longitude;
         }
+
     }
 
-//     * 获取权限结果
-
-    //输入的测试图片
-//    private void initData(){
-//        multipleItemQuickAdapter = new MultipleItemQuickAdapter(getData());
-//    }
-//
-//    private ArrayList<AddImage> getData(){
-//        ArrayList<AddImage> data = new ArrayList<>();
-//        AddImage addImage1 = new AddImage(R.drawable.sisi);
-//        AddImage addImage2 = new AddImage(R.drawable.sisi);
-//
-//        data.add(addImage1);
-//        data.add((addImage2));
-//        return data;
-//    }
 
     private void initView(){
         btn_cancel = findViewById(R.id.community4_Leftarrow_btn);
@@ -296,7 +295,7 @@ public class community4 extends Activity implements View.OnClickListener {
         et = findViewById(R.id.community4_Sharetext_edit);
         ibUpdatePhoto = findViewById(R.id.community4_AddImage_btn4);
         //ibPhoto = findViewById(R.id.community4_item_image);
-        locate = findViewById(R.id.Locate);
+        locate = findViewById(R.id.locate);
         saveSP = getSharedPreferences("url",MODE_PRIVATE);
 
         locate.setText(address);
@@ -305,6 +304,12 @@ public class community4 extends Activity implements View.OnClickListener {
         btn_release.setOnClickListener(this);
         ibUpdatePhoto.setOnClickListener(this);
         //ibPhoto.setOnClickListener(this);
+
+        dialog = new Dialog(this,R.style.FullActivity);
+        WindowManager.LayoutParams attributes = getWindow().getAttributes();
+        attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
+        attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
+        dialog.getWindow().setAttributes(attributes);
 
         gridView = findViewById(R.id.community4_gridview);
 
@@ -434,7 +439,7 @@ public class community4 extends Activity implements View.OnClickListener {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
- //   通过图片url获取drawable
+    //   通过图片url获取drawable
     private Drawable loadImageFromNetwork(String imageUrl)
     {
         Drawable drawable = null;
@@ -461,11 +466,11 @@ public class community4 extends Activity implements View.OnClickListener {
             public void run() {
                 final Drawable drawable = loadImageFromNetwork(url);
                 // post() 特别关键，就是到UI主线程去更新图片
-                ibPhoto.post(new Runnable(){
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        ibPhoto.setImageDrawable(drawable) ;
+                        ibPhoto.post(new Runnable(){
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+                                ibPhoto.setImageDrawable(drawable) ;
                     }}) ;
             }
 
@@ -477,8 +482,6 @@ public class community4 extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
     }
-
-
     /**
      * startActivityForResult执行后的回调方法，接收返回的图片
      * @param requestCode
@@ -503,6 +506,7 @@ public class community4 extends Activity implements View.OnClickListener {
                 final String filepath = getRealPathFromUriAboveApi19(this,photoUri);//获取绝对路径
                 //final String httpurl = "http://192.168.16.1:8080/api/user/uploadImageAndroid";
                 final String httpurl = "http://159.75.2.94:8080/api/user/uploadImageAndroid";
+
                 //http请求获取上传到云后的图片URL
                 Thread thread = new Thread(new Runnable() {
                     @Override
@@ -531,6 +535,7 @@ public class community4 extends Activity implements View.OnClickListener {
                             e.printStackTrace();
                         }
                     }
+
                 });
                 thread.start();
                 thread.join(5000);
@@ -539,26 +544,85 @@ public class community4 extends Activity implements View.OnClickListener {
                         mData.add(new AddImage(i, urlList.get(i)));
                         urlList.clear();
                     }
-                    madapt = new MyAdapter<AddImage>(mData, R.layout.item_photo){//Arraylist转换list
-                        @Override
-                        public void bindView(ViewHolder holder, AddImage obj) {
-                            holder.setImageResource(R.id.community4_item_image,R.drawable.sucai);
-                            //holder.getItemView().setBackground();
-                        }
+                    madapt = new MyAdapter(mData, community4.this){
                     };
+
                     gridView.setAdapter(madapt);
                     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Toast.makeText(mcontext, "你点击了~" + position + "~项", Toast.LENGTH_SHORT).show();
+                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                            Position = position;
+                            if (Position < mData.size()) {
+                                image = findViewById(R.id.community4_item_image);
+                                dia();
+                                dialog.show();
+                            }
+                            else {
+                                //  6.0之后动态申请权限 SD卡写入权限
+                                ibUpdatePhoto.setVisibility(View.GONE);
+                                if (ContextCompat.checkSelfPermission(community4.this,
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                        != PackageManager.PERMISSION_GRANTED) {
+                                    ActivityCompat.requestPermissions(community4.this,
+                                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                            MY_ADD_CASE_CALL_PHONE2);
+
+                                } else {
+                                    //打开相册
+                                    choosePhoto();
+                                }
+                            }
                         }
                     });
+                    Deleteclick();
+
+
                 }
             } catch (Exception e) {
                 //"上传失败");
             }
             if(httpCode!=200)Toast.makeText(community4.this,"上传图片失败",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void Deleteclick() {
+        madapt.delete(new MyAdapter.Det() {
+            @Override
+            public void del(int position) {
+//              删除list中的数据，重新绑定数据
+                mData.remove(position);
+                madapt.notifyDataSetChanged();
+            }
+        });
+    }
+
+    //点击图片放大
+    private void dia(){
+        image = getImageView();
+        dialog.setContentView(image);
+
+        //大图的点击事件（点击让他消失）
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private ImageView getImageView(){
+        ImageView imageView = new ImageView(this);
+
+        //宽高
+        imageView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        //imageView设置图片
+        //@SuppressLint("ResourceType") InputStream is = getResources().openRawResource(R.drawable.sisi);
+
+        //Drawable drawable = BitmapDrawable.createFromStream(is, null);
+        //new DownImageTask(image).execute(mData.get(Position).getImgUrl());
+        Glide.with(this).load(mData.get(Position).getImgUrl()).into(imageView);
+        return imageView;
     }
 
     @Override
@@ -569,18 +633,19 @@ public class community4 extends Activity implements View.OnClickListener {
                 break;
             case R.id.community4_Release_btn:
                 et_str = et.getText().toString().trim();
-                imgUrlList = null;
+                imgUrlList = "";
 
                 for (int i = 0; i <urlList.size(); i++)imgUrlList = imgUrlList + urlList.get(i) + " ";
 
-                if(urlList.size() > 0) for (int i = 0; i <urlList.size(); i++)imgUrlList = imgUrlList + urlList.get(i) + " ";
-
-                if(imgUrlList != null)imgUrlList = imgUrlList.substring(0,imgUrlList.length()-1);
+                if(urlList.size() > 0) {
+                    for (int i = 0; i <urlList.size(); i++)imgUrlList = imgUrlList + urlList.get(i) + " ";
+                    imgUrlList = imgUrlList.substring(0,imgUrlList.length()-1);
+                }
                 if(et_str.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"输入为空",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"请输入文字",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"不为空",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"动态发布成功",Toast.LENGTH_SHORT).show();
                     //将输入内容发送到数据库--http请求
                     Thread thread = new Thread(new Runnable() {
                         @Override
@@ -620,6 +685,7 @@ public class community4 extends Activity implements View.OnClickListener {
                 break;
             case R.id.community4_AddImage_btn4:
                 //  6.0之后动态申请权限 SD卡写入权限
+                ibUpdatePhoto.setVisibility(View.GONE);
                 if (ContextCompat.checkSelfPermission(community4.this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -634,11 +700,14 @@ public class community4 extends Activity implements View.OnClickListener {
                 break;
                 //点击删除图片
             case R.id.community4_item_cancel:
-            //点击删除图片
-            case R.id.community4_item_image:
-
-                ibPhoto.setImageResource(R.drawable.sucai);//测试。实际需做：删除此图片item
-                urlList.remove(0);//从urlList中删除对应的图片url ，括号内为要删除的第几张图片（从0开始算）
+                final int position = (int) view.getTag();
+                mData.remove(position);
+                madapt.notifyDataSetChanged();
+                break;
+//            case R.id.community4_item_image:
+//
+//                ibPhoto.setImageResource(R.drawable.sucai);//测试。实际需做：删除此图片item
+//                urlList.remove(0);//从urlList中删除对应的图片url ，括号内为要删除的第几张图片（从0开始算）
         }
 
     }
@@ -646,44 +715,52 @@ public class community4 extends Activity implements View.OnClickListener {
 
 }
 
-
-
-//class MyAdapt extends  RecyclerView.Adapter{
-//
-//    private List<AddImage> addImages;
-//
-//    public MyAdapt(List<AddImage> addImages){
-//        this.addImages = addImages;
-//    }
-//    @Override
-//    public int getItemCount() {
-//        return addImages.size();
-//    }
-//
-//
-//    @Override
-//    public MyHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-//        return MyHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_photo, viewGroup, false));
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-//
-//    }
-//
-//
+/*
+     //小图点击事件
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.show();
+//            }
+//        });
 //}
 //
-//class MyHolder extends RecyclerView.ViewHolder{
+//    private void init() {
+//        imageView = (ImageView) findViewById(R.id.image);
 //
-//    private ImageButton photo;
-//    private ImageButton cancel;
+//        //展示在dialog上面的大图
+//        dialog = new Dialog(nextAcitivy.this, R.style.FullActivity);
 //
-//    public MyHolder(@NonNull View itemView) {
-//        super(itemView);
+//        WindowManager.LayoutParams attributes = getWindow().getAttributes();
+//        attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
+//        dialog.getWindow().setAttributes(attributes);
 //
-//        photo = itemView.findViewById(R.id.community4_item_image);
-//        cancel = itemView.findViewById(R.id.community4_item_cancel);
+//        image = getImageView();
+//        dialog.setContentView(image);
 //
+//        //大图的点击事件（点击让他消失）
+//        image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dis-miss();
+//            }
+//        });
 //    }
-//}
+//        private ImageView getImageView(){
+//            ImageView imageView = new ImageView(this);
+//
+//            //宽高
+//            imageView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//
+//            //imageView设置图片
+//            @SuppressLint("ResourceType") InputStream is = getResources().openRawResource(R.drawable.camera);
+//
+//            Drawable drawable = BitmapDrawable.createFromStream(is, null);
+//            imageView.setImageDrawable(drawable);
+//
+//            return imageView;
+//        }//图片显示
+ */
+
+

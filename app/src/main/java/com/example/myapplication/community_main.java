@@ -138,7 +138,6 @@ public class community_main extends Fragment implements LoadMoreModule {
                 break;
             case R.id.float_button:
                 intent = new Intent(getActivity(),community4.class);//点击浮动按钮跳转到发表动态界面
-                intent = new Intent(getActivity(),search_user.class);//点击搜索按钮跳转到搜索结果
                 startActivity(intent);
                 break;
         }}

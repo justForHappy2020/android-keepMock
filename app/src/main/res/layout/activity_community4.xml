@@ -88,7 +88,7 @@
             </ImageView>
 
             <TextView
-                android:id="@+id/Locate"
+                android:id="@+id/locate"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
@@ -100,31 +100,37 @@
 
         </LinearLayout>
 
-        <GridView
-            android:id="@+id/community4_gridview"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="10dp"
-            android:horizontalSpacing="-35dp"
-            android:numColumns="3"
+            android:layout_height="325dp"
             android:paddingStart="50dp"
-            android:scrollbars="none"
-            android:focusable="true"
-            android:descendantFocusability="blocksDescendants"
-            android:verticalSpacing="5dp">
+            android:paddingTop="10dp"
+            android:paddingEnd="50dp">
+
+            <GridView
+                android:id="@+id/community4_gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:horizontalSpacing="-60dp"
+                android:numColumns="3"
+                android:scrollbars="none">
 
 
-        </GridView>
+            </GridView>
+            <ImageView
+                android:id="@+id/community4_AddImage_btn4"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:background="#EFEFEF"
+                android:padding="5dp"
+                android:src="@drawable/add">
 
-        <ImageButton
-            android:id="@+id/community4_AddImage_btn4"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:padding="5dp"
-            android:background="#EFEFEF"
-            android:src="@drawable/add">
+            </ImageView>
 
-        </ImageButton>
+        </RelativeLayout>
+
 
     </LinearLayout>
 </LinearLayout>

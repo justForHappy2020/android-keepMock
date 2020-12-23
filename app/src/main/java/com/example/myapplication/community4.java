@@ -190,7 +190,7 @@ public class community4 extends Activity implements View.OnClickListener {
         criteria.setAltitudeRequired(false);//不要求海拔
         criteria.setBearingRequired(false);//不要求方位
         criteria.setCostAllowed(true);//允许有花费
-        criteria.setPowerRequirement(Criteria.POWER_LOW);//低功耗
+        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);//功耗
         //获取LocationManager
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -200,10 +200,10 @@ public class community4 extends Activity implements View.OnClickListener {
         // 获取所有可用的位置提供器
         List<String> providerList = locationManager.getProviders(true);
         // 测试一般都在室内，这里颠倒了书上的判断顺序
-        if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
-            provider = LocationManager.NETWORK_PROVIDER;
-        } else if (providerList.contains(LocationManager.GPS_PROVIDER)) {
+        if (providerList.contains(LocationManager.GPS_PROVIDER)) {
             provider = LocationManager.GPS_PROVIDER;
+        } else if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
+            provider = LocationManager.NETWORK_PROVIDER;
         } else {
             // 当没有可用的位置提供器时，弹出Toast提示用户
             Toast.makeText(this, "Please Open Your GPS or Location Service", Toast.LENGTH_SHORT).show();

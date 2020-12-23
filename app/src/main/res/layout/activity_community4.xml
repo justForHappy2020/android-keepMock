@@ -99,37 +99,42 @@
             </TextView>
 
         </LinearLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="325dp"
-            android:paddingStart="50dp"
+            android:layout_height="250dp"
             android:paddingTop="10dp"
+            android:paddingStart="50dp"
             android:paddingEnd="50dp">
 
             <GridView
                 android:id="@+id/community4_gridview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="10dp"
-                android:horizontalSpacing="-60dp"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
                 android:numColumns="3"
-                android:scrollbars="none">
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                android:layout_centerInParent="true">
 
 
             </GridView>
-            <ImageView
+
+            <ImageButton
                 android:id="@+id/community4_AddImage_btn4"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:background="#EFEFEF"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="50dp"
                 android:padding="5dp"
+                android:background="#EFEFEF"
                 android:src="@drawable/add">
 
-            </ImageView>
-
+            </ImageButton>
         </RelativeLayout>
+
+
+
+
+
+
 
 
     </LinearLayout>

@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,9 +123,9 @@ public class fragment_search_all extends Fragment {
         course1.setCourseIntro("K1零基础  . 3002.5万人参加");
         User user = new User("迪奥·布兰度","URL");
 
-        Share share1 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27");
-        Share share2 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27");
-        Share share3= new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27");
+        Share share1 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27", 1, true);
+        Share share2 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27", 2, false);
+        Share share3= new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27", 0, false);
 /*
         datas01.add(share1);
         datas01.add(share2);

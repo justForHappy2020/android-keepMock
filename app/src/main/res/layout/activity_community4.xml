@@ -102,18 +102,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="325dp"
-            android:paddingStart="50dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="50dp">
+            android:layout_height="250dp"
+
+            android:gravity="center">
 
             <GridView
                 android:id="@+id/community4_gridview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="10dp"
-                android:horizontalSpacing="-60dp"
+                android:layout_width="250dp"
+                android:layout_height="240dp"
+                android:verticalSpacing="5dp"
                 android:numColumns="3"
                 android:scrollbars="none">
 
@@ -123,8 +120,9 @@
                 android:id="@+id/community4_AddImage_btn4"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
+                android:scaleType="fitCenter"
                 android:background="#EFEFEF"
-                android:padding="5dp"
+                android:padding="30dp"
                 android:src="@drawable/add">
 
             </ImageView>

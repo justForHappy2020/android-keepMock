@@ -91,13 +91,12 @@
             android:screenOrientation="portrait" />
 
 
-      <activity android:name=".MainActivity_ViewPage">
-                <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+<!--      <activity android:name=".MainActivity_ViewPage">   1223-->
+<!--                <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity
             android:name=".play"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -201,13 +200,20 @@
             android:name=".pvideo_pause"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <!--
-        <activity
-            android:name=".community4"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-        -->
-        <activity android:name=".community4"></activity>
+<!--        &lt;!&ndash;-->
+<!--        <activity-->
+<!--            android:name=".community4"-->
+<!--            android:launchMode="singleTop"-->
+<!--            android:screenOrientation="portrait" />-->
+<!--        &ndash;&gt;-->
+        <activity android:name=".community4">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+<!--        <activity android:name=".community4"></activity> 1223-->
     </application>
 
 </manifest>

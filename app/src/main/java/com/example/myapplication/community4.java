@@ -660,7 +660,7 @@ public class community4 extends Activity implements View.OnClickListener {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                String responseData = HttpUtils.connectHttp("https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/sharing",json);
+                                String responseData = HttpUtils.connectHttp("http://159.75.2.94:8080/api/community/sharing",json);
                                 try {
                                     JSONObject jsonObject1 = new JSONObject(responseData);
                                     //相应的内容

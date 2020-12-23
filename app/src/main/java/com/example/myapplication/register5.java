@@ -102,7 +102,7 @@ public class register5 extends Activity implements View.OnClickListener{
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        String responseData = HttpUtils.connectHttp("http://192.168.16.1:8080/api/user/setProfile",json);
+                        String responseData = HttpUtils.connectHttp("http://159.75.2.94:8080/api/user/setProfile",json);
                         try {
                             JSONObject jsonObject1 = new JSONObject(responseData);
                                 //相应的内容

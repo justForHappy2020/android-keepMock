@@ -50,6 +50,7 @@ public class fragment_search_all extends Fragment {
     MultipleItemQuickAdapter myAdapter;
     MultipleItemQuickAdapter miniCourseAdapter;
 
+    private String token;//后期本地获取
 
     @Nullable
     @Override
@@ -215,7 +216,7 @@ public class fragment_search_all extends Fragment {
 
     private void configLoadMoreData() {
         String url;//http请求的url
-        url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/getHotShare";
+        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&currentPage=" + currentPage;//后期改为搜索动态接口
 
         getHttpSearch(url);
 

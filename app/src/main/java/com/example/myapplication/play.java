@@ -179,7 +179,7 @@ public class play extends Activity implements View.OnClickListener{
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/actionId2Action?actionId=" + actionID;
+                String url = "http://159.75.2.94:8080/api/community/actionId2Action?actionId=" + actionID;
                 String responseData = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
@@ -230,7 +230,7 @@ public class play extends Activity implements View.OnClickListener{
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://192.168.16.1:8080/api/course/playTheVideo?token=" + token + "&&courseId=" + actionID;
+                String url = "http://159.75.2.94:8080/api/course/playTheVideo?token=" + token + "&&courseId=" + actionID;
                 String responseData = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);

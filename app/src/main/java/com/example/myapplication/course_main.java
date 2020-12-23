@@ -101,7 +101,7 @@ public class course_main extends Activity implements View.OnClickListener {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-        String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/courseId2Course?courseId=" + courseID.toString().trim();
+        String url = "http://159.75.2.94:8080/api/course/courseId2Course?courseId=" + courseID.toString().trim();
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -169,7 +169,7 @@ public class course_main extends Activity implements View.OnClickListener {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-        String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getRelativeCourse?courseId=" + courseID.toString().trim();
+        String url = "http://159.75.2.94:8080/api/course/getRelativeCourse?courseId=" + courseID.toString().trim();
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);

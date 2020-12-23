@@ -244,7 +244,7 @@ public class register3 extends Activity implements View.OnClickListener {
                 Uri photoUri = data.getData();//获取路径
                 //final String filename = photoUri.getPath();
                 final String filepath = getRealPathFromUriAboveApi19(this,photoUri);//获取绝对路径
-                final String httpurl = "http://192.168.16.1:8080/api/user/uploadImageAndroid";
+                final String httpurl = "http://159.75.2.94:8080/api/user/uploadImageAndroid";
 
 
                 //http请求

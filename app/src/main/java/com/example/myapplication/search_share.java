@@ -52,7 +52,7 @@ public class search_share extends Activity implements View.OnClickListener{
 
     private void initView(){
         flowLayout = findViewById(R.id.flowLayout);
-        et = findViewById(R.id.text_inout_search);
+        et = findViewById(R.id.text_input_search);
         search = findViewById(R.id.searching_button);
         clear_history = findViewById(R.id.clean_history);
         quit = findViewById(R.id.quit_button);

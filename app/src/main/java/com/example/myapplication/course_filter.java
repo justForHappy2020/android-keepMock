@@ -84,7 +84,7 @@ public class course_filter extends Activity implements View.OnClickListener {
             Long bodyClassId = null;
             Long degreeClassId = null;
             String url;
-            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
+            url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
             getHttpFilter(url);//筛选课程并展示
 
             //下面这句注释掉的不要加上去。。不然item显示重复
@@ -166,7 +166,7 @@ public class course_filter extends Activity implements View.OnClickListener {
             Long bodyClassId = null;//部位id值
             Long degreeClassId = null;//难度id值
             String url;//http请求的url
-            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
+            url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
             getHttpFilter(url);//筛选课程并展示
         }
         else {//某个部位
@@ -187,7 +187,7 @@ public class course_filter extends Activity implements View.OnClickListener {
             String url;//http请求的url
             totalBodyClassId = getBodyClassId(bodyClassId);//得到身体部位标签的id
             //totalDegreeClassId = getDegreeId(degreeClassId);//得到难度标签的Id
-            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
+            url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
             getHttpFilter(url);//筛选课程并展示
         }
     }
@@ -233,7 +233,7 @@ public class course_filter extends Activity implements View.OnClickListener {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-        String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getFilter";
+        String url = "http://159.75.2.94:8080/api/course/getFilter";
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -374,7 +374,7 @@ public class course_filter extends Activity implements View.OnClickListener {
                 String url;//http请求的url
                 totalBodyClassId = getBodyClassId(bodyClassId);//得到身体部位标签的id
                 totalDegreeClassId = getDegreeId(degreeClassId);//得到难度标签的Id
-                url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + totalDegreeClassId + "&&currentPage=" + currentPage;
+                url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + totalDegreeClassId + "&&currentPage=" + currentPage;
                 getHttpFilter(url);//筛选课程并展示
                 break;
             case R.id.reset://标签全部置灰，取消选中

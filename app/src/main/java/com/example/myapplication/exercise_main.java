@@ -83,7 +83,7 @@ public class exercise_main extends Fragment{
             @Override
             public void run() {
                 //String url = "http://192.168.16.1:8080/api/course/getHotCourse10";
-                String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getHotCourse10";
+                String url = "http://159.75.2.94:8080/api/course/getHotCourse10";
                 String responseData = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
@@ -140,7 +140,7 @@ public class exercise_main extends Fragment{
             @Override
             public void run() {
         //String url = "http://192.168.16.1:8080/api/course/getFilter";
-                String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getFilter";
+                String url = "http://159.75.2.94:8080/api/course/getFilter";
                 String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -190,7 +190,7 @@ public class exercise_main extends Fragment{
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-        String url = "http://192.168.16.1:8080/api/course/getCountTime";
+        String url = "http://159.75.2.94:8080/api/course/getCountTime";
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);

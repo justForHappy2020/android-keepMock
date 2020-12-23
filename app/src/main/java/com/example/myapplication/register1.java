@@ -104,7 +104,7 @@ public class register1 extends Activity implements View.OnClickListener{
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        String url = "http://192.168.16.1:8080/api/user/getCode";
+                        String url = "http://159.75.2.94:8080/api/user/getCode";
                         String responseData = connectHttp(url,json);
                         getfeedback(responseData);
                     } catch (IOException e) {

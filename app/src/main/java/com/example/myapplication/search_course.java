@@ -40,7 +40,7 @@ public class search_course extends Activity implements View.OnClickListener{
 
     private void initView() {
         ibback = findViewById(R.id.search_back);
-        ibSearch = findViewById(R.id.searching_button);
+        ibSearch = findViewById(R.id.searching_button1);
         btReset = findViewById(R.id.search_reset);
         etInput = findViewById(R.id.text_inout_search);
         search_linerLayout = findViewById(R.id.search_linerLayout);
@@ -92,7 +92,7 @@ public class search_course extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.searching_button:
+            case R.id.searching_button1:
                 search();
                 break;
             case R.id.search_back:

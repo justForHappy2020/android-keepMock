@@ -127,7 +127,7 @@ public class search_share extends Activity implements View.OnClickListener{
                         //获取最近搜索中的点击内容进行传值
                         String str = auto_tv.getText().toString();
                         Intent intent = new Intent(search_share.this, search_result.class);
-                        intent.putExtra("search_content",str);
+                        intent.putExtra("searchContent",str);
                         intent.putExtra("from",SEARCH_SHARE);
                         startActivity(intent);
                     }

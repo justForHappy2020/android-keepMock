@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!--
  这个可写可不写
@@ -30,14 +31,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
+
+
         <activity android:name=".activity_download"></activity>
         <!-- 允许明文传输，否则无法直接获取获取资源 -->
         <activity android:name=".activity_movement_detail"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"/>
         <activity
-            android:name=".search_course"
+            android:name=".search_course_backup"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
@@ -65,13 +69,13 @@
         <activity
             android:name=".search_share"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"/>
 
-        </activity>
         <activity
-            android:name=".search"
+            android:name=".search_course"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".course_filter"
             android:launchMode="singleTop"

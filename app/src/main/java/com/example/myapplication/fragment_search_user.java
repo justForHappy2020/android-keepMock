@@ -59,7 +59,6 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
         currentPage = 1;
         Bundle bundle = getArguments();
         keyWord = bundle.getString("searchContent");
-        initData();
         initView(view);
         return view;
     }

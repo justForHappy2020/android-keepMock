@@ -25,27 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import com.example.myapplication.entity.Course;
-import com.example.myapplication.entity.CourseClass;
-import com.example.myapplication.utils.HttpUtils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class exercise_main extends Fragment{
 
     private ImageView ivSearch;
@@ -252,7 +231,7 @@ public class exercise_main extends Fragment{
         Intent intent = null;
         switch (view.getId()) {
             case R.id.search:
-                intent = new Intent(getActivity(), search.class);
+                intent = new Intent(getActivity(), search_course.class);
                 startActivity(intent);
                 break;
             //筛选课程http、跳转对应的筛选主页

@@ -504,7 +504,6 @@ public class community4 extends Activity implements View.OnClickListener {
                 Uri photoUri = data.getData();//获取路径
                 //final String filename = photoUri.getPath();
                 final String filepath = getRealPathFromUriAboveApi19(this,photoUri);//获取绝对路径
-                //final String httpurl = "http://192.168.16.1:8080/api/user/uploadImageAndroid";
                 final String httpurl = "http://159.75.2.94:8080/api/user/uploadImageAndroid";
 
                 //http请求获取上传到云后的图片URL
@@ -518,8 +517,6 @@ public class community4 extends Activity implements View.OnClickListener {
                                 //相应的内容
                                 httpCode = jsonObject1.getInt("code");
                                 if(httpCode == 200){
-
-
                                     url= jsonObject1.getString("data");//云上的图片URL
                                     urlList.add(url);
                                     SharedPreferences.Editor editor = saveSP.edit();
@@ -532,6 +529,9 @@ public class community4 extends Activity implements View.OnClickListener {
                                 e.printStackTrace();
                             }
                         } catch (Exception e) {
+                            Looper.prepare();
+                            Toast.makeText(community4.this,"图片过大，请重新上传",Toast.LENGTH_SHORT).show();
+                            Looper.loop();// 进入loop中的循环，查看消息队列
                             e.printStackTrace();
                         }
                     }
@@ -564,7 +564,7 @@ public class community4 extends Activity implements View.OnClickListener {
                                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                                         != PackageManager.PERMISSION_GRANTED) {
                                     ActivityCompat.requestPermissions(community4.this,
-                                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
                                             MY_ADD_CASE_CALL_PHONE2);
 
                                 } else {
@@ -581,7 +581,10 @@ public class community4 extends Activity implements View.OnClickListener {
             } catch (Exception e) {
                 //"上传失败");
             }
-            if(httpCode!=200)Toast.makeText(community4.this,"上传图片失败",Toast.LENGTH_SHORT).show();
+            if(httpCode!=200){
+                ibUpdatePhoto.setVisibility(View.VISIBLE);
+                Toast.makeText(community4.this,"上传图片失败",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -690,7 +693,7 @@ public class community4 extends Activity implements View.OnClickListener {
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(community4.this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
                             MY_ADD_CASE_CALL_PHONE2);
 
                 } else {

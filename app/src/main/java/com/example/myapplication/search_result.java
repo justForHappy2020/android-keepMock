@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -17,7 +18,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class search_result extends FragmentActivity implements View.OnClickListener{
@@ -170,10 +173,36 @@ public class search_result extends FragmentActivity implements View.OnClickListe
             case R.id.searching_result_button:
                 intent = new Intent(this, search_result.class);
                 searchContent = etInput.getText().toString().trim();
+                SharedPreferences shp;
+                Set<String> strSet = new HashSet<String>();
                 if(mViewPager.getCurrentItem() == 0)intent.putExtra("from", SEARCH_ALL);
-                else if(mViewPager.getCurrentItem() == 1)intent.putExtra("from", SEARCH_COURSE);
-                else if(mViewPager.getCurrentItem() == 2)intent.putExtra("from", SEARCH_SHARE);
-                else if(mViewPager.getCurrentItem() == 3)intent.putExtra("from", SEARCH_USER);
+                else if(mViewPager.getCurrentItem() == 1){
+                    intent.putExtra("from", SEARCH_COURSE);
+                    shp = getSharedPreferences("search_course_history",MODE_PRIVATE);
+                    strSet = shp.getStringSet("search_course_history_list",new HashSet<String>());
+                    strSet.add(searchContent);
+                    SharedPreferences.Editor editor = shp.edit();
+                    editor.putStringSet("search_course_history_list",strSet);
+                    editor.commit();
+                }
+                else if(mViewPager.getCurrentItem() == 2){
+                    intent.putExtra("from", SEARCH_SHARE);
+                    shp = getSharedPreferences("search_share_history",MODE_PRIVATE);
+                    strSet = shp.getStringSet("search_share_history_list",new HashSet<String>());
+                    strSet.add(searchContent);
+                    SharedPreferences.Editor editor = shp.edit();
+                    editor.putStringSet("search_share_history_list",strSet);
+                    editor.commit();
+                }
+                else if(mViewPager.getCurrentItem() == 3){
+                    intent.putExtra("from", SEARCH_USER);
+                    shp = getSharedPreferences("search_user_history",MODE_PRIVATE);
+                    strSet = shp.getStringSet("search_user_history_list",new HashSet<String>());
+                    strSet.add(searchContent);
+                    SharedPreferences.Editor editor = shp.edit();
+                    editor.putStringSet("search_user_history_list",strSet);
+                    editor.commit();
+                }
                 intent.putExtra("searchContent",searchContent);
                 startActivity(intent);
                 finish();

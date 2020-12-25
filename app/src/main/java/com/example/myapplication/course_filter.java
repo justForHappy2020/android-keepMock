@@ -21,8 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -81,10 +79,15 @@ public class course_filter extends Activity implements View.OnClickListener {
             /**
              * 加载更多函数，需要完善加载下一页的HTTP请求
              */
-            Long bodyClassId = null;
-            Long degreeClassId = null;
-            String url;
-            url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
+            String totalBodyClassId = null;//汇总的部位Id
+            String totalDegreeClassId = null;//汇总的难度id
+            String url;//http请求的url
+            totalBodyClassId = getBodyClassId();//得到身体部位标签的id
+            totalDegreeClassId = getDegreeId();//得到难度标签的Id
+            if(totalBodyClassId == null && totalDegreeClassId == null)url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + "&&degree=" + "&&currentPage=" + currentPage;
+            else if(totalBodyClassId == null)url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart="  + "&&degree=" + totalDegreeClassId + "&&currentPage=" + currentPage;
+            else if(totalDegreeClassId == null)url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + "&&currentPage=" + currentPage;
+            else url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + totalDegreeClassId + "&&currentPage=" + currentPage;
             getHttpFilter(url);//筛选课程并展示
 
             //下面这句注释掉的不要加上去。。不然item显示重复
@@ -121,7 +124,6 @@ public class course_filter extends Activity implements View.OnClickListener {
                             course.setCourseId(jsonObject.getLong("courseId"));
                             course.setCourseName(jsonObject.getString("courseName"));
                             course.setBackgroundUrl(jsonObject.getString("backgroundUrl"));
-                            //course.setCourseUrl(jsonObject.getString("courseUrl"));
                             course.setBodyPart(jsonObject.getString("bodyPart"));
                             course.setDegree(jsonObject.getString("degree"));
                             course.setDuration(jsonObject.getString("duration"));
@@ -163,10 +165,8 @@ public class course_filter extends Activity implements View.OnClickListener {
         Intent intentAccept = getIntent();
         courseClass = (CourseClass) intentAccept.getSerializableExtra("bodypart");
         if (courseClass.getClassValue().equals("all")) {//"all"
-            Long bodyClassId = null;//部位id值
-            Long degreeClassId = null;//难度id值
             String url;//http请求的url
-            url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + bodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
+            url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart="  + "&&degree="  + "&&currentPage=" + currentPage;
             getHttpFilter(url);//筛选课程并展示
         }
         else {//某个部位
@@ -182,22 +182,22 @@ public class course_filter extends Activity implements View.OnClickListener {
             }
             String totalBodyClassId = null;//汇总的部位Id
             //String totalDegreeClassId = null;//汇总的难度id
-            Long bodyClassId = null;//部位id值
-            Long degreeClassId = null;//难度id值
             String url;//http请求的url
-            totalBodyClassId = getBodyClassId(bodyClassId);//得到身体部位标签的id
-            //totalDegreeClassId = getDegreeId(degreeClassId);//得到难度标签的Id
-            url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + degreeClassId + "&&currentPage=" + currentPage;
+            totalBodyClassId = getBodyClassId();//得到身体部位标签的id
+            //totalDegreeClassId = getDegreeId();//得到难度标签的Id
+            if(totalBodyClassId == null)url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + "&&degree="  + "&&currentPage=" + currentPage;
+            else url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree="  + "&&currentPage=" + currentPage;
             getHttpFilter(url);//筛选课程并展示
         }
     }
 
-    private String getDegreeId(Long degreeClassId){
+    private String getDegreeId(){
         ColorDrawable colorDrawable;
         int color;
         String totalDegreeClassId = null;
+        Long degreeClassId = null;
         int i;
-        for(i = 0 ; i < btDegree.length ; i++) {
+        for(i = 0 ; i < degree.size() ; i++) {
             background=btDegree[i].getBackground();
             colorDrawable = (ColorDrawable) background;
             color=colorDrawable.getColor();
@@ -210,10 +210,11 @@ public class course_filter extends Activity implements View.OnClickListener {
         return totalDegreeClassId;
     }
 
-    private String getBodyClassId(Long bodyClassId){
+    private String getBodyClassId(){
         ColorDrawable colorDrawable;
         int color;
         String totalBodyClassId = null;
+        Long bodyClassId = null;
         int i;
         for(i = 0 ; i < btBodypart.length ; i++) {
             background=btBodypart[i].getBackground();
@@ -365,17 +366,19 @@ public class course_filter extends Activity implements View.OnClickListener {
                 break;
             case R.id.sure://清空课程列表，如果BUTTON选中，传值，筛选选中的标签的课程，展示课程
                 courseList.clear();
-
+                courseListSet.clear();
                 currentPage = Long.valueOf(1);
                 String totalBodyClassId = null;//汇总的部位Id
                 String totalDegreeClassId = null;//汇总的难度id
-                Long bodyClassId = null;//部位id值
-                Long degreeClassId = null;//难度id值
                 String url;//http请求的url
-                totalBodyClassId = getBodyClassId(bodyClassId);//得到身体部位标签的id
-                totalDegreeClassId = getDegreeId(degreeClassId);//得到难度标签的Id
-                url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + totalDegreeClassId + "&&currentPage=" + currentPage;
+                totalBodyClassId = getBodyClassId();//得到身体部位标签的id
+                totalDegreeClassId = getDegreeId();//得到难度标签的Id
+                if(totalBodyClassId == null && totalDegreeClassId == null)url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + "&&degree=" + "&&currentPage=" + currentPage;
+                else if(totalBodyClassId == null)url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart="  + "&&degree=" + totalDegreeClassId + "&&currentPage=" + currentPage;
+                else if(totalDegreeClassId == null)url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + "&&currentPage=" + currentPage;
+                else url = "http://159.75.2.94:8080/api/course/filterCourse?bodyPart=" + totalBodyClassId + "&&degree=" + totalDegreeClassId + "&&currentPage=" + currentPage;
                 getHttpFilter(url);//筛选课程并展示
+                quickAdapter.notifyDataSetChanged();//检测数据更新并刷新
                 break;
             case R.id.reset://标签全部置灰，取消选中
                 int i;

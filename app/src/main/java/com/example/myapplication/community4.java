@@ -703,9 +703,9 @@ public class community4 extends Activity implements View.OnClickListener {
                 break;
                 //点击删除图片
             case R.id.community4_item_cancel:
-                final int position = (int) view.getTag();
-                mData.remove(position);
-                madapt.notifyDataSetChanged();
+//                final int position = (int) view.getTag();
+//                mData.remove(position);
+//                madapt.notifyDataSetChanged();
                 break;
 //            case R.id.community4_item_image:
 //

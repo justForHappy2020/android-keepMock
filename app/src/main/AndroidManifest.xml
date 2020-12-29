@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapplication">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -31,11 +32,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity_download"></activity>
+        <activity android:name=".activity_download" />
         <!-- 允许明文传输，否则无法直接获取获取资源 -->
-        <activity android:name=".activity_movement_detail"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".activity_movement_detail"
+            android:theme="@style/AppTheme"
+            android:usesCleartextTraffic="true" />
         <activity
             android:name=".search_course"
             android:launchMode="singleTop"
@@ -43,21 +45,15 @@
         <activity
             android:name=".community1"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".community2"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".community3"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".search_user"
             android:launchMode="singleTop"
@@ -65,9 +61,7 @@
         <activity
             android:name=".search_share"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".search"
             android:launchMode="singleTop"
@@ -89,10 +83,8 @@
             android:name=".search_result"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
-
-
-      <activity android:name=".MainActivity_ViewPage">
-                <intent-filter>
+        <activity android:name=".MainActivity_ViewPage">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -101,9 +93,9 @@
         <activity
             android:name=".play"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTop"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".exercise_main"></activity>
+            android:launchMode="singleTop" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".exercise_main" />
         <!--
         <activity android:name=".MainActivity">
 
@@ -207,7 +199,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         -->
-        <activity android:name=".community4"></activity>
+        <activity android:name=".community4" />
     </application>
 
 </manifest>

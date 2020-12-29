@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -65,6 +66,10 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.contents, item.getShare().getContents())
                         .setText(R.id.praises, item.getShare().getLikeNumbers())
                         .setText(R.id.comments,item.getShare().getCommentsNumbers());
+                if(item.getShare().getRelations()==0||item.getShare().getRelations()==2)helper.setText(R.id.share_follow,"关注");
+                else  helper.setText(R.id.share_follow ,"已关注");
+                if(item.getShare().isLike())helper.setImageResource(R.id.postlike,R.drawable.like_click);
+                else helper.setImageResource(R.id.postlike,R.drawable.like);
 
                 Glide.with(getContext()).load(item.getShare().getUser().getHeadPortraitUrl()).into((ImageView) helper.getView(R.id.share_users_head));
                 Glide.with(getContext()).load(item.getShare().getImgUrls()).into((ImageView) helper.getView(R.id.content_pics));

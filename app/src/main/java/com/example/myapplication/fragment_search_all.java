@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +50,7 @@ public class fragment_search_all extends Fragment {
     MultipleItemQuickAdapter myAdapter;
     MultipleItemQuickAdapter miniCourseAdapter;
 
+    private String token;//后期本地获取
 
     @Nullable
     @Override
@@ -124,9 +124,9 @@ public class fragment_search_all extends Fragment {
         course1.setCourseIntro("K1零基础  . 3002.5万人参加");
         User user = new User("迪奥·布兰度","URL");
 
-        Share share1 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27");
-        Share share2 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27");
-        Share share3= new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27");
+        Share share1 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27", 1, true);
+        Share share2 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27", 2, false);
+        Share share3= new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27", 0, false);
 /*
         datas01.add(share1);
         datas01.add(share2);
@@ -216,7 +216,7 @@ public class fragment_search_all extends Fragment {
 
     private void configLoadMoreData() {
         String url;//http请求的url
-        url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/getHotShare";
+        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&currentPage=" + currentPage;//后期改为搜索动态接口
 
         getHttpSearch(url);
 

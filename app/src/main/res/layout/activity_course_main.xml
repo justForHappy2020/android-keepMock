@@ -255,53 +255,52 @@
                         />
 
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/related_course1"
                         style="@style/SmsButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:background="@drawable/ocean"
+                        android:src="@drawable/ocean"
                         android:text="Button One" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/related_course2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:background="@drawable/ocean"
+                        android:src="@drawable/ocean"
                         android:text="Button Two" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/related_course3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:background="@drawable/ocean"
+                        android:src="@drawable/ocean"
                         android:text="Button Three" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/related_course4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:background="@drawable/ocean"
+                        android:src="@drawable/ocean"
                         android:text="Button Four" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/related_course5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:background="@drawable/ocean"
+                        android:src="@drawable/ocean"
                         android:text="Button Five" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/related_course6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:background="@drawable/ocean"
                         android:text="Button Six" />
                 </LinearLayout>
             </HorizontalScrollView>

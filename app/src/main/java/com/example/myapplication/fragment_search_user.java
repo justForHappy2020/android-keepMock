@@ -59,7 +59,6 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
         currentPage = 1;
         Bundle bundle = getArguments();
         keyWord = bundle.getString("searchContent");
-        initData();
         initView(view);
         return view;
     }
@@ -242,7 +241,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
 
     private void configLoadMoreData() {
         String url;//http请求的url
-        url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/searchFriend?keyword=" + keyWord + "&&currentPage=" + currentPage;
+        url = "http://159.75.2.94:8080/api/community/searchFriend?keyword=" + keyWord + "&currentPage=" + currentPage;
         getHttpSearch(url);
         dataSet.add(userList);
         quickAdapter.addData(dataSet.get(currentPage-1));

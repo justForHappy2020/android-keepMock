@@ -191,13 +191,12 @@ public class fragment_search_daily extends Fragment {
 
     private void configLoadMoreData() {
         String url;//http请求的url
-        url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/getHotShare";
+        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + "123" + "&currentPage=" + currentPage;//后期改为搜索动态接口
         getHttpSearch(url);
 
-        //sharePages.add(shareList);
+        sharePages.add(shareList);
 
-        //dataSet.add(shareList);
-        //quickAdapter.addData(dataSet.get(currentPage-1));
+        quickAdapter.addData(sharePages.get(currentPage-1));
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreEnd();
     }

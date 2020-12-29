@@ -10,13 +10,15 @@ public class Share {
     private String likeNumbers;
     private String commentsNumbers;
     private String createTime;
+    private int relations;
+    private boolean like;
 
     public Share(){
 
     }
 
 
-    public Share(User user, int shareType, int shareId, String imgUrls, String contents, String likeNumbers, String commentsNumbers, String createTime) {
+    public Share(User user, int shareType, int shareId, String imgUrls, String contents, String likeNumbers, String commentsNumbers, String createTime, int relations, boolean like) {
         this.user = user;
         this.shareType = shareType;
         this.shareId = shareId;
@@ -25,6 +27,24 @@ public class Share {
         this.likeNumbers = likeNumbers;
         this.commentsNumbers = commentsNumbers;
         this.createTime = createTime;
+        this.relations = relations;
+        this.like = like;
+    }
+
+    public int getRelations() {
+        return relations;
+    }
+
+    public void setRelations(int relations) {
+        this.relations = relations;
+    }
+
+    public boolean isLike() {
+        return like;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
     }
 
     public User getUser() {

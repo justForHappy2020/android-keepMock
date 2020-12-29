@@ -126,7 +126,7 @@ public class register2 extends Activity implements View.OnClickListener{
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String url = "http://192.168.16.1:8080/api/user/getCode";
+                            String url = "http://159.75.2.94:8080/api/user/getCode";
                             String responseData = connectHttp(url,json);
                             getfeedback(responseData);
                         } catch (IOException e) {
@@ -194,7 +194,7 @@ public class register2 extends Activity implements View.OnClickListener{
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String responseData = connectHttp("http://192.168.16.1:8080/api/user/login",json);//okhttp
+                            String responseData = connectHttp("http://159.75.2.94:8080/api/user/login",json);//okhttp
                             //getfeedback(responseData);
                             try {
                                 JSONObject jsonObject = new JSONObject(responseData);

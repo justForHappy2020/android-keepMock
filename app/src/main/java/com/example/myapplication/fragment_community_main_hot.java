@@ -2,14 +2,17 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +53,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
     private Boolean hasNext;
     private MultipleItemQuickAdapter quickAdapter;
     private RecyclerView recyclerView;
-    private String token = "123";
+    private String token = "123";//后期本地获取
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,7 +65,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
         return view;
     }
 
-    private void initView(View view) {
+    private void initView(final View view) {
        // ImageButton img1 = view.findViewById(R.id.fragment_community_main_follow);
        // ImageButton img2 = view.findViewById(R.id.community_main_search);
        // ImageButton float_btn = view.findViewById(R.id.float_button);
@@ -127,7 +131,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
 
             }
         });
-        //具体课程的监听
+
         quickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
@@ -138,25 +142,60 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
             }
         });
         quickAdapter.addChildClickViewIds(R.id.share_follow,R.id.share_users_head,R.id.users_id,R.id.postlike,R.id.praises,R.id.postcomment,R.id.comments);
-        //具体课程的监听
         quickAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+            Boolean isClicked = null;
+            Boolean isLiked = null;
             @Override
             public void onItemChildClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {
-                int count_like = 0;
-                int count_follow = 0;
+                if(isLiked == null) {
+                    if (shareList.get(position).getShare().isLike())
+                        isLiked = true;
+                    else isLiked = false;
+                }
+                if(isClicked == null) {
+                    if (shareList.get(position).getShare().getRelations() == 0 || shareList.get(position).getShare().getRelations() == 2)
+                        isClicked = false;
+                    else isClicked = true;
+                }
                 switch (view.getId()){
                     case R.id.share_users_head:
                         //position.like.click;
                         clickHead(position);
                         break;
                     case R.id.share_follow:
-                        count_follow = count_follow + 1;
-                        clickFollow(position,count_follow);
+                        if(isClicked == true){
+                            isClicked=false;
+                            Button item_follow=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.share_follow);
+                            item_follow.setText("关注");
+                            item_follow.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            //加一个关注的接口
+                        }
+                        else {
+                            isClicked=true;
+                            Button item_follow=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.share_follow);
+                            item_follow.setText("已关注");
+                            item_follow.setBackgroundColor(Color.parseColor("#25C689"));
+                            //加一个取消关注的接口
+                        }
                         break;
                     case R.id.praises:
                     case R.id.postlike:
-                        count_like = count_like + 1;
-                        clickLike(view,position,count_like);
+                        if(isLiked == false){
+                            isLiked=true;
+                            ImageView item_like=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.postlike);
+                            TextView item_praises=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.praises);
+                            item_praises.setText(String.valueOf(Integer.parseInt(item_praises.getText().toString())+1));
+                            item_like.setImageResource(R.drawable.like_click);
+                            //加一个点赞接口
+                        }
+                        else {
+                            isLiked=false;
+                            ImageView item_like=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.postlike);
+                            TextView item_praises=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.praises);
+                            item_praises.setText(String.valueOf(Integer.parseInt(item_praises.getText().toString())-1));
+                            item_like.setImageResource(R.drawable.like);
+                            //加一个取消点赞接口
+                        }
                         break;
                     case R.id.postcomment:
                         //  clickComment(position);
@@ -176,23 +215,6 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
         intent.putExtra("token",token);  //后期通过Sp获取
         intent.putExtra("userId",shareList.get(position).getShare().getUser().getUserId());
         startActivity(intent);
-    }
-    public void clickFollow(int position,int i){
-        Boolean isClicked;
-        if (i%2 == 1) isClicked = true;
-        else isClicked = false;
-        if(isClicked == false){
-            isClicked=true;
-            Button item_follow=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.share_follow);
-            item_follow.setText("关注");
-            item_follow.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        }
-        else {
-            isClicked=false;
-            Button item_follow=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.share_follow);
-            item_follow.setText("已关注");
-            item_follow.setBackgroundColor(Color.parseColor("#25C689"));
-        }
     }
     public void clickLike(View view,int position,int i){//这里逻辑比较混乱
         Boolean isClicked;
@@ -297,7 +319,8 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                             share.setLikeNumbers(jsonObject.getString("likeNumbers"));
                             share.setCommentsNumbers(jsonObject.getString("commentNumbers"));
                             share.setCreateTime(jsonObject.getString("createTime"));
-
+                            share.setLike(false);//share.setLike(jsonObject.getBoolean("like"));
+                            share.setRelations(jsonObject.getInt("relations"));
                             share.setUser(user);
                             shareList.add(new MultipleItem(MultipleItem.SHARE,share));
                         }
@@ -322,11 +345,31 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
 
     private void configLoadMoreData() {
         String url;//http请求的url
-        url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/getHotShare";
+        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&&currentPage=" + currentPage;
         getHttpSearch(url);
         dataSet.add(shareList);
         quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreEnd();
+    }
+
+    //   通过图片url获取drawable
+    private Drawable loadImageFromNetwork(String imageUrl)
+    {
+        Drawable drawable = null;
+        try {
+            // 可以在这里通过文件名来判断，是否本地有此图片
+            drawable = Drawable.createFromStream(
+                    new URL(imageUrl).openStream(), imageUrl + ".jpg");
+        } catch (IOException e) {
+            Log.d("test", e.getMessage());
+        }
+        if (drawable == null) {
+            Log.d("test", "null drawable");
+        } else {
+            Log.d("test", "not null drawable");
+        }
+
+        return drawable ;
     }
 }

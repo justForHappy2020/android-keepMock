@@ -16,9 +16,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.myapplication.entity.Action;
@@ -43,7 +45,7 @@ public class course_main extends Activity implements View.OnClickListener {
 
     private ImageButton ibVideoPlay;
     private Button btVideoPlay;
-    private Button  btRelatedCourse[] = new Button[6];
+    private ImageButton  btRelatedCourse[] = new ImageButton[6];
     private List<Course> relatedCourse = new ArrayList();
     private TextView tvCalorie;
     private TextView tvDuration;
@@ -69,12 +71,12 @@ public class course_main extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_course_main);
 
         Intent intent = getIntent();
-        courseID = intent.getLongExtra("courseID",0);
+        courseID = intent.getLongExtra("courseID",1);
 
-        courseId2Course(courseID);
+        //courseId2Course(courseID);
 
         initView();
-        //startThread();
+        startThread();
     }
 
     private void startThread() {
@@ -95,13 +97,31 @@ public class course_main extends Activity implements View.OnClickListener {
         thread.start();
     }
 
+    private void startThread2(final int i) {
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                final Drawable drawable = loadImageFromNetwork(relatedCourse.get(i).getBackgroundUrl());
+                // post() 特别关键，就是到UI主线程去更新图片
+                btRelatedCourse[i].post(new Runnable(){
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        btRelatedCourse[i].setImageDrawable(drawable) ;
+                    }}) ;
+            }
+
+        });
+        thread.start();
+    }
+
     //通过课程ID获得课程类
     private void courseId2Course(Long courseId){
         final Long courseID = courseId;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-        String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/courseId2Course?courseId=" + courseID.toString().trim();
+        String url = "http://159.75.2.94:8080/api/course/courseId2Course?courseId=" + courseID.toString().trim();
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -136,7 +156,7 @@ public class course_main extends Activity implements View.OnClickListener {
                     action.setActionImgs(jsonObject.getString("actionImgs"));
                     action.setActionUrl(jsonObject.getString("actionUrl"));
                     action.setDuration(jsonObject.getString("duration"));
-                    action.setIntroId(jsonObject.getLong("introId"));
+                    action.setIntro(jsonObject.getString("intro"));
                     course.getActionList().add(action);
                 }
             }
@@ -155,10 +175,10 @@ public class course_main extends Activity implements View.OnClickListener {
             Toast.makeText(course_main.this,"ERROR", Toast.LENGTH_SHORT).show();
         }
         else             {
-            //tvCalorie.setText(course.getCalorie() + "千卡");
-            //tvDuration.setText(course.getDuration());
-            //tvDegree.setText(course.getDegree());
-            //tvIntro.setText(course.getCourseIntro());
+            tvCalorie.setText(course.getCalorie() + "千卡");
+            tvDuration.setText(course.getDuration());
+            tvDegree.setText(course.getDegree());
+            tvIntro.setText(course.getCourseIntro());
         }
         httpcode = 0;
     }
@@ -169,7 +189,7 @@ public class course_main extends Activity implements View.OnClickListener {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-        String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getRelativeCourse?courseId=" + courseID.toString().trim();
+        String url = "http://159.75.2.94:8080/api/course/getRelativeCourse?courseId=" + courseID.toString().trim();
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -213,7 +233,10 @@ public class course_main extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
         if(httpcode!=200) Toast.makeText(course_main.this,"ERROR", Toast.LENGTH_SHORT).show();
-        else for (int i = 0; i <relatedCourse.size(); i++)btRelatedCourse[i].setText(relatedCourse.get(i).getCourseName() + "\n" + relatedCourse.get(i).getDuration() + "  " + relatedCourse.get(i).getDegree() );//录入相关课程
+        else for (int i = 0; i <btRelatedCourse.length; i++){//只能录入6个相关课程
+            //btRelatedCourse[i].setText(relatedCourse.get(i).getCourseName() + "\n" + relatedCourse.get(i).getDuration() + "  " + relatedCourse.get(i).getDegree() );//录入相关课程
+            startThread2(i);
+        }
         httpcode = 0;
     }
 
@@ -238,7 +261,7 @@ public class course_main extends Activity implements View.OnClickListener {
 
 
     private void initView(){
-        /*
+
         ibVideoPlay = findViewById(R.id.video_play);
         btVideoPlay = findViewById(R.id.play_video);
         btRelatedCourse[0] = findViewById(R.id.related_course1);
@@ -252,8 +275,10 @@ public class course_main extends Activity implements View.OnClickListener {
         tvDegree = findViewById(R.id.degree);
         tvIntro = findViewById(R.id.course_intro);
 
-         */
+
         tvActionNum=findViewById(R.id.course_detail_actionNum);
+
+        courseId2Course(courseID);
 
         tvActionNum.setText(course.getActionList().size()+" 个动作");
 
@@ -282,16 +307,16 @@ public class course_main extends Activity implements View.OnClickListener {
         recyclerView.setAdapter(myAdapter);
 
 
-/*
-        if(courseId2Course(courseID) == true) {//根据ID获取课程类./courseId2course
+
+/*        if(courseId2Course(courseID) == true) {//根据ID获取课程类./courseId2course
             tvCalorie.setText(course.getCalorie() + "千卡");
             tvDuration.setText(course.getDuration());
             tvDegree.setText(course.getDegree());
             tvIntro.setText(course.getCourseIntro());
-        }
+        }*/
 
 
-        courseId2Course(courseID);//根据ID获取课程类./courseId2course
+        //courseId2Course(courseID);//根据ID获取课程类./courseId2course
 
         initRelativeCourse(courseID);//获取相关课程./getRelativeCourse
 
@@ -299,7 +324,7 @@ public class course_main extends Activity implements View.OnClickListener {
         btVideoPlay.setOnClickListener(this);//监听获取验证码按钮
         for(int i = 0;i<btRelatedCourse.length;i++) btRelatedCourse[i].setOnClickListener(this);
 
- */
+
     }
 
     public void onClick(View view) {
@@ -313,40 +338,40 @@ public class course_main extends Activity implements View.OnClickListener {
                 break;
             case R.id.related_course1:
                 intent = new Intent(this, course_main.class);
-                intent.putExtra("course",relatedCourse.get(0).getCourseId());
+                intent.putExtra("courseID",relatedCourse.get(0).getCourseId());
                 startActivity(intent);
                 finish();
                 break;
             case R.id.related_course2:
                 intent = new Intent(this, course_main.class);
-                intent.putExtra("course",relatedCourse.get(1).getCourseId());
+                intent.putExtra("courseID",relatedCourse.get(1).getCourseId());
                 startActivity(intent);
                 finish();
                 break;
             case R.id.related_course3:
                 intent = new Intent(this, course_main.class);
-                intent.putExtra("course",relatedCourse.get(2).getCourseId());
+                intent.putExtra("courseID",relatedCourse.get(2).getCourseId());
                 startActivity(intent);
                 finish();
                 break;
             case R.id.related_course4:
                 intent = new Intent(this, course_main.class);
-                intent.putExtra("course",relatedCourse.get(3).getCourseId());
+                intent.putExtra("courseID",relatedCourse.get(3).getCourseId());
                 startActivity(intent);
                 finish();
                 break;
             case R.id.related_course5:
                 intent = new Intent(this, course_main.class);
-                intent.putExtra("course",relatedCourse.get(4).getCourseId());
+                intent.putExtra("courseID",relatedCourse.get(4).getCourseId());
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.related_course6:
+/*            case R.id.related_course6:
                 intent = new Intent(this, course_main.class);
-                intent.putExtra("course",relatedCourse.get(5).getCourseId());
+                intent.putExtra("courseID",relatedCourse.get(5).getCourseId());
                 startActivity(intent);
                 finish();
-                break;
+                break;*/
         }
     }
 }

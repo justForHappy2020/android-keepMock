@@ -25,27 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import com.example.myapplication.entity.Course;
-import com.example.myapplication.entity.CourseClass;
-import com.example.myapplication.utils.HttpUtils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class exercise_main extends Fragment{
 
     private ImageView ivSearch;
@@ -83,7 +62,7 @@ public class exercise_main extends Fragment{
             @Override
             public void run() {
                 //String url = "http://192.168.16.1:8080/api/course/getHotCourse10";
-                String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getHotCourse10";
+                String url = "http://159.75.2.94:8080/api/course/getHotCourse10";
                 String responseData = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
@@ -140,7 +119,7 @@ public class exercise_main extends Fragment{
             @Override
             public void run() {
         //String url = "http://192.168.16.1:8080/api/course/getFilter";
-                String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/getFilter";
+                String url = "http://159.75.2.94:8080/api/course/getFilter";
                 String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -190,7 +169,7 @@ public class exercise_main extends Fragment{
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-        String url = "http://192.168.16.1:8080/api/course/getCountTime";
+        String url = "http://159.75.2.94:8080/api/course/getCountTime";
         String responseData = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -252,7 +231,7 @@ public class exercise_main extends Fragment{
         Intent intent = null;
         switch (view.getId()) {
             case R.id.search:
-                intent = new Intent(getActivity(), search.class);
+                intent = new Intent(getActivity(), search_course.class);
                 startActivity(intent);
                 break;
             //筛选课程http、跳转对应的筛选主页

@@ -62,7 +62,7 @@ public class search_user extends AppCompatActivity implements View.OnClickListen
 
     private void initView(){
         flowLayout = findViewById(R.id.flowLayout);
-        et = findViewById(R.id.text_inout_search);
+        et = findViewById(R.id.text_input_search);
         search = findViewById(R.id.searching_button);
         clear_history = findViewById(R.id.clean_history);
         quit = findViewById(R.id.quit_button);
@@ -88,7 +88,7 @@ public class search_user extends AppCompatActivity implements View.OnClickListen
                 if(!estr.isEmpty()){
                     Intent i = new Intent(search_user.this , search_result.class);//启动课程结果activity
                     i.putExtra("from",SEARCH_USER);
-                    i.putExtra("search_content",estr);
+                    i.putExtra("searchContent",estr);
                     startActivity(i);
 
                     strSet= new HashSet<String>(strSet);
@@ -97,7 +97,7 @@ public class search_user extends AppCompatActivity implements View.OnClickListen
                     addData(strList);
 
                     SharedPreferences.Editor editor = shp.edit();
-                    editor.putStringSet("search_share_history_list",strSet);
+                    editor.putStringSet("search_user_history_list",strSet);
                     editor.commit();
 
 
@@ -106,7 +106,7 @@ public class search_user extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.clean_history:
                 flowLayout.removeAllViews();
-                et.getText().clear();
+                if(et.getText()!=null)et.getText().clear();
                 strList.clear();
                 strSet.clear();
 
@@ -137,7 +137,7 @@ public class search_user extends AppCompatActivity implements View.OnClickListen
                         //获取最近搜索中的点击内容进行传值
                         String str = auto_tv.getText().toString();
                         Intent intent = new Intent(search_user.this, search_result.class);
-                        intent.putExtra("search_content",str);
+                        intent.putExtra("searchContent",str);
                         intent.putExtra("from",SEARCH_USER);
                         startActivity(intent);
                     }

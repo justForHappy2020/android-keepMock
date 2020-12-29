@@ -128,7 +128,7 @@ public class play extends Activity implements View.OnClickListener{
 
         Intent intentAccept = null;
         intentAccept = getIntent();
-        actionID = intentAccept.getLongExtra("actionID",0);
+        actionID = intentAccept.getLongExtra("actionID",1);
         getActionCom();//http获取动作类
         //VIDEO_URL=intentAccept.getStringExtra("courseUrl");
 
@@ -175,62 +175,24 @@ public class play extends Activity implements View.OnClickListener{
         });
     }
 
+
+    //测试数据，不用actionidTOaction的接口了，直接从课程获取
     private void getActionCom() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/community/actionId2Action?actionId=" + actionID;
-                String responseData = null;
-                try {
-                    responseData = HttpUtils.connectHttpGet(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                JSONObject jsonObject1 = null;
-                try {
-                    jsonObject1 = new JSONObject(responseData);
-                    httpcode = jsonObject1.getInt("code");
-                    if(httpcode == 200){
-                        //得到相应的内容
-                        JSONObject jsonObject = jsonObject1.getJSONObject("data");
-                        //ActionCom相应的内容
                         actionCom = new ActionCom();
-                        actionCom.setActionId(jsonObject.getLong("actionId"));
-                        actionCom.setActionName(jsonObject.getString("actionName"));
-                        actionCom.setActionImgs(jsonObject.getString("actionImgs"));
-                        actionCom.setActionUrl(jsonObject.getString("actionUrl"));
-                        actionCom.setDuration(jsonObject.getString("duration"));
-                        actionCom.setIntroId(jsonObject.getLong("introId"));
-                        actionCom.setActionGif(jsonObject.getString("actionGif"));
-                        actionCom.setKeyPoint(jsonObject.getString("keyPoint"));
-                        actionCom.setBreath(jsonObject.getString("breath"));
-                        actionCom.setFeel(jsonObject.getString("feel"));
-                        actionCom.setFellImg(jsonObject.getString("fellImg"));
-                        actionCom.setMistake(jsonObject.getString("mistake"));
-                        actionCom.setDetail(jsonObject.getString("detail"));
-                        actionCom.setDetailImg(jsonObject.getString("detailImg"));
+                        actionCom.setActionId((long) 2);
+                        actionCom.setActionName("第二套广播体操");
+                        actionCom.setActionImgs("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3535103937,562173148&fm=26&gp=0.jpg");
+                        actionCom.setActionUrl("http://vfx.mtime.cn/Video/2019/03/21/mp4/190321153853126488.mp4");
+                        actionCom.setDuration("00:36:21");
+                        actionCom.setIntro("留做富文本2");
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-        try {
-            thread.join(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if(httpcode!=200) Toast.makeText(play.this,"ERROR", Toast.LENGTH_SHORT).show();
-        httpcode = 0;
-    }
 
     //记录播放记录http
     private void savedPlayRecord(){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://192.168.16.1:8080/api/course/playTheVideo?token=" + token + "&&courseId=" + actionID;
+                String url = "http://159.75.2.94:8080/api/course/playTheVideo?token=" + token + "&&courseId=" + actionID;
                 String responseData = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);

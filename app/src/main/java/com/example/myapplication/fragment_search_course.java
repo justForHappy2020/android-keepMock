@@ -163,10 +163,10 @@ public class fragment_search_course extends Fragment {
 
         private void configLoadMoreData() {
             String url;//http请求的url
-            url = "https://www.fastmock.site/mock/774dcf01fef0c91321522e08613b412e/api/api/course/searchCourse?keyword=" + keyWord + "&&currentPage=" + currentPage;
+            url = "http://159.75.2.94:8080/api/course/searchCourse?keyword=" + keyWord + "&currentPage=" + currentPage;//(e.g.搜索"腹肌")
             getHttpSearch(url);
-            //dataSet.add(courseList);
-            //quickAdapter.addData(dataSet.get(currentPage-1));
+            dataSet.add(courseList);
+            quickAdapter.addData(dataSet.get(currentPage-1));
             currentPage++;
             quickAdapter.getLoadMoreModule().loadMoreEnd();
         }

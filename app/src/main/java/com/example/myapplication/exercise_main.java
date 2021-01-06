@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -47,14 +48,17 @@ public class exercise_main extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_main, container, false);
 
-
         initView(view);
         //initCountTime();
-        initBodypart();
-        initHotCourse();
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        initBodypart();
+        initHotCourse();
+    }
 
     //获取热门课程
     private void initHotCourse() {
@@ -64,13 +68,16 @@ public class exercise_main extends Fragment{
                 //String url = "http://192.168.16.1:8080/api/course/getHotCourse10";
                 String url = "http://159.75.2.94:8080/api/course/getHotCourse10";
                 String responseData = null;
+                /*
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                 */
                 JSONObject jsonObject1 = null;
                 try {
+                    responseData = HttpUtils.connectHttpGet(url);
                     jsonObject1 = new JSONObject(responseData);
                     int httpcode = jsonObject1.getInt("code");
                     if (httpcode == 200) {
@@ -97,6 +104,8 @@ public class exercise_main extends Fragment{
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }catch (IOException e){
+                    e.printStackTrace();
                 }
             }
 
@@ -121,13 +130,17 @@ public class exercise_main extends Fragment{
         //String url = "http://192.168.16.1:8080/api/course/getFilter";
                 String url = "http://159.75.2.94:8080/api/course/getFilter";
                 String responseData = null;
+                /*
         try {
             responseData = HttpUtils.connectHttpGet(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+                 */
         JSONObject jsonObject1 = null;
         try {
+            responseData = HttpUtils.connectHttpGet(url);
             jsonObject1 = new JSONObject(responseData);
             httpcode = jsonObject1.getInt("code");
             if(httpcode == 200){
@@ -145,6 +158,8 @@ public class exercise_main extends Fragment{
                 }
             }
         } catch (JSONException e) {
+            e.printStackTrace();
+        }catch (IOException e){
             e.printStackTrace();
         }
             }

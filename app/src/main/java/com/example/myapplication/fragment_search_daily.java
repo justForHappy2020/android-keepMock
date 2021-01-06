@@ -36,7 +36,7 @@ public class fragment_search_daily extends Fragment {
 
 
     private List<MultipleItem> shareList = new ArrayList<>();
-    private List<List> sharePages = new ArrayList<>();
+    private List<List> shareSet = new ArrayList<>();
     
     private int currentPage; //要分页查询的页面
 
@@ -60,6 +60,8 @@ public class fragment_search_daily extends Fragment {
         Bundle bundle = getArguments();
         keyWord = bundle.getString("searchContent");
 
+        shareSet.add(shareList);
+
         initView(view);
 
         return view;
@@ -73,7 +75,7 @@ public class fragment_search_daily extends Fragment {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
 
         //设置adapter
-        quickAdapter = new MultipleItemQuickAdapter(shareList);
+        quickAdapter = new MultipleItemQuickAdapter(shareSet.get(0));
 
         configLoadMoreData();
 
@@ -126,7 +128,6 @@ public class fragment_search_daily extends Fragment {
         SpacesItemDecoration decoration=new SpacesItemDecoration(16);
         recyclerView.addItemDecoration(decoration);
 
-
     }
 
     public void clickHead(int position){
@@ -141,13 +142,17 @@ public class fragment_search_daily extends Fragment {
             @Override
             public void run() {
                 String responseData = null;
+                /*
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                 */
                 JSONObject jsonObject1 = null;
                 try {
+                    responseData = HttpUtils.connectHttpGet(url);
                     jsonObject1 = new JSONObject(responseData);
                     httpcode = jsonObject1.getInt("code");
                     if (httpcode == 200) {
@@ -173,6 +178,8 @@ public class fragment_search_daily extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -194,9 +201,9 @@ public class fragment_search_daily extends Fragment {
         url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + "123" + "&currentPage=" + currentPage;//后期改为搜索动态接口
         getHttpSearch(url);
 
-        sharePages.add(shareList);
+        shareSet.add(shareList);
 
-        quickAdapter.addData(sharePages.get(currentPage-1));
+        //quickAdapter.addData(shareSet.get(currentPage-1));
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreEnd();
     }

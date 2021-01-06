@@ -30,13 +30,11 @@ import java.util.List;
 
 public class fragment_search_course extends Fragment {
 
-    private List<List> dataSet = new  ArrayList<>();
+    private List<List> courseSet = new  ArrayList<>();
     private int TOTAL_PAGES;
 
     QuickAdapter quickAdapter;
     RecyclerView recyclerView;
-
-    String searchContent;//传入用户在搜索界面输入的内容
 
     private int httpcode;
     private String keyWord;//搜索的关键词
@@ -51,6 +49,7 @@ public class fragment_search_course extends Fragment {
         currentPage = 1;
         Bundle bundle = getArguments();
         keyWord = bundle.getString("searchContent");
+        courseSet.add(courseList);
 
         initView(view);
         //initData();
@@ -61,7 +60,7 @@ public class fragment_search_course extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_course_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        quickAdapter = new QuickAdapter(R.layout.item_course, courseList);
+        quickAdapter = new QuickAdapter(R.layout.item_course, courseSet.get(0));
 
         configLoadMoreData();
 
@@ -111,13 +110,17 @@ public class fragment_search_course extends Fragment {
             @Override
             public void run() {
                 String responseData = null;
+                /*
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                 */
                 JSONObject jsonObject1 = null;
                 try {
+                    responseData = HttpUtils.connectHttpGet(url);
                     jsonObject1 = new JSONObject(responseData);
                     httpcode = jsonObject1.getInt("code");
                     if (httpcode == 200) {
@@ -146,6 +149,8 @@ public class fragment_search_course extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -165,8 +170,8 @@ public class fragment_search_course extends Fragment {
             String url;//http请求的url
             url = "http://159.75.2.94:8080/api/course/searchCourse?keyword=" + keyWord + "&currentPage=" + currentPage;//(e.g.搜索"腹肌")
             getHttpSearch(url);
-            dataSet.add(courseList);
-            quickAdapter.addData(dataSet.get(currentPage-1));
+            courseSet.add(courseList);
+            //quickAdapter.addData(dataSet.get(currentPage-1));
             currentPage++;
             quickAdapter.getLoadMoreModule().loadMoreEnd();
         }

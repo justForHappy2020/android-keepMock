@@ -44,7 +44,7 @@ import java.util.List;
 
 public class fragment_community_main_hot extends Fragment implements LoadMoreModule {
     private View.OnClickListener onClickListener;
-    private List<List> dataSet = new  ArrayList<>();
+    private List<List> shareSet = new  ArrayList<>();
     private int TOTAL_PAGES;
     private int currentPage; //要分页查询的页面
     private List<MultipleItem> shareList = new ArrayList();
@@ -59,7 +59,12 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community_main_content, container, false);
         currentPage = 1;
+
+        shareSet.add(shareList);
+
         Bundle bundle = getArguments();
+
+
         initData();
         initView(view);
         return view;
@@ -75,7 +80,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
        // float_btn.setOnClickListener(onClickListener);
         recyclerView = (RecyclerView) view.findViewById(R.id.community_main_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        quickAdapter = new MultipleItemQuickAdapter(shareList);
+        quickAdapter = new MultipleItemQuickAdapter(shareSet.get(0));
         configLoadMoreData();
         /*RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.community_main_recyclerView);
         //设置recyclerView的样式
@@ -290,13 +295,17 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
             @Override
             public void run() {
                 String responseData = null;
+                /*
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                 */
                 JSONObject jsonObject1 = null;
                 try {
+                    responseData = HttpUtils.connectHttpGet(url);
                     jsonObject1 = new JSONObject(responseData);
                     httpcode = jsonObject1.getInt("code");
                     if (httpcode == 200) {
@@ -327,6 +336,8 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -347,8 +358,8 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
         String url;//http请求的url
         url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&&currentPage=" + currentPage;
         getHttpSearch(url);
-        dataSet.add(shareList);
-        quickAdapter.addData(dataSet.get(currentPage-1));
+        shareSet.add(shareList);
+        //quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreEnd();
     }

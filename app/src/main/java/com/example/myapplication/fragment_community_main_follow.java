@@ -203,13 +203,17 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
             @Override
             public void run() {
                 String responseData = null;
+                /*
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                 */
                 JSONObject jsonObject1 = null;
                 try {
+                    responseData = HttpUtils.connectHttpGet(url);
                     jsonObject1 = new JSONObject(responseData);
                     httpcode = jsonObject1.getInt("code");
                     if (httpcode == 200) {
@@ -239,6 +243,8 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                         }
                     }
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                }catch (IOException e) {
                     e.printStackTrace();
                 }
             }

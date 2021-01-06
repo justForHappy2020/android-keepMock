@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,21 +36,16 @@ import java.util.List;
 
 public class fragment_search_user extends Fragment implements LoadMoreModule {
 
-    private List<List> dataSet = new  ArrayList<>();
     private int TOTAL_PAGES;
-
-    MultipleItemQuickAdapter quickAdapter;
-    String searchContent;//传入用户在搜索界面输入的内容
-
-    List<User> postList= new ArrayList<>();
-
     private int httpcode;
     private Boolean hasNext;
-    private List<MultipleItem> datas01= new ArrayList<>();
-    private List<MultipleItem> datas02= new ArrayList<>();
-    private List<MultipleItem> userList = new ArrayList();
     private int currentPage; //要分页查询的页面
     private String keyWord;//搜索的关键词
+
+    private List<List> dataSet = new  ArrayList<>();
+    private List<MultipleItem> userList = new ArrayList();
+
+    MultipleItemQuickAdapter quickAdapter;
     RecyclerView recyclerView;
 
     @Nullable
@@ -59,19 +55,21 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
         currentPage = 1;
         Bundle bundle = getArguments();
         keyWord = bundle.getString("searchContent");
+
+        dataSet.add(userList);
+
         initView(view);
+
         return view;
     }
+
 
     private void initView(View view){
         recyclerView= (RecyclerView) view.findViewById(R.id.fragment_user_recyclerView);
         //设置recyclerView的样式
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        quickAdapter = new MultipleItemQuickAdapter(userList);
-        //设置item之间的间隔
-        SpacesItemDecoration decoration = new SpacesItemDecoration(16);
-        recyclerView.addItemDecoration(decoration);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        quickAdapter = new MultipleItemQuickAdapter(dataSet.get(0));
+
 
         configLoadMoreData();
 
@@ -125,6 +123,10 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
             }
         });
         recyclerView.setAdapter(quickAdapter);
+
+        //设置item之间的间隔
+        recyclerView.addItemDecoration(new SpacesItemDecoration(16));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
     public void clickFollow(int position,int i){
         Boolean isClicked;
@@ -193,13 +195,20 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
             @Override
             public void run() {
                 String responseData = null;
+                /*
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                 */
                 JSONObject jsonObject1 = null;
                 try {
+                    responseData = HttpUtils.connectHttpGet(url);
+
+                    Log.d("USER: ",responseData);
+
                     jsonObject1 = new JSONObject(responseData);
                     httpcode = jsonObject1.getInt("code");
                     if (httpcode == 200) {
@@ -218,17 +227,19 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
                             user.setGender(jsonObject.getString("gender"));
                             user.setIntro(jsonObject.getString("intro"));
                             user.setCreateTime(jsonObject.getString("createTime"));
-                            userList.add(new MultipleItem(5,user));
+                            userList.add(new MultipleItem(MultipleItem.USER,user));
                         }
                     }
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                }catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
         thread.start();
         try {
-            thread.join(10000);
+            thread.join(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -242,9 +253,10 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
     private void configLoadMoreData() {
         String url;//http请求的url
         url = "http://159.75.2.94:8080/api/community/searchFriend?keyword=" + keyWord + "&currentPage=" + currentPage;
+
         getHttpSearch(url);
         dataSet.add(userList);
-        quickAdapter.addData(dataSet.get(currentPage-1));
+        //quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreEnd();
     }

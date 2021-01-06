@@ -90,8 +90,6 @@ public class search_course extends Activity implements View.OnClickListener{
                     editor.putStringSet("search_course_history_list",strSet);
                     editor.commit();
 
-
-
                 }
                 break;
             case R.id.clean_history:

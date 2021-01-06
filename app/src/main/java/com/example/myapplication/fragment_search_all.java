@@ -33,9 +33,11 @@ import java.util.List;
 
 public class fragment_search_all extends Fragment {
 
-    private List<Share> datas01= new ArrayList<>();
-    private List<MultipleItem> datas02= new ArrayList<>();
-    private List<MultipleItem> datas03= new ArrayList<>();
+
+    private List<MultipleItem> postList= new ArrayList<>();
+    private List<MultipleItem> multItemList= new ArrayList<>();
+
+    private List<List> shareSet= new ArrayList<>();
 
     private int TOTAL_PAGES;
     private int currentPage; //要分页查询的页面
@@ -61,6 +63,8 @@ public class fragment_search_all extends Fragment {
         searchContent = bundle.getString("searchContent");
         currentPage = 1;
 
+        shareSet.add(postList);
+
         initView(view);
         initData();
 
@@ -73,8 +77,9 @@ public class fragment_search_all extends Fragment {
         postRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_all_recyclerView);
         courseRecyclerView = (RecyclerView) headerView.findViewById(R.id.fragment_course_recyclerView);
 
-        myAdapter = new MultipleItemQuickAdapter(datas02);
-        miniCourseAdapter = new MultipleItemQuickAdapter(datas03);
+        myAdapter = new MultipleItemQuickAdapter(shareSet.get(0));
+
+        miniCourseAdapter = new MultipleItemQuickAdapter(multItemList);
 
         miniCourseAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -122,35 +127,17 @@ public class fragment_search_all extends Fragment {
         Course course1 = new Course();
         course1.setCourseName("腹肌");
         course1.setCourseIntro("K1零基础  . 3002.5万人参加");
-        User user = new User("迪奥·布兰度","URL");
 
-        Share share1 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27", 1, true);
-        Share share2 = new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27", 2, false);
-        Share share3= new Share(user,0,2,"URL","波纹呼吸法","233","123","2020.12.27", 0, false);
-/*
-        datas01.add(share1);
-        datas01.add(share2);
-        datas01.add(share3);
+        multItemList.add(new MultipleItem(MultipleItem.TEXTONLY,"课程"));
 
- */
-        datas03.add(new MultipleItem(MultipleItem.TEXTONLY,"课程"));
+        multItemList.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
+        multItemList.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
+        multItemList.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
 
-        datas03.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
-        datas03.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
-        datas03.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
+        multItemList.add(new MultipleItem(MultipleItem.BUTTON,"加载更多"));
 
-        datas03.add(new MultipleItem(MultipleItem.BUTTON,"加载更多"));
+        multItemList.add(new MultipleItem(MultipleItem.TEXTONLY,"动态"));
 
-        datas03.add(new MultipleItem(MultipleItem.TEXTONLY,"动态"));
-/*
-        datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(0)));
-        datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(1)));
-        datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(2)));
-        datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(0)));
-        datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(2)));
-        datas02.add(new MultipleItem(MultipleItem.MASONRYPOST, datas01.get(1)));
-
- */
         configLoadMoreData();
     }
 
@@ -160,13 +147,17 @@ public class fragment_search_all extends Fragment {
             @Override
             public void run() {
                 String responseData = null;
+                /*
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                 */
                 JSONObject jsonObject1 = null;
                 try {
+                    responseData = HttpUtils.connectHttpGet(url);
                     jsonObject1 = new JSONObject(responseData);
                     httpcode = jsonObject1.getInt("code");
                     if (httpcode == 200) {
@@ -192,11 +183,13 @@ public class fragment_search_all extends Fragment {
 
                             share.setUser(user);
 
-                            datas02.add(new MultipleItem(MultipleItem.MASONRYPOST,share));
+                            postList.add(new MultipleItem(MultipleItem.MASONRYPOST,share));
 
                         }
                     }
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                }catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -220,6 +213,7 @@ public class fragment_search_all extends Fragment {
 
         getHttpSearch(url);
 
+        shareSet.add(postList);
         //myAdapter.addData(sharePages.get(currentPage-1));
         currentPage++;
         myAdapter.getLoadMoreModule().loadMoreEnd();

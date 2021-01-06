@@ -52,28 +52,15 @@ public class community_main extends Fragment implements LoadMoreModule {
         currentPage = 1;
         //Bundle bundle = getArguments();
         initView(view);
-        initData();
-
-        initData();
 
         return view;
     }
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        initData();
     }
-       /*
-    private void initView(View view){
-        ImageView img1 = view.findViewById(R.id.community_main_follow);
-        ImageView img2= view.findViewById(R.id.community_main_search);
-        tabLayout = view.findViewById(R.id.community_main_tablayout);
-        viewPager = view.findViewById(R.id.community_main_viewPager);
-
-        viewPager.setOffscreenPageLimit(2);//设置缓存页面上限，默认为3
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-    }
-        */
 
     private void initFragments() {
         Bundle bundle = new Bundle();

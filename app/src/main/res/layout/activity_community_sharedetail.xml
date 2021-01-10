@@ -62,30 +62,25 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/headprotrait"
+                    <com.makeramen.roundedimageview.RoundedImageView
+
+                        android:id="@+id/userHeadprotrait"
                         android:layout_width="42dp"
                         android:layout_height="42dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_margin="15dp"
-                        android:background="@drawable/headprotrait"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/headprotrait">
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/headprotrait"
+                        app:riv_oval="true" />
 
-                    </ImageButton>
-
-                    <Button
-                        android:id="@+id/community1_playername_btn"
-                        style="?borderlessButtonStyle"
+                    <TextView
+                        android:id="@+id/userNickName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:text="@string/community1_playerid"
-                        android:textColor="#353535"
-                        android:textSize="15sp"
-                        android:textStyle="bold">
-
-                    </Button>
+                        android:text="UserName"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -104,124 +99,125 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:layout_gravity="center_horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/transparent">
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/community1_playerimage5"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_centerInParent="true"
-                        android:background="@color/white"
+                        android:background="@color/transparent"
                         android:padding="3dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/sucai">
 
-                    </ImageButton>
+                    </ImageView>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/community1_playerimage1"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_above="@id/community1_playerimage5"
                         android:layout_toLeftOf="@id/community1_playerimage5"
-                        android:background="@color/white"
+                        android:background="@color/transparent"
                         android:padding="3dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/sucai">
 
-                    </ImageButton>
+                    </ImageView>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/community1_playerimage2"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_above="@id/community1_playerimage5"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/white"
+                        android:background="@color/transparent"
                         android:padding="3dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/sucai">
 
-                    </ImageButton>
+                    </ImageView>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/community1_playerimage3"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_above="@id/community1_playerimage5"
                         android:layout_toRightOf="@id/community1_playerimage5"
-                        android:background="@color/white"
+                        android:background="@color/transparent"
                         android:padding="3dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/sucai">
 
-                    </ImageButton>
+                    </ImageView>
 
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/community1_playerimage4"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@id/community1_playerimage5"
-                        android:background="@color/white"
+                        android:background="@color/transparent"
                         android:padding="3dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/sucai">
 
-                    </ImageButton>
+                    </ImageView>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/community1_playerimage6"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@id/community1_playerimage5"
-                        android:background="@color/white"
+                        android:background="@color/transparent"
                         android:padding="3dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/sucai">
 
-                    </ImageButton>
+                    </ImageView>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/community1_playerimage7"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_below="@id/community1_playerimage5"
                         android:layout_toStartOf="@id/community1_playerimage5"
-                        android:background="@color/white"
+                        android:background="@color/transparent"
                         android:padding="3dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/sucai">
 
-                    </ImageButton>
+                    </ImageView>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/community1_playerimage8"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_below="@id/community1_playerimage5"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/white"
+                        android:background="@color/transparent"
                         android:padding="3dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/sucai">
 
-                    </ImageButton>
+                    </ImageView>
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/community1_playerimage9"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_below="@id/community1_playerimage5"
                         android:layout_toEndOf="@id/community1_playerimage5"
-                        android:background="@color/white"
+                        android:background="@color/transparent"
                         android:padding="3dp"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/sucai">
 
-                    </ImageButton>
+                    </ImageView>
 
                 </RelativeLayout>
 
@@ -349,9 +345,8 @@
     <LinearLayout
         android:id="@+id/community1_saysomething"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">

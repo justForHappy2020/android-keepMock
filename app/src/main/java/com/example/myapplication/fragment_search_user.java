@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -48,6 +50,27 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
     MultipleItemQuickAdapter quickAdapter;
     RecyclerView recyclerView;
 
+    private String url;//http请求的url
+
+    private AlertDialog.Builder builder;
+    private String errorMsg;
+
+    private void showErrorAlert(String Msg){
+        builder = new AlertDialog.Builder(getActivity()).setIcon(R.drawable.cancel).setTitle("Error")
+                .setMessage(Msg).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        builder.create().show();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,11 +81,14 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
 
         dataSet.add(userList);
 
-        initView(view);
-
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
+    }
 
     private void initView(View view){
         recyclerView= (RecyclerView) view.findViewById(R.id.fragment_user_recyclerView);
@@ -146,50 +172,6 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
         }
     }
 
-    private void initData(){
-       /* User user1 = new User("用户1",R.drawable.sucai);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        //设置adapter
-        MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(datas02);
-        recyclerView.setAdapter(myAdapter);
-
-        //设置item之间的间隔
-        SpacesItemDecoration decoration = new SpacesItemDecoration(16);
-        recyclerView.addItemDecoration(decoration);
-    }
-
-    private void initData(){
-
-        User user1 = new User(666,"用户1",R.drawable.sucai);
-        User user2 = new User(233,"用户2",R.drawable.sucai);
-        User user3 = new User(555,"用户3",R.drawable.sucai);
-
-        User user1 = new User("用户1",R.drawable.sucai);
-        User user2 = new User("用户2",R.drawable.sucai);
-        User user3 = new User("用户3",R.drawable.sucai);
-
-        datas01.add(user1);
-        datas01.add(user2);
-        datas01.add(user3);
-
-        datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(0)));
-        datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(1)));
-        datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(2)));
-        datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(2)));
-        datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(1)));
-        datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(0)));
-        datas02.add(new MultipleItem(MultipleItem.USER, datas01.get(1)));*/
-
-     /*   User user;
-        for (int i = 0; i < 5; i++) {
-            user = new User();
-           userList.add(new MultipleItem(5,user));
-        }
-        dataSet.add(userList);*/
-    }
-
     private void getHttpSearch(final String url) {
         final Thread thread = new Thread(new Runnable() {
             @Override
@@ -207,7 +189,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
 
-                    Log.d("USER: ",responseData);
+                    Log.d("USER_responseData ",responseData);
 
                     jsonObject1 = new JSONObject(responseData);
                     httpcode = jsonObject1.getInt("code");
@@ -231,8 +213,10 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
                         }
                     }
                 } catch (JSONException e) {
+                    errorMsg = e.getMessage();
                     e.printStackTrace();
                 }catch (IOException e) {
+                    errorMsg = e.getMessage();
                     e.printStackTrace();
                 }
             }
@@ -241,24 +225,25 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
         try {
             thread.join(3000);
         } catch (InterruptedException e) {
+            errorMsg = e.getMessage();
             e.printStackTrace();
         }
         if (httpcode != 200) {
-            Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+            showErrorAlert("fragment_search_user: "+errorMsg);
         }
+
 /*        else for (int i = 0; i <courseList.size(); i++)btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
                 courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程*/
     }
 
     private void configLoadMoreData() {
-        String url;//http请求的url
         url = "http://159.75.2.94:8080/api/community/searchFriend?keyword=" + keyWord + "&currentPage=" + currentPage;
 
         getHttpSearch(url);
         dataSet.add(userList);
         //quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
-        quickAdapter.getLoadMoreModule().loadMoreEnd();
+        quickAdapter.getLoadMoreModule().loadMoreComplete();
     }
 }
 

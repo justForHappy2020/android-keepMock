@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -34,6 +36,7 @@ public class search_user extends Activity implements View.OnClickListener {
     Set<String> strSet = new HashSet<String>();
 
     int SEARCH_USER = 3;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

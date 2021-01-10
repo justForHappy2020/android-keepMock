@@ -1,11 +1,17 @@
 package com.example.myapplication;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,53 +19,94 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.Comment;
+import com.example.myapplication.entity.Share;
 import com.example.myapplication.entity.User;
+import com.example.myapplication.utils.HttpUtils;
+import com.makeramen.roundedimageview.RoundedImageView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class activity_sharedetail extends Activity implements View.OnClickListener{
 
     private List<List> dataSet = new ArrayList<>();
+    private List<Comment> mainCommentList = new ArrayList();
+
+    private Share share;
+
     private int TOTAL_PAGES;
     private RecyclerView recyclerView;
 
     private Button loadMoreComments;
     private ImageView back;
+    private RoundedImageView userHeadprotraitImg;
+    private TextView userNameText;
+    private TextView shareText;
+    private TextView likeNumbers;
+    private TextView commentsNumber;
+    private TextView blikeNumbers;
+    private TextView bcommentsNumber;
 
-    BaseQuickAdapter<Comment, BaseViewHolder> quickAdapter;
+    private List<ImageView> shareImgs = new ArrayList<>();
 
+    private Dialog dialog;
+    private BaseQuickAdapter<Comment, BaseViewHolder> quickAdapter;
 
     private String commentId;//传入帖子ID
 
     private int httpcode;
     private Boolean hasNext;
     private int currentPage; //要分页查询的页面
-    private List<Comment> mainCommentList = new ArrayList();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_sharedetail);
 
-        initData();
+        Intent intent = getIntent();
+        share = (Share)intent.getSerializableExtra("share");
+        dataSet.add(mainCommentList);
+
         initView();
+        initData();
 
     }
 
     private void initView() {
         loadMoreComments = findViewById(R.id.sharedetail_loadmore_comments);
         back = findViewById(R.id.community1_leftarrow);
+        userHeadprotraitImg=findViewById(R.id.userHeadprotrait);
+        userNameText=findViewById(R.id.userNickName);
+        shareText=findViewById(R.id.community1_playersay);
+        likeNumbers=findViewById(R.id.community1_visitors_commentnum);
+        commentsNumber=findViewById(R.id.community1_visitorthu);
+        blikeNumbers=findViewById(R.id.community1_thumbsnum);
+        bcommentsNumber=findViewById(R.id.community1_newsnum);
+
+        shareImgs.add((ImageView)findViewById(R.id.community1_playerimage1));
+        shareImgs.add((ImageView)findViewById(R.id.community1_playerimage2));
+        shareImgs.add((ImageView)findViewById(R.id.community1_playerimage3));
+        shareImgs.add((ImageView)findViewById(R.id.community1_playerimage4));
+        shareImgs.add((ImageView)findViewById(R.id.community1_playerimage5));
+        shareImgs.add((ImageView)findViewById(R.id.community1_playerimage6));
+        shareImgs.add((ImageView)findViewById(R.id.community1_playerimage7));
+        shareImgs.add((ImageView)findViewById(R.id.community1_playerimage8));
+        shareImgs.add((ImageView)findViewById(R.id.community1_playerimage9));
+
         recyclerView = (RecyclerView) findViewById(R.id.community_reviews_main);
 
         loadMoreComments.setOnClickListener(this);
         back.setOnClickListener(this);
-
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity_sharedetail.this));
 
@@ -68,10 +115,9 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         quickAdapter =  new BaseQuickAdapter<Comment, BaseViewHolder >(R.layout.item_comment_main,dataSet.get(0)){
             @Override
             protected void convert(BaseViewHolder helper, Comment comment) {
-                User user = comment.getUser();
                 helper.setText(R.id.item_comment_main_username,comment.getUser().getNickname())
-                        .setText(R.id.item_comment_main_text, comment.getTextContent())
-                        .setImageResource(R.id.item_comment_main_username_headprotrait, R.drawable.sucai);//comment.getUser().getHeadPortraitUrl()
+                        .setText(R.id.item_comment_main_text, comment.getTextContent());
+                Glide.with(getContext()).load(comment.getUser().getHeadPortraitUrl()).into((ImageView)helper.getView(R.id.item_comment_main_username_headprotrait));
             }
         };
 
@@ -117,20 +163,106 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
     }
 
     private void initData() {
+        if(share!=null){
+            userNameText.setText(share.getUser().getNickname());
+            shareText.setText(share.getContents());
 
+            likeNumbers.setText(share.getLikeNumbers()+"人点赞");
+            blikeNumbers.setText(share.getLikeNumbers());
+            commentsNumber.setText(share.getCommentsNumbers()+"评论");
+            bcommentsNumber.setText(share.getCommentsNumbers());
+
+            Glide.with(this).load(share.getUser().getHeadPortraitUrl()).into(userHeadprotraitImg);
+
+            int ImgUrls_length=1;//test data
+            for(int n=0;n<9;n++){
+                if(n<ImgUrls_length){
+                    Glide.with(this).load(share.getImgUrls()).into(shareImgs.get(n));
+
+                    shareImgs.get(n).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            final ImageView imageView = new ImageView(getApplicationContext());
+                            Glide.with(getApplicationContext()).load(share.getImgUrls()).into(imageView);
+
+                            dialog = new Dialog(getApplicationContext(),R.style.FullActivity);
+                            WindowManager.LayoutParams attributes = getWindow().getAttributes();
+                            attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
+                            attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
+                            dialog.getWindow().setAttributes(attributes);
+                            dialog.setContentView(imageView);
+                            imageView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+                }else{
+                    shareImgs.get(n).setImageResource(R.color.transparent);
+                }
+
+            }
+
+
+        }
+
+        //final String url = "http://159.75.2.94:8080/api/community/getShareDetail";
+        //getHttpShareDetail(url);
 
         /*TestData*/
 
         Comment comment;
-        User user = new User("乔瑟夫·乔斯达","URL");
-        for (int i = 0; i < 5; i++) {
+        User user = new User("乔瑟夫·乔斯达","https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3392663359,4194879068&fm=26&gp=0.jpg");
+        for (int i = 0; i < 10; i++) {
             comment = new Comment();
             comment.setUser(user);
-            comment.setTextContent("昨天学习了波纹疾走，今天感觉肌肉力量增强了！");
-            comment.setLikeNum(233);
+            comment.setTextContent("评论"+i+": 昨天学习了波纹疾走，今天感觉肌肉力量增强了！");
+            comment.setLikeNum(233+i);
             mainCommentList.add(comment);
         }
         dataSet.add(mainCommentList);
+    }
+
+    private void getHttpShareDetail(final String url) {
+        final Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String responseData = null;
+
+                JSONObject jsonObject1 = null;
+                try {
+                    responseData = HttpUtils.connectHttpGet(url);
+
+                    Log.d("ShareDetail_Json:",responseData);
+                    //jsonObject1 = new JSONObject(responseData);
+                    httpcode = jsonObject1.getInt("code");
+                    if (httpcode == 200) {
+                        //JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
+                        //hasNext = jsonObject2.getBoolean("hasNext");
+                        //TOTAL_PAGES = jsonObject2.getInt("totalPages");
+                        //得到筛选的课程list
+                        //JSONArray JSONArrayShare = jsonObject2.getJSONArray("shareList");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (httpcode != 200) {
+            Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void configLoadMoreData() {
@@ -163,22 +295,23 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
 
                 /*TestData*/
 
-                List<Comment> testList = new ArrayList();
+                List<Comment> newCommentList = new ArrayList();
+
                 Comment comment;
-                User user = new User("乔瑟夫·乔斯达","URL");
-                for (int i = 0; i < 5; i++) {
+                User user = new User("乔瑟夫·乔斯达","https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3392663359,4194879068&fm=26&gp=0.jpg");
+                for (int i = 10; i < 21; i++) {
                     comment = new Comment();
                     comment.setUser(user);
-                    comment.setTextContent("今天获得了替身，照相机粉碎者！");
-                    comment.setLikeNum(666);
-                    testList.add(comment);
+                    comment.setTextContent("评论"+i+": 昨天学习了波纹疾走，今天感觉肌肉力量增强了！");
+                    comment.setLikeNum(23+i);
+                    newCommentList.add(comment);
                 }
-                dataSet.add(testList);
+                dataSet.add(newCommentList);
 
-                quickAdapter.addData(testList);//放入新评论
+                quickAdapter.addData(newCommentList);//放入新评论
                 break;
-            case R.id.headprotrait:
-            case R.id.community1_playername_btn:
+            case R.id.userHeadprotrait:
+            case R.id.userNickName:
                 Toast.makeText(activity_sharedetail.this, "进入个人主页", Toast.LENGTH_SHORT).show();
                 break;
         }

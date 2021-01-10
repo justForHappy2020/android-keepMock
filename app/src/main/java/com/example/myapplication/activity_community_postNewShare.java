@@ -1,18 +1,14 @@
 package com.example.myapplication;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -31,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -45,7 +40,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.myapplication.Beans.DownImageTask;
 import com.example.myapplication.entity.AddImage;
 import com.example.myapplication.utils.HttpUtils;
 
@@ -64,7 +58,7 @@ import java.util.List;
 
 import static com.example.myapplication.utils.ClientUploadUtils.upload;
 
-public class community4 extends Activity implements View.OnClickListener {
+public class activity_community_postNewShare extends Activity implements View.OnClickListener {
 
 
     private ImageButton btn_cancel;//取消按钮
@@ -109,7 +103,7 @@ public class community4 extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community4);
-        mcontext = community4.this;
+        mcontext = activity_community_postNewShare.this;
         getLocation();
         getaddress();
 
@@ -530,7 +524,7 @@ public class community4 extends Activity implements View.OnClickListener {
                             }
                         } catch (Exception e) {
                             Looper.prepare();
-                            Toast.makeText(community4.this,"图片过大，请重新上传",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity_community_postNewShare.this,"图片过大，请重新上传",Toast.LENGTH_SHORT).show();
                             Looper.loop();// 进入loop中的循环，查看消息队列
                             e.printStackTrace();
                         }
@@ -544,7 +538,7 @@ public class community4 extends Activity implements View.OnClickListener {
                         mData.add(new AddImage(i, urlList.get(i)));
                         urlList.clear();
                     }
-                    madapt = new MyAdapter(mData, community4.this){
+                    madapt = new MyAdapter(mData, activity_community_postNewShare.this){
                     };
 
                     gridView.setAdapter(madapt);
@@ -560,10 +554,10 @@ public class community4 extends Activity implements View.OnClickListener {
                             else {
                                 //  6.0之后动态申请权限 SD卡写入权限
                                 ibUpdatePhoto.setVisibility(View.GONE);
-                                if (ContextCompat.checkSelfPermission(community4.this,
+                                if (ContextCompat.checkSelfPermission(activity_community_postNewShare.this,
                                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                                         != PackageManager.PERMISSION_GRANTED) {
-                                    ActivityCompat.requestPermissions(community4.this,
+                                    ActivityCompat.requestPermissions(activity_community_postNewShare.this,
                                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
                                             MY_ADD_CASE_CALL_PHONE2);
 
@@ -583,7 +577,7 @@ public class community4 extends Activity implements View.OnClickListener {
             }
             if(httpCode!=200){
                 ibUpdatePhoto.setVisibility(View.VISIBLE);
-                Toast.makeText(community4.this,"上传图片失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity_community_postNewShare.this,"上传图片失败",Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -689,10 +683,10 @@ public class community4 extends Activity implements View.OnClickListener {
             case R.id.community4_AddImage_btn4:
                 //  6.0之后动态申请权限 SD卡写入权限
                 ibUpdatePhoto.setVisibility(View.GONE);
-                if (ContextCompat.checkSelfPermission(community4.this,
+                if (ContextCompat.checkSelfPermission(activity_community_postNewShare.this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(community4.this,
+                    ActivityCompat.requestPermissions(activity_community_postNewShare.this,
                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
                             MY_ADD_CASE_CALL_PHONE2);
 

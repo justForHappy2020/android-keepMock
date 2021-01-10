@@ -1,19 +1,17 @@
 package com.example.myapplication;
 
-import android.graphics.Color;
-import android.util.Log;
-import android.view.ViewGroup;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.module.UpFetchModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.MultipleItem;
-
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, MultipleItem item) {
+    protected void convert(final BaseViewHolder helper, final MultipleItem item) {
 
         switch (helper.getItemViewType()) {
             case MultipleItem.TEXTONLY:
@@ -42,23 +40,38 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
             case MultipleItem.BUTTON:
                 helper.setText(R.id.buttonOnly, item.getText());
                 break;
-            /*case MultipleItem.MINICOURSE:
-                helper.setImageResource(R.id.masonry_item_post_img, item.getCourse().getBackgroundUrl())
-                        .setText(R.id.tv_title, item.getData().getTitle())
-                        .setText(R.id.tv_content, item.getData().getContent());
-                break;*/
+            case MultipleItem.MINICOURSE:
+                helper.setText(R.id.course_name, item.getCourse().getCourseName())
+                        .setText(R.id.course_intro, item.getCourse().getCourseIntro());
+                Glide.with(getContext()).load(item.getCourse().getBackgroundUrl()).placeholder(R.drawable.ic_placeholder).into((ImageView) helper.getView(R.id.course_img));
+                break;
 
             case MultipleItem.MASONRYPOST:
                 helper.setText(R.id.masonry_item_textContent, item.getShare().getContents())
                         .setText(R.id.masonry_item_username, item.getShare().getUser().getNickname())
                         .setText(R.id.masonry_item_num,String.valueOf(item.getShare().getLikeNumbers()));
-                Glide.with(getContext()).load(item.getShare().getUser().getHeadPortraitUrl()).into((ImageView) helper.getView(R.id.masonry_item_portrait_img));
-                Glide.with(getContext()).load(item.getShare().getImgUrls()).into((ImageView) helper.getView(R.id.masonry_item_post_img));
 
+                Glide.with(getContext()).load(item.getShare().getUser().getHeadPortraitUrl()).placeholder(R.drawable.headprotrait).into((ImageView) helper.getView(R.id.masonry_item_portrait_img));
+
+                helper.getView(R.id.masonry_item_post_img).setTag(R.id.masonry_item_post_img,item.getShare().getImgUrls());
+                Glide.with(getContext())
+                        .load(item.getShare().getImgUrls())
+                        .error(R.drawable.ic_load_pic_error)
+                        .placeholder(R.drawable.ic_placeholder)
+                        .into(new SimpleTarget<GlideDrawable>() {
+                            @Override
+                            public void onResourceReady(GlideDrawable resource,GlideAnimation<? super GlideDrawable> glideAnimation) {
+                                String tag = (String) helper.getView(R.id.masonry_item_post_img).getTag(R.id.masonry_item_post_img);
+                                // 如果一样，显示图片
+                                if (TextUtils.equals(item.getShare().getImgUrls(), tag)) {
+                                    helper.setImageDrawable(R.id.masonry_item_post_img,resource);
+                                }
+                            }
+                        });
                 break;
             case MultipleItem.USER:
                 helper.setText(R.id.user_id, item.getUser().getNickname());
-                Glide.with(getContext()).load(item.getUser().getHeadPortraitUrl()).into((ImageView) helper.getView(R.id.user_head));
+                Glide.with(getContext()).load(item.getUser().getHeadPortraitUrl()).placeholder(R.drawable.headprotrait).into((ImageView) helper.getView(R.id.user_head));
                     //.setImageResource(R.id.user_head, R.mipmap.ic_launcher);// item.getUser().getHeadPortraitUrl()
             break;
             case MultipleItem.SHARE:
@@ -72,15 +85,13 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                 else helper.setImageResource(R.id.postlike,R.drawable.like);
 
                 Glide.with(getContext()).load(item.getShare().getUser().getHeadPortraitUrl()).into((ImageView) helper.getView(R.id.share_users_head));
-                Glide.with(getContext()).load(item.getShare().getImgUrls()).into((ImageView) helper.getView(R.id.content_pics));
-                        //.setImageResource(R.id.share_users_head, R.drawable.sucai)// item.getShare().getUser().getHeadPortraitUrl()
-                        //.setImageResource(R.id.content_pics, R.drawable.post_img3);//item.getShare().getImgUrls()
+                Glide.with(getContext()).load(item.getShare().getImgUrls()).placeholder(R.drawable.ic_placeholder).into((ImageView) helper.getView(R.id.content_pics));
                 break;
 
             case MultipleItem.ACTION:
                 helper.setText(R.id.item_movement_name, item.getAction().getActionName())
                         .setText(R.id.item_movement_duration, item.getAction().getDuration());
-                Glide.with(getContext()).load(item.getAction().getActionImgs()).into((ImageView) helper.getView(R.id.item_movement_img));
+                Glide.with(getContext()).load(item.getAction().getActionImgs()).placeholder(R.drawable.ic_placeholder).into((ImageView) helper.getView(R.id.item_movement_img));
                         //.setImageResource(R.id.item_movement_img,R.drawable.course_movement);//item.getAction().getBackgroundUrl()
                 break;
 

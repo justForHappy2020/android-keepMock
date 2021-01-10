@@ -2,17 +2,13 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,85 +33,48 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URL;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class fragment_community_main_hot extends Fragment implements LoadMoreModule {
-    private View.OnClickListener onClickListener;
-    private List<List> shareSet = new  ArrayList<>();
-    private int TOTAL_PAGES;
-    private int currentPage; //要分页查询的页面
-    private List<MultipleItem> shareList = new ArrayList();
-    private List<MultipleItem> data01 = new ArrayList();
-    private int httpcode;
-    private Boolean hasNext;
     private MultipleItemQuickAdapter quickAdapter;
     private RecyclerView recyclerView;
+
+    private List<List> shareSet = new  ArrayList<>();
+    private List<MultipleItem> shareList = new ArrayList();
+
+    private int TOTAL_PAGES;
+    private int currentPage; //要分页查询的页面
+    private int httpcode;
+    private Boolean hasNext;
     private String token = "123";//后期本地获取
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community_main_content, container, false);
         currentPage = 1;
-
         shareSet.add(shareList);
-
         Bundle bundle = getArguments();
 
-
-        initData();
-        initView(view);
         return view;
     }
 
-    private void initView(final View view) {
-       // ImageButton img1 = view.findViewById(R.id.fragment_community_main_follow);
-       // ImageButton img2 = view.findViewById(R.id.community_main_search);
-       // ImageButton float_btn = view.findViewById(R.id.float_button);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //initData();
+        initView(view);
+    }
 
-       // img1.setOnClickListener(onClickListener);
-       // img2.setOnClickListener(onClickListener);
-       // float_btn.setOnClickListener(onClickListener);
+    private void initView(final View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.community_main_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         quickAdapter = new MultipleItemQuickAdapter(shareSet.get(0));
         configLoadMoreData();
-        /*RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.community_main_recyclerView);
-        //设置recyclerView的样式
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        //设置adapter
-        MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(datas02);
-        recyclerView.setAdapter(myAdapter);
-        //设置item之间的间隔
-        SpacesItemDecoration decoration = new SpacesItemDecoration(16);
-        recyclerView.addItemDecoration(decoration);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        quickAdapter = new MultipleItemQuickAdapter(shareList);
-        configLoadMoreData();
 
-        quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
-            //int mCurrentCunter = 0;
-
-            @Override
-            public void onLoadMore() {
-                if (currentPage > TOTAL_PAGES) {
-                    quickAdapter.getLoadMoreModule().loadMoreEnd();
-                } else {
-                    new Handler().postDelayed(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            configLoadMoreData();
-                        }
-                    }, 1000);
-
-                }
-
-            }
-        });
-        recyclerView.setAdapter(quickAdapter);*/
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             //int mCurrentCunter = 0;
 
@@ -142,6 +101,9 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent;
                 intent = new Intent(getActivity(), activity_sharedetail.class);
+
+                intent.putExtra("share",(Serializable) shareList.get(position).getShare());
+
                 intent.putExtra("ShareId",shareList.get(position).getShare().getShareId());
                 startActivity(intent);
             }
@@ -202,12 +164,6 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                             //加一个取消点赞接口
                         }
                         break;
-                    case R.id.postcomment:
-                        //  clickComment(position);
-                        Intent intent;
-                        intent = new Intent(getActivity(), activity_sharedetail.class);
-                        startActivity(intent);
-                        break;
                 }
 
             }
@@ -258,38 +214,11 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                 startActivity(intent);
                 break;
             case R.id.float_button:
-                intent = new Intent(getActivity(),community4.class);//点击浮动按钮跳转到发表动态界面
+                intent = new Intent(getActivity(), activity_community_postNewShare.class);//点击浮动按钮跳转到发表动态界面
                 startActivity(intent);
                 break;
         }}
-    private void initData(){
 
-       /* Share share1 = new Share("用户1","测试内容哈哈哈",R.drawable.sucai,R.drawable.scenery,"666","233");
-        Share share2 = new Share("用户2","测试内容哈哈哈",R.drawable.sucai,R.drawable.post_img2,"777","666");
-        Share share3 = new Share("用户3","测试内容哈哈哈",R.drawable.sucai,R.drawable.post_img3,"888","233");
-
-        datas01.add(share1);
-        datas01.add(share2);
-        datas01.add(share3);
-
-        datas02.add(new MultipleItem(MultipleItem.SHARE, datas01.get(0)));
-        datas02.add(new MultipleItem(MultipleItem.SHARE, datas01.get(1)));
-        datas02.add(new MultipleItem(MultipleItem.SHARE, datas01.get(2)));
-        datas02.add(new MultipleItem(MultipleItem.SHARE, datas01.get(2)));
-        datas02.add(new MultipleItem(MultipleItem.SHARE, datas01.get(1)));
-        datas02.add(new MultipleItem(MultipleItem.SHARE, datas01.get(0)));
-        datas02.add(new MultipleItem(MultipleItem.SHARE, datas01.get(1)));
-    */
-
-//        Share share;
-//        for (int i = 0; i < 5; i++) {
-//            share = new Share();
-//            shareList.add(new MultipleItem(6,share));
-//            share.setNickname("用户名称");
-//            share.setContents("动态内容");
-//        }
-//        dataSet.add(shareList);
-    }
     private void getHttpSearch(final String url) {
         final Thread thread = new Thread(new Runnable() {
             @Override
@@ -333,6 +262,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                             share.setUser(user);
                             shareList.add(new MultipleItem(MultipleItem.SHARE,share));
                         }
+                        shareSet.add(shareList);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -350,37 +280,15 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
         if (httpcode != 200) {
             Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
         }
-/*        else for (int i = 0; i <courseList.size(); i++)btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
-                courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程*/
     }
 
     private void configLoadMoreData() {
         String url;//http请求的url
         url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&&currentPage=" + currentPage;
         getHttpSearch(url);
-        shareSet.add(shareList);
         //quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreEnd();
     }
 
-    //   通过图片url获取drawable
-    private Drawable loadImageFromNetwork(String imageUrl)
-    {
-        Drawable drawable = null;
-        try {
-            // 可以在这里通过文件名来判断，是否本地有此图片
-            drawable = Drawable.createFromStream(
-                    new URL(imageUrl).openStream(), imageUrl + ".jpg");
-        } catch (IOException e) {
-            Log.d("test", e.getMessage());
-        }
-        if (drawable == null) {
-            Log.d("test", "null drawable");
-        } else {
-            Log.d("test", "not null drawable");
-        }
-
-        return drawable ;
-    }
 }

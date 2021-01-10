@@ -1,6 +1,8 @@
 package com.example.myapplication.entity;
 
-public class Share {
+import java.io.Serializable;
+
+public class Share implements Serializable {
 
     private User user;
     private int shareType;

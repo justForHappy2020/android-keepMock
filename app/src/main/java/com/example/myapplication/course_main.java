@@ -123,13 +123,17 @@ public class course_main extends Activity implements View.OnClickListener {
             public void run() {
         String url = "http://159.75.2.94:8080/api/course/courseId2Course?courseId=" + courseID.toString().trim();
         String responseData = null;
+        /*
         try {
             responseData = HttpUtils.connectHttpGet(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+         */
         JSONObject jsonObject1 = null;
         try {
+            responseData = HttpUtils.connectHttpGet(url);
             jsonObject1 = new JSONObject(responseData);
             httpcode = jsonObject1.getInt("code");
             if(httpcode == 200){
@@ -161,6 +165,8 @@ public class course_main extends Activity implements View.OnClickListener {
                 }
             }
         } catch (JSONException e) {
+            e.printStackTrace();
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }

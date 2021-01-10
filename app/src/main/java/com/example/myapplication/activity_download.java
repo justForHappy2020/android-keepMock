@@ -48,7 +48,7 @@ public class activity_download extends Activity implements View.OnClickListener 
     /**
      * TestData
      */
-    String Url = "http://qkds47aiq.hn-bkt.clouddn.com/%E5%8A%A8%E4%BD%9C%E4%B8%80%E6%B5%8B%E8%AF%95%E7%89%88%EF%BC%88%E6%9C%AA%E5%8C%85%E8%A3%85%EF%BC%89.mp4";
+    String Url = "https://static.ouj.com/hiyd_cms/file/879c2dc01f384a738a58ae1ae9250449.mp4";
 
 
     private Handler handler = new Handler(new Handler.Callback() {

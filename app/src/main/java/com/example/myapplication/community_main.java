@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -57,8 +58,8 @@ public class community_main extends Fragment implements LoadMoreModule {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initData();
     }
 
@@ -124,7 +125,7 @@ public class community_main extends Fragment implements LoadMoreModule {
                 startActivity(intent);
                 break;
             case R.id.float_button:
-                intent = new Intent(getActivity(),community4.class);//点击浮动按钮跳转到发表动态界面
+                intent = new Intent(getActivity(), activity_community_postNewShare.class);//点击浮动按钮跳转到发表动态界面
                 startActivity(intent);
                 break;
         }}

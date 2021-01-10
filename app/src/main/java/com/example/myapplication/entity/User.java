@@ -2,7 +2,9 @@ package com.example.myapplication.entity;
 
 import android.widget.ImageView;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Long userId;
     private String phoneNumber;
     private String nickname;

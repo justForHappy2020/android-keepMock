@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,43 +33,46 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class fragment_community_main_follow extends Fragment implements LoadMoreModule {
-    private View.OnClickListener onClickListener;
-    private List<List> dataSet = new  ArrayList<>();
+    private MultipleItemQuickAdapter quickAdapter;
+    private RecyclerView recyclerView;
+
+    private List<List> shareSet = new  ArrayList<>();
+    private List<MultipleItem> shareList = new ArrayList();
+
     private int TOTAL_PAGES;
     private int currentPage; //要分页查询的页面
-    private List<MultipleItem> shareList = new ArrayList();
-    private List<MultipleItem> data01 = new ArrayList();
     private int httpcode;
     private Boolean hasNext;
-    MultipleItemQuickAdapter quickAdapter;
-    RecyclerView recyclerView;
-
-    private String keyUrl;//搜索的关键词
-    private String token = "123";//后期从本地获取
+    private String token = "123";//后期本地获取
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community_main_content, container, false);
         currentPage = 1;
+        shareSet.add(shareList);
         Bundle bundle = getArguments();
-        initData();
-        initView(view);
+
         return view;
     }
 
-    private void initView(View view) {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //initData();
+        initView(view);
+    }
 
+    private void initView(final View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.community_main_recyclerView);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        quickAdapter = new MultipleItemQuickAdapter(shareList);
-
+        quickAdapter = new MultipleItemQuickAdapter(shareSet.get(0));
         configLoadMoreData();
 
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -93,16 +95,20 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
 
             }
         });
+
         quickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent;
                 intent = new Intent(getActivity(), activity_sharedetail.class);
+
+                intent.putExtra("share",(Serializable) shareList.get(position).getShare());
+
+                intent.putExtra("ShareId",shareList.get(position).getShare().getShareId());
                 startActivity(intent);
             }
         });
         quickAdapter.addChildClickViewIds(R.id.share_follow,R.id.share_users_head,R.id.users_id,R.id.postlike,R.id.praises,R.id.postcomment,R.id.comments);
-        //具体课程的监听
         quickAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             Boolean isClicked = null;
             Boolean isLiked = null;
@@ -139,6 +145,7 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                             //加一个取消关注的接口
                         }
                         break;
+                    case R.id.praises:
                     case R.id.postlike:
                         if(isLiked == false){
                             isLiked=true;
@@ -157,29 +164,44 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                             //加一个取消点赞接口
                         }
                         break;
-                    case R.id.postcomment:
-                      //  clickComment(position);
-                        Intent intent;
-                        intent = new Intent(getActivity(), activity_sharedetail.class);
-                        startActivity(intent);
-                        break;
                 }
 
             }
         });
         recyclerView.setAdapter(quickAdapter);
     }
-            public void clickHead(int position){
-                Intent intent;
-                intent = new Intent(getActivity(), community2.class);
-                startActivity(intent);
-            }
-            public void clickComment(int position){
-                Intent intent;
-                intent = new Intent(getActivity(), community3.class);
-                startActivity(intent);
-            }
+    public void clickHead(int position){
+        Intent intent;
+        intent = new Intent(getActivity(), community2.class);
+        intent.putExtra("token",token);  //后期通过Sp获取
+        intent.putExtra("userId",shareList.get(position).getShare().getUser().getUserId());
+        startActivity(intent);
+    }
+    public void clickLike(View view,int position,int i){//这里逻辑比较混乱
+        Boolean isClicked;
+        if (i%2 == 1) isClicked = true;
+        else isClicked = false;//从接口获取，List.get(i).getLiked();
+        if(isClicked == false){
+            isClicked=true;
+            ImageView item_like=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.postlike);
+            TextView item_praises=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.praises);
+            item_praises.setText(String.valueOf(Integer.parseInt(item_praises.getText().toString())+1));
+            item_like.setImageResource(R.drawable.like_click);
+        }
+        else {
+            isClicked=false;
+            ImageView item_like=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.postlike);
+            TextView item_praises=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.praises);
+            item_praises.setText(String.valueOf(Integer.parseInt(item_praises.getText().toString())-1));
+            item_like.setImageResource(R.drawable.like);
+        }
 
+    }
+    public void clickComment(int position){
+        Intent intent;
+        intent = new Intent(getActivity(), community3.class);
+        startActivity(intent);
+    }
     public void onCommunityClick(View view){
         Intent intent = null;
         switch (view.getId()) {
@@ -192,25 +214,16 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                 startActivity(intent);
                 break;
             case R.id.float_button:
-                intent = new Intent(getActivity(),community4.class);//点击浮动按钮跳转到发表动态界面
+                intent = new Intent(getActivity(), activity_community_postNewShare.class);//点击浮动按钮跳转到发表动态界面
                 startActivity(intent);
                 break;
         }}
-    private void initData() {
-    }
+
     private void getHttpSearch(final String url) {
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 String responseData = null;
-                /*
-                try {
-                    responseData = HttpUtils.connectHttpGet(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                 */
                 JSONObject jsonObject1 = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
@@ -236,15 +249,16 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                             share.setLikeNumbers(jsonObject.getString("likeNumbers"));
                             share.setCommentsNumbers(jsonObject.getString("commentNumbers"));
                             share.setCreateTime(jsonObject.getString("createTime"));
-                            share.setLike(true);//share.setLike(jsonObject.getBoolean("like"));
+                            share.setLike(false);//share.setLike(jsonObject.getBoolean("like"));
                             share.setRelations(jsonObject.getInt("relations"));
                             share.setUser(user);
                             shareList.add(new MultipleItem(MultipleItem.SHARE,share));
                         }
+                        shareSet.add(shareList);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -258,17 +272,14 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
         if (httpcode != 200) {
             Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
         }
-/*        else for (int i = 0; i <courseList.size(); i++)btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
-                courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程*/
     }
 
     private void configLoadMoreData() {
         String url;//http请求的url
         url = "http://159.75.2.94:8080/api/community/getFriendShare?token=" + token + "&&currentPage=" + currentPage;
         getHttpSearch(url);
-        dataSet.add(shareList);
-        quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreEnd();
     }
+
 }

@@ -1,7 +1,10 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +37,8 @@ import java.util.List;
 public class fragment_search_all extends Fragment {
 
 
-    private List<MultipleItem> postList= new ArrayList<>();
+    private List<MultipleItem> shareList = new ArrayList<>();
     private List<MultipleItem> multItemList= new ArrayList<>();
-
-    private List<List> shareSet= new ArrayList<>();
 
     private int TOTAL_PAGES;
     private int currentPage; //要分页查询的页面
@@ -54,6 +55,27 @@ public class fragment_search_all extends Fragment {
 
     private String token;//后期本地获取
 
+    private String url;//http请求动态的url
+
+    private AlertDialog.Builder builder;
+    private String errorMsg;
+
+    private void showErrorAlert(String Msg){
+        builder = new AlertDialog.Builder(getActivity()).setIcon(R.drawable.cancel).setTitle("Error")
+                .setMessage(Msg).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        builder.create().show();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,12 +85,16 @@ public class fragment_search_all extends Fragment {
         searchContent = bundle.getString("searchContent");
         currentPage = 1;
 
-        shareSet.add(postList);
-
-        initView(view);
-        initData();
+        //shareSet.add(shareList);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
+        initData();
     }
 
     private void initView(View view){
@@ -77,7 +103,7 @@ public class fragment_search_all extends Fragment {
         postRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_all_recyclerView);
         courseRecyclerView = (RecyclerView) headerView.findViewById(R.id.fragment_course_recyclerView);
 
-        myAdapter = new MultipleItemQuickAdapter(shareSet.get(0));
+        myAdapter = new MultipleItemQuickAdapter(shareList);//shareSet.get(0)
 
         miniCourseAdapter = new MultipleItemQuickAdapter(multItemList);
 
@@ -124,9 +150,12 @@ public class fragment_search_all extends Fragment {
 
     private void initData(){
 
+       /*-------------------TEST DATA-------------------*/
         Course course1 = new Course();
         course1.setCourseName("腹肌");
         course1.setCourseIntro("K1零基础  . 3002.5万人参加");
+        course1.setBackgroundUrl("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F17%2F20180717171039_pcrip.thumb.700_0.jpg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612753714&t=c63ac29b6f5d3344823b0fbc9f067e43");
+        /*-------------------TEST DATA-------------------*/
 
         multItemList.add(new MultipleItem(MultipleItem.TEXTONLY,"课程"));
 
@@ -183,39 +212,37 @@ public class fragment_search_all extends Fragment {
 
                             share.setUser(user);
 
-                            postList.add(new MultipleItem(MultipleItem.MASONRYPOST,share));
+                            shareList.add(new MultipleItem(MultipleItem.MASONRYPOST,share));
 
                         }
                     }
                 } catch (JSONException e) {
+                    errorMsg = e.getMessage();
                     e.printStackTrace();
                 }catch (IOException e) {
+                    errorMsg = e.getMessage();
                     e.printStackTrace();
                 }
             }
         });
         thread.start();
         try {
-            thread.join(10000);
+            thread.join(8000);
         } catch (InterruptedException e) {
+            errorMsg=e.getMessage();
             e.printStackTrace();
         }
         if (httpcode != 200) {
-            Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+            myAdapter.getLoadMoreModule().loadMoreFail();
+            showErrorAlert("fragment_search_all: "+errorMsg);
         }
-/*        else for (int i = 0; i <courseList.size(); i++)btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
-                courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程*/
     }
 
     private void configLoadMoreData() {
-        String url;//http请求的url
         url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&currentPage=" + currentPage;//后期改为搜索动态接口
-
         getHttpSearch(url);
-
-        shareSet.add(postList);
-        //myAdapter.addData(sharePages.get(currentPage-1));
+        myAdapter.notifyDataSetChanged();
         currentPage++;
-        myAdapter.getLoadMoreModule().loadMoreEnd();
+        myAdapter.getLoadMoreModule().loadMoreComplete();
     }
 }

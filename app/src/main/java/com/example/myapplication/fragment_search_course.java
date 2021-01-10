@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,6 +44,28 @@ public class fragment_search_course extends Fragment {
     private int currentPage; //要分页查询的页面
     private List<Course> courseList = new ArrayList();
 
+    private String url;//http请求的url
+
+
+    private AlertDialog.Builder builder;
+    private String errorMsg;
+
+    private void showErrorAlert(String Msg){
+        builder = new AlertDialog.Builder(getActivity()).setIcon(R.drawable.cancel).setTitle("Error")
+                .setMessage(Msg).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        builder.create().show();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,9 +75,13 @@ public class fragment_search_course extends Fragment {
         keyWord = bundle.getString("searchContent");
         courseSet.add(courseList);
 
-        initView(view);
-        //initData();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
     }
 
     private void initView(View view) {
@@ -148,8 +176,10 @@ public class fragment_search_course extends Fragment {
                         }
                     }
                 } catch (JSONException e) {
+                    errorMsg = e.getMessage();
                     e.printStackTrace();
                 }catch (IOException e) {
+                    errorMsg = e.getMessage();
                     e.printStackTrace();
                 }
             }
@@ -158,22 +188,23 @@ public class fragment_search_course extends Fragment {
         try {
             thread.join(10000);
         } catch (InterruptedException e) {
+            errorMsg = e.getMessage();
             e.printStackTrace();
         }
         if (httpcode != 200) {
-            Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+            showErrorAlert("fragment_search_course: "+errorMsg);
         }
 
     }
 
         private void configLoadMoreData() {
-            String url;//http请求的url
+
             url = "http://159.75.2.94:8080/api/course/searchCourse?keyword=" + keyWord + "&currentPage=" + currentPage;//(e.g.搜索"腹肌")
             getHttpSearch(url);
             courseSet.add(courseList);
             //quickAdapter.addData(dataSet.get(currentPage-1));
             currentPage++;
-            quickAdapter.getLoadMoreModule().loadMoreEnd();
+            quickAdapter.getLoadMoreModule().loadMoreComplete();
         }
 
 }

@@ -1,9 +1,12 @@
 package com.example.myapplication;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +39,6 @@ public class fragment_search_daily extends Fragment {
 
 
     private List<MultipleItem> shareList = new ArrayList<>();
-    private List<List> shareSet = new ArrayList<>();
     
     private int currentPage; //要分页查询的页面
 
@@ -48,8 +50,28 @@ public class fragment_search_daily extends Fragment {
     MultipleItemQuickAdapter quickAdapter;
     RecyclerView recyclerView;
 
+    private String url;//http请求的url
+    private String token;//后期本地获取
 
-    
+    private AlertDialog.Builder builder;
+    private String errorMsg;
+
+    private void showErrorAlert(String Msg){
+        builder = new AlertDialog.Builder(getActivity()).setIcon(R.drawable.cancel).setTitle("Error")
+                .setMessage(Msg).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        builder.create().show();
+    }
+
 
     @Nullable
     @Override
@@ -59,25 +81,21 @@ public class fragment_search_daily extends Fragment {
         currentPage = 1;
         Bundle bundle = getArguments();
         keyWord = bundle.getString("searchContent");
-
-        shareSet.add(shareList);
-
-        initView(view);
-
         return view;
+    }
+
+     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
+        configLoadMoreData();
     }
 
     private void initView(View view){
 
         recyclerView= (RecyclerView) view.findViewById(R.id.fragment_daily_recyclerView);
-
-        //设置recyclerView的样式
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-
         //设置adapter
-        quickAdapter = new MultipleItemQuickAdapter(shareSet.get(0));
-
-        configLoadMoreData();
+        quickAdapter = new MultipleItemQuickAdapter(shareList);
 
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             //int mCurrentCunter = 0;
@@ -124,6 +142,8 @@ public class fragment_search_daily extends Fragment {
 
         recyclerView.setAdapter(quickAdapter);
 
+        //设置recyclerView的样式
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         //设置item之间的间隔
         SpacesItemDecoration decoration=new SpacesItemDecoration(16);
         recyclerView.addItemDecoration(decoration);
@@ -176,9 +196,11 @@ public class fragment_search_daily extends Fragment {
                             shareList.add(new MultipleItem(MultipleItem.MASONRYPOST,share));
                         }
                     }
-                } catch (JSONException e) {
+                }  catch (JSONException e) {
+                    errorMsg = e.getMessage();
                     e.printStackTrace();
                 }catch (IOException e) {
+                    errorMsg = e.getMessage();
                     e.printStackTrace();
                 }
             }
@@ -187,25 +209,20 @@ public class fragment_search_daily extends Fragment {
         try {
             thread.join(3000);
         } catch (InterruptedException e) {
+            errorMsg=e.getMessage();
             e.printStackTrace();
         }
         if (httpcode != 200) {
-            Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+            showErrorAlert("fragment_search_daily: "+errorMsg);
         }
-/*        else for (int i = 0; i <courseList.size(); i++)btCourse[i].setText(courseList.get(i).getCourseName() + "\n" + courseList.get(i).getDegree() + " . " +
-                courseList.get(i).getDuration() + " . " +courseList.get(i).getHits() + "万人已参加");//展示课程*/
     }
 
     private void configLoadMoreData() {
-        String url;//http请求的url
-        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + "123" + "&currentPage=" + currentPage;//后期改为搜索动态接口
+        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&currentPage=" + currentPage;//后期改为搜索动态接口
         getHttpSearch(url);
-
-        shareSet.add(shareList);
-
-        //quickAdapter.addData(shareSet.get(currentPage-1));
+        quickAdapter.notifyDataSetChanged();
         currentPage++;
-        quickAdapter.getLoadMoreModule().loadMoreEnd();
+        quickAdapter.getLoadMoreModule().loadMoreComplete();
     }
 
 

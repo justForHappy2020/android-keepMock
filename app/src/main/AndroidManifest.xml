@@ -201,11 +201,11 @@
             android:screenOrientation="portrait" />
         <!--
         <activity
-            android:name=".community4"
+            android:name=".activity_community_postNewShare"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         -->
-        <activity android:name=".community4" />
+        <activity android:name=".activity_community_postNewShare" />
     </application>
 
 </manifest>

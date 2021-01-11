@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
@@ -49,6 +50,7 @@ public class fragment_search_daily extends Fragment {
 
     MultipleItemQuickAdapter quickAdapter;
     RecyclerView recyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private String url;//http请求的url
     private String token;//后期本地获取
@@ -80,7 +82,7 @@ public class fragment_search_daily extends Fragment {
 
         currentPage = 1;
         Bundle bundle = getArguments();
-        keyWord = bundle.getString("searchContent");
+        keyWord = bundle.getString("keyWord");
         return view;
     }
 
@@ -94,6 +96,21 @@ public class fragment_search_daily extends Fragment {
     private void initView(View view){
 
         recyclerView= (RecyclerView) view.findViewById(R.id.fragment_daily_recyclerView);
+        swipeRefreshLayout = view.findViewById(R.id.fragment_daily_swipe_refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {//下拉刷新监听
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshData();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
+
         //设置adapter
         quickAdapter = new MultipleItemQuickAdapter(shareList);
 
@@ -225,5 +242,12 @@ public class fragment_search_daily extends Fragment {
         quickAdapter.getLoadMoreModule().loadMoreComplete();
     }
 
+    private void refreshData() {
+        currentPage = 1;
+        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&currentPage=" + currentPage++;
+        shareList=new ArrayList<>();
+        getHttpSearch(url);
+        quickAdapter.setNewData(shareList);
+    }
 
 }

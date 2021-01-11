@@ -21,7 +21,7 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
     public MultipleItemQuickAdapter(List data) {
         super(data);
         addItemType(MultipleItem.TEXTONLY, R.layout.item_textonly);
-        addItemType(MultipleItem.BUTTON, R.layout.item_buttononly);
+        addItemType(MultipleItem.BUTTON, R.layout.item_search_all_checkmore_button);
         addItemType(MultipleItem.MINICOURSE, R.layout.item_course_mini);
         addItemType(MultipleItem.MASONRYPOST, R.layout.item_post_simplified);
         addItemType(MultipleItem.USER, R.layout.item_user_result);

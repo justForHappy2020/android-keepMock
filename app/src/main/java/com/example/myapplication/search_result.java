@@ -64,8 +64,8 @@ public class search_result extends FragmentActivity implements View.OnClickListe
         Bundle bundle = new Bundle();
         Intent intent = getIntent();
         from = intent.getIntExtra("from",0);
-        searchContent = intent.getStringExtra("searchContent");
-        bundle.putString("searchContent", searchContent);
+        searchContent = intent.getStringExtra("keyWord");
+        bundle.putString("keyWord", searchContent);
 
         fragment_search_all f1 = new fragment_search_all();
         fragment_search_course f2 = new fragment_search_course();
@@ -203,7 +203,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
                     editor.putStringSet("search_user_history_list",strSet);
                     editor.commit();
                 }
-                intent.putExtra("searchContent",searchContent);
+                intent.putExtra("keyWord",searchContent);
                 startActivity(intent);
                 finish();
                 break;

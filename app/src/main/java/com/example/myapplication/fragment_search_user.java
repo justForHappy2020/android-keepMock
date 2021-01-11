@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
@@ -49,6 +50,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
 
     MultipleItemQuickAdapter quickAdapter;
     RecyclerView recyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private String url;//http请求的url
 
@@ -77,7 +79,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
         View view = inflater.inflate(R.layout.fragment_search_user, container, false);
         currentPage = 1;
         Bundle bundle = getArguments();
-        keyWord = bundle.getString("searchContent");
+        keyWord = bundle.getString("keyWord");
 
         dataSet.add(userList);
 
@@ -92,6 +94,21 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
 
     private void initView(View view){
         recyclerView= (RecyclerView) view.findViewById(R.id.fragment_user_recyclerView);
+        swipeRefreshLayout = view.findViewById(R.id.fragment_user_swipe_refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {//下拉刷新监听
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshData();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
+
         //设置recyclerView的样式
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         quickAdapter = new MultipleItemQuickAdapter(dataSet.get(0));
@@ -244,6 +261,14 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
         //quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
         quickAdapter.getLoadMoreModule().loadMoreComplete();
+    }
+
+    private void refreshData() {
+        currentPage = 1;
+        url = "http://159.75.2.94:8080/api/community/searchFriend?keyword=" + keyWord + "&currentPage=" + currentPage++;
+        userList=new ArrayList<>();
+        getHttpSearch(url);
+        quickAdapter.setNewData(userList);
     }
 }
 

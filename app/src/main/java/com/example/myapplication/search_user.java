@@ -2,8 +2,6 @@ package com.example.myapplication;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -74,7 +72,7 @@ public class search_user extends Activity implements View.OnClickListener {
                 if(!estr.isEmpty()){
                     Intent i = new Intent(search_user.this , search_result.class);//启动课程结果activity
                     i.putExtra("from",SEARCH_USER);
-                    i.putExtra("searchContent",estr);
+                    i.putExtra("keyWord",estr);
                     startActivity(i);
 
                     strSet= new HashSet<String>(strSet);
@@ -123,7 +121,7 @@ public class search_user extends Activity implements View.OnClickListener {
                         //获取最近搜索中的点击内容进行传值
                         String str = auto_tv.getText().toString();
                         Intent intent = new Intent(search_user.this, search_result.class);
-                        intent.putExtra("searchContent",str);
+                        intent.putExtra("keyWord",str);
                         intent.putExtra("from",SEARCH_USER);
                         startActivity(intent);
                     }

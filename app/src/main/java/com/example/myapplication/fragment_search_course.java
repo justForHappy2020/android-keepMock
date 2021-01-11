@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
+import com.chad.library.adapter.base.listener.OnUpFetchListener;
 import com.example.myapplication.entity.Course;
 import com.example.myapplication.utils.HttpUtils;
 
@@ -32,11 +35,12 @@ import java.util.List;
 
 public class fragment_search_course extends Fragment {
 
-    private List<List> courseSet = new  ArrayList<>();
+    //private List<List> courseSet = new  ArrayList<>();
     private int TOTAL_PAGES;
 
     QuickAdapter quickAdapter;
     RecyclerView recyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private int httpcode;
     private String keyWord;//搜索的关键词
@@ -45,7 +49,6 @@ public class fragment_search_course extends Fragment {
     private List<Course> courseList = new ArrayList();
 
     private String url;//http请求的url
-
 
     private AlertDialog.Builder builder;
     private String errorMsg;
@@ -72,8 +75,8 @@ public class fragment_search_course extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search_course, container, false);
         currentPage = 1;
         Bundle bundle = getArguments();
-        keyWord = bundle.getString("searchContent");
-        courseSet.add(courseList);
+        keyWord = bundle.getString("keyWord");
+        //courseSet.add(courseList);
 
         return view;
     }
@@ -87,8 +90,23 @@ public class fragment_search_course extends Fragment {
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_course_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        swipeRefreshLayout = view.findViewById(R.id.fragment_course_swipe_refresh);
 
-        quickAdapter = new QuickAdapter(R.layout.item_course, courseSet.get(0));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {//下拉刷新监听
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshData();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
+
+
+        quickAdapter = new QuickAdapter(R.layout.item_course, courseList);
 
         configLoadMoreData();
 
@@ -112,6 +130,7 @@ public class fragment_search_course extends Fragment {
 
             }
         });
+
         //具体课程的监听
         quickAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -129,7 +148,11 @@ public class fragment_search_course extends Fragment {
             }
         });
 
+        quickAdapter.setEmptyView(R.layout.empty_view);//设置空布局，没有数据时显示
+        quickAdapter.setAnimationEnable(true);
         recyclerView.setAdapter(quickAdapter);
+
+
 
     }
 
@@ -197,14 +220,20 @@ public class fragment_search_course extends Fragment {
 
     }
 
-        private void configLoadMoreData() {
+    private void configLoadMoreData() {
+        url = "http://159.75.2.94:8080/api/course/searchCourse?keyword=" + keyWord + "&currentPage=" + currentPage;//(e.g.搜索"腹肌")
+        getHttpSearch(url);
+        quickAdapter.notifyDataSetChanged();
+        currentPage++;
+        quickAdapter.getLoadMoreModule().loadMoreComplete();
+    }
 
-            url = "http://159.75.2.94:8080/api/course/searchCourse?keyword=" + keyWord + "&currentPage=" + currentPage;//(e.g.搜索"腹肌")
-            getHttpSearch(url);
-            courseSet.add(courseList);
-            //quickAdapter.addData(dataSet.get(currentPage-1));
-            currentPage++;
-            quickAdapter.getLoadMoreModule().loadMoreComplete();
-        }
+    private void refreshData() {
+        currentPage=1;
+        url = "http://159.75.2.94:8080/api/course/searchCourse?keyword=" + keyWord + "&currentPage=" + currentPage++;
+        courseList = new ArrayList<>();
+        getHttpSearch(url);
+        quickAdapter.setNewData(courseList);
+    }
 
 }

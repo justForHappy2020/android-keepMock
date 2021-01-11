@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -38,19 +40,21 @@ public class fragment_search_all extends Fragment {
 
 
     private List<MultipleItem> shareList = new ArrayList<>();
-    private List<MultipleItem> multItemList= new ArrayList<>();
+    private List<Course> courseList = new ArrayList<>();
+    private List<MultipleItem> miniCourseList = new ArrayList<>();
 
     private int TOTAL_PAGES;
     private int currentPage; //要分页查询的页面
     private int httpcode;
     private Boolean hasNext;
 
-    String searchContent;//传入用户在搜索界面输入的内容
+    String keyWord;//传入用户在搜索界面输入的内容
 
-    RecyclerView postRecyclerView;
+    RecyclerView rootRecyclerView;
     RecyclerView courseRecyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
-    MultipleItemQuickAdapter myAdapter;
+    MultipleItemQuickAdapter rootAdapter;
     MultipleItemQuickAdapter miniCourseAdapter;
 
     private String token;//后期本地获取
@@ -82,11 +86,8 @@ public class fragment_search_all extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search_all, container, false);
 
         Bundle bundle = getArguments();
-        searchContent = bundle.getString("searchContent");
+        keyWord = bundle.getString("keyWord");
         currentPage = 1;
-
-        //shareSet.add(shareList);
-
         return view;
     }
 
@@ -100,35 +101,51 @@ public class fragment_search_all extends Fragment {
     private void initView(View view){
         View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_course_mini,null);
 
-        postRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_all_recyclerView);
+        rootRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_all_recyclerView);
         courseRecyclerView = (RecyclerView) headerView.findViewById(R.id.fragment_course_recyclerView);
+        swipeRefreshLayout = view.findViewById(R.id.fragment_all_swipe_refresh);
 
-        myAdapter = new MultipleItemQuickAdapter(shareList);//shareSet.get(0)
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {//下拉刷新监听
+                rootRecyclerView.post(new Runnable() {//后续需要增加courseRecyclerview.post
+                    @Override
+                    public void run() {
+                        refreshData();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
 
-        miniCourseAdapter = new MultipleItemQuickAdapter(multItemList);
+        rootAdapter = new MultipleItemQuickAdapter(shareList);//shareSet.get(0)
+
+        miniCourseAdapter = new MultipleItemQuickAdapter(miniCourseList);
 
         miniCourseAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> baseQuickAdapter, @NonNull View view, int position) {
-                Toast.makeText(getActivity(),"OnClick Position: " + position,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), course_main.class);
+                intent.putExtra("course", courseList.get(position).getCourseId());
+                startActivity(intent);
             }
         });
 
-        myAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
+        rootAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             //int mCurrentCunter = 0;
 
             @Override
             public void onLoadMore() {
                 if (currentPage > TOTAL_PAGES) {
-                    myAdapter.getLoadMoreModule().loadMoreEnd();
+                    rootAdapter.getLoadMoreModule().loadMoreEnd();
                 } else {
                     new Handler().postDelayed(new Runnable() {
 
                         @Override
                         public void run() {
-                            configLoadMoreData();
+                            configLoadMoreShareData();
                         }
-                    }, 2000);
+                    }, 1000);
 
                 }
 
@@ -136,41 +153,63 @@ public class fragment_search_all extends Fragment {
         });
 
         //设置recyclerView的样式
-        postRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        rootRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         //设置adapter
-        myAdapter.addHeaderView(headerView);//待增添逻辑：如果无课程则不添加“课程”TextView和加载更多按钮（小于等于三条也不显示）
-        postRecyclerView.setAdapter(myAdapter);
+        rootAdapter.addHeaderView(headerView);//待增添逻辑：如果无课程则不添加“课程”TextView和加载更多按钮（小于等于三条也不显示）
+        rootRecyclerView.setAdapter(rootAdapter);
 
         courseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         courseRecyclerView.setAdapter(miniCourseAdapter);
         //设置item之间的间隔
         SpacesItemDecoration decoration=new SpacesItemDecoration(16);
-        postRecyclerView.addItemDecoration(decoration);
+        rootRecyclerView.addItemDecoration(decoration);
     }
 
     private void initData(){
 
-       /*-------------------TEST DATA-------------------*/
-        Course course1 = new Course();
-        course1.setCourseName("腹肌");
-        course1.setCourseIntro("K1零基础  . 3002.5万人参加");
-        course1.setBackgroundUrl("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F17%2F20180717171039_pcrip.thumb.700_0.jpg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612753714&t=c63ac29b6f5d3344823b0fbc9f067e43");
-        /*-------------------TEST DATA-------------------*/
+        rootRecyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                getHttpSearchCourse("http://159.75.2.94:8080/api/course/searchCourse?keyword=" + keyWord + "&currentPage=" + 1);
 
-        multItemList.add(new MultipleItem(MultipleItem.TEXTONLY,"课程"));
+                if(!courseList.isEmpty()){
+                    miniCourseAdapter.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.titlebar_search_all_course,null));
+                    //miniCourseList.add(new MultipleItem(MultipleItem.TEXTONLY,"课程"));
 
-        multItemList.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
-        multItemList.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
-        multItemList.add(new MultipleItem(MultipleItem.MINICOURSE,course1));
+                    if(courseList.size()>3){
+                        for(int n=0;n<3;n++){
+                            miniCourseList.add(new MultipleItem(MultipleItem.MINICOURSE,courseList.get(n)));
+                        }
+                        View checkMoreButton=LayoutInflater.from(getActivity()).inflate(R.layout.item_search_all_checkmore_button,null);
+                        checkMoreButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(getContext(), search_result.class);
+                                intent.putExtra("from", 1);
+                                intent.putExtra("keyWord",keyWord);
+                                startActivity(intent);
+                            }
+                        });
+                        miniCourseAdapter.addFooterView(checkMoreButton);
+                        //miniCourseList.add(new MultipleItem(MultipleItem.BUTTON,"加载更多"));
+                    }else{
+                        for(int n=0;n<courseList.size();n++){
+                            miniCourseList.add(new MultipleItem(MultipleItem.MINICOURSE,courseList.get(n)));
+                        }
+                    }
+                }
+                miniCourseAdapter.addFooterView(LayoutInflater.from(getActivity()).inflate(R.layout.titlebar_search_all_share,null));
+                //miniCourseList.add(new MultipleItem(MultipleItem.TEXTONLY,"动态"));
+                miniCourseAdapter.notifyDataSetChanged();
 
-        multItemList.add(new MultipleItem(MultipleItem.BUTTON,"加载更多"));
+            }
+        });
 
-        multItemList.add(new MultipleItem(MultipleItem.TEXTONLY,"动态"));
 
-        configLoadMoreData();
+        configLoadMoreShareData();
     }
 
-    private void getHttpSearch(final String url) {
+    private void getHttpSearchShare(final String url) {
 
         final Thread thread = new Thread(new Runnable() {
             @Override
@@ -233,16 +272,78 @@ public class fragment_search_all extends Fragment {
             e.printStackTrace();
         }
         if (httpcode != 200) {
-            myAdapter.getLoadMoreModule().loadMoreFail();
+            rootAdapter.getLoadMoreModule().loadMoreFail();
             showErrorAlert("fragment_search_all: "+errorMsg);
         }
     }
 
-    private void configLoadMoreData() {
-        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&currentPage=" + currentPage;//后期改为搜索动态接口
-        getHttpSearch(url);
-        myAdapter.notifyDataSetChanged();
-        currentPage++;
-        myAdapter.getLoadMoreModule().loadMoreComplete();
+    private void getHttpSearchCourse(final String url) {
+        final Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String responseData = null;
+                JSONObject jsonObject1 = null;
+                try {
+                    responseData = HttpUtils.connectHttpGet(url);
+                    jsonObject1 = new JSONObject(responseData);
+                    httpcode = jsonObject1.getInt("code");
+                    if (httpcode == 200) {
+                        JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
+                        //得到筛选的课程list
+                        JSONArray JSONArrayCourse = jsonObject2.getJSONArray("courseList");
+                        for (int i = 0; i < JSONArrayCourse.length(); i++) {
+                            JSONObject jsonObject = JSONArrayCourse.getJSONObject(i);
+                            //相应的内容
+                            Course course = new Course();
+                            course.setCourseId(jsonObject.getLong("courseId"));
+                            course.setCourseName(jsonObject.getString("courseName"));
+                            course.setBackgroundUrl(jsonObject.getString("backgroundUrl"));
+                            //course.setCourseUrl(jsonObject.getString("courseUrl"));
+                            course.setBodyPart(jsonObject.getString("bodyPart"));
+                            course.setDegree(jsonObject.getString("degree"));
+                            course.setDuration(jsonObject.getString("duration"));
+                            course.setHits(jsonObject.getInt("hits"));
+                            course.setCreateTime(jsonObject.getString("createTime"));
+                            course.setCalorie(jsonObject.getInt("calorie"));
+                            course.setCourseIntro(jsonObject.getString("courseIntro"));
+                            courseList.add(i, course);
+                        }
+                    }
+                } catch (JSONException e) {
+                    errorMsg = e.getMessage();
+                    e.printStackTrace();
+                }catch (IOException e) {
+                    errorMsg = e.getMessage();
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
+            errorMsg = e.getMessage();
+            e.printStackTrace();
+        }
+        if (httpcode != 200) {
+            showErrorAlert("fragment_search_course: "+errorMsg);
+        }
+
     }
+
+    private void configLoadMoreShareData() {
+        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&currentPage=" + currentPage;//后期改为搜索动态接口
+        getHttpSearchShare(url);
+        rootAdapter.notifyDataSetChanged();
+        currentPage++;
+        rootAdapter.getLoadMoreModule().loadMoreComplete();
+    }
+    private void refreshData() {
+        currentPage = 1;
+        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&currentPage=" + currentPage++;
+        shareList=new ArrayList<>();
+        getHttpSearchShare(url);
+        rootAdapter.setNewData(shareList);
+    }
+
 }

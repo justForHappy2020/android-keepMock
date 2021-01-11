@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
@@ -41,8 +42,9 @@ import java.util.List;
 public class fragment_community_main_hot extends Fragment implements LoadMoreModule {
     private MultipleItemQuickAdapter quickAdapter;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    private List<List> shareSet = new  ArrayList<>();
+    //private List<List> shareSet = new  ArrayList<>();
     private List<MultipleItem> shareList = new ArrayList();
 
     private int TOTAL_PAGES;
@@ -50,13 +52,14 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
     private int httpcode;
     private Boolean hasNext;
     private String token = "123";//后期本地获取
+    String url;//http请求的url
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community_main_content, container, false);
         currentPage = 1;
-        shareSet.add(shareList);
+        //shareSet.add(shareList);
         Bundle bundle = getArguments();
 
         return view;
@@ -71,8 +74,23 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
 
     private void initView(final View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.community_main_recyclerView);
+        swipeRefreshLayout = view.findViewById(R.id.fragment_community_swipe_refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {//下拉刷新监听
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshData();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        quickAdapter = new MultipleItemQuickAdapter(shareSet.get(0));
+        quickAdapter = new MultipleItemQuickAdapter(shareList);
         configLoadMoreData();
 
         quickAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -262,7 +280,7 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
                             share.setUser(user);
                             shareList.add(new MultipleItem(MultipleItem.SHARE,share));
                         }
-                        shareSet.add(shareList);
+                        //shareSet.add(shareList);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -283,12 +301,20 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
     }
 
     private void configLoadMoreData() {
-        String url;//http请求的url
         url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&&currentPage=" + currentPage;
         getHttpSearch(url);
         //quickAdapter.addData(dataSet.get(currentPage-1));
         currentPage++;
-        quickAdapter.getLoadMoreModule().loadMoreEnd();
+        quickAdapter.notifyDataSetChanged();
+        quickAdapter.getLoadMoreModule().loadMoreComplete();
+    }
+
+    private void refreshData() {
+        currentPage=1;
+        url = "http://159.75.2.94:8080/api/community/getHotShare?token=" + token + "&&currentPage=" + currentPage++;
+        shareList = new ArrayList<>();
+        getHttpSearch(url);
+        quickAdapter.setNewData(shareList);
     }
 
 }

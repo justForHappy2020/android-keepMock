@@ -117,7 +117,7 @@ public class search_course_backup extends Activity implements View.OnClickListen
         }else{
             searchContent = etInput.getText().toString().trim();
             intent.putExtra("from",SEARCH_COURSE);
-            intent.putExtra("searchContent",searchContent);
+            intent.putExtra("keyWord",searchContent);
             startActivity(intent);
         }
 

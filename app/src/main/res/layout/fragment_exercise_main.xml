@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#F4F4FA"
-                    android:drawableTop="@drawable/bodypart_e"
+                    android:drawableTop="@drawable/bodypart_f"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
 
@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#F4F4FA"
-                    android:drawableTop="@drawable/bodypart_f"
+                    android:drawableTop="@drawable/bodypart_g"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
 
@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#F4F4FA"
-                    android:drawableTop="@drawable/bodypart_g"
+                    android:drawableTop="@drawable/bodypart_h"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
 
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#F4F4FA"
-                    android:drawableTop="@drawable/bodypart_h"
+                    android:drawableTop="@drawable/bodypart_all"
                     android:fontFamily="sans-serif-black"
                     android:text="腿" />
 

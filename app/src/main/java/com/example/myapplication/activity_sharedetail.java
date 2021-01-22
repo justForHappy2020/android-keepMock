@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,8 @@ import com.example.myapplication.entity.Comment;
 import com.example.myapplication.entity.ShareAbb;
 import com.example.myapplication.entity.User;
 import com.example.myapplication.utils.HttpUtils;
+import com.jaeger.ninegridimageview.NineGridImageView;
+import com.jaeger.ninegridimageview.NineGridImageViewAdapter;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.json.JSONException;
@@ -43,6 +46,7 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
 
     private int TOTAL_PAGES;
     private RecyclerView recyclerView;
+    private NineGridImageView<String> nineGridImageView;
 
     private Button loadMoreComments;
     private ImageView back;
@@ -55,6 +59,7 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
     private TextView bcommentsNumber;
 
     private List<ImageView> shareImgs = new ArrayList<>();
+    private List<String> imgUrls = new ArrayList<>();
 
     private Dialog dialog;
     private BaseQuickAdapter<Comment, BaseViewHolder> quickAdapter;
@@ -102,6 +107,7 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         shareImgs.add((ImageView)findViewById(R.id.community1_playerimage9));
 
         recyclerView = (RecyclerView) findViewById(R.id.community_reviews_main);
+        nineGridImageView = findViewById(R.id.sharedetail_nine_grid);
 
         loadMoreComments.setOnClickListener(this);
         back.setOnClickListener(this);
@@ -158,6 +164,40 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
 
         recyclerView.setAdapter(quickAdapter);
 
+        nineGridImageView.setAdapter(new NineGridImageViewAdapter<String>() {
+            @Override
+            protected void onDisplayImage(Context context, ImageView imageView,String url) {
+                Glide.with(context)
+                        .load(url)
+                        .into(imageView);
+            }
+            @Override
+            protected ImageView generateImageView(Context context) {
+                return super.generateImageView(context);
+            }
+
+            @Override
+            protected void onItemImageClick(Context context, int index, List list) {
+                super.onItemImageClick(context, index, list);
+                final ImageView imageView = new ImageView(getApplicationContext());
+                Glide.with(getBaseContext()).load(list.get(index)).into(imageView);
+
+                dialog = new Dialog(getApplicationContext(),R.style.FullActivity);
+                WindowManager.LayoutParams attributes = getWindow().getAttributes();
+                attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
+                attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
+                dialog.getWindow().setAttributes(attributes);
+                dialog.setContentView(imageView);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
+
     }
 
     private void initData() {
@@ -174,6 +214,11 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
             //Glide.with(this).load(shareAbb.getUser().getHeadPortraitUrl()).into(userHeadprotraitImg);
             Glide.with(this).load(shareAbb.getHeadPortraitUrl()).into(userHeadprotraitImg);
 
+            imgUrls.add(shareAbb.getImgUrls());//测试数据
+
+            nineGridImageView.setImagesData(imgUrls);
+
+/*
             int ImgUrls_length=1;//test data
             for(int n=0;n<9;n++){
                 if(n<ImgUrls_length){
@@ -202,11 +247,12 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
                         }
                     });
                 }else{
-                    shareImgs.get(n).setImageResource(R.color.transparent);
+                    shareImgs.get(n).setVisibility(View.GONE);//setImageResource(R.color.transparent);
                 }
 
             }
 
+ */
 
         }
 

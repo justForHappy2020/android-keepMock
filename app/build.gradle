@@ -52,4 +52,6 @@ dependencies {
     //compile 'com.danikula:videocache:2.7.1'//视频缓存
     implementation 'com.zzhoujay.richtext:richtext:3.0.0'
     compile 'com.alibaba:fastjson:1.1.72.android'
+    compile 'com.jaeger.ninegridimageview:library:1.0.0'
+
 }

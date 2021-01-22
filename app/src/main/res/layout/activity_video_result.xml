@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="204dp"
             android:layout_marginTop="100dp"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/video_result" />
 
         <TextView

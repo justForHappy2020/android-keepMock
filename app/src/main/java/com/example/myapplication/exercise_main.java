@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.example.myapplication.entity.Course;
 import com.example.myapplication.entity.CourseClass;
+import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.utils.HttpUtils;
 
 import org.json.JSONArray;
@@ -27,6 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class exercise_main extends Fragment{
+    private RecyclerView recyclerView;
+    private MultipleItemQuickAdapter quickAdapter;
 
     private ImageView ivSearch;
     private Button btBodypart[] = new Button[8];
@@ -34,9 +44,8 @@ public class exercise_main extends Fragment{
     private TextView tvCountTime;
     private List<CourseClass> bodyPart = new ArrayList();
     private List<CourseClass> degree = new ArrayList();
-    private List<Course> hotCourse = new ArrayList();
-    private List<Course> courseList = new ArrayList();
-    //private CourseClass allCourse = new CourseClass();
+    private List<MultipleItem> hotCourse = new ArrayList();
+    private List<MultipleItem> courseList = new ArrayList();
 
     private int httpcode;
     private String countTime;//累计分钟数
@@ -97,7 +106,7 @@ public class exercise_main extends Fragment{
                             course.setDuration(jsonObject.getString("duration"));
                             course.setHits(jsonObject.getInt("hits"));
                             course.setCreateTime(jsonObject.getString("createTime"));
-                            hotCourse.add(i,course);
+                            hotCourse.add(i,new MultipleItem(MultipleItem.NORMCOURSE,course));
                         }
 
 
@@ -117,9 +126,13 @@ public class exercise_main extends Fragment{
             e.printStackTrace();
         }
         if(httpcode!=200) Toast.makeText(getActivity(),"ERROR", Toast.LENGTH_SHORT).show();
-        else for (int i = 0; i < 10; i++)
-            btHotcourse[i].setText(hotCourse.get(i).getCourseName() + "\n" + hotCourse.get(i).getDuration() + "  " + hotCourse.get(i).getDegree());//10个BUTTON中录入热门课程
+        /*
+        else
+            for (int i = 0; i < 10; i++)
+            btHotcourse[i].setText(hotCourse.get(i).getCourse().getCourseName() + "\n" + hotCourse.get(i).getCourse().getDuration() + "  " + hotCourse.get(i).getCourse().getDegree());//10个BUTTON中录入热门课程
+    */
     }
+
 
 
     //获取部位标签
@@ -216,6 +229,32 @@ public class exercise_main extends Fragment{
         btBodypart[6] = view.findViewById(R.id.bodypart7);
         btBodypart[7] = view.findViewById(R.id.bodypart8);
 
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.exercise_main_hotcourses_recyclerview);
+
+        LinearLayoutManager layoutM = new LinearLayoutManager(getActivity());
+        layoutM.setOrientation(LinearLayoutManager.HORIZONTAL);//设置为横向排列
+        recyclerView.setLayoutManager(layoutM);
+
+        quickAdapter = new MultipleItemQuickAdapter(hotCourse);
+        //具体课程的监听
+        quickAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> baseQuickAdapter, @NonNull View view, int i) {
+                Intent intent;
+                intent = new Intent(getActivity(), course_main.class);
+                intent.putExtra("courseID",hotCourse.get(i).getCourse().getCourseId());
+                startActivity(intent);
+            }
+        });
+        quickAdapter.setAnimationEnable(true);
+
+        recyclerView.setAdapter(quickAdapter);
+
+        SpacesItemDecoration decoration=new SpacesItemDecoration(16);
+        recyclerView.addItemDecoration(decoration);
+
+        /*
         btHotcourse[0] = view.findViewById(R.id.hotcourse1);
         btHotcourse[1] = view.findViewById(R.id.hotcourse2);
         btHotcourse[2] = view.findViewById(R.id.hotcourse3);
@@ -227,6 +266,7 @@ public class exercise_main extends Fragment{
         btHotcourse[8] = view.findViewById(R.id.hotcourse9);
         btHotcourse[9] = view.findViewById(R.id.hotcourse10);
 
+         */
 
         onClickListener = new View.OnClickListener() {
             @Override
@@ -236,9 +276,8 @@ public class exercise_main extends Fragment{
         };
 
         ivSearch.setOnClickListener(onClickListener);//监听获取验证码按钮
-        int i;
-        for (i = 0; i < 8; i++) btBodypart[i].setOnClickListener(onClickListener);
-        for (i = 0; i < 10; i++) btHotcourse[i].setOnClickListener(onClickListener);
+        for (int i = 0; i < 8; i++) btBodypart[i].setOnClickListener(onClickListener);
+        //for (i = 0; i < 10; i++) btHotcourse[i].setOnClickListener(onClickListener);
 
     }
 
@@ -293,6 +332,7 @@ public class exercise_main extends Fragment{
                 intent.putExtra("bodypart" , bodyPart.get(7));
                 startActivity(intent);
                 break;
+                /*
             case R.id.hotcourse1:
                 intent = new Intent(getActivity(), course_main.class);
                 intent.putExtra("courseID",hotCourse.get(0).getCourseId());
@@ -343,6 +383,7 @@ public class exercise_main extends Fragment{
                 intent.putExtra("courseID",hotCourse.get(9).getCourseId());
                 startActivity(intent);
                 break;
+                 */
         }
     }
 }

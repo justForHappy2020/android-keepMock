@@ -19,18 +19,52 @@
             android:background="#FAFAFA"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/video_play"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/scenery" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/video_play"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/course_background" />
+
+                <TextView
+                    android:id="@+id/course_detail_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="课程名称"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/video_play"
+                    app:layout_constraintLeft_toLeftOf="@id/video_play"
+                    app:layout_constraintRight_toRightOf="@id/video_play" />
+
+                <ImageView
+                    android:id="@+id/course_detail_back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_back_white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                android:paddingBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -45,15 +79,15 @@
                         android:gravity="center"
                         android:text="燃脂"
                         android:textColor="#B3B1B2"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/calorie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="38千卡"
+                        android:text="0千卡"
                         android:textColor="#000000"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -70,15 +104,15 @@
                         android:gravity="center"
                         android:text="时长"
                         android:textColor="#B3B1B2"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/duration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="188 分钟"
+                        android:text="0分钟"
                         android:textColor="#000000"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -95,7 +129,7 @@
                         android:gravity="center"
                         android:text="难度"
                         android:textColor="#B3B1B2"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/degree"
@@ -103,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:text="K2 初学"
                         android:textColor="#000000"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -111,7 +145,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:background="#FFFFFF"
                 android:orientation="vertical"
                 android:padding="15dp">
@@ -174,7 +208,7 @@
                         android:id="@+id/course_detail_actionNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="14 个动作" />
+                        android:text="0个动作" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -235,75 +269,12 @@
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
-            <HorizontalScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/course_detail_related_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:fillViewport="true"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        />
-
-
-                    <ImageButton
-                        android:id="@+id/related_course1"
-                        style="@style/SmsButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="5dp"
-                        android:src="@drawable/ocean"
-                        android:text="Button One" />
-
-                    <ImageButton
-                        android:id="@+id/related_course2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="5dp"
-                        android:src="@drawable/ocean"
-                        android:text="Button Two" />
-
-                    <ImageButton
-                        android:id="@+id/related_course3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="5dp"
-                        android:src="@drawable/ocean"
-                        android:text="Button Three" />
-
-                    <ImageButton
-                        android:id="@+id/related_course4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="5dp"
-                        android:src="@drawable/ocean"
-                        android:text="Button Four" />
-
-                    <ImageButton
-                        android:id="@+id/related_course5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="5dp"
-                        android:src="@drawable/ocean"
-                        android:text="Button Five" />
-
-                    <ImageButton
-                        android:id="@+id/related_course6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="5dp"
-                        android:text="Button Six" />
-                </LinearLayout>
-            </HorizontalScrollView>
+                android:layout_height="match_parent"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_course_simplified" />
 
         </LinearLayout>
     </ScrollView>

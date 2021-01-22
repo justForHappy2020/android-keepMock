@@ -41,8 +41,8 @@
 
     <!--    community string-->
     <string name="community1_edit">\t说点什么吧</string>
-    <string name="community1_thumbsnum">331</string>
-    <string name="community1_newsnum">47</string>
+    <string name="community1_thumbsnum">0</string>
+    <string name="community1_newsnum">0</string>
     <string name="community1_playerid">陈陈陈</string>
     <string name="community1_playerid_repeat">陈陈陈（作者）：</string>
     <string name="community1_playertext">滴~夜跑可爱卡\n滴~夜跑可爱卡\n滴~夜跑可爱卡\n滴~夜跑可爱卡</string>

@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.example.myapplication.entity.MultipleItem;
-import com.example.myapplication.entity.Share;
+import com.example.myapplication.entity.ShareAbb;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -35,8 +35,8 @@ public class community_main extends Fragment implements LoadMoreModule {
     private FragmentPagerAdapter mAdapter;
     private int from;
     private TabLayout mTabLayout;
-    List<Share> postList= new ArrayList<>();
-    private List<Share> datas01= new ArrayList<>();
+    List<ShareAbb> postList= new ArrayList<>();
+    private List<ShareAbb> datas01= new ArrayList<>();
     private List<MultipleItem> datas02= new ArrayList<>();
 
     private String[] titles = {"热门", "关注"};

@@ -17,36 +17,33 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:background="#3E3C42"
-            android:orientation="horizontal">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
 
             <ImageButton
                 android:id="@+id/information_goback"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/information_goback"
                 android:background="#3E3C42"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                />
+                android:src="@drawable/information_goback" />
+
             <TextView
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="14dp"
+                android:layout_weight="1"
                 android:text="消息"
-                android:layout_marginTop="10dp"
                 android:textColor="#FFFFFF"
-                android:textSize="30dp"/>
+                android:textSize="30dp" />
+
             <ImageButton
                 android:id="@+id/button3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/information_check"
                 android:background="#3E3C42"
-                android:layout_marginRight="29dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="230dp"
-                />
+                android:src="@drawable/information_check" />
         </LinearLayout>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"

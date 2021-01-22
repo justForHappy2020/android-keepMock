@@ -143,7 +143,7 @@ public class fragment_search_course extends Fragment {
                     if(courseList.size()<=position)position = position - courseList.size();
                     else break;
                 }*/
-                intent.putExtra("course", courseList.get(position).getCourseId());
+                intent.putExtra("courseID",courseList.get(position).getCourseId());
                 startActivity(intent);
             }
         });

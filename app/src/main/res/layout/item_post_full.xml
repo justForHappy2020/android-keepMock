@@ -5,12 +5,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
     android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -35,23 +36,18 @@
 
         <Button
             android:id="@+id/share_follow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="84dp"
+            android:layout_height="32dp"
             android:layout_gravity="right|center_vertical"
-            android:layout_weight="0.2"
-            android:backgroundTint="#FFFFFF"
+            android:background="@drawable/button_radius_white_stroke"
             android:text="关注" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/contents"
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="3dp"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="运动减肥打卡 慢跑10公里，最近都是笑得腹肌都出来了哈哈哈哈这后面会被自动省略"
@@ -62,9 +58,7 @@
         android:id="@+id/content_pics"
         android:layout_width="match_parent"
         android:layout_height="100pt"
-        android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/scenery" />
@@ -72,9 +66,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

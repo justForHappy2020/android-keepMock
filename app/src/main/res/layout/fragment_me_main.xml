@@ -203,7 +203,7 @@
                             android:layout_weight="1"
                             android:background="#FFFFFF"
                             android:scaleType="fitEnd"
-                            app:srcCompat="@drawable/next" />
+                            android:src="@drawable/next" />
                     </LinearLayout>
 
                     <TextView

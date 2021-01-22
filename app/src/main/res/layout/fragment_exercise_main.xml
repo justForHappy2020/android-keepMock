@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#F6F6F6"
     android:orientation="vertical">
 
@@ -181,120 +182,12 @@
                     android:textColor="#535353"
                     android:textSize="14sp" />
 
-                <HorizontalScrollView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/exercise_main_hotcourses_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fillViewport="true">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/hotcourse1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="腹肌撕裂者 &#10;17分钟 K1"
-                            android:textColor="@color/white"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:id="@+id/hotcourse2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Button Two"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:id="@+id/hotcourse3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Button Three"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:id="@+id/hotcourse4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Button Four"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:id="@+id/hotcourse5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Button Five"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:id="@+id/hotcourse6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Button Six"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:id="@+id/hotcourse7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Button Seven"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:id="@+id/hotcourse8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Button Eight"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:id="@+id/hotcourse9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Button Nine"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:id="@+id/hotcourse10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/fitness"
-                            android:fontFamily="sans-serif-black"
-                            android:text="Button ten"
-                            android:textSize="20dp" />
-                    </LinearLayout>
-
-                </HorizontalScrollView>
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_course_simplified" />
 
             </LinearLayout>
 
@@ -306,7 +199,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <TextView

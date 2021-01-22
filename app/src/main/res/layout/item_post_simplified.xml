@@ -21,8 +21,9 @@
         android:layout_marginLeft="9dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="9dp"
+        android:ellipsize="end"
         android:lines="1"
-        android:text="慢跑10公里，最近都是累的要死呜呜呜呜呜呜，啊啊啊啊哭死了"
+        android:text="慢跑10公里，最近都是累的要死呜呜呜呜呜呜，啊啊啊啊哭死了23333"
         android:textColor="#505050"
         android:textSize="13sp"
         android:textStyle="bold" />
@@ -54,7 +55,7 @@
             android:textSize="10sp" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/masonry_item_like"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="center_vertical"

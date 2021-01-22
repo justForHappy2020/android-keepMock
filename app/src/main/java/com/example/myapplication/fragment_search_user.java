@@ -44,6 +44,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
     private Boolean hasNext;
     private int currentPage; //要分页查询的页面
     private String keyWord;//搜索的关键词
+    private String token = "123";//后期本地获取
 
     private List<List> dataSet = new  ArrayList<>();
     private List<MultipleItem> userList = new ArrayList();
@@ -165,6 +166,10 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
 
             }
         });
+
+        quickAdapter.setEmptyView(R.layout.empty_view);//设置空布局，没有数据时显示
+        quickAdapter.setAnimationEnable(true);
+
         recyclerView.setAdapter(quickAdapter);
 
         //设置item之间的间隔
@@ -254,7 +259,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
     }
 
     private void configLoadMoreData() {
-        url = "http://159.75.2.94:8080/api/community/searchFriend?keyword=" + keyWord + "&currentPage=" + currentPage;
+        url = "http://159.75.2.94:8080/api/community/searchFriend?keyword=" + keyWord + "&token=" + token + "&currentPage=" + currentPage;
 
         getHttpSearch(url);
         dataSet.add(userList);
@@ -265,7 +270,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
 
     private void refreshData() {
         currentPage = 1;
-        url = "http://159.75.2.94:8080/api/community/searchFriend?keyword=" + keyWord + "&currentPage=" + currentPage++;
+        url = "http://159.75.2.94:8080/api/community/searchFriend?keyword=" + keyWord + "&token=" + token + "&currentPage=" + currentPage++;
         userList=new ArrayList<>();
         getHttpSearch(url);
         quickAdapter.setNewData(userList);

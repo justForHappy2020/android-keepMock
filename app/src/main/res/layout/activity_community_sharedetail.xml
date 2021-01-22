@@ -38,7 +38,7 @@
     <ScrollView
         android:id="@+id/community1_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="575dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:orientation="vertical"
@@ -88,8 +88,8 @@
                     android:id="@+id/community1_playersay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:text="@string/community1_playertext"
                     android:textColor="#353535"
                     android:textSize="16sp">
@@ -223,14 +223,14 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:background="#F0F0F2"
                 android:orientation="vertical">
                 <!--                间隔player和visitor页面-->
 
-            </LinearLayout>
+            </View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -240,100 +240,92 @@
                 <!--                visitor页面-->
 
                 <TextView
-                    android:id="@+id/community1_visitors_commentnum"
-                    android:layout_width="200dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/community1_visitorthu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/community1_visitors_commentnum"
-                    android:textSize="15dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/community1_visitorsthu"
+                    android:textSize="18sp">
 
                 </TextView>
 
-                <LinearLayout
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
                     android:background="#F0F0F2"
                     android:orientation="horizontal">
 
-                </LinearLayout>
+                </View>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/community1_visitorthu"
+                        android:id="@+id/community1_visitors_commentnum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/community1_visitorsthu"
+                        android:layout_weight="1"
+                        android:text="@string/community1_visitors_commentnum"
                         android:textColor="#AFAFAF"
-                        android:textSize="17dp">
+                        android:textSize="18sp">
 
                     </TextView>
 
-                    <Button
-                        style="?android:attr/borderlessButtonStyle"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="120dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:gravity="right"
                         android:text="按热度"
                         android:textColor="#AFAFAF"
-                        android:textSize="18dp">
+                        android:textSize="18sp" />
 
-                    </Button>
-
-                    <Button
-                        style="?android:attr/borderlessButtonStyle"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="3dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:gravity="left"
+                        android:layout_marginRight="20dp"
                         android:text="| 按时间"
                         android:textColor="#AFAFAF"
-                        android:textSize="18dp">
-
-                    </Button>
+                        android:textSize="18sp" />
 
 
                 </LinearLayout>
 
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/community_reviews_main"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:isScrollContainer="false"
-                    android:visibility="visible"
-                    tools:listitem="@layout/item_comment_main" />
+                    android:descendantFocusability="blocksDescendants">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/sharedetail_loadmore_comments"
-                        style="?borderlessButtonStyle"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/community_reviews_main"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@color/white"
-                        android:text="@string/community1_visitors_opencomment"
-                        android:textColor="#353535"
-                        android:textSize="15dp">
+                        android:isScrollContainer="false"
+                        android:visibility="visible"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_comment_main" />
+                </RelativeLayout>>
 
-                    </Button>
-                </LinearLayout>
+
+                <Button
+                    android:id="@+id/sharedetail_loadmore_comments"
+                    style="?borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:text="@string/community1_visitors_opencomment"
+                    android:textColor="#353535"
+                    android:textSize="15dp">
+
+                </Button>
 
 
             </LinearLayout>

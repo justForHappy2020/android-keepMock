@@ -2,35 +2,65 @@ package com.example.myapplication.entity;
 
 import java.io.Serializable;
 
-public class Share implements Serializable {
+public class ShareAbb implements Serializable {
 
-    private User user;
+    private Long userId;
+    private String headPortraitUrl;
+    private String nickName;
+    private int relations;
+
+    //private User user;
+
     private int shareType;
     private int shareId;
     private String imgUrls;
-    private String contents;
+    private String content;
     private String likeNumbers;
-    private String commentsNumbers;
+    private String commentNumbers;
     private String createTime;
-    private int relations;
     private boolean like;
 
-    public Share(){
+    public ShareAbb(){
 
     }
 
-
-    public Share(User user, int shareType, int shareId, String imgUrls, String contents, String likeNumbers, String commentsNumbers, String createTime, int relations, boolean like) {
-        this.user = user;
+    public ShareAbb(Long userId, String headPortraitUrl, String nickName, int relations, int shareType, int shareId, String imgUrls, String content, String likeNumbers, String commentNumbers, String createTime, boolean like) {
+        this.userId = userId;
+        this.headPortraitUrl = headPortraitUrl;
+        this.nickName = nickName;
+        this.relations = relations;
         this.shareType = shareType;
         this.shareId = shareId;
         this.imgUrls = imgUrls;
-        this.contents = contents;
+        this.content = content;
         this.likeNumbers = likeNumbers;
-        this.commentsNumbers = commentsNumbers;
+        this.commentNumbers = commentNumbers;
         this.createTime = createTime;
-        this.relations = relations;
         this.like = like;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getHeadPortraitUrl() {
+        return headPortraitUrl;
+    }
+
+    public void setHeadPortraitUrl(String headPortraitUrl) {
+        this.headPortraitUrl = headPortraitUrl;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public int getRelations() {
@@ -49,6 +79,7 @@ public class Share implements Serializable {
         this.like = like;
     }
 
+    /*
     public User getUser() {
         return user;
     }
@@ -56,6 +87,7 @@ public class Share implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+     */
 
     public int getShareType() {
         return shareType;
@@ -81,12 +113,12 @@ public class Share implements Serializable {
         this.imgUrls = imgUrls;
     }
 
-    public String getContents() {
-        return contents;
+    public String getContent() {
+        return content;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getLikeNumbers() {
@@ -97,12 +129,12 @@ public class Share implements Serializable {
         this.likeNumbers = likeNumbers;
     }
 
-    public String getCommentsNumbers() {
-        return commentsNumbers;
+    public String getCommentNumbers() {
+        return commentNumbers;
     }
 
-    public void setCommentsNumbers(String commentsNumbers) {
-        this.commentsNumbers = commentsNumbers;
+    public void setCommentNumbers(String commentNumbers) {
+        this.commentNumbers = commentNumbers;
     }
 
     public String getCreateTime() {

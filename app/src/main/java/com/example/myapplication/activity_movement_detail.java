@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.entity.Course;
@@ -46,7 +45,7 @@ public class activity_movement_detail extends Activity implements View.OnClickLi
         currentOne=intent.getIntExtra("courseActionPosition",0);
         actionVideoUrl = course.getActionList().get(currentOne).getActionUrl();
 
-        initData();
+        initIntroData();
         initView();
     }
 
@@ -84,11 +83,9 @@ public class activity_movement_detail extends Activity implements View.OnClickLi
 
     }
 
-    private void initData(){
+    private void initIntroData(){
 
-        /**
-         * Test data
-         */
+        /*
         final String text = "<font color='black' size='18px'><b><big>要点</big></b><br></font>"+"<font color='black' size='18px'>· 双手撑地，前脚掌着地，身体与大腿夹角呈90°<br>· 膝关节夹角呈90°</font><br>";
         final String text1 = "<p><font color='black' size='18px'><b><big>呼吸</big></b><br></font>"+"<font color='black' size='18px'>· 自然呼吸</font><br>";
         final String text2 = "<p><font color='black' size='18px'><b><big>动作感觉</big></b><br></font>"+"<font color='black' size='18px'>· 整个腹部有强烈的收缩紧绷感</font>";
@@ -102,6 +99,7 @@ public class activity_movement_detail extends Activity implements View.OnClickLi
         course.getActionList().get(0).setIntro(text+text1+text2+img);//testdata,后面需要改成发请求拿数据
         course.getActionList().get(1).setIntro(text11+text22+text33+img1);
         course.getActionList().get(2).setIntro(text+text22+text2+img);
+         */
 
         introList = new ArrayList<>();//把每一个action的intro内容装入introList
 
@@ -110,7 +108,6 @@ public class activity_movement_detail extends Activity implements View.OnClickLi
         }
 
     }
-
 
     @Override
     public void onClick(View view) {

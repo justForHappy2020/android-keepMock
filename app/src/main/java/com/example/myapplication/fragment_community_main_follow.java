@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +20,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.chad.library.adapter.base.module.LoadMoreModule;
+import com.example.myapplication.Beans.HttpRequest;
+import com.example.myapplication.Beans.ResponseDataBean;
 import com.example.myapplication.entity.MultipleItem;
-import com.example.myapplication.entity.Share;
-import com.example.myapplication.entity.User;
+import com.example.myapplication.entity.ShareAbb;
 import com.example.myapplication.utils.HttpUtils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,7 +49,7 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
     //private List<List> shareSet = new  ArrayList<>();
     private List<MultipleItem> shareList = new ArrayList();
 
-    private int TOTAL_PAGES;
+    private Long TOTAL_PAGES;
     private int currentPage; //要分页查询的页面
     private int httpcode;
     private Boolean hasNext;
@@ -120,9 +122,9 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                 Intent intent;
                 intent = new Intent(getActivity(), activity_sharedetail.class);
 
-                intent.putExtra("share",(Serializable) shareList.get(position).getShare());
+                intent.putExtra("shareAbb",(Serializable) shareList.get(position).getShareAbb());
 
-                intent.putExtra("ShareId",shareList.get(position).getShare().getShareId());
+                intent.putExtra("ShareId",shareList.get(position).getShareAbb().getShareId());
                 startActivity(intent);
             }
         });
@@ -133,12 +135,12 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
             @Override
             public void onItemChildClick(@NonNull BaseQuickAdapter quickAdapter, @NonNull View view, int position) {
                 if(isLiked == null) {
-                    if (shareList.get(position).getShare().isLike())
+                    if (shareList.get(position).getShareAbb().isLike())
                         isLiked = true;
                     else isLiked = false;
                 }
                 if(isClicked == null) {
-                    if (shareList.get(position).getShare().getRelations() == 0 || shareList.get(position).getShare().getRelations() == 2)
+                    if (shareList.get(position).getShareAbb().getRelations() == 0 || shareList.get(position).getShareAbb().getRelations() == 2)
                         isClicked = false;
                     else isClicked = true;
                 }
@@ -152,14 +154,14 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                             isClicked=false;
                             Button item_follow=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.share_follow);
                             item_follow.setText("关注");
-                            item_follow.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            item_follow.setBackground(getActivity().getDrawable(R.drawable.button_radius_white_stroke));
                             //加一个关注的接口
                         }
                         else {
                             isClicked=true;
                             Button item_follow=recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.share_follow);
                             item_follow.setText("已关注");
-                            item_follow.setBackgroundColor(Color.parseColor("#25C689"));
+                            item_follow.setBackground(getActivity().getDrawable(R.drawable.button_radius_green_stroke));
                             //加一个取消关注的接口
                         }
                         break;
@@ -186,13 +188,18 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
 
             }
         });
+
+        quickAdapter.setEmptyView(R.layout.empty_view);
+        quickAdapter.setAnimationEnable(true);
+
         recyclerView.setAdapter(quickAdapter);
     }
     public void clickHead(int position){
         Intent intent;
         intent = new Intent(getActivity(), community2.class);
         intent.putExtra("token",token);  //后期通过Sp获取
-        intent.putExtra("userId",shareList.get(position).getShare().getUser().getUserId());
+        //intent.putExtra("userId",shareList.get(position).getShareAbb().getUser().getUserId());
+        intent.putExtra("userId",shareList.get(position).getShareAbb().getUserId());
         startActivity(intent);
     }
     public void clickLike(View view,int position,int i){//这里逻辑比较混乱
@@ -245,6 +252,42 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                 JSONObject jsonObject1 = null;
                 try {
                     responseData = HttpUtils.connectHttpGet(url);
+                    HttpRequest httpRequest = JSON.parseObject(responseData, HttpRequest.class);
+                    httpcode=httpRequest.getCode();
+                    TOTAL_PAGES=httpRequest.getData().getTotalPages();
+                    for(int i = 0;i<httpRequest.getData().getShareList().size();i++){
+                        //文本数据在传输时会在转义符前多加一个\，需要去除;
+                        httpRequest.getData().getShareList().get(i).setContent(
+                                httpRequest.getData().getShareList().get(i).getContent()
+                                        .replace("\\n", "\n")
+                                        .replace("\\r","\r")
+                                        .replace("\\t","\t"));
+                        shareList.add(new MultipleItem(MultipleItem.SHAREABB,httpRequest.getData().getShareList().get(i)));
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (httpcode != 200) {
+            Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+        }
+
+        /*
+        final Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String responseData = null;
+                JSONObject jsonObject1 = null;
+                try {
+                    responseData = HttpUtils.connectHttpGet(url);
                     jsonObject1 = new JSONObject(responseData);
                     httpcode = jsonObject1.getInt("code");
                     if (httpcode == 200) {
@@ -256,21 +299,21 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
                         for (int i = 0; i < JSONArrayShare.length(); i++) {
                             JSONObject jsonObject = JSONArrayShare.getJSONObject(i);
                             //相应的内容
-                            Share share = new Share();
+                            ShareAbb share = new ShareAbb();
                             User user = new User();
 
                             user.setNickname(jsonObject.getString("nickname"));
                             user.setHeadPortraitUrl(jsonObject.getString("headPortraitUrl"));
 
-                            share.setContents(jsonObject.getString("content"));
+                            share.setContent(jsonObject.getString("content"));
                             share.setImgUrls(jsonObject.getString("imgUrls"));
                             share.setLikeNumbers(jsonObject.getString("likeNumbers"));
-                            share.setCommentsNumbers(jsonObject.getString("commentNumbers"));
+                            share.setCommentNumbers(jsonObject.getString("commentNumbers"));
                             share.setCreateTime(jsonObject.getString("createTime"));
                             share.setLike(false);//share.setLike(jsonObject.getBoolean("like"));
                             share.setRelations(jsonObject.getInt("relations"));
                             share.setUser(user);
-                            shareList.add(new MultipleItem(MultipleItem.SHARE,share));
+                            shareList.add(new MultipleItem(MultipleItem.SHAREABB,share));
                         }
                         //shareSet.add(shareList);
                     }
@@ -290,6 +333,8 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
         if (httpcode != 200) {
             Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
         }
+
+         */
     }
 
     private void configLoadMoreData() {

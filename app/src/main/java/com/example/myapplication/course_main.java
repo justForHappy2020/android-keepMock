@@ -2,10 +2,8 @@ package com.example.myapplication;
 
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
 import android.app.Activity;
@@ -25,7 +23,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.myapplication.entity.Action;
 import com.example.myapplication.entity.Course;
-import com.example.myapplication.entity.Movement;
 import com.example.myapplication.entity.MultipleItem;
 import com.example.myapplication.utils.HttpUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -43,10 +40,12 @@ import java.util.List;
 
 public class course_main extends Activity implements View.OnClickListener {
 
-    private ImageButton ibVideoPlay;
+    private ImageView ivBackgroundImg;
+    private ImageView ivBack;
     private Button btVideoPlay;
     private ImageButton  btRelatedCourse[] = new ImageButton[6];
-    private List<Course> relatedCourse = new ArrayList();
+    private List<MultipleItem> relatedCourse = new ArrayList();
+    private TextView tvCourseName;
     private TextView tvCalorie;
     private TextView tvDuration;
     private TextView tvDegree;
@@ -56,7 +55,8 @@ public class course_main extends Activity implements View.OnClickListener {
     private Long courseID;
 
 
-    private RecyclerView recyclerView;
+    private RecyclerView actionRecyclerView;
+    private RecyclerView relCoursesRecyclerView;
 
     private List<Long> actionIdList = new ArrayList();//动作ID的LIST
     private int IdLocation;//第几个动作，从0开始算
@@ -76,43 +76,17 @@ public class course_main extends Activity implements View.OnClickListener {
         //courseId2Course(courseID);
 
         initView();
-        startThread();
+        initData();
+        //startThread();
     }
 
-    private void startThread() {
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                final Drawable drawable = loadImageFromNetwork(course.getBackgroundUrl());
-                // post() 特别关键，就是到UI主线程去更新图片
-                ibVideoPlay.post(new Runnable(){
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        ibVideoPlay.setImageDrawable(drawable) ;
-                    }}) ;
-            }
-
-        });
-        thread.start();
-    }
-
-    private void startThread2(final int i) {
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                final Drawable drawable = loadImageFromNetwork(relatedCourse.get(i).getBackgroundUrl());
-                // post() 特别关键，就是到UI主线程去更新图片
-                btRelatedCourse[i].post(new Runnable(){
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        btRelatedCourse[i].setImageDrawable(drawable) ;
-                    }}) ;
-            }
-
-        });
-        thread.start();
+    private void initData(){
+        tvCourseName.setText(course.getCourseName());
+        Glide.with(this)
+                .load(course.getBackgroundUrl())
+                .error(R.drawable.ic_load_pic_error)
+                .placeholder(R.drawable.ic_placeholder)
+                .into(ivBackgroundImg);
     }
 
     //通过课程ID获得课程类
@@ -123,14 +97,6 @@ public class course_main extends Activity implements View.OnClickListener {
             public void run() {
         String url = "http://159.75.2.94:8080/api/course/courseId2Course?courseId=" + courseID.toString().trim();
         String responseData = null;
-        /*
-        try {
-            responseData = HttpUtils.connectHttpGet(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-         */
         JSONObject jsonObject1 = null;
         try {
             responseData = HttpUtils.connectHttpGet(url);
@@ -224,7 +190,7 @@ public class course_main extends Activity implements View.OnClickListener {
                     course.setCreateTime(jsonObject.getString("createTime"));
                     course.setCalorie(jsonObject.getInt("calorie"));
                     course.setCourseIntro(jsonObject.getString("courseIntro"));
-                    relatedCourse.add(i,course);
+                    relatedCourse.add(i,new MultipleItem(MultipleItem.NORMCOURSE,course));
                 }
             }
         } catch (JSONException e) {
@@ -239,48 +205,35 @@ public class course_main extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
         if(httpcode!=200) Toast.makeText(course_main.this,"ERROR", Toast.LENGTH_SHORT).show();
+        /*
         else for (int i = 0; i <btRelatedCourse.length; i++){//只能录入6个相关课程
             //btRelatedCourse[i].setText(relatedCourse.get(i).getCourseName() + "\n" + relatedCourse.get(i).getDuration() + "  " + relatedCourse.get(i).getDegree() );//录入相关课程
             startThread2(i);
         }
+         */
         httpcode = 0;
     }
 
-    private Drawable loadImageFromNetwork(String imageUrl)
-    {
-        Drawable drawable = null;
-        try {
-            // 可以在这里通过文件名来判断，是否本地有此图片
-            drawable = Drawable.createFromStream(
-                    new URL(imageUrl).openStream(), "course_background.jpg");
-        } catch (IOException e) {
-            Log.d("test", e.getMessage());
-        }
-        if (drawable == null) {
-            Log.d("test", "null drawable");
-        } else {
-            Log.d("test", "not null drawable");
-        }
-
-        return drawable ;
-    }
-
-
     private void initView(){
 
-        ibVideoPlay = findViewById(R.id.video_play);
+        ivBackgroundImg = findViewById(R.id.video_play);
+        ivBack = findViewById(R.id.course_detail_back);
         btVideoPlay = findViewById(R.id.play_video);
+        /*
         btRelatedCourse[0] = findViewById(R.id.related_course1);
         btRelatedCourse[1] = findViewById(R.id.related_course2);
         btRelatedCourse[2] = findViewById(R.id.related_course3);
         btRelatedCourse[3] = findViewById(R.id.related_course4);
         btRelatedCourse[4] = findViewById(R.id.related_course5);
         btRelatedCourse[5] = findViewById(R.id.related_course6);
+
+         */
+
+        tvCourseName = findViewById(R.id.course_detail_name);
         tvCalorie = findViewById(R.id.calorie);
         tvDuration = findViewById(R.id.duration);
         tvDegree = findViewById(R.id.degree);
         tvIntro = findViewById(R.id.course_intro);
-
 
         tvActionNum=findViewById(R.id.course_detail_actionNum);
 
@@ -288,20 +241,26 @@ public class course_main extends Activity implements View.OnClickListener {
 
         tvActionNum.setText(course.getActionList().size()+" 个动作");
 
-        recyclerView = findViewById(R.id.course_detail_content_recyclerView);
+        actionRecyclerView = findViewById(R.id.course_detail_content_recyclerView);
+        relCoursesRecyclerView = findViewById(R.id.course_detail_related_recyclerView);
 
-        List<MultipleItem> data= new ArrayList<>();
+        List<MultipleItem> actionList= new ArrayList<>();
         for(int j=0;j<course.getActionList().size();j++){
-           data.add(new MultipleItem(MultipleItem.ACTION,course.getActionList().get(j)));
+           actionList.add(new MultipleItem(MultipleItem.ACTION,course.getActionList().get(j)));
         }
 
-        MultipleItemQuickAdapter myAdapter = new MultipleItemQuickAdapter(data);
+        MultipleItemQuickAdapter actionAdapter = new MultipleItemQuickAdapter(actionList);
+        MultipleItemQuickAdapter courseAdapter = new MultipleItemQuickAdapter(relatedCourse);
 
         LinearLayoutManager layoutM = new LinearLayoutManager(this);
+        LinearLayoutManager layoutM1 = new LinearLayoutManager(this);
         layoutM.setOrientation(LinearLayoutManager.HORIZONTAL);//设置为横向排列
+        layoutM1.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        recyclerView.setLayoutManager(layoutM);
-        myAdapter.setOnItemClickListener(new OnItemClickListener() {
+        actionRecyclerView.setLayoutManager(layoutM);
+        relCoursesRecyclerView.setLayoutManager(layoutM1);
+
+        actionAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> baseQuickAdapter, @NonNull View view, int position) {
                 Intent intent = new Intent(course_main.this,activity_movement_detail.class);
@@ -310,7 +269,20 @@ public class course_main extends Activity implements View.OnClickListener {
                 startActivity(intent);
             }
         });
-        recyclerView.setAdapter(myAdapter);
+        courseAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> baseQuickAdapter, @NonNull View view, int position) {
+                Intent intent = new Intent(course_main.this,course_main.class);
+                intent.putExtra("courseID",relatedCourse.get(position).getCourse().getCourseId());
+                startActivity(intent);
+            }
+        });
+
+        actionRecyclerView.setAdapter(actionAdapter);
+        relCoursesRecyclerView.setAdapter(courseAdapter);
+
+        SpacesItemDecoration decoration=new SpacesItemDecoration(16);
+        relCoursesRecyclerView.addItemDecoration(decoration);
 
 
 
@@ -326,9 +298,11 @@ public class course_main extends Activity implements View.OnClickListener {
 
         initRelativeCourse(courseID);//获取相关课程./getRelativeCourse
 
-        ibVideoPlay.setOnClickListener(this);//监听获取验证码按钮
+        ivBack.setOnClickListener(this);
+        ivBackgroundImg.setOnClickListener(this);//监听获取验证码按钮
         btVideoPlay.setOnClickListener(this);//监听获取验证码按钮
-        for(int i = 0;i<btRelatedCourse.length;i++) btRelatedCourse[i].setOnClickListener(this);
+
+        //for(int i = 0;i<btRelatedCourse.length;i++) btRelatedCourse[i].setOnClickListener(this);
 
 
     }
@@ -336,12 +310,16 @@ public class course_main extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
+            case R.id.course_detail_back:
+                finish();
+                break;
             case R.id.video_play:
                 intent = new Intent(this, play.class);
                 intent.putExtra("courseUrl",course.getActionList().get(0).getActionUrl());
                 intent.putExtra("courseID",course.getCourseId());
                 startActivity(intent);
                 break;
+                /*
             case R.id.related_course1:
                 intent = new Intent(this, course_main.class);
                 intent.putExtra("courseID",relatedCourse.get(0).getCourseId());
@@ -372,7 +350,7 @@ public class course_main extends Activity implements View.OnClickListener {
                 startActivity(intent);
                 finish();
                 break;
-/*            case R.id.related_course6:
+            case R.id.related_course6:
                 intent = new Intent(this, course_main.class);
                 intent.putExtra("courseID",relatedCourse.get(5).getCourseId());
                 startActivity(intent);

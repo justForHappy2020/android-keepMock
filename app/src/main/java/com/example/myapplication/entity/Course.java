@@ -21,7 +21,7 @@ public class Course implements Serializable {
 
     private String duration;
 
-    private int hits;
+    private int hits;//建议改为String
 
     private String createTime;
 

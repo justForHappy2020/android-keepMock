@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -12,6 +13,7 @@ import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.module.UpFetchModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.MultipleItem;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
@@ -23,9 +25,11 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
         addItemType(MultipleItem.TEXTONLY, R.layout.item_textonly);
         addItemType(MultipleItem.BUTTON, R.layout.item_search_all_checkmore_button);
         addItemType(MultipleItem.MINICOURSE, R.layout.item_course_mini);
+        addItemType(MultipleItem.NORMCOURSE, R.layout.item_course_simplified);
+
         addItemType(MultipleItem.MASONRYPOST, R.layout.item_post_simplified);
         addItemType(MultipleItem.USER, R.layout.item_user_result);
-        addItemType(MultipleItem.SHARE, R.layout.item_post_full);
+        addItemType(MultipleItem.SHAREABB, R.layout.item_post_full);
         addItemType(MultipleItem.ACTION, R.layout.item_course_movement);
         addItemType(MultipleItem.ADDIMAGE,R.layout.item_photo);
     }
@@ -47,45 +51,61 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                 break;
 
             case MultipleItem.MASONRYPOST:
-                helper.setText(R.id.masonry_item_textContent, item.getShare().getContents())
-                        .setText(R.id.masonry_item_username, item.getShare().getUser().getNickname())
-                        .setText(R.id.masonry_item_num,String.valueOf(item.getShare().getLikeNumbers()));
+                helper.setText(R.id.masonry_item_textContent, item.getShareAbb().getContent().replace("\\n", "\t").replace("\\r","\r").replace("\\t","\t"))//缩略展示，将换行替换为空格，以展示更多内容
+                        .setText(R.id.masonry_item_username, item.getShareAbb().getNickName())
+                        .setText(R.id.masonry_item_num,String.valueOf(item.getShareAbb().getLikeNumbers()));
 
-                Glide.with(getContext()).load(item.getShare().getUser().getHeadPortraitUrl()).placeholder(R.drawable.headprotrait).into((ImageView) helper.getView(R.id.masonry_item_portrait_img));
-
-                helper.getView(R.id.masonry_item_post_img).setTag(R.id.masonry_item_post_img,item.getShare().getImgUrls());
                 Glide.with(getContext())
-                        .load(item.getShare().getImgUrls())
+                        .load(item.getShareAbb().getHeadPortraitUrl())
+                        .asBitmap()
+                        .placeholder(R.drawable.headprotrait)
                         .error(R.drawable.ic_load_pic_error)
-                        .placeholder(R.drawable.ic_placeholder)
+                        .into((RoundedImageView) helper.getView(R.id.masonry_item_portrait_img));
+
+                helper.getView(R.id.masonry_item_post_img).setTag(R.id.masonry_item_post_img,item.getShareAbb().getImgUrls());
+                Glide.with(getContext())
+                        .load(item.getShareAbb().getImgUrls())
+                        .error(R.drawable.ic_load_pic_error)
+                        // 取消动画，防止第一次加载不出来
+                        .dontAnimate()
                         .into(new SimpleTarget<GlideDrawable>() {
                             @Override
                             public void onResourceReady(GlideDrawable resource,GlideAnimation<? super GlideDrawable> glideAnimation) {
                                 String tag = (String) helper.getView(R.id.masonry_item_post_img).getTag(R.id.masonry_item_post_img);
                                 // 如果一样，显示图片
-                                if (TextUtils.equals(item.getShare().getImgUrls(), tag)) {
+                                if (TextUtils.equals(item.getShareAbb().getImgUrls(), tag)) {
                                     helper.setImageDrawable(R.id.masonry_item_post_img,resource);
                                 }
                             }
                         });
+
                 break;
             case MultipleItem.USER:
                 helper.setText(R.id.user_id, item.getUser().getNickname());
-                Glide.with(getContext()).load(item.getUser().getHeadPortraitUrl()).placeholder(R.drawable.headprotrait).into((ImageView) helper.getView(R.id.user_head));
-                    //.setImageResource(R.id.user_head, R.mipmap.ic_launcher);// item.getUser().getHeadPortraitUrl()
+                Glide.with(getContext())
+                        .load(item.getUser().getHeadPortraitUrl())
+                        .placeholder(R.drawable.headprotrait)
+                        .error(R.drawable.ic_load_pic_error)
+                        .transform(new CenterCrop(getContext()), new GlideRoundTransform(getContext(),15))
+                        .into((ImageView) helper.getView(R.id.user_head));
             break;
-            case MultipleItem.SHARE:
-                helper.setText(R.id.users_id, item.getShare().getUser().getNickname())
-                        .setText(R.id.contents, item.getShare().getContents())
-                        .setText(R.id.praises, item.getShare().getLikeNumbers())
-                        .setText(R.id.comments,item.getShare().getCommentsNumbers());
-                if(item.getShare().getRelations()==0||item.getShare().getRelations()==2)helper.setText(R.id.share_follow,"关注");
+            case MultipleItem.SHAREABB:
+                helper.setText(R.id.users_id, item.getShareAbb().getNickName())
+                        .setText(R.id.content, item.getShareAbb().getContent())
+                        .setText(R.id.praises, item.getShareAbb().getLikeNumbers())
+                        .setText(R.id.comments,item.getShareAbb().getCommentNumbers());
+                if(item.getShareAbb().getRelations()==0||item.getShareAbb().getRelations()==2)helper.setText(R.id.share_follow,"关注");
                 else  helper.setText(R.id.share_follow ,"已关注");
-                if(item.getShare().isLike())helper.setImageResource(R.id.postlike,R.drawable.like_click);
+                if(item.getShareAbb().isLike())helper.setImageResource(R.id.postlike,R.drawable.like_click);
                 else helper.setImageResource(R.id.postlike,R.drawable.like);
 
-                Glide.with(getContext()).load(item.getShare().getUser().getHeadPortraitUrl()).into((ImageView) helper.getView(R.id.share_users_head));
-                Glide.with(getContext()).load(item.getShare().getImgUrls()).placeholder(R.drawable.ic_placeholder).into((ImageView) helper.getView(R.id.content_pics));
+                Glide.with(getContext())
+                        .load(item.getShareAbb().getHeadPortraitUrl())
+                        .asBitmap()
+                        .placeholder(R.drawable.headprotrait)
+                        .error(R.drawable.ic_load_pic_error)
+                        .into((RoundedImageView)helper.getView(R.id.share_users_head));
+                Glide.with(getContext()).load(item.getShareAbb().getImgUrls()).placeholder(R.drawable.ic_placeholder).into((ImageView) helper.getView(R.id.content_pics));
                 break;
 
             case MultipleItem.ACTION:
@@ -97,6 +117,17 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
 
             case MultipleItem.ADDIMAGE:
                 //helper.setImageResource(R.id.community4_item_image, item.getAddimage().getImgUrl());
+                break;
+            case MultipleItem.NORMCOURSE:
+                String item_text = item.getCourse().getDegree() + "·" + item.getCourse().getDuration() + "·" +item.getCourse().getHits() + "万人已参加";//后期需要完善
+                helper.setText(R.id.course_item_norm_name, item.getCourse().getCourseName())
+                        .setText(R.id.course_item_norm_text, item_text);
+                Glide.with(getContext())
+                        .load(item.getCourse().getBackgroundUrl())
+                        .error(R.drawable.ic_load_pic_error)
+                        .transform(new CenterCrop(getContext()), new GlideRoundTransform(getContext(),15))
+                        .into((ImageView) helper.getView(R.id.course_item_norm_bgImg));
+                break;
 
         }
     }

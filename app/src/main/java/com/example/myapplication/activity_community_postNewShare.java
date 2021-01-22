@@ -102,7 +102,7 @@ public class activity_community_postNewShare extends Activity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_community4);
+        setContentView(R.layout.activity_community_post_share);
         mcontext = activity_community_postNewShare.this;
         getLocation();
         getaddress();
@@ -570,7 +570,6 @@ public class activity_community_postNewShare extends Activity implements View.On
                     });
                     Deleteclick();
 
-
                 }
             } catch (Exception e) {
                 //"上传失败");
@@ -658,6 +657,7 @@ public class activity_community_postNewShare extends Activity implements View.On
                                     e.printStackTrace();
                                 }
                                 String responseData = HttpUtils.connectHttp("http://159.75.2.94:8080/api/community/sharing",json);
+
                                 try {
                                     JSONObject jsonObject1 = new JSONObject(responseData);
                                     //相应的内容

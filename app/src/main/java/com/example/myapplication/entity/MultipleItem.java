@@ -12,15 +12,16 @@ public class MultipleItem implements MultiItemEntity {
     public static final int MINICOURSE = 3;
     public static final int MASONRYPOST = 4;
     public static final int USER = 5;
-    public static final int SHARE = 6;
+    public static final int SHAREABB = 6;
 
     public static final int ACTION = 7;
     public static final int ADDIMAGE = 8;
+    public static final int NORMCOURSE = 9;
 
 
     private int itemType;
     private Course course;
-    private Share share;
+    private ShareAbb shareAbb;
     private User user;
     private String text;
     private Action action;
@@ -31,9 +32,9 @@ public class MultipleItem implements MultiItemEntity {
         this.text = text;
     }
 
-    public MultipleItem(int itemType, Share share) {
+    public MultipleItem(int itemType, ShareAbb shareAbb) {
         this.itemType = itemType;
-        this.share = share;
+        this.shareAbb = shareAbb;
     }
 
     public MultipleItem(int itemType,Course course) {
@@ -68,8 +69,8 @@ public class MultipleItem implements MultiItemEntity {
         return course;
     }
 
-    public Share getShare(){
-        return share;
+    public ShareAbb getShareAbb(){
+        return shareAbb;
     }
 
     public User getUser() {

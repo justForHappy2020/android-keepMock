@@ -3,13 +3,11 @@ package com.example.myapplication;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +22,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.Comment;
-import com.example.myapplication.entity.Share;
+import com.example.myapplication.entity.ShareAbb;
 import com.example.myapplication.entity.User;
 import com.example.myapplication.utils.HttpUtils;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -41,7 +39,7 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
     private List<List> dataSet = new ArrayList<>();
     private List<Comment> mainCommentList = new ArrayList();
 
-    private Share share;
+    private ShareAbb shareAbb;
 
     private int TOTAL_PAGES;
     private RecyclerView recyclerView;
@@ -74,7 +72,7 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         setContentView(R.layout.activity_community_sharedetail);
 
         Intent intent = getIntent();
-        share = (Share)intent.getSerializableExtra("share");
+        shareAbb = (ShareAbb)intent.getSerializableExtra("shareAbb");
         dataSet.add(mainCommentList);
 
         initView();
@@ -88,8 +86,8 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         userHeadprotraitImg=findViewById(R.id.userHeadprotrait);
         userNameText=findViewById(R.id.userNickName);
         shareText=findViewById(R.id.community1_playersay);
-        likeNumbers=findViewById(R.id.community1_visitors_commentnum);
-        commentsNumber=findViewById(R.id.community1_visitorthu);
+        likeNumbers=findViewById(R.id.community1_visitorthu);
+        commentsNumber=findViewById(R.id.community1_visitors_commentnum);
         blikeNumbers=findViewById(R.id.community1_thumbsnum);
         bcommentsNumber=findViewById(R.id.community1_newsnum);
 
@@ -163,27 +161,29 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
     }
 
     private void initData() {
-        if(share!=null){
-            userNameText.setText(share.getUser().getNickname());
-            shareText.setText(share.getContents());
+        if(shareAbb !=null){
+            //userNameText.setText(shareAbb.getUser().getNickname());
+            userNameText.setText(shareAbb.getNickName());
+            shareText.setText(shareAbb.getContent());
 
-            likeNumbers.setText(share.getLikeNumbers()+"人点赞");
-            blikeNumbers.setText(share.getLikeNumbers());
-            commentsNumber.setText(share.getCommentsNumbers()+"评论");
-            bcommentsNumber.setText(share.getCommentsNumbers());
+            likeNumbers.setText(shareAbb.getLikeNumbers()+"人点赞");
+            blikeNumbers.setText(shareAbb.getLikeNumbers());
+            commentsNumber.setText(shareAbb.getCommentNumbers()+"评论");
+            bcommentsNumber.setText(shareAbb.getCommentNumbers());
 
-            Glide.with(this).load(share.getUser().getHeadPortraitUrl()).into(userHeadprotraitImg);
+            //Glide.with(this).load(shareAbb.getUser().getHeadPortraitUrl()).into(userHeadprotraitImg);
+            Glide.with(this).load(shareAbb.getHeadPortraitUrl()).into(userHeadprotraitImg);
 
             int ImgUrls_length=1;//test data
             for(int n=0;n<9;n++){
                 if(n<ImgUrls_length){
-                    Glide.with(this).load(share.getImgUrls()).into(shareImgs.get(n));
+                    Glide.with(this).load(shareAbb.getImgUrls()).into(shareImgs.get(n));
 
                     shareImgs.get(n).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             final ImageView imageView = new ImageView(getApplicationContext());
-                            Glide.with(getApplicationContext()).load(share.getImgUrls()).into(imageView);
+                            Glide.with(getApplicationContext()).load(shareAbb.getImgUrls()).into(imageView);
 
                             dialog = new Dialog(getApplicationContext(),R.style.FullActivity);
                             WindowManager.LayoutParams attributes = getWindow().getAttributes();
@@ -294,7 +294,6 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
                 Toast.makeText(activity_sharedetail.this, "读取中···", Toast.LENGTH_SHORT).show();
 
                 /*TestData*/
-
                 List<Comment> newCommentList = new ArrayList();
 
                 Comment comment;
@@ -309,6 +308,7 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
                 dataSet.add(newCommentList);
 
                 quickAdapter.addData(newCommentList);//放入新评论
+                quickAdapter.notifyDataSetChanged();
                 break;
             case R.id.userHeadprotrait:
             case R.id.userNickName:

@@ -95,7 +95,10 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .setText(R.id.praises, item.getShareAbb().getLikeNumbers())
                         .setText(R.id.comments,item.getShareAbb().getCommentNumbers());
                 if(item.getShareAbb().getRelations()==0||item.getShareAbb().getRelations()==2)helper.setText(R.id.share_follow,"关注");
-                else  helper.setText(R.id.share_follow ,"已关注");
+                else{
+                    helper.setText(R.id.share_follow ,"已关注");
+                    helper.setBackgroundResource(R.id.share_follow,R.drawable.button_radius_green_stroke);
+                }
                 if(item.getShareAbb().isLike())helper.setImageResource(R.id.postlike,R.drawable.like_click);
                 else helper.setImageResource(R.id.postlike,R.drawable.like);
 

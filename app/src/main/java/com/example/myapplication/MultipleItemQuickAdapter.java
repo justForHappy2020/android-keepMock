@@ -1,6 +1,11 @@
 package com.example.myapplication;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -13,8 +18,11 @@ import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.module.UpFetchModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.myapplication.entity.MultipleItem;
+import com.jaeger.ninegridimageview.NineGridImageView;
+import com.jaeger.ninegridimageview.NineGridImageViewAdapter;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,9 +37,11 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
 
         addItemType(MultipleItem.MASONRYPOST, R.layout.item_post_simplified);
         addItemType(MultipleItem.USER, R.layout.item_user_result);
-        addItemType(MultipleItem.SHAREABB, R.layout.item_post_full);
+        addItemType(MultipleItem.SHAREABB, R.layout.item_post);
         addItemType(MultipleItem.ACTION, R.layout.item_course_movement);
         addItemType(MultipleItem.ADDIMAGE,R.layout.item_photo);
+        addItemType(MultipleItem.SHAREFULL,R.layout.item_post_full);
+
     }
 
     @Override
@@ -131,7 +141,27 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Multiple
                         .transform(new CenterCrop(getContext()), new GlideRoundTransform(getContext(),15))
                         .into((ImageView) helper.getView(R.id.course_item_norm_bgImg));
                 break;
+            case MultipleItem.SHAREFULL:
+                helper.setText(R.id.item_post_full_username, item.getShareAbb().getNickName())
+                        .setText(R.id.item_post_full_text, item.getShareAbb().getContent())
+                        .setText(R.id.item_post_full_likenumber, item.getShareAbb().getLikeNumbers())
+                        .setText(R.id.item_post_full_commentnumber,item.getShareAbb().getCommentNumbers());
+                if(item.getShareAbb().isLike())helper.setImageResource(R.id.item_post_full_like,R.drawable.like_click);
+                else helper.setImageResource(R.id.item_post_full_like,R.drawable.like);
 
+                Glide.with(getContext())
+                        .load(item.getShareAbb().getHeadPortraitUrl())
+                        .asBitmap()
+                        .placeholder(R.drawable.headprotrait)
+                        .error(R.drawable.ic_load_pic_error)
+                        .into((RoundedImageView)helper.getView(R.id.item_post_full_userhead));
+                NineGridImageView<String> nineGridImageView = helper.getView(R.id.item_post_full_nine_grid);
+                nineGridImageView.setAdapter(item.getNineGridAdapter());
+                List<String> imgUrls = new ArrayList<>();
+                imgUrls.add(item.getShareAbb().getImgUrls());
+                imgUrls.add(item.getShareAbb().getImgUrls());
+                nineGridImageView.setImagesData(imgUrls);//后期需要改接口返回图片为list
+                break;
         }
     }
 

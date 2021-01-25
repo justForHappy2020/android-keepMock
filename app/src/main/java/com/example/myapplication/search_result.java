@@ -65,6 +65,7 @@ public class search_result extends FragmentActivity implements View.OnClickListe
         Intent intent = getIntent();
         from = intent.getIntExtra("from",0);
         searchContent = intent.getStringExtra("keyWord");
+        etInput.setText(searchContent);
         bundle.putString("keyWord", searchContent);
 
         fragment_search_all f1 = new fragment_search_all();

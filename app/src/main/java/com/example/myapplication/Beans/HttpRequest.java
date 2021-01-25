@@ -3,12 +3,12 @@ package com.example.myapplication.Beans;
 public class HttpRequest {
     private int code;
     private String message;
-    private ResponseDataBean data;
+    private DailyShareRetBean data;
 
     public HttpRequest() {
     }
 
-    public HttpRequest(int code, String message, ResponseDataBean data) {
+    public HttpRequest(int code, String message, DailyShareRetBean data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -30,11 +30,11 @@ public class HttpRequest {
         this.message = message;
     }
 
-    public ResponseDataBean getData() {
+    public DailyShareRetBean getData() {
         return data;
     }
 
-    public void setData(ResponseDataBean data) {
+    public void setData(DailyShareRetBean data) {
         this.data = data;
     }
 }

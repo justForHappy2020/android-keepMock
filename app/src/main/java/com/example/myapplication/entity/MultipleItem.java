@@ -1,6 +1,7 @@
 package com.example.myapplication.entity;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.jaeger.ninegridimageview.NineGridImageViewAdapter;
 
 public class MultipleItem implements MultiItemEntity {
     /**
@@ -17,6 +18,8 @@ public class MultipleItem implements MultiItemEntity {
     public static final int ACTION = 7;
     public static final int ADDIMAGE = 8;
     public static final int NORMCOURSE = 9;
+    public static final int SHAREFULL = 10;
+
 
 
     private int itemType;
@@ -26,6 +29,7 @@ public class MultipleItem implements MultiItemEntity {
     private String text;
     private Action action;
     private AddImage addimage;
+    private NineGridImageViewAdapter<String> nineGridAdapter;
 
     public MultipleItem(int itemType,String text) {
         this.itemType = itemType;
@@ -56,6 +60,12 @@ public class MultipleItem implements MultiItemEntity {
         this.addimage = addimage;
     }
 
+    public MultipleItem(int itemType, ShareAbb shareAbb, NineGridImageViewAdapter<String> nineGridAdapter) {
+        this.itemType = itemType;
+        this.shareAbb = shareAbb;
+        this.nineGridAdapter = nineGridAdapter;
+    }
+
     @Override
     public int getItemType() {
         return itemType;
@@ -83,4 +93,8 @@ public class MultipleItem implements MultiItemEntity {
     }
 
     public AddImage getAddimage() { return addimage;}
+
+    public NineGridImageViewAdapter<String> getNineGridAdapter(){
+        return nineGridAdapter;
+    }
 }

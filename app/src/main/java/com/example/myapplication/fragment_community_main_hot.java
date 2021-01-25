@@ -197,9 +197,11 @@ public class fragment_community_main_hot extends Fragment implements LoadMoreMod
     }
     public void clickHead(int position){
         Intent intent;
-        intent = new Intent(getActivity(), community2.class);
+        intent = new Intent(getActivity(), activity_community_homepage.class);
         intent.putExtra("token",token);  //后期通过Sp获取
         intent.putExtra("userId",shareList.get(position).getShareAbb().getUserId());
+        intent.putExtra("userName",shareList.get(position).getShareAbb().getNickName());
+        intent.putExtra("userPortraitUrl",shareList.get(position).getShareAbb().getHeadPortraitUrl());
         startActivity(intent);
     }
     public void clickLike(View view,int position,int i){//这里逻辑比较混乱

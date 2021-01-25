@@ -29,15 +29,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".activity_download"></activity>
-
-        <!-- 允许明文传输，否则无法直接获取获取资源 -->
+        <activity
+            android:name=".fragment_community_homepage_shares"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fragment_community_homepage_shares"
+            android:theme="@style/FullscreenTheme"></activity>
+        <activity android:name=".activity_download" /> <!-- 允许明文传输，否则无法直接获取获取资源 -->
         <activity
             android:name=".activity_movement_detail"
             android:theme="@style/AppTheme"
@@ -49,15 +51,15 @@
         <activity
             android:name=".community1"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".community2"
+            android:name=".activity_community_homepage"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".community3"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".search_user"
             android:launchMode="singleTop"
@@ -65,13 +67,11 @@
         <activity
             android:name=".search_share"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".search_course"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".course_filter"
             android:launchMode="singleTop"

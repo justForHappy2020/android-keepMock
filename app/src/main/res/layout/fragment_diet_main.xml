@@ -93,7 +93,7 @@
             android:id="@+id/diet_main_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_post_full" />
+            tools:listitem="@layout/item_post" />
 
     </LinearLayout>
 </LinearLayout>

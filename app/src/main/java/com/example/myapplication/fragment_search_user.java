@@ -141,7 +141,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent;
-                intent = new Intent(getActivity(), community2.class);
+                intent = new Intent(getActivity(), activity_community_homepage.class);
                 startActivity(intent);
             }
         });
@@ -159,7 +159,7 @@ public class fragment_search_user extends Fragment implements LoadMoreModule {
                         break;
                     case R.id.user_head:
                         Intent intent;
-                        intent = new Intent(getActivity(), community2.class);
+                        intent = new Intent(getActivity(), activity_community_homepage.class);
                         startActivity(intent);
                         break;
                 }

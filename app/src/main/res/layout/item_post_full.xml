@@ -3,74 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp"
-    android:background="#FFFFFF"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:paddingHorizontal="20dp"
+    android:paddingTop="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <com.makeramen.roundedimageview.RoundedImageView
 
-            android:id="@+id/share_users_head"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/item_post_full_userhead"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            android:src="@drawable/sucai"
+            android:src="@drawable/headprotrait"
             app:riv_oval="true" />
 
         <TextView
-            android:id="@+id/users_id"
+            android:id="@+id/item_post_full_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="7dp"
-            android:layout_weight="0.5"
-            android:text="USER_NAME"
-            android:textColor="#353535" />
-
-        <Button
-            android:id="@+id/share_follow"
-            android:layout_width="84dp"
-            android:layout_height="32dp"
-            android:layout_gravity="right|center_vertical"
-            android:background="@drawable/button_radius_white_stroke"
-            android:text="关注" />
+            android:layout_marginLeft="15dp"
+            android:text="UserName"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/item_post_full_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="运动减肥打卡 慢跑10公里，最近都是笑得腹肌都出来了哈哈哈哈这后面会被自动省略"
-        android:textColor="#383837"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/content_pics"
-        android:layout_width="match_parent"
-        android:layout_height="100pt"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/scenery" />
+        android:layout_marginBottom="20dp"
+        android:text="@string/community1_playertext"
+        android:textColor="#353535"
+        android:textSize="16sp">
+
+    </TextView>
+
+    <com.jaeger.ninegridimageview.NineGridImageView
+        android:id="@+id/item_post_full_nine_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:imgGap="4dp"
+        app:showStyle="fill"
+        app:singleImgSize="120dp">
+
+    </com.jaeger.ninegridimageview.NineGridImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/postlike"
+            android:id="@+id/item_post_full_like"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="left"
@@ -79,7 +74,7 @@
             android:src="@drawable/like" />
 
         <TextView
-            android:id="@+id/praises"
+            android:id="@+id/item_post_full_likenumber"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -88,7 +83,7 @@
             android:textSize="10sp" />
 
         <ImageView
-            android:id="@+id/postcomment"
+            android:id="@+id/item_post_full_comment"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="15dp"
@@ -98,7 +93,7 @@
             android:src="@drawable/comment" />
 
         <TextView
-            android:id="@+id/comments"
+            android:id="@+id/item_post_full_commentnumber"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -106,4 +101,10 @@
             android:textColor="#999999"
             android:textSize="10sp" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e5e5e5" />
+
 </LinearLayout>

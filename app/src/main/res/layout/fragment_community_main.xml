@@ -93,14 +93,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#F6F6F6"
-                tools:listitem="@layout/item_post_full" />-->
+                tools:listitem="@layout/item_post" />-->
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/community_main_viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#F6F6F6"
-                tools:listitem="@layout/item_post_full" />
+                tools:listitem="@layout/item_post" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/float_button"

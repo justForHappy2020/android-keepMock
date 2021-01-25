@@ -1,33 +1,23 @@
 package com.example.myapplication.entity;
 
-import android.widget.ImageView;
-
-import java.io.Serializable;
-
-public class User implements Serializable {
+public class UserAbb {
     private Long userId;
-    private String phoneNumber;
     private String nickname;
     private String gender;
     private String headPortraitUrl;
     private int type;
-    private String createTime;
     private String intro;
-    private String password;
-    private String token;
 
-    public User(){
-
+    public UserAbb() {
     }
 
-    public User(String nickname,String headPortraitUrl){
+    public UserAbb(Long userId, String nickname, String gender, String headPortraitUrl, int type, String intro) {
+        this.userId = userId;
         this.nickname = nickname;
+        this.gender = gender;
         this.headPortraitUrl = headPortraitUrl;
-    }
-
-    //生成set、get方法
-    public int getType() {
-        return type;
+        this.type = type;
+        this.intro = intro;
     }
 
     public Long getUserId() {
@@ -36,14 +26,6 @@ public class User implements Serializable {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getNickname() {
@@ -70,16 +52,12 @@ public class User implements Serializable {
         this.headPortraitUrl = headPortraitUrl;
     }
 
+    public int getType() {
+        return type;
+    }
+
     public void setType(int type) {
         this.type = type;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
     }
 
     public String getIntro() {
@@ -89,13 +67,4 @@ public class User implements Serializable {
     public void setIntro(String intro) {
         this.intro = intro;
     }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
 }

@@ -58,12 +58,11 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
     private TextView blikeNumbers;
     private TextView bcommentsNumber;
 
-    private List<ImageView> shareImgs = new ArrayList<>();
+    //private List<ImageView> shareImgs = new ArrayList<>();
     private List<String> imgUrls = new ArrayList<>();
 
     private Dialog dialog;
     private BaseQuickAdapter<Comment, BaseViewHolder> quickAdapter;
-
     private String commentId;//传入帖子ID
 
     private int httpcode;
@@ -95,7 +94,7 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         commentsNumber=findViewById(R.id.community1_visitors_commentnum);
         blikeNumbers=findViewById(R.id.community1_thumbsnum);
         bcommentsNumber=findViewById(R.id.community1_newsnum);
-
+/*
         shareImgs.add((ImageView)findViewById(R.id.community1_playerimage1));
         shareImgs.add((ImageView)findViewById(R.id.community1_playerimage2));
         shareImgs.add((ImageView)findViewById(R.id.community1_playerimage3));
@@ -105,6 +104,8 @@ public class activity_sharedetail extends Activity implements View.OnClickListen
         shareImgs.add((ImageView)findViewById(R.id.community1_playerimage7));
         shareImgs.add((ImageView)findViewById(R.id.community1_playerimage8));
         shareImgs.add((ImageView)findViewById(R.id.community1_playerimage9));
+
+ */
 
         recyclerView = (RecyclerView) findViewById(R.id.community_reviews_main);
         nineGridImageView = findViewById(R.id.sharedetail_nine_grid);

@@ -194,7 +194,7 @@ public class fragment_search_daily extends Fragment {
 
     public void clickHead(int position){
         Intent intent;
-        intent = new Intent(getActivity(), community2.class);
+        intent = new Intent(getActivity(), activity_community_homepage.class);
         startActivity(intent);
     }
 

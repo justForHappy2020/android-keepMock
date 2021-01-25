@@ -417,7 +417,7 @@ public class fragment_search_all extends Fragment {
 
     public void onHeadClick(int position){
         Intent intent;
-        intent = new Intent(getActivity(), community2.class);
+        intent = new Intent(getActivity(), activity_community_homepage.class);
         startActivity(intent);
     }
 }

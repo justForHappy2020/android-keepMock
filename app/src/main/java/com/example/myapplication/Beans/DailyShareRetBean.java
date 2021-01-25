@@ -6,16 +6,16 @@ import com.example.myapplication.entity.ShareAbb;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResponseDataBean {
+public class DailyShareRetBean {
     private boolean hasNext;
     private Long totalPages;
     private List<ShareAbb> shareList = new ArrayList<ShareAbb>();
 
-    public ResponseDataBean() {
+    public DailyShareRetBean() {
 
     }
 
-    public ResponseDataBean(boolean hasNext, Long totalPages, List<ShareAbb> shareList) {
+    public DailyShareRetBean(boolean hasNext, Long totalPages, List<ShareAbb> shareList) {
         this.hasNext = hasNext;
         this.totalPages = totalPages;
         this.shareList = shareList;

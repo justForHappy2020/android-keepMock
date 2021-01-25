@@ -1,10 +1,8 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +25,9 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.example.myapplication.Beans.HttpRequest;
-import com.example.myapplication.Beans.ResponseDataBean;
 import com.example.myapplication.entity.MultipleItem;
-import com.example.myapplication.entity.ShareAbb;
 import com.example.myapplication.utils.HttpUtils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -196,7 +191,7 @@ public class fragment_community_main_follow extends Fragment implements LoadMore
     }
     public void clickHead(int position){
         Intent intent;
-        intent = new Intent(getActivity(), community2.class);
+        intent = new Intent(getActivity(), activity_community_homepage.class);
         intent.putExtra("token",token);  //后期通过Sp获取
         //intent.putExtra("userId",shareList.get(position).getShareAbb().getUser().getUserId());
         intent.putExtra("userId",shareList.get(position).getShareAbb().getUserId());

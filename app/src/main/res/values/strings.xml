@@ -91,4 +91,10 @@
     <string name="comment_content">两只青蛙四条腿..</string>
     <string name="comment_day">2020/02/29</string>
 
+    <string name="title_activity_fragment_community_homepage_shares">
+        fragment_community_homepage_shares
+    </string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
 </resources>

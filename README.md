@@ -1,3 +1,4 @@
+
 # 健康运动APP项目安卓端文档
 
 
@@ -23,36 +24,42 @@ Layout不是做得和效果图一样就代表可以了，能用了，一个能�
 
 ### 基本布局技巧与建议
 
-#### 谨慎使用`layout_margin`进行布局
+#### 控件留白，居中居左居右等
+
+**谨慎使用`layout_margin`进行布局**
 
 在此前的许多布局中，发现存在这样的问题：一个页面中绝大部分控件的相对位置靠`layout_margin`属性来维持，例如一个标题栏要设计成这样：
 
-![image-20210224214344409](C:%5CUsers%5C13651%5CDesktop%5C%E5%81%A5%E5%BA%B7%E8%BF%90%E5%8A%A8APP%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%8D%93%E7%AB%AF%E6%96%87%E6%A1%A3.assets%5Cimage-20210224214344409.png)
+![image-20210224214344409](https://i.loli.net/2021/02/25/bFpjOYvI6uMzT5a.png)
 
 “消息”文字为一个`TextView`，右侧两个图标为`ImageView`，都放在以一个横向的`LinerLayout`里，文字与图标之间的间隙是一段空白。
 
 如果`TextView`和`ImageView`直接放在`LinerLayout`里，会默认全部靠左对齐，如图：
 
-![image-20210224214307788](C:%5CUsers%5C13651%5CDesktop%5C%E5%81%A5%E5%BA%B7%E8%BF%90%E5%8A%A8APP%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%8D%93%E7%AB%AF%E6%96%87%E6%A1%A3.assets%5Cimage-20210224214307788.png)
+![image-20210224214307788](https://i.loli.net/2021/02/25/jYpvbf4NeqxSm6w.png)
 
 而如果修改“消息”`TextView`的`layout_marginRight`为`xxxdp`，中间的空白就出来了。这样做行不行呢？当然行，因为有效果了，但是只是在当前尺寸的屏幕下可行，到了其它尺寸的屏幕上就会出现控件位置不对的致命错误，这种方法需要对每个尺寸的屏幕都适配一个layout，这是吃力不讨好的。
 
 
-| ![image-20210224214716513](C:%5CUsers%5C13651%5CDesktop%5C%E5%81%A5%E5%BA%B7%E8%BF%90%E5%8A%A8APP%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%8D%93%E7%AB%AF%E6%96%87%E6%A1%A3.assets%5Cimage-20210224214716513.png) | ![image-20210224215726810](C:%5CUsers%5C13651%5CDesktop%5C%E5%81%A5%E5%BA%B7%E8%BF%90%E5%8A%A8APP%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%8D%93%E7%AB%AF%E6%96%87%E6%A1%A3.assets%5Cimage-20210224215726810.png) |
+| ![image-20210224214716513](https://i.loli.net/2021/02/25/DJKdVszhv3c9xPo.png) | ![image-20210224215726810](https://i.loli.net/2021/02/25/lcDeLHvSPWT9qpQ.png) |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | “消息”`TextView`的`layout_marginRight`为230dp时在1080x1920,420dpi屏幕上的预览，正常 | “消息”`TextView`的`layout_marginRight`为230dp时在1080x2160,440dpi屏幕上的预览，文字显示不全，显示“√”的`ImageView`显然也已经超出屏幕范围了， |
 
 而比较推荐的接近方法是使用`layout_weight`属性，使控件具有自动拉伸的特性。值得注意的是，“消息”`TextView`的宽被拉伸以后没有文字显示的区域也是可以被点击的，当控件具有点击事件的时候建议填充以一个`Space`控件并赋值`layout_weight`来进行占位，这样就可以把两边的控件“顶住”，又不会存在点击事件触发区域的问题。
 
-#### 多级`LinearLayout`时不妨试试`Tablelayout`,`GridLayout`等
+#### 复杂页面设计
+
+多级`LinearLayout`时不妨试试`Tablelayout`, `GridLayout`, `ConstrainLayout`等
 
 
 
-#### 控件背景多用`xml`资源，少用图片
+#### 控件设计
+
+**控件背景多用`xml`资源，少用图片。**
 
 要实现一个圆角按钮，你可能会想到使用一张有色圆角图片作为背景实现如下效果：
 
-![image-20210224221425208](C:%5CUsers%5C13651%5CDesktop%5C%E5%81%A5%E5%BA%B7%E8%BF%90%E5%8A%A8APP%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%8D%93%E7%AB%AF%E6%96%87%E6%A1%A3.assets%5Cimage-20210224221425208.png)
+![image-20210224221425208](https://i.loli.net/2021/02/25/jYUQnl9SkfOPumt.png)
 
 
 
@@ -84,7 +91,7 @@ xml可以实现的效果很多，有需要可以多多了解。
 
 我们的项目经常会有很多同类型的信息需要以列表、瀑布流等形式进行展示，如下图红框圈出。在布局的时候可不能放几个图在哪就完事，我们需要用到`RecyclerView`控件。
 
-![image-20210224225836043](C:%5CUsers%5C13651%5CDesktop%5C%E5%81%A5%E5%BA%B7%E8%BF%90%E5%8A%A8APP%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%8D%93%E7%AB%AF%E6%96%87%E6%A1%A3.assets%5Cimage-20210224225836043.png)
+![image-20210224225836043](https://i.loli.net/2021/02/25/N2IFOuJ6lvKLWdA.png)
 
 
 
@@ -94,6 +101,14 @@ xml可以实现的效果很多，有需要可以多多了解。
 
 1. [RecyclerView详解 - 简书](https://www.jianshu.com/p/b4bb52cdbeb7)
 2. [Android RecyclerView从入门到玩坏 - imooc](https://www.imooc.com/article/68704)
+
+
+
+#### Tab栏
+
+实现Tab栏的方式也很多，但一般推荐`TabLayout`与`ViewPager`联动使用。如图，上方可用使用`TabLayout`实现带有指示器(Indicator)的Tabs，下方用`ViewPager`装载`Fragment`。“课程”，“动态”，“好友”，“文章”各栏的内容页面编写单独的Fragment。
+
+![image-20210225074814349](https://i.loli.net/2021/02/25/EpU8wZJyhQCFNAH.png)
 
 
 
@@ -121,46 +136,26 @@ RecyclerView控件需要使用adapter来装载内容，项目建议统一使用�
 
 由于没有找到合适的第三方库，我们编写自己的视频缓存管理工具，类名为`VideoCacheUtil`。
 
-简单使用：
+简单使用：（未上线）
 
 ```java
 VideoCacheUtil.with(context)
-				.load(vidoeUrl)
-				.downloader(downloadActivity)
-				.intoUri(uri)
+			.load(vidoeUrl)
+			.downloader(downloadActivity)
+			.intoUri(uri)
 ```
 
 
 
 #### 类方法
 
-##### isExistInLocal(String url)
-
-参数：String url
-
-返回类型：Boolean
-
-功能：判断传入的视频Url是否已经缓存到本地并返回真值
+| 方法名                                               | 参数                    | 返回类型            | 功能                                                      |
+| ---------------------------------------------------- | ----------------------- | ------------------- | --------------------------------------------------------- |
+| **isExistInLocal(String url)**                       | String url              | Boolean             | 判断传入的视频url是否已经缓存到本地并返回真值             |
+| **isExistInLocal(ArrayList\<String> urls) //未上线** | ArrayList\<String> urls | ArrayList\<Boolean> | 判断传入的视频url序列是否已经缓存到本地并返回对应真值List |
+| **getCachedVideoList(void)//未上线**                 | void                    | List\<CachedVideo>  | 返回已经缓存到本地的视频实体类CachedVideo的List           |
 
 
-
-##### isExistInLocal(ArrayList\<String> Url) //未上线
-
-参数：ArrayList\<String> url
-
-返回类型：ArrayList\<Boolean> 
-
-功能：判断传入的视频url序列是否已经缓存到本地并返回对应真值List
-
-
-
-##### getCachedVideoList(void)//未上线
-
-参数：void
-
-返回类型：List\<CachedVideo>
-
-功能：返回已经缓存到本地的视频实体类CachedVideo的List
 
 
 

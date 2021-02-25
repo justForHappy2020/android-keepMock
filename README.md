@@ -18,7 +18,7 @@ Layout不是做得和效果图一样就代表可以了，能用了，一个能�
 
 例如一个以卡片形式展示不同商品的页面，编写Layout文件时如果只是像画画一样把效果图搬上去放到指定的位置的话，是没有太多作用的，只是又一个效果图罢了，只能看不能用。而如果使用`ListView`或`RecyclerView`这类专门展示列表信息的控件的话，则可以节省大量开发时间，编写Java代码时无需过多修改。
 
-<u>请合理利用各类控件及其特性。</u>，建议充分了解各种控件的作用和特性，一篇较为详细的Android入门学习教程：[Android基础入门教程 - RUNOOB](https://www.runoob.com/w3cnote/android-tutorial-intro.html)
+<u>请合理利用各类控件及其特性。</u>一篇较为详细的Android入门学习教程：[Android基础入门教程 - RUNOOB](https://www.runoob.com/w3cnote/android-tutorial-intro.html)
 
 
 

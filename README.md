@@ -1,4 +1,3 @@
-
 # 健康运动APP项目安卓端文档
 
 
@@ -6,13 +5,31 @@
 ## Overview
 
 本文档旨在通过写清楚使用的技术和参考资料，联通各成员，打通壁垒，共同进步。
+
 [toc]
 
 ---
 
+## 命名规范
+
+请严格参考《阿里巴巴Android开发手册》的命名规范。
+
+module：注册(register)、首页(homepage)、运动中心(sport)、社区(community)、饮食健康(diet)、我的(me)
+
+用例：
+
+1. 开始训练页Activity  `sport_activity_train_start`
+2. 课程完成页Activity  `sport_activity_train_compelete`
+
+变量名、Id资源名原则上均以驼峰命名法命名，用例：
+
+​	**变量**：shareList, currentPage
+
+​	**Id**: tvUserName, btnFollow
 
 
-## Layout设计
+
+## UI与布局
 
 Layout不是做得和效果图一样就代表可以了，能用了，一个能用的layout是**需要考虑页面功能需求的。**
 
@@ -24,9 +41,11 @@ Layout不是做得和效果图一样就代表可以了，能用了，一个能�
 
 ### 基本布局技巧与建议
 
+针对以往问题的一些建议。
+
 #### 控件留白，居中居左居右等
 
-**谨慎使用`layout_margin`进行布局**
+谨慎使用`layout_margin`进行布局
 
 在此前的许多布局中，发现存在这样的问题：一个页面中绝大部分控件的相对位置靠`layout_margin`属性来维持，例如一个标题栏要设计成这样：
 
@@ -49,7 +68,7 @@ Layout不是做得和效果图一样就代表可以了，能用了，一个能�
 
 #### 复杂页面设计
 
-多级`LinearLayout`时不妨试试`Tablelayout`, `GridLayout`, `ConstrainLayout`等
+多级`LinearLayout`时不妨试试`Tablelayout`, `GridLayout`, `ConstrainLayout`等, 尽量减少嵌套，避免过长的绘制时间。
 
 
 
@@ -87,6 +106,8 @@ xml可以实现的效果很多，有需要可以多多了解。
 
 ### 列表内容展示
 
+项目有大量列表内容需要展示，布局时请先了解如下材料。
+
 #### 使用RecyclerView
 
 我们的项目经常会有很多同类型的信息需要以列表、瀑布流等形式进行展示，如下图红框圈出。在布局的时候可不能放几个图在哪就完事，我们需要用到`RecyclerView`控件。
@@ -113,6 +134,8 @@ xml可以实现的效果很多，有需要可以多多了解。
 
 
 ## Java编写
+
+Java编写规范请先参考《阿里巴巴Android开发手册》，以下为本项目使用的库或一些技术的细节。
 
 ### 使用RecyclerViewAdapter
 
@@ -157,11 +180,16 @@ VideoCacheUtil.with(context)
 
 
 
+## Github操作
 
+代码仓库操作规范。
 
+### 上传
 
+1. 上传自己的代码请上传到自己的分支
 
+2. 为避免主支融合与他人代码出现冲突，大量爆红，每次上传前**先拉取主支代码在本地进行融合**，无误后再传**分支**。
 
+   方法：正确安装git后，在Android Studio的Terminal内输入**git pull origin master **
 
- 
-
+   参考资料：[git merge冲突解决](

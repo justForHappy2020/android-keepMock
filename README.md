@@ -192,4 +192,4 @@ VideoCacheUtil.with(context)
 
    方法：正确安装git后，在Android Studio的Terminal内输入**git pull origin master **
 
-   参考资料：[git merge冲突解决](
+   参考资料：[git merge冲突解决](https://www.cnblogs.com/aidixie/p/12577272.html)

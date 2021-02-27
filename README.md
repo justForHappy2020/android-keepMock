@@ -23,7 +23,7 @@ module：注册(register)、首页(homepage)、运动中心(sport)、社区(comm
 
 变量名、Id资源名原则上均以驼峰命名法命名，用例：
 
-​	**变量**：shareList, currentPage
+​	**变量**：shareList, currentListPage
 
 ​	**Id**: tvUserName, btnFollow
 

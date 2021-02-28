@@ -190,6 +190,6 @@ VideoCacheUtil.with(context)
 
 2. 为避免主支融合与他人代码出现冲突，大量爆红，每次上传前**先拉取主支代码在本地进行融合**，无误后再传**分支**。
 
-   方法：正确安装git后，在Android Studio的Terminal内输入**git pull origin master **
+   方法：正确安装git后，在Android Studio的Terminal内输入**git pull origin master**
 
    参考资料：[git merge冲突解决](https://www.cnblogs.com/aidixie/p/12577272.html)
